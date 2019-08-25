@@ -1,0 +1,30 @@
+<header>
+    <nav>
+        <div>
+            <h1>Dynamic Programming Solver</h1>
+        </div>
+        <div class="items">
+            <div routerLink="about"
+                (click)="onActionClick()">
+                <i class="fas fa-info-circle"></i>
+            </div>
+        </div>
+    </nav>
+    <div class="tabs">
+        <div [className]="selectedTab == 0 ? 'active' : ''"
+            (click)="onTabSelected(0)"
+            routerLink="im">
+            Investment
+        </div>
+        <div [className]="selectedTab == 1 ? 'active' : ''"
+            (click)="onTabSelected(1)"
+            routerLink="mrm">
+            Machine replacement
+        </div>
+        <div [className]="selectedTab == 2 ? 'active' : ''"
+            (click)="onTabSelected(2)"
+            routerLink="wm">
+            Workforce
+        </div>
+    </div>
+</header>

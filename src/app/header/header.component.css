@@ -1,0 +1,106 @@
+header {
+    width: 100%;
+    height: 160px;
+    padding: 32px;
+    margin-bottom: 64px;
+    background-color: #00BCD4;
+    color: white;
+}
+
+header > nav {
+    display: flex;
+    height: 72px;
+}
+
+header > nav > div {
+    width: 100%;
+    align-self: center;
+}
+
+header > nav > div > h1 {
+    margin: 0px;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+header > div {
+    padding: 16px 32px;
+}
+
+header > div > p {
+    font-size: 14px;
+    text-align: center;
+}
+
+.items {
+    position: absolute;
+    max-width: 30%;
+    top: -32px;
+    right: -32px;
+}
+
+.items > div {
+    width: 56px;
+    height: 56px;
+    float: right;
+    cursor: pointer;
+    transition: background-color 200ms;
+}
+
+.items > div > i {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+header > .tabs {
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    bottom: 0px;
+    padding: 0px;
+    cursor: pointer;
+}
+
+header > .tabs > div {
+    display: inline-block;
+    width: 33.3%;
+    height: 56px;
+    padding: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 12px;
+    outline: none;
+}
+
+.items > div:hover,
+header > .tabs > div:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+header > .tabs > div.active {
+    border-bottom: 2px solid #ffffff;
+}
+
+@media only screen and (min-width: 800px) {
+    header {
+        height: 200px;
+    }
+    
+    header > div > p {
+        font-size: 16px;
+    }
+    
+    header > nav > div > h1 {
+        font-size: 36px;
+    }
+    
+    header > .tabs > div {
+        font-size: 16px;
+    }
+}

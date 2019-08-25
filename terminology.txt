@@ -1,0 +1,3 @@
+mrm: Machine Replacement Model
+wm: Workforce Model
+im: Investment Model
