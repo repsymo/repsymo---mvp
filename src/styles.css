@@ -32,3 +32,116 @@ body {
     background: rgba(0, 0, 0, 0.2);
     margin: 16px 0px;
 }
+
+/* ---------------------------------------- PAGES ---------------------------------------- */
+.page > .top-panel {
+    display: block;
+    margin: auto;
+    margin-bottom: 32px;
+}
+
+.page > .top-panel > div {
+    display: block;
+    width: 100%;
+    padding: 8px 32px;
+}
+
+.page > .solve-button-pane {
+    display: flex;
+    margin-bottom: 32px;
+}
+
+#nextButton {
+    width: 40%;
+    margin-bottom: 32px;
+}
+
+#solveButton {
+    width: 80%;
+    margin: auto;
+}
+
+#solutionPanel {
+    margin: 64px 0px;
+}
+
+#solutionPanel > .solution-title > p {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 18px;
+    color: #737373;
+}
+
+#solutionPanel > .stages > p {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#solutionPanel > .stages > table {
+    margin-bottom: 32px;
+}
+
+#solutionPanel > .result > p {
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+#solutionPanel > .result > .chains-container {
+    display: block;
+    width: 100%;
+    overflow: auto;
+}
+
+#solutionPanel > .result > .chains-container > .chain {
+    display: block;
+    margin: 16px 0px;
+    align-self: center;
+}
+
+#solutionPanel > .result > .chains-container > div.chain span {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    margin-right: 32px;
+    border: 2px solid #212121;
+    text-align: center;
+    line-height: 56px;
+}
+
+#solutionPanel > .result > .chains-container > div.chain span::after {
+    content: '->';
+    position: absolute;
+    right: -24px;
+    top: 0px;
+}
+
+#solutionPanel > .result > .chains-container > div.chain span.end::after {
+    content: '';
+}
+
+#solutionPanel > .result > .chains-container > div.chain > div {
+    display: inline-block;
+}
+
+@media only screen and (min-width: 400px) {
+    .page > .top-panel {
+        width: 400px;
+    }    
+}
+
+@media only screen and (min-width: 800px) {
+    .page > .top-panel {
+        width: 680px;
+    }
+    
+    .page > .top-panel > div {
+        width: 50%;
+        float: left;
+    }
+    
+    #inputTable {
+        width: 60%;
+        margin: 16px auto;
+    }
+}

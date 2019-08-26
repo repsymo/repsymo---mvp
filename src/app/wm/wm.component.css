@@ -1,0 +1,9 @@
+#solutionPanel > .result > .report {
+    margin-top: 32px;
+}
+
+#solutionPanel > .result > .report > p {
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+}

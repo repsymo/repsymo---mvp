@@ -1,1 +1,144 @@
-<p>wm works!</p>
+<div class="top-panel">
+    <div>
+        <div class="form-group">
+            <label for="timeInput">Number of weeks to analyse</label>
+            <input [(ngModel)]="timeWeeks"
+                type="number"
+                class="form-control"
+                id="timeInput"
+                placeholder="Enter the number of weeks">
+        </div>
+    </div>
+    <div>
+        <div class="form-group">
+            <label for="manpowerExcessInput">Manpower excess cost per worker per week</label>
+            <input [(ngModel)]="manpowerExcessCost"
+                type="number"
+                class="form-control"
+                id="manpowerExcessInput"
+                placeholder="Enter the manpower excess cost">
+        </div>
+    </div>
+    <div>
+        <div class="form-group">
+            <label for="newHireFixedInput">Fixed cost for new employees</label>
+            <input [(ngModel)]="newEmployeeFixedCost"
+                type="number"
+                class="form-control"
+                id="newHireFixedInput"
+                placeholder="Enter the fixed cost for new employees">
+        </div>
+    </div>
+    <div>
+        <div class="form-group">
+            <label for="newHireInput">Variable cost for new employees per week</label>
+            <input [(ngModel)]="newEmployeePerWeekCost"
+                type="number"
+                class="form-control"
+                id="newHireInput"
+                placeholder="Enter the variable cost for new employees per week">
+        </div>
+    </div>
+    <div>
+        <button id="nextButton" 
+            class="btn btn-primary"
+            (click)="onNext()">
+            Next
+        </button>
+    </div>
+</div>
+<div id="inputTable" 
+    [ngClass]="{ 'gone': inputDataStep == 0 }">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Time t (weeks)
+                </th>
+                <th scope="col">
+                    Workforce required (employees)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of inputData; let index = index">
+                <th scope="row">{{ row.week }}</th>
+                <td>
+                    <div class="form-group">
+                        <input [(ngModel)]="inputData[index].workforce" 
+                            type="number" 
+                            class="form-control">
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div [ngClass]="{ 
+                    'gone': inputDataStep == 0,
+                    'solve-button-pane': inputDataStep > 0 
+                }">
+    <button id="solveButton"
+        class="btn btn-primary"
+        (click)="onSolve()">
+        Solve
+    </button>
+</div>
+<div id="solutionPanel"
+    [ngClass]="{ 'gone': inputDataStep < 2 }">
+    <div class="divider"></div>
+    <div class="stages" *ngFor="let stage of solver.getStages()">
+        <p>STAGE {{ stage.week + 1 }}</p>
+        <div>Minimum Demand: <strong>{{ stage.minimumDemand }}</strong> employees</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">x_{{ stage.week }}</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">min</th>
+                    <th scope="col">x_{{ stage.week + 1 }}</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let row of stage.rows">
+                <tr>
+                    <th scope="row">{{ row.previousX }}</th>
+                    <td>{{ row.cost }}</td>
+                    <td>{{ row.f }}</td>
+                    <td>{{ row.x }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="result">
+        <p>Result chains</p>
+        <div class="chains-container">
+            <div class="chain">
+                <div class="chains" *ngFor="let item of solver.getPath()">
+                    <span>{{ item }}</span>
+                </div>
+                <span class="end">END</span>
+            </div>
+        </div>
+        <div class="report">
+            <p>Report of results</p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Week</th>
+                        <th scope="col">Minimum demand</th>
+                        <th scope="col">Current demand</th>
+                        <th scope="col">Interpretation</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let stage of solver.getStages()">
+                    <tr>
+                        <th scope="row">{{ stage.week }}</th>
+                        <td>{{ stage.minimumDemand }}</td>
+                        <td>{{ solver.getPath()[stage.week] }}</td>
+                        <td>{{ solver.getInterpretation()[stage.week] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

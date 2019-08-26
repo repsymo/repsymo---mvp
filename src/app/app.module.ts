@@ -9,11 +9,12 @@ import { FooterComponent } from './footer/footer.component';
 import { ImComponent } from './im/im.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
+import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/about',
+    redirectTo: '/wm',
     pathMatch: 'full'
   },
   {
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
