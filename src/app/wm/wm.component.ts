@@ -15,15 +15,17 @@ export class WmComponent implements OnInit {
   private manpowerExcessCost: number;
   private newEmployeeFixedCost: number;
   private newEmployeePerWeekCost: number;
+  private initialEmployees: number;
   private inputData: WorkforcePerWeek[];
   
   constructor() {
     this.solver = new WMSolver();
     this.inputDataStep = 0;
     this.timeWeeks = 5;
-    this.manpowerExcessCost = 300;
-    this.newEmployeeFixedCost = 400;
-    this.newEmployeePerWeekCost = 200;
+    this.manpowerExcessCost = 200;
+    this.newEmployeeFixedCost = 320;
+    this.newEmployeePerWeekCost = 150;
+    this.initialEmployees = 0;
     this.inputData = null;
   }
   
@@ -36,20 +38,20 @@ export class WmComponent implements OnInit {
       },
       {
         week: 2,
-        workforce: 7
+        workforce: 9
       },
       {
         week: 3,
-        workforce: 8
+        workforce: 12
       },
       {
         week: 4,
-        workforce: 4
+        workforce: 12
       },
       {
         week: 5,
         workforce: 6
-      },
+      }
     ]
     for(let i = 0; i < this.inputData.length; i++) {
       this.inputData[i] = {
@@ -77,10 +79,10 @@ export class WmComponent implements OnInit {
       manpowerExcessCost: this.manpowerExcessCost,
       newEmployeeFixedCost: this.newEmployeeFixedCost,
       newEmployeePerWeekCost: this.newEmployeePerWeekCost,
+      initialNumberOfEmployees: this.initialEmployees,
       workforceWeeks: this.inputData
     }
     
     this.solver.solve(model);
-    
   }
 }

@@ -7,6 +7,7 @@ export interface Model {
     manpowerExcessCost: number,
     newEmployeeFixedCost: number,
     newEmployeePerWeekCost: number,
+    initialNumberOfEmployees: number,
     workforceWeeks: WorkforcePerWeek[]
 }
 
@@ -20,7 +21,11 @@ export interface StageRow {
      * x_(i-1)
      */
     previousX: number,
-    cost,
+    
+    /**
+     * Options for cost formatted as JSON array
+     */
+    cost: string,
     
     /**
      * Cost function on that row
@@ -128,31 +133,27 @@ export class WMSolver {
         const path: number[] = [];
         const interpretation: string[] = [];
         const weeks = this.model.workforceWeeks.length;
-        let row = 0;
-        let last = this.stages[weeks - 1].rows[row].x;
+        const getInterpretationAt = (row: StageRow): string => {
+            if(row.x < row.previousX) {
+                return `Fire ${row.previousX - row.x} employees`;
+            }
+            else if(row.x > row.previousX) {
+                return `Hire ${row.x - row.previousX} employees`;
+            }
+            return `It doesn't change`;
+        }
+        let row: StageRow = this.stages[weeks - 1].rows[0];
         
-        path.push(last);
-        interpretation.push(`Hire ${last} employees`);
+        path.push(row.x);
+        interpretation.push(getInterpretationAt(row));
         
         // The array is reversed so start from the second stage
         for(let stageIndex = weeks - 2; stageIndex >= 0; stageIndex--) {
             const stage = this.stages[stageIndex];
-            const row = stage.rows.find(row => row.previousX == last);
-            let interpretationStr = '';
+            row = stage.rows.find(v => v.previousX == row.x);
             
-            if(row.x < last) {
-                interpretationStr = `Fire ${last - row.x} employees`;
-            }
-            else if(row.x > last) {
-                interpretationStr = `Hire ${row.x - last} employees`;
-            }
-            else {
-                interpretationStr = `It doesn't change`;
-            }
-            last = row.x;
-            
-            path.push(last);
-            interpretation.push(interpretationStr);
+            path.push(row.x);
+            interpretation.push(getInterpretationAt(row));
         }
         this.path = path;
         this.interpretation = interpretation;
@@ -180,39 +181,40 @@ export class WMSolver {
         this.stages = [];
         this.max = Math.max.apply(null, problemModel.workforceWeeks.map(v => v.workforce));
         const weeks = problemModel.workforceWeeks.length;
-        
-        let previousXStart = 0;
-        let previousXEnd = 0;
-        
-        // Initialize stages
-        for(let stage = 0; stage < weeks; stage++) {
-            const rows: StageRow[] = [];
+        const initStages = () => {
+            let previousXStart = problemModel.initialNumberOfEmployees;
+            let previousXEnd = problemModel.initialNumberOfEmployees;
             
-            for(let _x = previousXStart; _x <= previousXEnd; _x++) {
-                rows.push({
-                   previousX: _x,
-                   cost: 0,
-                   f: 0,
-                   x: 0
+            for(let stage = 0; stage < weeks; stage++) {
+                const rows: StageRow[] = [];
+                
+                for(let _x = previousXStart; _x <= previousXEnd; _x++) {
+                    rows.push({
+                        previousX: _x,
+                        cost: '',
+                        f: 0,
+                        x: 0
+                    });
+                }
+                this.stages.push({
+                    week: stage,
+                    minimumDemand: problemModel.workforceWeeks[stage].workforce,
+                    rows: rows
                 });
+                previousXStart = problemModel.workforceWeeks[stage].workforce;
+                previousXEnd = this.max;
             }
-            this.stages.push({
-               week: stage,
-               minimumDemand: problemModel.workforceWeeks[stage].workforce,
-               rows: rows
-            });
-            previousXStart = problemModel.workforceWeeks[stage].workforce;
-            previousXEnd = this.max;
+        }
+        const solveStages = () => {
+            for(let stageIndex = weeks - 1; stageIndex >= 0; stageIndex--) {
+                this.solveStage(this.stages[stageIndex]);
+            }
         }
         
-        // Solve stages
-        for(let stageIndex = weeks - 1; stageIndex >= 0; stageIndex--) {
-            this.solveStage(this.stages[stageIndex]);
-        }
+        initStages();
+        solveStages();
         this.stages.reverse();
         this.findResultPathAndInterpretation();
-        console.log(this.findResultPathAndInterpretation());
-        
     }
     
 }

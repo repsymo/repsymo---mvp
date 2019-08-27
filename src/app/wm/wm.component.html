@@ -40,6 +40,16 @@
         </div>
     </div>
     <div>
+        <div class="form-group">
+            <label for="initialEmployeesInput">Initial number of employees</label>
+            <input [(ngModel)]="initialEmployees"
+                type="number"
+                class="form-control"
+                id="initialEmployeesInput"
+                placeholder="Enter the initial number of employees">
+        </div>
+    </div>
+    <div>
         <button id="nextButton" 
             class="btn btn-primary"
             (click)="onNext()">
