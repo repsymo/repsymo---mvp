@@ -124,7 +124,7 @@
             <thead>
                 <tr>
                     <th scope="col">x_{{ stage.week }}</th>
-                    <th scope="col">Cost</th>
+                    <th scope="col">Cost (demand, cost)</th>
                     <th scope="col">min</th>
                     <th scope="col">x_{{ stage.week + 1 }}</th>
                 </tr>
@@ -132,7 +132,7 @@
             <tbody *ngFor="let row of stage.rows">
                 <tr>
                     <th scope="row">{{ row.previousX }}</th>
-                    <td>{{ row.cost }}</td>
+                    <td>{{ formatCost(row.cost) }}</td>
                     <td>{{ row.f }}</td>
                     <td>{{ row.x }}</td>
                 </tr>

@@ -69,6 +69,19 @@ export class WmComponent implements OnInit {
     }
   }
   
+  formatCost(cost: string): string {
+    const array = JSON.parse(cost);
+    let str = '';
+    
+    array.forEach(element => {
+      const demand = element.demand;
+      const cost = element.value;
+      
+      str += ` (${demand}, ${cost}) `;
+    });
+    return str;
+  }
+  
   ngOnInit() {
   }
   
