@@ -8,16 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   selectedTab = -1;
-  
+
   constructor() { }
 
   ngOnInit() {
   }
-  
+
   onActionClick() {
     this.selectedTab = -1;
   }
-  
+
   onTabSelected(index) {
     this.selectedTab = index;
   }

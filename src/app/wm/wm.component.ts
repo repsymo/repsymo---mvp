@@ -1,65 +1,76 @@
 import { Component, OnInit } from '@angular/core';
-import { WMSolver, Model, WorkforcePerWeek } from '../solver/WMSolver';
+import { WMSolver, Model, WorkforcePerTU } from '../solver/WMSolver';
+import { TimeUnit } from '../model/TimeUnit';
 
 @Component({
   selector: 'app-wm',
   templateUrl: './wm.component.html',
   styleUrls: ['./wm.component.css'],
-  host: { 'class': 'page' }
+  host: { class: 'page' }
 })
 export class WmComponent implements OnInit {
-
+  
   private readonly solver: WMSolver;
-  private inputDataStep: number;
-  private timeWeeks: number;
+  readonly pageDocumentation: string[];
+  private timeToAnalyse: number;
   private manpowerExcessCost: number;
   private newEmployeeFixedCost: number;
   private newEmployeePerWeekCost: number;
   private initialEmployees: number;
   private fireEmployeeCost: number;
   private quitEmployees: number;
-  private inputData: WorkforcePerWeek[];
+  private inputData: WorkforcePerTU[];
+  inputDataStep: number;
+  timeUnitLabel: string;
   
   constructor() {
     this.solver = new WMSolver();
-    this.inputDataStep = 0;
-    this.timeWeeks = 5;
+    this.pageDocumentation = this.createDocArray();
+    this.timeToAnalyse = 5;
     this.manpowerExcessCost = 0;
     this.newEmployeeFixedCost = 9000;
     this.newEmployeePerWeekCost = 108000;
     this.initialEmployees = 30;
     this.fireEmployeeCost = 25000;
     this.quitEmployees = 3;
-    this.inputData = null;
+    this.inputData = [];
+    this.inputDataStep = 0;
+    this.timeUnitLabel = '';
   }
-  
-  initInputDataArray() {
-    this.inputData = Array(this.timeWeeks);
-    const sampleData: WorkforcePerWeek[] = [
+
+  private createDocArray(): string[] {
+    return [
+      
+    ];
+  }
+
+  private initInputDataArray() {
+    this.inputData = Array(this.timeToAnalyse);
+    const sampleData: WorkforcePerTU[] = [
       {
-        week: 1,
+        timeunit: 1,
         workforce: 28
       },
       {
-        week: 2,
+        timeunit: 2,
         workforce: 30
       },
       {
-        week: 3,
+        timeunit: 3,
         workforce: 25
       },
       {
-        week: 4,
+        timeunit: 4,
         workforce: 29
       },
       {
-        week: 5,
+        timeunit: 5,
         workforce: 20
       }
-    ]
-    for(let i = 0; i < this.inputData.length; i++) {
+    ];
+    for (let i = 0; i < this.inputData.length; i++) {
       this.inputData[i] = {
-        week: i + 1,
+        timeunit: i + 1,
         workforce: sampleData[i].workforce
       };
       // this.inputData[i] = {
@@ -68,40 +79,45 @@ export class WmComponent implements OnInit {
       // };
     }
   }
-  
+
   formatCost(cost: string): string {
-    const array = JSON.parse(cost);
+    const array: { demand: string, value: string }[] = JSON.parse(cost);
     let str = '';
-    
+
     array.forEach(element => {
       const demand = element.demand;
       const cost = element.value;
-      
+
       str += ` (${demand}, ${cost}) `;
     });
     return str;
   }
-  
+
   ngOnInit() {
+  }
+
+  onTimeUnitChange(timeUnit: TimeUnit) {
+    this.timeUnitLabel = timeUnit.label;
   }
   
   onNext() {
     this.inputDataStep++;
     this.initInputDataArray();
   }
-  
+
   onSolve() {
     this.inputDataStep++;
     const model: Model = {
       manpowerExcessCost: this.manpowerExcessCost,
       newEmployeeFixedCost: this.newEmployeeFixedCost,
-      newEmployeePerWeekCost: this.newEmployeePerWeekCost,
+      newEmployeePerTUCost: this.newEmployeePerWeekCost,
       initialNumberOfEmployees: this.initialEmployees,
       fireEmployeeCost: this.fireEmployeeCost,
       quitEmployees: this.quitEmployees,
-      workforceWeeks: this.inputData
-    }
-    
+      workforcePerTU: this.inputData
+    };
+
     this.solver.solve(model);
   }
+  
 }

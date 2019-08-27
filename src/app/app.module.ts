@@ -10,6 +10,8 @@ import { ImComponent } from './im/im.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { FormsModule } from '@angular/forms';
+import { PageDocumentationComponent } from './page-documentation/page-documentation.component';
+import { TimeUnitSelectorComponent } from './time-unit-selector/time-unit-selector.component';
 
 const appRoutes: Routes = [
   {
@@ -33,7 +35,7 @@ const appRoutes: Routes = [
     path: 'about',
     component: AboutComponent
   }
-]
+];
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ const appRoutes: Routes = [
     HeaderComponent,
     FooterComponent,
     ImComponent,
-    AboutComponent
+    AboutComponent,
+    PageDocumentationComponent,
+    TimeUnitSelectorComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

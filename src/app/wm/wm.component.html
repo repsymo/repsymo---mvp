@@ -1,78 +1,96 @@
+<!-- ---------------------------------------- PAGE DOCUMENTATION ---------------------------------------- -->
+<app-page-documentation [items]="pageDocumentation"></app-page-documentation>
 <div class="top-panel">
     <div>
+        <app-time-unit-selector (valueChanged)="onTimeUnitChange($event)">
+        </app-time-unit-selector>
+    </div>
+    <div>
         <div class="form-group">
-            <label for="timeInput">Number of weeks to analyse</label>
-            <input [(ngModel)]="timeWeeks"
-                type="number"
-                class="form-control"
-                id="timeInput"
-                placeholder="Enter the number of weeks">
+            <label for="timeInput">
+                Number of {{ timeUnitLabel.toLowerCase() }} to analyse
+            </label>
+            <input  id="timeInput"
+                    [(ngModel)]="timeToAnalyse"
+                    class="form-control"
+                    type="number"
+                    placeholder="Enter the number of time units">
         </div>
     </div>
     <div>
         <div class="form-group">
-            <label for="manpowerExcessInput">Manpower excess cost per worker per week</label>
-            <input [(ngModel)]="manpowerExcessCost"
-                type="number"
-                class="form-control"
-                id="manpowerExcessInput"
-                placeholder="Enter the manpower excess cost">
+            <label for="manpowerExcessInput">
+                Manpower excess cost per worker per {{ timeUnitLabel.toLowerCase() }}
+            </label>
+            <input  id="manpowerExcessInput"
+                    [(ngModel)]="manpowerExcessCost"
+                    class="form-control"
+                    type="number"
+                    placeholder="Enter the manpower excess cost per time unit">
         </div>
     </div>
     <div>
         <div class="form-group">
-            <label for="newHireFixedInput">Fixed cost for new employees</label>
-            <input [(ngModel)]="newEmployeeFixedCost"
-                type="number"
-                class="form-control"
-                id="newHireFixedInput"
-                placeholder="Enter the fixed cost for new employees">
+            <label for="newHireFixedInput">Fixed cost for hiring a new employee</label>
+            <input  id="newHireFixedInput"
+                    [(ngModel)]="newEmployeeFixedCost"
+                    class="form-control"
+                    type="number"
+                    placeholder="Enter the fixed cost for new employees">
         </div>
     </div>
     <div>
         <div class="form-group">
-            <label for="newHireInput">Variable cost for new employees per week</label>
-            <input [(ngModel)]="newEmployeePerWeekCost"
-                type="number"
-                class="form-control"
-                id="newHireInput"
-                placeholder="Enter the variable cost for new employees per week">
+            <label for="newHireInput">
+                Variable cost for hiring a new employee per {{ timeUnitLabel.toLowerCase() }}
+            </label>
+            <input  id="newHireInput"
+                    [(ngModel)]="newEmployeePerWeekCost"
+                    class="form-control"
+                    type="number"
+                    placeholder="Enter the variable cost for new employees per time unit">
         </div>
     </div>
     <div>
         <div class="form-group">
-            <label for="initialEmployeesInput">Initial number of employees</label>
-            <input [(ngModel)]="initialEmployees"
-                type="number"
-                class="form-control"
-                id="initialEmployeesInput"
-                placeholder="Enter the initial number of employees">
+            <label for="initialEmployeesInput">
+                Initial number of employees
+            </label>
+            <input  id="initialEmployeesInput"
+                    [(ngModel)]="initialEmployees"
+                    class="form-control"
+                    type="number"
+                    placeholder="Enter the initial number of employees">
         </div>
     </div>
     <div>
         <div class="form-group">
-            <label for="fireEmployeeCostInput">Cost for firing an employee</label>
-            <input [(ngModel)]="fireEmployeeCost"
-                type="number"
-                class="form-control"
-                id="fireEmployeeCostInput"
-                placeholder="Enter cost for firing an employee">
+            <label for="fireEmployeeCostInput">
+                Cost for firing an employee
+            </label>
+            <input  id="fireEmployeeCostInput"
+                    [(ngModel)]="fireEmployeeCost"
+                    class="form-control"
+                    type="number"
+                    placeholder="Enter the cost for firing an employee">
         </div>
     </div>
     <div>
         <div class="form-group">
-            <label for="quitEmployeesInput">Number of employees who decide to quit per week</label>
-            <input [(ngModel)]="quitEmployees"
-                type="number"
-                class="form-control"
-                id="quitEmployeesInput"
-                placeholder="Enter the number of employees who quit">
+            <label for="quitEmployeesInput">
+                Number of employees who decide to quit per {{ timeUnitLabel.toLowerCase() }}
+            </label>
+            <input  id="quitEmployeesInput"
+                    [(ngModel)]="quitEmployees"
+                    class="form-control"
+                    type="number"
+                    placeholder="Enter the number of employees who quit each time unit">
         </div>
     </div>
     <div>
         <button id="nextButton" 
-            class="btn btn-primary"
-            (click)="onNext()">
+                class="btn btn-primary"
+                (click)="onNext()">
             Next
         </button>
     </div>
@@ -83,7 +101,7 @@
         <thead>
             <tr>
                 <th scope="col">
-                    Time t (weeks)
+                    Time t ({{ timeUnitLabel.toLowerCase() }})
                 </th>
                 <th scope="col">
                     Workforce required (employees)
@@ -92,7 +110,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let row of inputData; let index = index">
-                <th scope="row">{{ row.week }}</th>
+                <th scope="row">{{ row.timeunit }}</th>
                 <td>
                     <div class="form-group">
                         <input [(ngModel)]="inputData[index].workforce" 
@@ -109,24 +127,27 @@
                     'solve-button-pane': inputDataStep > 0 
                 }">
     <button id="solveButton"
-        class="btn btn-primary"
-        (click)="onSolve()">
+            class="btn btn-primary"
+            (click)="onSolve()">
         Solve
     </button>
 </div>
 <div id="solutionPanel"
     [ngClass]="{ 'gone': inputDataStep < 2 }">
     <div class="divider"></div>
-    <div class="stages" *ngFor="let stage of solver.getStages()">
-        <p>STAGE {{ stage.week + 1 }}</p>
-        <div>Minimum Demand: <strong>{{ stage.minimumDemand }}</strong> employees</div>
+    <div class="stages"
+        *ngFor="let stage of solver.getStages()">
+        <p>STAGE {{ stage.id + 1 }}</p>
+        <div>
+            Minimum Demand: <strong>{{ stage.minimumDemand }}</strong> employees
+        </div>
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">x_{{ stage.week }}</th>
+                    <th scope="col">x_{{ stage.id }}</th>
                     <th scope="col">Cost (demand, cost)</th>
                     <th scope="col">min</th>
-                    <th scope="col">x_{{ stage.week + 1 }}</th>
+                    <th scope="col">x_{{ stage.id + 1 }}</th>
                 </tr>
             </thead>
             <tbody *ngFor="let row of stage.rows">
@@ -154,7 +175,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Week</th>
+                        <th scope="col">{{ timeUnitLabel }}</th>
                         <th scope="col">Minimum demand</th>
                         <th scope="col">Current demand</th>
                         <th scope="col">Interpretation</th>
@@ -163,11 +184,11 @@
                 </thead>
                 <tbody *ngFor="let stage of solver.getStages()">
                     <tr>
-                        <th scope="row">{{ stage.week + 1 }}</th>
+                        <th scope="row">{{ stage.id + 1 }}</th>
                         <td>{{ stage.minimumDemand }}</td>
-                        <td>{{ solver.getPath()[stage.week] }}</td>
-                        <td>{{ solver.getInterpretation()[stage.week] }}</td>
-                        <td>{{ solver.getCost()[stage.week] }}</td>
+                        <td>{{ solver.getPath()[stage.id] }}</td>
+                        <td>{{ solver.getInterpretation()[stage.id] }}</td>
+                        <td>{{ solver.getCost()[stage.id] }}</td>
                     </tr>
                 </tbody>
             </table>
