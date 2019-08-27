@@ -8,7 +8,7 @@
     font-family: 'Noto Sans SC', sans-serif;
 }
 
-html {    
+html {
     height: 100%;
 }
 
@@ -18,8 +18,8 @@ body {
 }
 
 .container {
-    min-height: calc(100vh - 336px);
-    padding-bottom: 128px;
+    min-height: calc(100vh);
+    padding-bottom: 64px;
 }
 
 .gone {
@@ -46,13 +46,26 @@ body {
     padding: 8px 32px;
 }
 
+.page > .top-panel > div.time-input-container {
+    height: 102px;
+}
+
+.page > .top-panel > div.time-input-container .form-group{
+    position: relative;
+    width: 100%;
+}
+
 .page > .solve-button-pane {
     display: flex;
     margin-bottom: 32px;
 }
 
+.page > .top-panel > div.next-button-container {
+    width: 100%;
+}
+
 #nextButton {
-    width: 40%;
+    width: 25%;
     margin-bottom: 32px;
 }
 
@@ -137,7 +150,19 @@ body {
     
     .page > .top-panel > div {
         width: 50%;
+        height: 116px;
         float: left;
+    }
+    
+    .page > .top-panel > div .form-group {
+        position: absolute;
+        width: 80%;
+        bottom: 0px;
+    }
+    
+    .page > .top-panel > div.time-input-container {
+        position: relative;
+        width: 100%;
     }
     
     #inputTable {

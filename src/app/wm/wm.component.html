@@ -1,7 +1,7 @@
 <!-- ---------------------------------------- PAGE DOCUMENTATION ---------------------------------------- -->
 <app-page-documentation [items]="pageDocumentation"></app-page-documentation>
 <div class="top-panel">
-    <div>
+    <div class="time-input-container">
         <app-time-unit-selector (valueChanged)="onTimeUnitChange($event)">
         </app-time-unit-selector>
     </div>
@@ -19,6 +19,18 @@
     </div>
     <div>
         <div class="form-group">
+            <label for="initialEmployeesInput">
+                Initial number of employees
+            </label>
+            <input  id="initialEmployeesInput"
+                    [(ngModel)]="initialEmployees"
+                    class="form-control"
+                    type="number"
+                    placeholder="Enter the initial number of employees">
+        </div>
+    </div>
+    <div>
+        <div class="form-group">
             <label for="manpowerExcessInput">
                 Manpower excess cost per worker per {{ timeUnitLabel.toLowerCase() }}
             </label>
@@ -31,7 +43,9 @@
     </div>
     <div>
         <div class="form-group">
-            <label for="newHireFixedInput">Fixed cost for hiring a new employee</label>
+            <label for="newHireFixedInput">
+                Fixed cost for hiring a new employee
+            </label>
             <input  id="newHireFixedInput"
                     [(ngModel)]="newEmployeeFixedCost"
                     class="form-control"
@@ -49,18 +63,6 @@
                     class="form-control"
                     type="number"
                     placeholder="Enter the variable cost for new employees per time unit">
-        </div>
-    </div>
-    <div>
-        <div class="form-group">
-            <label for="initialEmployeesInput">
-                Initial number of employees
-            </label>
-            <input  id="initialEmployeesInput"
-                    [(ngModel)]="initialEmployees"
-                    class="form-control"
-                    type="number"
-                    placeholder="Enter the initial number of employees">
         </div>
     </div>
     <div>
@@ -87,7 +89,7 @@
                     placeholder="Enter the number of employees who quit each time unit">
         </div>
     </div>
-    <div>
+    <div class="next-button-container">
         <button id="nextButton" 
                 class="btn btn-primary"
                 (click)="onNext()">
