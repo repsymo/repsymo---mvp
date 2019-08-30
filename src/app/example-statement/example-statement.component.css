@@ -1,0 +1,9 @@
+p {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+div > div {
+    color: #737373;
+}

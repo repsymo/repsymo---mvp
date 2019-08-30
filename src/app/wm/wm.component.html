@@ -20,6 +20,9 @@
                         [items]="pageDocumentation">
 </app-page-documentation>
 
+<!-- ---------------------------------------- EXAMPLE STATEMENT ---------------------------------------- -->
+<app-example-statement [value]="example"></app-example-statement>
+
 <!-- ---------------------------------------- TOP PANEL ---------------------------------------- -->
 <div class="top-panel">
     <div class="time-input-container">
@@ -210,7 +213,7 @@
                         <th scope="col">Cost</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let stage of solver.getStages()">
+                <tbody *ngFor="let stage of solver.getStages().slice().reverse()">
                     <tr>
                         <th scope="row">{{ stage.id + 1 }}</th>
                         <td>{{ stage.minimumDemand }}</td>

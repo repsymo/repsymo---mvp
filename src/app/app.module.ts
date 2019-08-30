@@ -12,6 +12,7 @@ import { AboutComponent } from './about/about.component';
 import { FormsModule } from '@angular/forms';
 import { PageDocumentationComponent } from './page-documentation/page-documentation.component';
 import { TimeUnitSelectorComponent } from './time-unit-selector/time-unit-selector.component';
+import { ExampleStatementComponent } from './example-statement/example-statement.component';
 
 const appRoutes: Routes = [
   {
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
     ImComponent,
     AboutComponent,
     PageDocumentationComponent,
-    TimeUnitSelectorComponent
+    TimeUnitSelectorComponent,
+    ExampleStatementComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

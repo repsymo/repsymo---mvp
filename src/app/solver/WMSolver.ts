@@ -137,7 +137,7 @@ export class WMSolver {
   
   private reset() {
     this.model = null;
-    this.stages = null;
+    this.stages = [];
     this.max = -1;
     this.path = [];
     this.cost = [];

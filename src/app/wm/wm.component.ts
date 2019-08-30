@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WMSolver, Model, WorkforcePerTU } from '../solver/WMSolver';
 import { TimeUnit } from '../model/TimeUnit';
 import { Definition } from '../page-documentation/page-documentation.component';
+import { Example } from '../example-statement/example-statement.component';
 
 @Component({
   selector: 'app-wm',
@@ -20,6 +21,7 @@ export class WmComponent implements OnInit {
   timeUnitLabel: string;
   showDocumentation: boolean;
   showExamplePopup: boolean;
+  example: Example;
   
   constructor() {
     this.solver = new WMSolver();
@@ -31,6 +33,7 @@ export class WmComponent implements OnInit {
     this.timeUnitLabel = '';
     this.showDocumentation = false;
     this.showExamplePopup = false;
+    this.example = this.newExample();
   }
   
   private newModel(): Model {
@@ -42,6 +45,13 @@ export class WmComponent implements OnInit {
       fireEmployeeCost: 0,
       quitEmployeesPerTU: 0,
       workforcePerTU: []
+    };
+  }
+  
+  private newExample(number: number = -1, statement: string = ''): Example {
+    return {
+      number: number,
+      statement: statement
     };
   }
   
@@ -111,6 +121,13 @@ export class WmComponent implements OnInit {
           this.model.initialNumberOfEmployees = 0;
           this.model.fireEmployeeCost = 0;
           this.model.quitEmployeesPerTU = 0;
+          this.example = this.newExample(1, 
+            `A construction contractor estimates that the workforce required 
+            over the next 5 weeks is 5, 7, 8, 4 and 6 workers respectively.
+            Excess labor kept on the force will cost $300 per worker per
+            week, and new hiring in any week will incur a fixed cost of
+            $400 plus $200 per worker per week. Compute a hiring plan that
+            minimizes the cost.`);
           sampleData = [
             {
               timeunit: 1,
@@ -144,6 +161,15 @@ export class WmComponent implements OnInit {
           this.model.initialNumberOfEmployees = 30;
           this.model.fireEmployeeCost = 25000;
           this.model.quitEmployeesPerTU = 3;
+          this.example = this.newExample(2, 
+            `A company requires 28, 30, 25, 29 and 20 workers for the next
+            5 years respectively. Currently there are 30 employees. Each
+            worker earns $108,000 a year. When starting each year, a worker
+            may be hired or fired. It costs $9,000 to hire a worker and
+            $25,000 to fire him, because of insurance and benefits. As the
+            job is significantly tiring, each year 3 workers quit the job
+            (which don't receive the firing money). Find the optimal solution
+            for hiring employees along the 5 years.`);
           sampleData = [
             {
               timeunit: 1,
@@ -220,6 +246,7 @@ export class WmComponent implements OnInit {
     this._timeUnitId = -1;
     this.showDocumentation = false;
     this.showExamplePopup = false;
+    this.example = this.newExample();
   }
   
   onShowDoc() {
