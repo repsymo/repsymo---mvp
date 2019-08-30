@@ -29,13 +29,10 @@
     background-color: #f0f0f0;
 }
 
-app-page-documentation  {
-    transition: all 1000ms;
-}
-
 .showdoc-button-container {
     height: 24px;
     margin-bottom: 8px;
+    z-index: 99999;
 }
 
 .showdoc-button-container > i {

@@ -1,9 +1,13 @@
-p {
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
+div {
+    margin-bottom: 16px; 
 }
 
 div > div {
     color: #737373;
+}
+
+div > p {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
