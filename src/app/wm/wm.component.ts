@@ -40,7 +40,7 @@ export class WmComponent implements OnInit {
       newEmployeePerTUCost: 0,
       initialNumberOfEmployees: 0,
       fireEmployeeCost: 0,
-      quitEmployees: 0,
+      quitEmployeesPerTU: 0,
       workforcePerTU: []
     };
   }
@@ -110,7 +110,7 @@ export class WmComponent implements OnInit {
           this.model.newEmployeePerTUCost = 200;
           this.model.initialNumberOfEmployees = 0;
           this.model.fireEmployeeCost = 0;
-          this.model.quitEmployees = 0;
+          this.model.quitEmployeesPerTU = 0;
           sampleData = [
             {
               timeunit: 1,
@@ -143,7 +143,7 @@ export class WmComponent implements OnInit {
           this.model.newEmployeePerTUCost = 108000;
           this.model.initialNumberOfEmployees = 30;
           this.model.fireEmployeeCost = 25000;
-          this.model.quitEmployees = 3;
+          this.model.quitEmployeesPerTU = 3;
           sampleData = [
             {
               timeunit: 1,
