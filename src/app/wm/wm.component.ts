@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WMSolver, Model, WorkforcePerTU } from '../solver/WMSolver';
 import { TimeUnit } from '../model/TimeUnit';
+import { Definition } from '../page-documentation/page-documentation.component';
 
 @Component({
   selector: 'app-wm',
@@ -11,7 +12,7 @@ import { TimeUnit } from '../model/TimeUnit';
 export class WmComponent implements OnInit {
   
   private readonly solver: WMSolver;
-  readonly pageDocumentation: string[];
+  readonly pageDocumentation: Definition[];
   private timeToAnalyse: number;
   private manpowerExcessCost: number;
   private newEmployeeFixedCost: number;
@@ -22,6 +23,7 @@ export class WmComponent implements OnInit {
   private inputData: WorkforcePerTU[];
   inputDataStep: number;
   timeUnitLabel: string;
+  showDocumentation: boolean;
   
   constructor() {
     this.solver = new WMSolver();
@@ -36,11 +38,47 @@ export class WmComponent implements OnInit {
     this.inputData = [];
     this.inputDataStep = 0;
     this.timeUnitLabel = '';
+    this.showDocumentation = false;
   }
 
-  private createDocArray(): string[] {
+  private createDocArray(): Definition[] {
     return [
-      
+      {
+        title: 'Unit of time',
+        description: 'Label to represent the problem in terms of time'
+      },
+      {
+        title: 'Number of "time units" to analyse',
+        description: 'Amount of time to compute the model. For example 5 weeks'
+      },
+      {
+        title: 'Initial number of employees',
+        description: 'Number of employees already working before computing the model'
+      },
+      {
+        title: 'Manpower excess cost',
+        description: `Cost for manpower per unit of time. For example, it costs 50$ to pay for 
+                      manpower per week, to be considered when hiring new employees`
+      },
+      {
+        title: 'Fixed cost for hiring a new employee',
+        description: 'Cost that is paid only once when a new employee is being hired'
+      },
+      {
+        title: 'Variable cost for hiring a new employee per unit of time',
+        description: `Cost to pay for each hired employee per unit of time (eg. week, year)`
+      },
+      {
+        title: 'Cost for firing an employee',
+        description: `When the company fires an employee, they receive a benefit in terms of money
+                      that it is an expense if the company decides to fire or laid off staff`
+      },
+      {
+        title: 'Number of employees who decide to quit per unit of time',
+        description: `Some employees regularly quit their job. For example, 5 employees quit each
+                      year, so they will not get the "Cost for firing an employee" money when
+                      leaving the job`
+      }
     ];
   }
 
@@ -95,7 +133,11 @@ export class WmComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
+  onShowDoc() {
+    this.showDocumentation = !this.showDocumentation;
+  }
+  
   onTimeUnitChange(timeUnit: TimeUnit) {
     this.timeUnitLabel = timeUnit.label;
   }

@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TimeUnit } from '../model/TimeUnit';
-import { on } from 'cluster';
 
 @Component({
   selector: 'app-time-unit-selector',

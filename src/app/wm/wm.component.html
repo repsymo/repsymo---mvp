@@ -1,5 +1,13 @@
 <!-- ---------------------------------------- PAGE DOCUMENTATION ---------------------------------------- -->
-<app-page-documentation [items]="pageDocumentation"></app-page-documentation>
+<div class="showdoc-button-container">
+    <i class="far fa-question-circle"
+        (click)="onShowDoc()"></i>
+</div>
+<app-page-documentation [hidden]="!showDocumentation"
+                        [items]="pageDocumentation">
+</app-page-documentation>
+
+<!-- ---------------------------------------- TOP PANEL ---------------------------------------- -->
 <div class="top-panel">
     <div class="time-input-container">
         <app-time-unit-selector (valueChanged)="onTimeUnitChange($event)">
@@ -97,8 +105,10 @@
         </button>
     </div>
 </div>
+
+<!-- ---------------------------------------- TABULAR INPUT ---------------------------------------- -->
 <div id="inputTable" 
-    [ngClass]="{ 'gone': inputDataStep == 0 }">
+    [ngClass]="{ 'h': inputDataStep == 0 }">
     <table class="table">
         <thead>
             <tr>
@@ -134,6 +144,8 @@
         Solve
     </button>
 </div>
+
+<!-- ---------------------------------------- SOLUTION PANEL ---------------------------------------- -->
 <div id="solutionPanel"
     [ngClass]="{ 'gone': inputDataStep < 2 }">
     <div class="divider"></div>

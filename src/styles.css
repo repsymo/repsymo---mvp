@@ -137,6 +137,10 @@ body {
     display: inline-block;
 }
 
+#inputTable {
+    transition: all 400ms;
+}
+
 @media only screen and (min-width: 400px) {
     .page > .top-panel {
         width: 400px;
