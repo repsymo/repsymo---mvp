@@ -1,8 +1,21 @@
-<!-- ---------------------------------------- PAGE DOCUMENTATION ---------------------------------------- -->
+<!-- ---------------------------------------- PAGE OPTIONS ---------------------------------------- -->
 <div class="showdoc-button-container">
     <i class="far fa-question-circle"
         (click)="onShowDoc()"></i>
+    <i class="fas fa-redo"
+        (click)="onResetClick()"></i>
+    <i class="text"
+        (click)="onExampleButtonClick($event)">EXAMPLE</i>
 </div>
+
+<div id="examplePopup"
+    [ngClass]="{ 'gone': !showExamplePopup }"
+    (click)="onExampleClick($event)">
+    <p data-number="1">Example 1</p>
+    <p data-number="2">Example 2</p>
+</div>
+
+<!-- ---------------------------------------- PAGE DOCUMENTATION ---------------------------------------- -->
 <app-page-documentation [hidden]="!showDocumentation"
                         [items]="pageDocumentation">
 </app-page-documentation>
@@ -10,7 +23,8 @@
 <!-- ---------------------------------------- TOP PANEL ---------------------------------------- -->
 <div class="top-panel">
     <div class="time-input-container">
-        <app-time-unit-selector (valueChanged)="onTimeUnitChange($event)">
+        <app-time-unit-selector [value]="_timeUnitId"
+                                (valueChanged)="onTimeUnitChange($event)">
         </app-time-unit-selector>
     </div>
     <div>
@@ -31,7 +45,7 @@
                 Initial number of employees
             </label>
             <input  id="initialEmployeesInput"
-                    [(ngModel)]="initialEmployees"
+                    [(ngModel)]="model.initialNumberOfEmployees"
                     class="form-control"
                     type="number"
                     placeholder="Enter the initial number of employees">
@@ -43,7 +57,7 @@
                 Manpower excess cost per worker per {{ timeUnitLabel.toLowerCase() }}
             </label>
             <input  id="manpowerExcessInput"
-                    [(ngModel)]="manpowerExcessCost"
+                    [(ngModel)]="model.manpowerExcessCost"
                     class="form-control"
                     type="number"
                     placeholder="Enter the manpower excess cost per time unit">
@@ -55,7 +69,7 @@
                 Fixed cost for hiring a new employee
             </label>
             <input  id="newHireFixedInput"
-                    [(ngModel)]="newEmployeeFixedCost"
+                    [(ngModel)]="model.newEmployeeFixedCost"
                     class="form-control"
                     type="number"
                     placeholder="Enter the fixed cost for new employees">
@@ -67,7 +81,7 @@
                 Variable cost for hiring a new employee per {{ timeUnitLabel.toLowerCase() }}
             </label>
             <input  id="newHireInput"
-                    [(ngModel)]="newEmployeePerWeekCost"
+                    [(ngModel)]="model.newEmployeePerTUCost"
                     class="form-control"
                     type="number"
                     placeholder="Enter the variable cost for new employees per time unit">
@@ -79,7 +93,7 @@
                 Cost for firing an employee
             </label>
             <input  id="fireEmployeeCostInput"
-                    [(ngModel)]="fireEmployeeCost"
+                    [(ngModel)]="model.fireEmployeeCost"
                     class="form-control"
                     type="number"
                     placeholder="Enter the cost for firing an employee">
@@ -91,7 +105,7 @@
                 Number of employees who decide to quit per {{ timeUnitLabel.toLowerCase() }}
             </label>
             <input  id="quitEmployeesInput"
-                    [(ngModel)]="quitEmployees"
+                    [(ngModel)]="model.quitEmployees"
                     class="form-control"
                     type="number"
                     placeholder="Enter the number of employees who quit each time unit">
@@ -121,11 +135,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let row of inputData; let index = index">
+            <tr *ngFor="let row of model.workforcePerTU; let index = index">
                 <th scope="row">{{ row.timeunit }}</th>
                 <td>
                     <div class="form-group">
-                        <input [(ngModel)]="inputData[index].workforce" 
+                        <input [(ngModel)]="model.workforcePerTU[index].workforce" 
                             type="number" 
                             class="form-control">
                     </div>

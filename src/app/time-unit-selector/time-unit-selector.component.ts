@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { TimeUnit } from '../model/TimeUnit';
 
 @Component({
@@ -11,6 +11,13 @@ export class TimeUnitSelectorComponent implements OnInit {
   @Output()
   readonly valueChanged: EventEmitter<TimeUnit>;
   readonly timeUnits: TimeUnit[];
+  @Input()
+  set value(value: number) {
+    if(value >= 0 && value < this.timeUnits.length) {
+      this.selectedValue = this.timeUnits[value];
+      this.onChange();
+    }
+  }
   selectedValue: TimeUnit;
   
   constructor() {
