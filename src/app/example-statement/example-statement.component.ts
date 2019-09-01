@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 
 export interface Example {
   number: number,
-  statement: string
+  statement: string,
+  title?: string
 }
 
 @Component({
@@ -15,9 +16,11 @@ export class ExampleStatementComponent implements OnInit {
   example: Example;
   gone: boolean;
   @Input()
-  set value(example: Example) {console.log(example);
-  
+  set value(example: Example) {
     this.example = example;
+    if(example.title) {
+      example.number = 0;
+    }
     this.gone = example.number == -1;
   }
   

@@ -17,7 +17,7 @@ export interface WorkforcePerTU {
 /**
  * Workforce problem model.
  */
-export interface Model {
+export interface WorkforceModel {
   /**
    * Cost to pay to each employee hired for their manpower.
    */
@@ -124,7 +124,7 @@ export interface Stage {
  */
 export class WMSolver {
   
-  private model: Model;
+  private model: WorkforceModel;
   private stages: Stage[];
   private max: number;
   private path: number[];
@@ -252,7 +252,7 @@ export class WMSolver {
     this.interpretation = interpretation;
   }
   
-  getModel(): Model {
+  getModel(): WorkforceModel {
     return this.model;
   }
   
@@ -272,7 +272,10 @@ export class WMSolver {
     return this.interpretation;
   }
   
-  solve(problemModel: Model) {
+  solve(problemModel: WorkforceModel) {
+    if(!WMSolver.validateModel(problemModel)) {
+      throw new RangeError('Invalid problem model parameters');
+    }
     this.reset();
     this.model = problemModel;
     this.stages = [];
@@ -312,6 +315,17 @@ export class WMSolver {
     solveStages();
     this.stages.reverse();
     this.findResultPathCostAndInterpretation();
+  }
+  
+  public static validateModel(model: WorkforceModel): boolean {
+    return model.manpowerExcessCost >= 0
+        && model.newEmployeeFixedCost >= 0
+        && model.newEmployeePerTUCost >= 0
+        && model.initialNumberOfEmployees >= 0
+        && model.fireEmployeeCost >= 0
+        && model.quitEmployeesPerTU >= 0
+        && model.workforcePerTU.length >= 1
+        && model.workforcePerTU.filter(v => v.workforce < 0).length == 0;
   }
   
 }

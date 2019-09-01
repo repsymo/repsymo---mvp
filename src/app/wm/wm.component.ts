@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { WMSolver, Model, WorkforcePerTU } from '../solver/WMSolver';
+import { WMSolver, WorkforceModel, WorkforcePerTU } from '../solver/WMSolver';
 import { TimeUnit } from '../model/TimeUnit';
 import { Definition } from '../page-documentation/page-documentation.component';
 import { Example } from '../example-statement/example-statement.component';
+import { Page } from '../model/Page';
+import { IoService } from '../io.service';
 
 @Component({
   selector: 'app-wm',
@@ -10,12 +12,13 @@ import { Example } from '../example-statement/example-statement.component';
   styleUrls: ['./wm.component.css'],
   host: { class: 'page' }
 })
-export class WmComponent implements OnInit {
+export class WmComponent extends Page implements OnInit {
   
+  public static readonly MODEL_TYPE: string = 'workforce';
   private readonly solver: WMSolver;
+  private model: WorkforceModel;
   readonly pageDocumentation: Definition[];
-  private model: Model;
-  private timeToAnalyse: number;
+  timeToAnalyse: number;
   inputDataStep: number;
   _timeUnitId: number; // Just to set a sample's time unit
   timeUnitLabel: string;
@@ -23,11 +26,12 @@ export class WmComponent implements OnInit {
   showExamplePopup: boolean;
   example: Example;
   
-  constructor() {
+  constructor(ioService: IoService) {
+    super(ioService, WmComponent.MODEL_TYPE);
     this.solver = new WMSolver();
-    this.pageDocumentation = this.createDocArray();
     this.model = this.newModel();
-    this.timeToAnalyse = 0;
+    this.pageDocumentation = this.createDocArray();
+    this.timeToAnalyse = 1;
     this.inputDataStep = 0;
     this._timeUnitId = -1;
     this.timeUnitLabel = '';
@@ -36,7 +40,11 @@ export class WmComponent implements OnInit {
     this.example = this.newExample();
   }
   
-  private newModel(): Model {
+  ngOnInit() {
+    super.ngOnInit();
+  }
+  
+  private newModel(): WorkforceModel {
     return {
       manpowerExcessCost: 0,
       newEmployeeFixedCost: 0,
@@ -48,9 +56,10 @@ export class WmComponent implements OnInit {
     };
   }
   
-  private newExample(number: number = -1, statement: string = ''): Example {
+  private newExample(number: number = -1, statement: string = '', title: string = ''): Example {
     return {
       number: number,
+      title: title,
       statement: statement
     };
   }
@@ -209,20 +218,48 @@ export class WmComponent implements OnInit {
     this.model.workforcePerTU = inputData;
   }
   
-  formatCost(cost: string): string {
-    const array: { demand: string, value: string }[] = JSON.parse(cost);
-    let str = '';
-
-    array.forEach(element => {
-      const demand = element.demand;
-      const cost = element.value;
-
-      str += ` (${demand}, ${cost}) `;
-    });
-    return str;
+  getModel() {
+    // If current model is empty don't return it so it is not downloaded
+    if(!WMSolver.validateModel(this.model)) {
+      return null;
+    }
+    return this.model;
   }
-
-  ngOnInit() {
+  
+  getExample() {
+    return this.example;
+  }
+  
+  loadModel(modelObj: object, fileName: string, statement: string): boolean {
+    const model = modelObj as WorkforceModel;
+    
+    if(!WMSolver.validateModel(model)) {
+      return false;
+    }
+    this.model = model;
+    this.example = this.newExample(0, statement, fileName);
+    return true;
+  }
+  
+  onSolve() {
+    try {
+      this.solver.solve(this.model);
+      
+      // The step is 2 at this point
+      this.inputDataStep =  (this.inputDataStep < 2) ? 2 : this.inputDataStep;
+    } catch(error) {
+      alert(error);
+    }
+  }
+  
+  onReset() {
+    this.model = this.newModel();
+    this.timeToAnalyse = 1;
+    this.inputDataStep = 0;
+    this._timeUnitId = -1;
+    this.showDocumentation = false;
+    this.showExamplePopup = false;
+    this.example = this.newExample();
   }
   
   onExampleButtonClick() {
@@ -239,15 +276,6 @@ export class WmComponent implements OnInit {
     this.onSolve();
   }
   
-  onResetClick() {
-    this.model = this.newModel();
-    this.timeToAnalyse = 0;
-    this.inputDataStep = 0;
-    this._timeUnitId = -1;
-    this.showDocumentation = false;
-    this.showExamplePopup = false;
-    this.example = this.newExample();
-  }
   
   onShowDoc() {
     this.showDocumentation = !this.showDocumentation;
@@ -262,12 +290,18 @@ export class WmComponent implements OnInit {
     this.inputDataStep = (this.inputDataStep < 1) ? 1 : this.inputDataStep;
     this.initInputDataArray();
   }
+  
+  formatCost(cost: string): string {
+    const array: { demand: string, value: string }[] = JSON.parse(cost);
+    let str = '';
 
-  onSolve() {
-    this.solver.solve(this.model);
-    
-    // The step is 2 at this point
-    this.inputDataStep =  (this.inputDataStep < 2) ? 2 : this.inputDataStep;
+    array.forEach(element => {
+      const demand = element.demand;
+      const cost = element.value;
+
+      str += ` (${demand}, ${cost}) `;
+    });
+    return str;
   }
   
 }

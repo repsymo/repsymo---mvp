@@ -1,10 +1,10 @@
 <!-- ---------------------------------------- PAGE OPTIONS ---------------------------------------- -->
-<div class="showdoc-button-container">
-    <i class="far fa-question-circle"
+<div class="topbar-container">
+    <i class="fas fa-question-circle"
         (click)="onShowDoc()"></i>
-    <i class="fas fa-redo"
-        (click)="onResetClick()"></i>
-    <i class="text"
+    <i class="fas fa-redo-alt"
+        (click)="onReset()"></i>
+    <i class="text unselectable"
         (click)="onExampleButtonClick($event)">EXAMPLE</i>
 </div>
 
@@ -175,10 +175,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">x_{{ stage.id }}</th>
+                    <th scope="col">x<sub>{{ stage.id }}</sub></th>
                     <th scope="col">Cost (demand, cost)</th>
                     <th scope="col">min</th>
-                    <th scope="col">x_{{ stage.id + 1 }}</th>
+                    <th scope="col">x<sub>{{ stage.id + 1 }}</sub></th>
                 </tr>
             </thead>
             <tbody *ngFor="let row of stage.rows">

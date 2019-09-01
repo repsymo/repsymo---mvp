@@ -21,16 +21,16 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'im',
+    component: ImComponent
+  },
+  {
     path: 'mrm',
     component: MrmComponent
   },
   {
     path: 'wm',
     component: WmComponent
-  },
-  {
-    path: 'im',
-    component: ImComponent
   },
   {
     path: 'about',

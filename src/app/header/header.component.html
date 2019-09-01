@@ -3,10 +3,17 @@
         <div>
             <h1>2D2P Solver</h1>
         </div>
-        <div class="items">
-            <div routerLink="about"
-                (click)="onActionClick()">
+        <div class="items"
+            (click)="onActionClick($event)">
+            <div id="actionAbout" 
+                routerLink="about">
                 <i class="fas fa-info-circle"></i>
+            </div>
+            <div id="actionSave">
+                <i class="fas fa-save"></i>
+            </div>
+            <div id="actionOpen">
+                <i class="fas fa-upload"></i>
             </div>
         </div>
     </nav>
