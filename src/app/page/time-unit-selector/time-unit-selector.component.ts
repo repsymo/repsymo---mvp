@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { TimeUnit } from '../model/TimeUnit';
+import { TimeUnit } from '../../model/TimeUnit';
 
 @Component({
   selector: 'app-time-unit-selector',
@@ -8,8 +8,6 @@ import { TimeUnit } from '../model/TimeUnit';
 })
 export class TimeUnitSelectorComponent implements OnInit {
   
-  @Output()
-  readonly valueChanged: EventEmitter<TimeUnit>;
   readonly timeUnits: TimeUnit[];
   @Input()
   set value(value: number) {
@@ -18,16 +16,18 @@ export class TimeUnitSelectorComponent implements OnInit {
       this.onChange();
     }
   }
+  @Output()
+  readonly valueChanged: EventEmitter<TimeUnit>;
   selectedValue: TimeUnit;
   
   constructor() {
-    this.valueChanged = new EventEmitter();
     this.timeUnits = [
       { id: 0, label: 'Days' },
       { id: 1, label: 'Weeks' },
       { id: 2, label: 'Months' },
       { id: 3, label: 'Years' }
     ];
+    this.valueChanged = new EventEmitter();
     this.selectedValue = this.timeUnits[1];
   }
 

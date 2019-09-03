@@ -1,4 +1,4 @@
-import { WmComponent } from '../wm/wm.component';
+import { WmComponent } from '../page/wm/wm.component';
 
 export interface DDPPSFile {
   appVersion: string,

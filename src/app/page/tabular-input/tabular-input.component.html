@@ -1,0 +1,44 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"
+                *ngFor="let headerItem of header">
+                {{ headerItem }}
+            </th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let row of rows; index as y;">
+        <tr>
+            <th scope="row">{{ y + 1 }}</th>
+            <div *ngIf="isSingleColumn(); then singleColumnBlock else multiColumnBlock"></div>
+            
+            <!-- Render for single column -->
+            <ng-template #singleColumnBlock>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control"
+                                type="number" 
+                                [(ngModel)]="rows[y][keyValue]"
+                                *ngIf="isSingleColumnWithKey()">
+                        
+                        <input class="form-control"
+                                type="number" 
+                                [(ngModel)]="rows[y]"
+                                *ngIf="!isSingleColumnWithKey()">
+                    </div>
+                </td>
+            </ng-template>
+            
+            <!-- Render for multi column -->
+            <ng-template #multiColumnBlock>
+                    <td *ngFor="let key of keys(row)">
+                        <div class="form-group">
+                            <input class="form-control"
+                                    type="number"
+                                    [(ngModel)]="rows[y][key]">
+                        </div>
+                    </td>
+            </ng-template>
+        </tr>
+    </tbody>
+</table>

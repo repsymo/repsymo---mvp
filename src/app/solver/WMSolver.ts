@@ -130,8 +130,10 @@ export class WMSolver {
   private path: number[];
   private cost: number[];
   private interpretation: string[];
+  private formatCost: boolean;
   
   constructor() {
+    this.formatCost = true;
     this.reset();
   }
   
@@ -142,6 +144,19 @@ export class WMSolver {
     this.path = [];
     this.cost = [];
     this.interpretation = [];
+  }
+  
+  private formatCostOptions(cost: string): string {
+    const array: { demand: string, value: string }[] = JSON.parse(cost);
+    let str = '';
+
+    array.forEach(element => {
+      const demand = element.demand;
+      const cost = element.value;
+
+      str += ` (${demand}, ${cost}) `;
+    });
+    return str;
   }
   
   private solveStage = (stage: Stage) => {
@@ -205,7 +220,8 @@ export class WMSolver {
       
       // Give conclusions to the row
       const minCost: CostOption = getMinimum(options);
-      row.cost = JSON.stringify(options);
+      const costOptions = JSON.stringify(options);
+      row.cost = (this.formatCost) ? this.formatCostOptions(costOptions) : costOptions;
       row.f = minCost.value;
       row.x = minCost.demand;
     });

@@ -1,0 +1,19 @@
+#solutionPanel > .result > .report {
+    margin-top: 32px;
+}
+
+#solutionPanel > .result > .report > p {
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.h {
+    transform: scaleY(0);
+}
+
+@media only screen and (min-width: 800px) {
+    .page > .top-panel {
+        width: 680px;
+    }
+}

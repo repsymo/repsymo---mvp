@@ -2,17 +2,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { MrmComponent } from './mrm/mrm.component';
-import { WmComponent } from './wm/wm.component';
+import { MrmComponent } from './page/mrm/mrm.component';
+import { WmComponent } from './page/wm/wm.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { ImComponent } from './im/im.component';
+import { ImComponent } from './page/im/im.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { FormsModule } from '@angular/forms';
-import { PageDocumentationComponent } from './page-documentation/page-documentation.component';
-import { TimeUnitSelectorComponent } from './time-unit-selector/time-unit-selector.component';
-import { ExampleStatementComponent } from './example-statement/example-statement.component';
+import { PageDocumentationComponent } from './page/page-documentation/page-documentation.component';
+import { TimeUnitSelectorComponent } from './page/time-unit-selector/time-unit-selector.component';
+import { ExampleStatementComponent } from './page/example-statement/example-statement.component';
+import { TabularInputComponent } from './page/tabular-input/tabular-input.component';
+import { OptionsBarComponent } from './page/options-bar/options-bar.component';
+import { TabularOutputComponent } from './page/tabular-output/tabular-output.component';
+import { ChainsResultComponent } from './page/chains-result/chains-result.component';
 
 const appRoutes: Routes = [
   {
@@ -49,7 +53,11 @@ const appRoutes: Routes = [
     AboutComponent,
     PageDocumentationComponent,
     TimeUnitSelectorComponent,
-    ExampleStatementComponent
+    ExampleStatementComponent,
+    TabularInputComponent,
+    OptionsBarComponent,
+    TabularOutputComponent,
+    ChainsResultComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

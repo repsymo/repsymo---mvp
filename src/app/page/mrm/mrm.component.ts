@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MRMSolver } from '../solver/MRMSolver';
+import { MRMSolver } from '../../solver/MRMSolver';
 
 // This code comes from the previous project Machine Replacement Model, so this component will stay
 // implemented as JS-like way

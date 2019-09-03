@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { IOActionEvent } from './header/header.component';
 import { DDPPS, DDPPSFile } from './model/DDPPSolverFile';
 import { IoService, IOEvent } from './io.service';
-import { WmComponent } from './wm/wm.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { WmComponent } from './page/wm/wm.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -52,8 +52,7 @@ export class AppComponent implements OnInit {
     this.ioService.io.next(event);
   }
   
-  ngOnInit() {
-  }
+  ngOnInit() {}
   
   onIOAction(e: IOActionEvent) {
     switch(e.action) {

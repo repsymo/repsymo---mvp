@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { WMSolver, WorkforceModel, WorkforcePerTU } from '../solver/WMSolver';
-import { TimeUnit } from '../model/TimeUnit';
+import { WMSolver, WorkforceModel, WorkforcePerTU, Stage } from '../../solver/WMSolver';
+import { TimeUnit } from '../../model/TimeUnit';
 import { Definition } from '../page-documentation/page-documentation.component';
 import { Example } from '../example-statement/example-statement.component';
-import { Page } from '../model/Page';
-import { IoService } from '../io.service';
+import { Page } from '../Page';
+import { IoService } from '../../io.service';
+import { OptionsBarListener } from '../options-bar/options-bar.component';
 
 @Component({
   selector: 'app-wm',
@@ -12,31 +13,31 @@ import { IoService } from '../io.service';
   styleUrls: ['./wm.component.css'],
   host: { class: 'page' }
 })
-export class WmComponent extends Page implements OnInit {
+export class WmComponent extends Page implements OnInit, OptionsBarListener {
   
   public static readonly MODEL_TYPE: string = 'workforce';
   private readonly solver: WMSolver;
-  private model: WorkforceModel;
   readonly pageDocumentation: Definition[];
+  readonly inputTableHeader: string[];
+  model: WorkforceModel;
+  showDocumentation: boolean;
   timeToAnalyse: number;
   inputDataStep: number;
   _timeUnitId: number; // Just to set a sample's time unit
   timeUnitLabel: string;
-  showDocumentation: boolean;
-  showExamplePopup: boolean;
   example: Example;
   
   constructor(ioService: IoService) {
     super(ioService, WmComponent.MODEL_TYPE);
     this.solver = new WMSolver();
+    this.pageDocumentation = this.createDocumentation();
+    this.inputTableHeader = this.createInputTableHeader();
     this.model = this.newModel();
-    this.pageDocumentation = this.createDocArray();
+    this.showDocumentation = false;
     this.timeToAnalyse = 1;
     this.inputDataStep = 0;
     this._timeUnitId = -1;
     this.timeUnitLabel = '';
-    this.showDocumentation = false;
-    this.showExamplePopup = false;
     this.example = this.newExample();
   }
   
@@ -64,7 +65,7 @@ export class WmComponent extends Page implements OnInit {
     };
   }
   
-  private createDocArray(): Definition[] {
+  private createDocumentation(): Definition[] {
     return [
       {
         title: 'Unit of time',
@@ -104,7 +105,14 @@ export class WmComponent extends Page implements OnInit {
       }
     ];
   }
-
+  
+  private createInputTableHeader(): string[] {
+    return [
+      'Time t',
+      'Workforce required (employees)'
+    ];
+  }
+  
   private initInputDataArray() {
     const inputData: WorkforcePerTU[] = Array(this.timeToAnalyse);
     
@@ -252,32 +260,21 @@ export class WmComponent extends Page implements OnInit {
     }
   }
   
+  onShowExample(n: number) {
+    this.setExample(n);
+    this.inputDataStep++;
+    this.onSolve();
+  }
+  
   onReset() {
     this.model = this.newModel();
     this.timeToAnalyse = 1;
     this.inputDataStep = 0;
     this._timeUnitId = -1;
-    this.showDocumentation = false;
-    this.showExamplePopup = false;
     this.example = this.newExample();
   }
   
-  onExampleButtonClick() {
-    this.showExamplePopup = !this.showExamplePopup;
-  }
-  
-  onExampleClick(e: MouseEvent) {
-    const target: HTMLElement = e.target as HTMLElement;
-    const number: number = parseInt(target.dataset['number']);
-    
-    this.setExample(number);
-    this.showExamplePopup = false;
-    this.inputDataStep++;
-    this.onSolve();
-  }
-  
-  
-  onShowDoc() {
+  onToggleDocumentation() {
     this.showDocumentation = !this.showDocumentation;
   }
   
@@ -291,17 +288,39 @@ export class WmComponent extends Page implements OnInit {
     this.initInputDataArray();
   }
   
-  formatCost(cost: string): string {
-    const array: { demand: string, value: string }[] = JSON.parse(cost);
-    let str = '';
-
-    array.forEach(element => {
-      const demand = element.demand;
-      const cost = element.value;
-
-      str += ` (${demand}, ${cost}) `;
+  getStageTableHeader(stage: Stage): string[] {
+    return [
+      `x<sub>${stage.id}</sub>`,
+      'Cost (demand, cost)',
+      'f (minimum cost)',
+      `x<sub>${stage.id + 1}</sub>`
+    ];
+  }
+  
+  getReportTableHeader(): string[] {
+    return [
+      this.timeUnitLabel,
+      'Minimum demand',
+      'Current demand',
+      'Interpretation',
+      'Cost'
+    ];
+  }
+  
+  getReportTableRows(): string[] {
+    const stages = this.solver.getStages().slice().reverse();
+    const rows = [];
+    
+    stages.forEach(stage => {
+      rows.push({
+        'timeunit': stage.id + 1,
+        'minimumDemand': this.solver.getPath()[stage.id],
+        'currentDemand': this.solver.getInterpretation()[stage.id],
+        'interpretation': this.solver.getCost()[stage.id],
+        'cost': this.solver.getCost()[stage.id]
+      });
     });
-    return str;
+    return rows;
   }
   
 }

@@ -1,19 +1,7 @@
 <!-- ---------------------------------------- PAGE OPTIONS ---------------------------------------- -->
-<div class="topbar-container">
-    <i class="fas fa-question-circle"
-        (click)="onShowDoc()"></i>
-    <i class="fas fa-redo-alt"
-        (click)="onReset()"></i>
-    <i class="text unselectable"
-        (click)="onExampleButtonClick($event)">EXAMPLE</i>
-</div>
-
-<div id="examplePopup"
-    [ngClass]="{ 'gone': !showExamplePopup }"
-    (click)="onExampleClick($event)">
-    <p data-number="1">Example 1</p>
-    <p data-number="2">Example 2</p>
-</div>
+<app-options-bar [examplesNumber]="2"
+                [l]="this">
+</app-options-bar>
 
 <!-- ---------------------------------------- PAGE DOCUMENTATION ---------------------------------------- -->
 <app-page-documentation [hidden]="!showDocumentation"
@@ -126,35 +114,14 @@
 <!-- ---------------------------------------- TABULAR INPUT ---------------------------------------- -->
 <div id="inputTable" 
     [ngClass]="{ 'h': inputDataStep == 0 }">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">
-                    Time t ({{ timeUnitLabel.toLowerCase() }})
-                </th>
-                <th scope="col">
-                    Workforce required (employees)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let row of model.workforcePerTU; let index = index">
-                <th scope="row">{{ row.timeunit }}</th>
-                <td>
-                    <div class="form-group">
-                        <input [(ngModel)]="model.workforcePerTU[index].workforce" 
-                            type="number" 
-                            class="form-control">
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <app-tabular-input [header]="inputTableHeader"
+                        [timeUnit]="timeUnitLabel"
+                        [keyValue]="'workforce'"
+                        [rows]="model.workforcePerTU">
+    </app-tabular-input>
 </div>
-<div [ngClass]="{ 
-                    'gone': inputDataStep == 0,
-                    'solve-button-pane': inputDataStep > 0 
-                }">
+<div class="solve-button-pane" 
+    [ngClass]="{ 'gone': inputDataStep == 0 }">
     <button id="solveButton"
             class="btn btn-primary"
             (click)="onSolve()">
@@ -172,24 +139,9 @@
         <div>
             Minimum Demand: <strong>{{ stage.minimumDemand }}</strong> employees
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">x<sub>{{ stage.id }}</sub></th>
-                    <th scope="col">Cost (demand, cost)</th>
-                    <th scope="col">min</th>
-                    <th scope="col">x<sub>{{ stage.id + 1 }}</sub></th>
-                </tr>
-            </thead>
-            <tbody *ngFor="let row of stage.rows">
-                <tr>
-                    <th scope="row">{{ row.previousX }}</th>
-                    <td>{{ formatCost(row.cost) }}</td>
-                    <td>{{ row.f }}</td>
-                    <td>{{ row.x }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <app-tabular-output [header]="getStageTableHeader(stage)"
+                            [rows]="stage.rows">
+        </app-tabular-output>
     </div>
     <div class="result">
         <p>Result chains</p>
@@ -203,26 +155,9 @@
         </div>
         <div class="report">
             <p>Report of results</p>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">{{ timeUnitLabel }}</th>
-                        <th scope="col">Minimum demand</th>
-                        <th scope="col">Current demand</th>
-                        <th scope="col">Interpretation</th>
-                        <th scope="col">Cost</th>
-                    </tr>
-                </thead>
-                <tbody *ngFor="let stage of solver.getStages().slice().reverse()">
-                    <tr>
-                        <th scope="row">{{ stage.id + 1 }}</th>
-                        <td>{{ stage.minimumDemand }}</td>
-                        <td>{{ solver.getPath()[stage.id] }}</td>
-                        <td>{{ solver.getInterpretation()[stage.id] }}</td>
-                        <td>{{ solver.getCost()[stage.id] }}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <app-tabular-output [header]="getReportTableHeader()"
+                                [rows]="getReportTableRows()">
+            </app-tabular-output>
         </div>
     </div>
 </div>
