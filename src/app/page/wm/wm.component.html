@@ -13,95 +13,10 @@
 
 <!-- ---------------------------------------- TOP PANEL ---------------------------------------- -->
 <div class="top-panel">
-    <div class="time-input-container">
-        <app-time-unit-selector [value]="_timeUnitId"
-                                (valueChanged)="onTimeUnitChange($event)">
-        </app-time-unit-selector>
-    </div>
-    <div>
-        <div class="form-group">
-            <label for="timeInput">
-                Number of {{ timeUnitLabel.toLowerCase() }} to analyse
-            </label>
-            <input  id="timeInput"
-                    [(ngModel)]="timeToAnalyse"
-                    class="form-control"
-                    type="number"
-                    placeholder="Enter the number of time units">
-        </div>
-    </div>
-    <div>
-        <div class="form-group">
-            <label for="initialEmployeesInput">
-                Initial number of employees
-            </label>
-            <input  id="initialEmployeesInput"
-                    [(ngModel)]="model.initialNumberOfEmployees"
-                    class="form-control"
-                    type="number"
-                    placeholder="Enter the initial number of employees">
-        </div>
-    </div>
-    <div>
-        <div class="form-group">
-            <label for="manpowerExcessInput">
-                Manpower excess cost per worker per {{ timeUnitLabel.toLowerCase() }}
-            </label>
-            <input  id="manpowerExcessInput"
-                    [(ngModel)]="model.manpowerExcessCost"
-                    class="form-control"
-                    type="number"
-                    placeholder="Enter the manpower excess cost per time unit">
-        </div>
-    </div>
-    <div>
-        <div class="form-group">
-            <label for="newHireFixedInput">
-                Fixed cost for hiring a new employee
-            </label>
-            <input  id="newHireFixedInput"
-                    [(ngModel)]="model.newEmployeeFixedCost"
-                    class="form-control"
-                    type="number"
-                    placeholder="Enter the fixed cost for new employees">
-        </div>
-    </div>
-    <div>
-        <div class="form-group">
-            <label for="newHireInput">
-                Variable cost for hiring a new employee per {{ timeUnitLabel.toLowerCase() }}
-            </label>
-            <input  id="newHireInput"
-                    [(ngModel)]="model.newEmployeePerTUCost"
-                    class="form-control"
-                    type="number"
-                    placeholder="Enter the variable cost for new employees per time unit">
-        </div>
-    </div>
-    <div>
-        <div class="form-group">
-            <label for="fireEmployeeCostInput">
-                Cost for firing an employee
-            </label>
-            <input  id="fireEmployeeCostInput"
-                    [(ngModel)]="model.fireEmployeeCost"
-                    class="form-control"
-                    type="number"
-                    placeholder="Enter the cost for firing an employee">
-        </div>
-    </div>
-    <div>
-        <div class="form-group">
-            <label for="quitEmployeesInput">
-                Number of employees who decide to quit per {{ timeUnitLabel.toLowerCase() }}
-            </label>
-            <input  id="quitEmployeesInput"
-                    [(ngModel)]="model.quitEmployeesPerTU"
-                    class="form-control"
-                    type="number"
-                    placeholder="Enter the number of employees who quit each time unit">
-        </div>
-    </div>
+    <app-input-pane [model]="model"
+                    [items]="inputPaneItems"
+                    (timeUnitChange)="onTimeUnitChange($event)">
+    </app-input-pane>
     <div class="next-button-container">
         <button id="nextButton" 
                 class="btn btn-primary"

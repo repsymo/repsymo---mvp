@@ -48,21 +48,6 @@ body {
     margin-bottom: 32px;
 }
 
-.page > .top-panel > div {
-    display: block;
-    width: 100%;
-    padding: 8px 32px;
-}
-
-.page > .top-panel > div.time-input-container {
-    height: 102px;
-}
-
-.page > .top-panel > div.time-input-container .form-group{
-    position: relative;
-    width: 100%;
-}
-
 .page > .solve-button-pane {
     display: flex;
     margin-bottom: 32px;
@@ -158,23 +143,6 @@ body {
 @media only screen and (min-width: 800px) {
     .page > .top-panel {
         width: 680px;
-    }
-    
-    .page > .top-panel > div {
-        width: 50%;
-        height: 116px;
-        float: left;
-    }
-    
-    .page > .top-panel > div .form-group {
-        position: absolute;
-        width: 80%;
-        bottom: 0px;
-    }
-    
-    .page > .top-panel > div.time-input-container {
-        position: relative;
-        width: 100%;
     }
     
     #inputTable {

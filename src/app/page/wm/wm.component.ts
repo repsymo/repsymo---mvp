@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { WMSolver, WorkforceModel, WorkforcePerTU, Stage } from '../../solver/WMSolver';
+import { WMSolver, WorkforceModel, WorkforcePerTU, Stage, WMProportionalityOption } from '../../solver/WMSolver';
 import { TimeUnit } from '../../model/TimeUnit';
 import { Definition } from '../page-documentation/page-documentation.component';
 import { Example } from '../example-statement/example-statement.component';
 import { Page } from '../Page';
 import { IoService } from '../../io.service';
 import { OptionsBarListener } from '../options-bar/options-bar.component';
+import { TimeUnitDependentLabel, InputItem } from '../input-pane/input-pane.component';
 
 @Component({
   selector: 'app-wm',
@@ -17,28 +18,27 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
   
   public static readonly MODEL_TYPE: string = 'workforce';
   private readonly solver: WMSolver;
+  private readonly model: WorkforceModel;
   readonly pageDocumentation: Definition[];
+  readonly inputPaneItems: InputItem[];
   readonly inputTableHeader: string[];
-  model: WorkforceModel;
   showDocumentation: boolean;
-  timeToAnalyse: number;
   inputDataStep: number;
-  _timeUnitId: number; // Just to set a sample's time unit
-  timeUnitLabel: string;
   example: Example;
+  timeUnitLabel: string;
   
   constructor(ioService: IoService) {
     super(ioService, WmComponent.MODEL_TYPE);
     this.solver = new WMSolver();
-    this.pageDocumentation = this.createDocumentation();
-    this.inputTableHeader = this.createInputTableHeader();
     this.model = this.newModel();
+    this.pageDocumentation = this.createDocumentation();
+    this.inputPaneItems = this.createInputItems();
+    this.inputTableHeader = this.createInputTableHeader();
     this.showDocumentation = false;
-    this.timeToAnalyse = 1;
     this.inputDataStep = 0;
-    this._timeUnitId = -1;
-    this.timeUnitLabel = '';
     this.example = this.newExample();
+    this.timeUnitLabel = '';
+    // setInterval(()=>console.log(this.model['manpowerExcessCost']++),1000)
   }
   
   ngOnInit() {
@@ -46,15 +46,31 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
   }
   
   private newModel(): WorkforceModel {
+    const propOptions: WMProportionalityOption = {
+      fireEmployeeCostToCurrentStage: false
+    }
     return {
+      amountOfAnalysisTime: 1,
+      initialNumberOfEmployees: 0,
       manpowerExcessCost: 0,
       newEmployeeFixedCost: 0,
       newEmployeePerTUCost: 0,
-      initialNumberOfEmployees: 0,
       fireEmployeeCost: 0,
       quitEmployeesPerTU: 0,
-      workforcePerTU: []
+      workforcePerTU: [ ], // init
+      proportionalityOptions: propOptions
     };
+  }
+  
+  private clearModel() {
+    this.model.amountOfAnalysisTime = 1;
+    this.model.initialNumberOfEmployees = 0;
+    this.model.manpowerExcessCost = 0;
+    this.model.newEmployeeFixedCost = 0;
+    this.model.newEmployeePerTUCost = 0;
+    this.model.fireEmployeeCost = 0;
+    this.model.quitEmployeesPerTU = 0;
+    this.model.workforcePerTU = [];
   }
   
   private newExample(number: number = -1, statement: string = '', title: string = ''): Example {
@@ -106,6 +122,70 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
     ];
   }
   
+  private createInputItems(): InputItem[] {
+    const labels: TimeUnitDependentLabel[] = [
+      {
+        part1: 'Amount of ',
+        part2: ' to analyse'
+      },
+      {
+        text: 'Initial number of employees'
+      },
+      {
+        part1: 'Manpower excess cost per worker per ',
+        part2: ''
+      },
+      {
+        text: 'Fixed cost for hiring a new employee'
+      },
+      {
+        part1: 'Variable cost for hiring a new employee per ',
+        part2: ''
+      },
+      {
+        text: 'Cost for firing an employee'
+      },
+      {
+        part1: 'Number of employees who decide to quit per ',
+        part2: ''
+      }
+    ];
+    return [
+      {
+        mkey: 'amountOfAnalysisTime',
+        label: labels[0]
+      },
+      {
+        mkey: 'initialNumberOfEmployees',
+        label: labels[1]
+      },
+      {
+        mkey: 'manpowerExcessCost',
+        label: labels[2]
+      },
+      {
+        mkey: 'newEmployeeFixedCost',
+        label: labels[3]
+      },
+      {
+        mkey: 'newEmployeePerTUCost',
+        label: labels[4]
+      },
+      {
+        mkey: 'fireEmployeeCost',
+        label: labels[5]
+      },
+      {
+        mkey: 'quitEmployeesPerTU',
+        label: labels[6],
+        checkbox: {
+          part1: 'Proportional to the number of ',
+          part2: ''
+        }
+      }
+    ];
+  }
+  
   private createInputTableHeader(): string[] {
     return [
       'Time t',
@@ -114,7 +194,7 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
   }
   
   private initInputDataArray() {
-    const inputData: WorkforcePerTU[] = Array(this.timeToAnalyse);
+    const inputData: WorkforcePerTU[] = Array(this.model.amountOfAnalysisTime);
     
     for (let i = 0; i < inputData.length; i++) {
       inputData[i] = {
@@ -130,8 +210,8 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
     
     switch(n) {
       case 1:
-          this._timeUnitId = 1;
-          this.timeToAnalyse = 5;
+          //this._timeUnitId = 1;
+          this.model.amountOfAnalysisTime = 5;
           this.model.manpowerExcessCost = 300;
           this.model.newEmployeeFixedCost = 400;
           this.model.newEmployeePerTUCost = 200;
@@ -170,8 +250,8 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
         break;
         
       case 2:
-          this._timeUnitId = 3;
-          this.timeToAnalyse = 5;
+         // this._timeUnitId = 3;
+          this.model.amountOfAnalysisTime = 5;
           this.model.manpowerExcessCost = 0;
           this.model.newEmployeeFixedCost = 9000;
           this.model.newEmployeePerTUCost = 108000;
@@ -215,7 +295,7 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
           sampleData = [];
           break;
     }
-    const inputData: WorkforcePerTU[] = Array(this.timeToAnalyse);
+    const inputData: WorkforcePerTU[] = Array(this.model.amountOfAnalysisTime);
     
     for (let i = 0; i < inputData.length; i++) {
       inputData[i] = {
@@ -244,7 +324,7 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
     if(!WMSolver.validateModel(model)) {
       return false;
     }
-    this.model = model;
+    Object.keys(model).forEach(key => this.model[key] = model[key]);
     this.example = this.newExample(0, statement, fileName);
     return true;
   }
@@ -267,25 +347,24 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
   }
   
   onReset() {
-    this.model = this.newModel();
-    this.timeToAnalyse = 1;
     this.inputDataStep = 0;
-    this._timeUnitId = -1;
+    //this._timeUnitId = -1;
     this.example = this.newExample();
+    this.clearModel();
   }
   
   onToggleDocumentation() {
     this.showDocumentation = !this.showDocumentation;
   }
   
-  onTimeUnitChange(timeUnit: TimeUnit) {
-    this.timeUnitLabel = timeUnit.label;
-  }
-  
   onNext() {
     // The step is 1 at this point
     this.inputDataStep = (this.inputDataStep < 1) ? 1 : this.inputDataStep;
     this.initInputDataArray();
+  }
+  
+  onTimeUnitChange(timeUnit: TimeUnit) {
+    this.timeUnitLabel = timeUnit.label;
   }
   
   getStageTableHeader(stage: Stage): string[] {

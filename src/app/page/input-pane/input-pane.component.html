@@ -1,0 +1,30 @@
+<app-time-unit-selector (valueChanged)="onTimeUnitChange($event)">
+</app-time-unit-selector>
+<div>
+    <div *ngFor="let item of items; index as i">
+        <div class="form-group">
+            <label for="inputPaneInput{{ i }}">
+                <span>
+                    {{ getTUDLText(item.label) }}
+                </span>
+            </label>
+            <input  id="inputPaneInput{{ i }}"
+                    class="form-control"
+                    type="number"
+                    placeholder="{{ getTUDLText(item.hint) }}"
+                    [(ngModel)]="model[item.mkey]">
+        </div>
+        <div class="form-check"
+            *ngIf="item.checkbox">
+            <input id="inputPaneCB{{ i }}"
+                    class="form-check-input"
+                    type="checkbox">
+            <label class="form-check-label"
+                    for="inputPaneCB{{ i }}">
+                <span>
+                    {{ getTUDLText(item.checkbox) }}
+                </span>
+            </label>
+        </div>
+    </div>
+</div>

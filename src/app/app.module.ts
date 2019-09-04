@@ -17,6 +17,7 @@ import { TabularInputComponent } from './page/tabular-input/tabular-input.compon
 import { OptionsBarComponent } from './page/options-bar/options-bar.component';
 import { TabularOutputComponent } from './page/tabular-output/tabular-output.component';
 import { ChainsResultComponent } from './page/chains-result/chains-result.component';
+import { InputPaneComponent } from './page/input-pane/input-pane.component';
 
 const appRoutes: Routes = [
   {
@@ -57,7 +58,8 @@ const appRoutes: Routes = [
     TabularInputComponent,
     OptionsBarComponent,
     TabularOutputComponent,
-    ChainsResultComponent
+    ChainsResultComponent,
+    InputPaneComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

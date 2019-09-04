@@ -13,11 +13,32 @@ export interface WorkforcePerTU {
   workforce: number;
 }
 
+/**
+ * Defines flags to set a value as proportional to the other value. For example, the key
+ * fireEmployeeCostToCurrentStage means that the model value 'fireEmployeeCost' will be taken as
+ * (fireEmployeeCost * 'the current stage (eg. week #1, week #4)') in the computation so older
+ * employees receive more money if being fired.
+ */
+export interface WMProportionalityOption {
+  fireEmployeeCostToCurrentStage: boolean;
+}
+
 // TU = Time Unit(s)
 /**
  * Workforce problem model.
  */
 export interface WorkforceModel {
+  /**
+   * Amount of time (weeks, years, etc) to count the process. It must be the same as workforcePerTU
+   * length, and it must be greater than 0.
+   */
+  amountOfAnalysisTime: number;
+  
+  /**
+   * Initial number of employees working before applying the analysis.
+   */
+  initialNumberOfEmployees: number;
+  
   /**
    * Cost to pay to each employee hired for their manpower.
    */
@@ -32,11 +53,6 @@ export interface WorkforceModel {
    * Cost to hire a new employee per time unit. For example: a employee salary is $500 a week.
    */
   newEmployeePerTUCost: number;
-  
-  /**
-   * Initial number of employees working before applying the analysis.
-   */
-  initialNumberOfEmployees: number;
   
   /**
    * Cost for firing an employee. This cost is about the benefit an employee gets when he's fired.
@@ -56,6 +72,14 @@ export interface WorkforceModel {
    * required for week #2).
    */
   workforcePerTU: WorkforcePerTU[];
+  
+  /**
+   * Defines flags to set a value as proportional to the other value. For example, the key
+   * fireEmployeeCostToCurrentStage means that the model value 'fireEmployeeCost' will be taken as
+   * (fireEmployeeCost * 'the current stage (eg. week #1, week #4)') in the computation so older
+   * employees receive more money if being fired.
+   */
+  proportionalityOptions: WMProportionalityOption;
 }
 
 /**
@@ -334,6 +358,12 @@ export class WMSolver {
   }
   
   public static validateModel(model: WorkforceModel): boolean {
+    if(model.amountOfAnalysisTime != model.workforcePerTU.length) {
+      return false;
+    }
+    if(model.amountOfAnalysisTime <= 0) {
+      return false;
+    }
     return model.manpowerExcessCost >= 0
         && model.newEmployeeFixedCost >= 0
         && model.newEmployeePerTUCost >= 0

@@ -1,12 +1,12 @@
 <div class="form-group">
-    <label  class="input-group-text"
+    <label class="input-group-text"
             for="timeUnitSelect">
         Select a unit of time
     </label>
     <select id="timeUnitSelect"
             class="custom-select"
             [(ngModel)]="selectedValue"
-            (change)=onChange()>
+            (change)="onChange()">
         <option *ngFor="let unit of timeUnits"
                 [ngValue]="unit">
             {{ unit.label }}
