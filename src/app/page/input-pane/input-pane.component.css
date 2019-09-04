@@ -15,6 +15,7 @@
 :host > div > div {
     width: 100%;
     margin-bottom: 16px;
+    vertical-align: top;
 }
 
 :host > div > div > div label {
@@ -39,5 +40,10 @@
     
     :host > div > div > div label {
         font-size: 16px;
+    }
+    
+    :host > div > div > div.form-group label.two-lines {
+        height: 48px;
+        line-height: 70px;
     }
 }

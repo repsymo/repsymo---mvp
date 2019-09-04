@@ -6,7 +6,7 @@ import { Example } from '../example-statement/example-statement.component';
 import { Page } from '../Page';
 import { IoService } from '../../io.service';
 import { OptionsBarListener } from '../options-bar/options-bar.component';
-import { TimeUnitDependentLabel, InputItem } from '../input-pane/input-pane.component';
+import { TimeUnitDependentLabel, InputItem, CheckboxInputItem } from '../input-pane/input-pane.component';
 
 @Component({
   selector: 'app-wm',
@@ -173,15 +173,20 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
       },
       {
         mkey: 'fireEmployeeCost',
-        label: labels[5]
+        label: labels[5],
+        twoLinesLabel: true,
+        checkbox: {
+          label: {
+            part1: 'Proportional to the number of ',
+            part2: ''
+          },
+          checkboxParentKey: 'proportionalityOptions',
+          checkboxChildKey: 'fireEmployeeCostToCurrentStage'
+        }
       },
       {
         mkey: 'quitEmployeesPerTU',
-        label: labels[6],
-        checkbox: {
-          part1: 'Proportional to the number of ',
-          part2: ''
-        }
+        label: labels[6]
       }
     ];
   }
