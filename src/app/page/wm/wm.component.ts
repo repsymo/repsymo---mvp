@@ -38,7 +38,6 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
     this.inputDataStep = 0;
     this.example = this.newExample();
     this.timeUnitLabel = '';
-    // setInterval(()=>console.log(this.model['manpowerExcessCost']++),1000)
   }
   
   ngOnInit() {

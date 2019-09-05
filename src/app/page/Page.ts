@@ -68,6 +68,7 @@ export abstract class Page implements OnInit {
     
     // The model may be empty and had returned null, don't download then
     if(model == null) {
+      alert('Model is empty!');
       return;
     }
     const name = prompt('Save problem as', this.problemName);
