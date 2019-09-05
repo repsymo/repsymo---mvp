@@ -1,6 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 export interface IOActionEvent {
   action: string,
@@ -13,16 +14,18 @@ export interface IOActionEvent {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   
   private readonly router: Router;
   @Output()
   readonly ioAction: EventEmitter<IOActionEvent>;
+  routerSubscription: Subscription;
   selectedTab: number;
   
   constructor(router: Router) {
     this.router = router;
     this.ioAction = new EventEmitter();
+    this.routerSubscription = null;
     this.selectedTab = -1;
   }
   
@@ -75,7 +78,7 @@ export class HeaderComponent implements OnInit {
   
   ngOnInit() {
     const f = filter(e => e instanceof NavigationEnd);
-    this.router.events.pipe(f).subscribe((e: NavigationEnd) => {
+    this.routerSubscription = this.router.events.pipe(f).subscribe((e: NavigationEnd) => {
       const url = e.url;
       const routes = [
         '/im',
@@ -85,6 +88,10 @@ export class HeaderComponent implements OnInit {
       const index = routes.findIndex(v => v == url);
       this.selectedTab = (index != -1) ? index : this.selectedTab;
     });
+  }
+  
+  ngOnDestroy() {
+    this.routerSubscription.unsubscribe();
   }
   
   onActionClick(e: MouseEvent) {

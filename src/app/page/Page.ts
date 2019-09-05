@@ -1,4 +1,4 @@
-import { of } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { OnInit, OnDestroy } from '@angular/core';
 import { IoService } from '../io.service';
 import { DDPPSFile } from '../model/DDPPSolverFile';
@@ -11,11 +11,13 @@ export abstract class Page implements OnInit, OnDestroy {
   private readonly ioService: IoService;
   private readonly modelType: string;
   private problemName: string;
+  private ioSubscription: Subscription;
   
   constructor(ioService: IoService, modelLabel: string) {
     this.ioService = ioService;
     this.modelType = modelLabel;
     this.problemName = 'DDPPSolver problem';
+    this.ioSubscription = null;
   }
   
   abstract getModel(): object;
@@ -25,9 +27,11 @@ export abstract class Page implements OnInit, OnDestroy {
   abstract onReset(): void;
   
   ngOnInit() {
-    this.ioService.io.subscribe(e => {
+    let f = false; // fixes the bug of asking to save when changing from tab
+    
+    this.ioSubscription = this.ioService.io.subscribe(e => {
       if(e == null) return;
-      console.log(e);
+      if(!f) return;
       
       switch(e.ioAction) {
         case 'open':
@@ -39,11 +43,11 @@ export abstract class Page implements OnInit, OnDestroy {
           break;
       }
     });
+    f = true;
   }
   
   ngOnDestroy() {
-    console.log('destyorr');
-    
+    this.ioSubscription.unsubscribe();
   }
   
   private open(data: DDPPSFile, name: string) {
