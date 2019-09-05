@@ -36,7 +36,6 @@ header > div > p {
 
 .items {
     position: absolute;
-    max-width: 30%;
     top: -32px;
     right: -32px;
 }
@@ -93,7 +92,6 @@ header > .tabs > div.active {
 @media only screen and (min-width: 800px) {
     header {
         height: 200px;
-        margin-bottom: 64px;
     }
     
     header > div > p {

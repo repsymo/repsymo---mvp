@@ -62,9 +62,12 @@
         <div class="chains-container">
             <div class="chain">
                 <div class="chains" *ngFor="let item of solver.getPath()">
-                    <span>{{ item }}</span>
+                    <app-chain-item [value]="item">
+                    </app-chain-item>
                 </div>
-                <span class="end">END</span>
+                <app-chain-item class="end"
+                                [value]="'END'">
+                </app-chain-item>
             </div>
         </div>
         <div class="report">

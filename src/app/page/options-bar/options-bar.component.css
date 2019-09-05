@@ -49,9 +49,3 @@
     top: 0%;
     background: rgba(255, 255, 255, 0.3);
 }
-
-@media only screen and (min-width: 800px) {
-    :host {
-        margin-bottom: 0px;
-    }
-}

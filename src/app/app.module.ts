@@ -16,8 +16,9 @@ import { ExampleStatementComponent } from './page/example-statement/example-stat
 import { TabularInputComponent } from './page/input/tabular-input/tabular-input.component';
 import { OptionsBarComponent } from './page/options-bar/options-bar.component';
 import { TabularOutputComponent } from './page/output/tabular-output/tabular-output.component';
-import { ChainsResultComponent } from './page/output/chains-result/chains-result.component';
+import { ChainsResultComponent } from './page/output/results/chains-result/chains-result.component';
 import { InputPaneComponent } from './page/input/input-pane/input-pane.component';
+import { ChainItemComponent } from './page/output/results/chain-item/chain-item.component';
 
 const appRoutes: Routes = [
   {
@@ -59,7 +60,8 @@ const appRoutes: Routes = [
     OptionsBarComponent,
     TabularOutputComponent,
     ChainsResultComponent,
-    InputPaneComponent
+    InputPaneComponent,
+    ChainItemComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
