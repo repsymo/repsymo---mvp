@@ -58,7 +58,7 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
       fireEmployeeCost: 0,
       quitEmployeesPerTU: 0,
       workforcePerTU: [ ], // init
-      proportionalityOptions: propOptions
+      //proportionalityOptions: propOptions
     };
   }
   
@@ -133,21 +133,24 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
       },
       {
         part1: 'Manpower excess cost per worker per ',
-        part2: ''
+        part2: '',
+        singular: true
       },
       {
         text: 'Fixed cost for hiring a new employee'
       },
       {
         part1: 'Variable cost for hiring a new employee per ',
-        part2: ''
+        part2: '',
+        singular: true
       },
       {
         text: 'Cost for firing an employee'
       },
       {
         part1: 'Number of employees who decide to quit per ',
-        part2: ''
+        part2: '',
+        singular: true
       }
     ];
     return [
@@ -175,14 +178,15 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
         mkey: 'fireEmployeeCost',
         label: labels[5],
         twoLinesLabel: true,
-        checkbox: {
-          label: {
-            part1: 'Proportional to the number of ',
-            part2: ''
-          },
-          checkboxParentKey: 'proportionalityOptions',
-          checkboxChildKey: 'fireEmployeeCostToCurrentStage'
-        }
+        // checkbox: {
+        //   label: {
+        //     part1: 'Proportional to the current ',
+        //     part2: '',
+        //     singular: true
+        //   },
+        //   checkboxParentKey: 'proportionalityOptions',
+        //   checkboxChildKey: 'fireEmployeeCostToCurrentStage'
+        // }
       },
       {
         mkey: 'quitEmployeesPerTU',
@@ -337,6 +341,7 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
   onSolve() {
     try {
       this.solver.solve(this.model);
+      console.log(this.solver.getStages());
       
       // The step is 2 at this point
       this.inputDataStep =  (this.inputDataStep < 2) ? 2 : this.inputDataStep;
@@ -398,9 +403,9 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
     stages.forEach(stage => {
       rows.push({
         'timeunit': stage.id + 1,
-        'minimumDemand': this.solver.getPath()[stage.id],
-        'currentDemand': this.solver.getInterpretation()[stage.id],
-        'interpretation': this.solver.getCost()[stage.id],
+        'minimumDemand': stage.minimumDemand,
+        'currentDemand': this.solver.getPath()[stage.id],
+        'interpretation': this.solver.getInterpretation()[stage.id],
         'cost': this.solver.getCost()[stage.id]
       });
     });

@@ -1,4 +1,5 @@
 export interface TimeUnit {
     id: number,
-    label: string
+    label: string,
+    singular: string
 }

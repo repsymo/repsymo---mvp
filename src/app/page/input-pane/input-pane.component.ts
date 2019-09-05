@@ -4,7 +4,8 @@ import { TimeUnit } from 'src/app/model/TimeUnit';
 export interface TimeUnitDependentLabel {
   text?: string,
   part1?: string,
-  part2?: string
+  part2?: string,
+  singular?: boolean
 }
 
 /**
@@ -94,9 +95,10 @@ export class InputPaneComponent implements OnInit {
   
   getTUDLText(item: TimeUnitDependentLabel) {
     if(!item) return '';
-    const tu = this.timeUnit.label.toLowerCase();
+    const tu = this.timeUnit;
+    const tul = (item.singular) ? tu.singular.toLowerCase() : tu.label.toLowerCase();
     const isNormalText = typeof item.text == 'string';
-    return (isNormalText) ? item.text : item.part1 + tu + item.part2;
+    return (isNormalText) ? item.text : item.part1 + tul + item.part2;
   }
   
 }

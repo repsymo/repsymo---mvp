@@ -24,9 +24,8 @@ export class ExampleStatementComponent implements OnInit {
     this.gone = example.number == -1;
   }
   
-  constructor() { }
+  constructor() {}
   
-  ngOnInit() {
-  }
+  ngOnInit() {}
   
 }

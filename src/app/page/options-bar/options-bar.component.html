@@ -13,7 +13,9 @@
     [ngClass]="{ 'gone': !showExamplePopup }"
     (click)="onExampleClick($event)"
     *ngFor="let i of getNArray()">
-    <p data-number="1">Example {{ i + 1 }}</p>
+    <p [attr.data-number]="i + 1">
+        Example {{ i + 1 }}
+    </p>
 </div>  
   
 <div class="popup-touchout"

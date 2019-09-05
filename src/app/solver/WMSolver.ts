@@ -19,7 +19,7 @@ export interface WorkforcePerTU {
  * (fireEmployeeCost * 'the current stage (eg. week #1, week #4)') in the computation so older
  * employees receive more money if being fired.
  */
-export interface WMProportionalityOption {
+export interface WMProportionalityOption { // Experimental
   fireEmployeeCostToCurrentStage: boolean;
 }
 
@@ -79,7 +79,7 @@ export interface WorkforceModel {
    * (fireEmployeeCost * 'the current stage (eg. week #1, week #4)') in the computation so older
    * employees receive more money if being fired.
    */
-  proportionalityOptions: WMProportionalityOption;
+  // proportionalityOptions: WMProportionalityOption;
 }
 
 /**
@@ -168,6 +168,17 @@ export class WMSolver {
     this.path = [];
     this.cost = [];
     this.interpretation = [];
+  }
+  
+  // Experimental
+  private getFireEmployeeCost(stageId: number): number {
+    const baseCost = this.model.fireEmployeeCost;
+    
+    // if(this.model.proportionalityOptions.fireEmployeeCostToCurrentStage) {
+    //   const stageNumber = stageId++; // Stage ID starts at 0
+    //   return baseCost * stageNumber;
+    // }
+    return baseCost;
   }
   
   private formatCostOptions(cost: string): string {

@@ -22,10 +22,10 @@ export class TimeUnitSelectorComponent implements OnInit {
   
   constructor() {
     this.timeUnits = [
-      { id: 0, label: 'Days' },
-      { id: 1, label: 'Weeks' },
-      { id: 2, label: 'Months' },
-      { id: 3, label: 'Years' }
+      { id: 0, label: 'Days', singular: 'Day' },
+      { id: 1, label: 'Weeks', singular: 'Week' },
+      { id: 2, label: 'Months', singular: 'Month' },
+      { id: 3, label: 'Years', singular: 'Year' }
     ];
     this.valueChanged = new EventEmitter();
     this.selectedValue = this.timeUnits[1];
