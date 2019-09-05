@@ -75,7 +75,6 @@ export abstract class Page implements OnInit, OnDestroy {
       });
     }
     const model = this.getModel();
-    console.log('Page save '+this.modelType);
     
     // The model may be empty and had returned null, don't download then
     if(model == null) {

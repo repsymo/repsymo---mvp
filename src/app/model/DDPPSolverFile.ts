@@ -1,4 +1,5 @@
 import { WmComponent } from '../page/wm/wm.component';
+import { ImComponent } from '../page/im/im.component';
 
 export interface DDPPSFile {
   appVersion: string,
@@ -10,6 +11,7 @@ export interface DDPPSFile {
 export class DDPPS implements DDPPSFile {
   
   private static readonly MODEL_TYPES: string[] = [
+    ImComponent.MODEL_TYPE,
     WmComponent.MODEL_TYPE
   ]
   public readonly appVersion: string;
