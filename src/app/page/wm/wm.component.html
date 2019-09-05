@@ -1,5 +1,5 @@
 <!-- ---------------------------------------- PAGE OPTIONS ---------------------------------------- -->
-<app-options-bar [examplesNumber]="20"
+<app-options-bar [examplesNumber]="2"
                 [l]="this">
 </app-options-bar>
 
@@ -9,7 +9,8 @@
 </app-page-documentation>
 
 <!-- ---------------------------------------- EXAMPLE STATEMENT ---------------------------------------- -->
-<app-example-statement [value]="example"></app-example-statement>
+<app-example-statement [value]="example">
+</app-example-statement>
 
 <!-- ---------------------------------------- TOP PANEL ---------------------------------------- -->
 <div class="top-panel">
@@ -18,8 +19,8 @@
                     (timeUnitChange)="onTimeUnitChange($event)">
     </app-input-pane>
     <div class="next-button-container">
-        <button id="nextButton" 
-                class="btn btn-primary"
+        <button class="btn btn-primary"
+                [ngClass]="{ 'gone': inputDataStep > 0 }"
                 (click)="onNext()">
             Next
         </button>
@@ -27,18 +28,16 @@
 </div>
 
 <!-- ---------------------------------------- TABULAR INPUT ---------------------------------------- -->
-<div id="inputTable" 
-    [ngClass]="{ 'h': inputDataStep == 0 }">
-    <app-tabular-input [header]="inputTableHeader"
-                        [timeUnit]="timeUnitLabel"
-                        [keyValue]="'workforce'"
-                        [rows]="model.workforcePerTU">
-    </app-tabular-input>
-</div>
-<div class="solve-button-pane" 
+<app-tabular-input class="tabular-input"
+                    [ngClass]="{ 'scale-y': inputDataStep == 0 }"
+                    [header]="inputTableHeader"
+                    [timeUnit]="timeUnitLabel"
+                    [keyValue]="'workforce'"
+                    [rows]="model.workforcePerTU">
+</app-tabular-input>
+<div class="solve-button-container" 
     [ngClass]="{ 'gone': inputDataStep == 0 }">
-    <button id="solveButton"
-            class="btn btn-primary"
+    <button class="btn btn-primary"
             (click)="onSolve()">
         Solve
     </button>

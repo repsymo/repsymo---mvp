@@ -11,13 +11,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { FormsModule } from '@angular/forms';
 import { PageDocumentationComponent } from './page/page-documentation/page-documentation.component';
-import { TimeUnitSelectorComponent } from './page/time-unit-selector/time-unit-selector.component';
+import { TimeUnitSelectorComponent } from './page/input/time-unit-selector/time-unit-selector.component';
 import { ExampleStatementComponent } from './page/example-statement/example-statement.component';
-import { TabularInputComponent } from './page/tabular-input/tabular-input.component';
+import { TabularInputComponent } from './page/input/tabular-input/tabular-input.component';
 import { OptionsBarComponent } from './page/options-bar/options-bar.component';
-import { TabularOutputComponent } from './page/tabular-output/tabular-output.component';
-import { ChainsResultComponent } from './page/chains-result/chains-result.component';
-import { InputPaneComponent } from './page/input-pane/input-pane.component';
+import { TabularOutputComponent } from './page/output/tabular-output/tabular-output.component';
+import { ChainsResultComponent } from './page/output/chains-result/chains-result.component';
+import { InputPaneComponent } from './page/input/input-pane/input-pane.component';
 
 const appRoutes: Routes = [
   {

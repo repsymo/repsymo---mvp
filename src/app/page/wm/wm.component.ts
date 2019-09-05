@@ -6,7 +6,7 @@ import { Example } from '../example-statement/example-statement.component';
 import { Page } from '../Page';
 import { IoService } from '../../io.service';
 import { OptionsBarListener } from '../options-bar/options-bar.component';
-import { TimeUnitDependentLabel, InputItem, CheckboxInputItem } from '../input-pane/input-pane.component';
+import { TimeUnitDependentLabel, InputItem, CheckboxInputItem } from '../input/input-pane/input-pane.component';
 
 @Component({
   selector: 'app-wm',
@@ -89,7 +89,7 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
       },
       {
         title: 'Number of "time units" to analyse',
-        description: 'Amount of time to compute the model. For example 5 weeks'
+        description: 'Amount of time to compute the model. For example, 5 weeks'
       },
       {
         title: 'Initial number of employees',
