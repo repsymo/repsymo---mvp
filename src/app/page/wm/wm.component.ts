@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WMSolver, WorkforceModel, WorkforcePerTU, Stage, WMProportionalityOption } from '../../solver/WMSolver';
 import { TimeUnit } from '../../model/TimeUnit';
 import { Definition } from '../page-documentation/page-documentation.component';
@@ -14,7 +14,7 @@ import { TimeUnitDependentLabel, InputItem, CheckboxInputItem } from '../input/i
   styleUrls: ['./wm.component.css'],
   host: { class: 'page' }
 })
-export class WmComponent extends Page implements OnInit, OptionsBarListener {
+export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarListener {
   
   public static readonly MODEL_TYPE: string = 'workforce';
   private readonly solver: WMSolver;
@@ -42,6 +42,10 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
   
   ngOnInit() {
     super.ngOnInit();
+  }
+  
+  ngOnDestroy() {
+    super.ngOnDestroy();
   }
   
   private newModel(): WorkforceModel {
@@ -328,6 +332,7 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
   
   loadModel(modelObj: object, fileName: string, statement: string): boolean {
     const model = modelObj as WorkforceModel;
+    console.log('WM load');
     
     if(!WMSolver.validateModel(model)) {
       return false;
@@ -340,7 +345,6 @@ export class WmComponent extends Page implements OnInit, OptionsBarListener {
   onSolve() {
     try {
       this.solver.solve(this.model);
-      console.log(this.solver.getStages());
       
       // The step is 2 at this point
       this.inputDataStep =  (this.inputDataStep < 2) ? 2 : this.inputDataStep;

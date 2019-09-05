@@ -2,3 +2,7 @@
     display: block;
     overflow-x: auto;
 }
+
+input {
+    min-width: 120px;
+}

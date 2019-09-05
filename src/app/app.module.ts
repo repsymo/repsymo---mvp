@@ -19,11 +19,12 @@ import { TabularOutputComponent } from './page/output/tabular-output/tabular-out
 import { ChainsResultComponent } from './page/output/results/chains-result/chains-result.component';
 import { InputPaneComponent } from './page/input/input-pane/input-pane.component';
 import { ChainItemComponent } from './page/output/results/chain-item/chain-item.component';
+import { TabularDynamicInputComponent } from './page/input/tabular-dynamic-input/tabular-dynamic-input.component';
 
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/wm',
+    redirectTo: '/im',
     pathMatch: 'full'
   },
   {
@@ -61,7 +62,8 @@ const appRoutes: Routes = [
     TabularOutputComponent,
     ChainsResultComponent,
     InputPaneComponent,
-    ChainItemComponent
+    ChainItemComponent,
+    TabularDynamicInputComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

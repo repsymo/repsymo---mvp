@@ -72,9 +72,11 @@ export class InputPaneComponent implements OnInit {
   private readonly cdr: ChangeDetectorRef
   private timeUnit: TimeUnit;
   @Input()
-  readonly items: InputItem[];
+  items: InputItem[];
   @Input()
-  readonly model: object;
+  model: object;
+  @Input()
+  timeunit: boolean = true;
   @Output()
   readonly timeUnitChange: EventEmitter<TimeUnit>;
   
@@ -95,6 +97,7 @@ export class InputPaneComponent implements OnInit {
   
   getTUDLText(item: TimeUnitDependentLabel) {
     if(!item) return '';
+    if(!this.timeunit) return item.text;
     const tu = this.timeUnit;
     const tul = (item.singular) ? tu.singular.toLowerCase() : tu.label.toLowerCase();
     const isNormalText = typeof item.text == 'string';

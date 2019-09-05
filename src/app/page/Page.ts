@@ -1,11 +1,11 @@
 import { of } from 'rxjs';
-import { OnInit } from '@angular/core';
+import { OnInit, OnDestroy } from '@angular/core';
 import { IoService } from '../io.service';
 import { DDPPSFile } from '../model/DDPPSolverFile';
 import { version } from '../../../package.json';
 import { Example } from './example-statement/example-statement.component';
 
-export abstract class Page implements OnInit {
+export abstract class Page implements OnInit, OnDestroy {
   
   private static readonly APP_VERSION: string = version;
   private readonly ioService: IoService;
@@ -27,6 +27,7 @@ export abstract class Page implements OnInit {
   ngOnInit() {
     this.ioService.io.subscribe(e => {
       if(e == null) return;
+      console.log(e);
       
       switch(e.ioAction) {
         case 'open':
@@ -38,6 +39,11 @@ export abstract class Page implements OnInit {
           break;
       }
     });
+  }
+  
+  ngOnDestroy() {
+    console.log('destyorr');
+    
   }
   
   private open(data: DDPPSFile, name: string) {
@@ -65,6 +71,7 @@ export abstract class Page implements OnInit {
       });
     }
     const model = this.getModel();
+    console.log('Page save '+this.modelType);
     
     // The model may be empty and had returned null, don't download then
     if(model == null) {

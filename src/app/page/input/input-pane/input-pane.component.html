@@ -1,4 +1,5 @@
-<app-time-unit-selector (valueChanged)="onTimeUnitChange($event)">
+<app-time-unit-selector *ngIf="timeunit"
+                        (valueChanged)="onTimeUnitChange($event)">
 </app-time-unit-selector>
 <div>
     <div *ngFor="let item of items; index as i">
