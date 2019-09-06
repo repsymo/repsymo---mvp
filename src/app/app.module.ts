@@ -20,6 +20,8 @@ import { ChainsResultComponent } from './page/output/results/chains-result/chain
 import { InputPaneComponent } from './page/input/input-pane/input-pane.component';
 import { ChainItemComponent } from './page/output/results/chain-item/chain-item.component';
 import { TabularDynamicInputComponent } from './page/input/tabular-dynamic-input/tabular-dynamic-input.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
   {
@@ -68,7 +70,8 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
