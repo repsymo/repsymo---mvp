@@ -35,6 +35,15 @@
         "/assets/icons/icon-96x96.png"
       ],
       "patterns": []
+    },
+    {
+      "name": "fontawesome",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://kit.fontawesome.com/dc1b09a32b.js"
+      ],
+      "patterns": []
     }
   ],
   "dataGroups": [],
