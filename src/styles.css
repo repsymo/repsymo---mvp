@@ -58,6 +58,10 @@ body {
     width: 100%;
 }
 
+.page table {
+  overflow-x: auto;  
+}
+
 #nextButton {
     width: 25%;
     margin-bottom: 32px;

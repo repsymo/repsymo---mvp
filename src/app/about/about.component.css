@@ -1,11 +1,13 @@
 :host {
-    display: block;
-    position: absolute;
-    top: 40%;
-    transform: translateY(-50%);
+    display: flex;
+    min-height: 60vh;
 }
 
-:host > .par > p {
+:host > div {
+    align-self: center;
+}
+
+:host .par > p {
     color: #737373;
 }
 
@@ -14,6 +16,6 @@
     font-style: italic;
 }
 
-:host > .appVersion > p {
+:host .appVersion > p {
     text-align: center;
 }

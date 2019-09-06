@@ -60,6 +60,7 @@ header > div > p {
 header > .tabs {
     position: absolute;
     width: 100%;
+    height: 56px;
     left: 0px;
     bottom: 0px;
     padding: 0px;
@@ -67,10 +68,10 @@ header > .tabs {
 }
 
 header > .tabs > div {
-    display: inline-block;
+    display: inline-flex;
     width: 33.3%;
-    height: 56px;
-    padding: 16px;
+    height: 100%;
+    padding: 8px;
     text-align: center;
     text-transform: uppercase;
     vertical-align: middle;
@@ -78,6 +79,12 @@ header > .tabs > div {
     font-size: 12px;
     transition: background-color 200ms;
     outline: none;
+}
+
+header > .tabs > div > span {
+    display: block;
+    margin: auto;
+    align-self: center;
 }
 
 .items > div:hover,
@@ -102,7 +109,12 @@ header > .tabs > div.active {
         font-size: 36px;
     }
     
+    header > .tabs {
+        height: auto;
+    }
+    
     header > .tabs > div {
+        padding: 16px;
         font-size: 16px;
     }
 }
