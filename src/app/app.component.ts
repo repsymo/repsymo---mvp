@@ -4,6 +4,7 @@ import { DDPPS, DDPPSFile } from './model/DDPPSolverFile';
 import { IoService, IOEvent } from './io.service';
 import { WmComponent } from './page/wm/wm.component';
 import { Router } from '@angular/router';
+import { ImComponent } from './page/im/im.component';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +35,7 @@ export class AppComponent implements OnInit {
         '/wm'
       ];
       const values = [
-        '',
+        ImComponent.MODEL_TYPE,
         '',
         WmComponent.MODEL_TYPE
       ];
@@ -66,6 +67,10 @@ export class AppComponent implements OnInit {
         break;
       
       case 'save':
+        if(this.router.url == '/mrm') {
+          alert('Saving not available yet for MRM');
+          break;
+        }
         this.ioService.io.next({ ioAction: 'save' });
         break;
     }

@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               
               this.ioAction.emit(event);
             } catch(error) {
-              alert('Invalid file' + error);
+              alert('Invalid file. ' + error);
             }
           };
           reader.readAsText(e.target.files[0]);

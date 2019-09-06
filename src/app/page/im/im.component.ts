@@ -227,7 +227,6 @@ export class ImComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
   
   loadModel(modelObj: object, fileName: string, statement: string): boolean {
     const model = modelObj as InvestmentModel;
-    console.log('IM load');
     
     if(!IMSolver.validateModel(model)) {
       return false;
@@ -250,8 +249,12 @@ export class ImComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
   }
   
   onSolve() {
-    this.solver.solve(this.model);
-    this.inputDataStep = 2;
+    try {
+      this.solver.solve(this.model);
+      this.inputDataStep = 2;
+    } catch(error) {
+      alert(error);
+    }
   }
   
   ngOnInit() {

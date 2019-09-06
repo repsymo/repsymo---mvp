@@ -31,7 +31,6 @@ export abstract class Page implements OnInit, OnDestroy {
     
     this.ioSubscription = this.ioService.io.subscribe(e => {
       if(e == null) return;
-      if(!f) return;
       
       switch(e.ioAction) {
         case 'open':
@@ -39,6 +38,7 @@ export abstract class Page implements OnInit, OnDestroy {
           break;
           
         case 'save':
+          if(!f) break;
           this.save();
           break;
       }

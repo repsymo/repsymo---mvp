@@ -149,6 +149,7 @@ export class IMSolver {
     const solveStages = () => {
       this.stages.forEach(stage => this.solveStage(stage));
     }
+    this.reset();
     this.model = problemModel;
     
     initStages();

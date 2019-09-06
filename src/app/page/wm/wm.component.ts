@@ -332,7 +332,6 @@ export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
   
   loadModel(modelObj: object, fileName: string, statement: string): boolean {
     const model = modelObj as WorkforceModel;
-    console.log('WM load');
     
     if(!WMSolver.validateModel(model)) {
       return false;
