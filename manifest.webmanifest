@@ -5,7 +5,7 @@
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/2D2P-Solver-JS/",
-  "start_url": "/2D2P-Solver-JS/",
+  "start_url": "/2D2P-Solver-JS/index.html",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
