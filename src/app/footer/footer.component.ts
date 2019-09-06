@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-
-  constructor() { }
-
+  
+  readonly copyright: string;
+  
+  constructor() {
+    this.copyright = '© 2019 Tobias Briones';
+  }
+  
   ngOnInit() {
   }
-
+  
 }

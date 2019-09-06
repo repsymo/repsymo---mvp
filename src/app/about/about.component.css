@@ -1,0 +1,19 @@
+:host {
+    display: block;
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+}
+
+:host > .par > p {
+    color: #737373;
+}
+
+:host .ref {
+    font-size: 14px;
+    font-style: italic;
+}
+
+:host > .appVersion > p {
+    text-align: center;
+}

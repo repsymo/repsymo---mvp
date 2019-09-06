@@ -24,7 +24,7 @@ import { TabularDynamicInputComponent } from './page/input/tabular-dynamic-input
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/im',
+    redirectTo: '/about',
     pathMatch: 'full'
   },
   {
