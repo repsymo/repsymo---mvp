@@ -134,10 +134,8 @@ body {
     transition: all 400ms;
 }
 
-@media only screen and (min-width: 400px) {
-    .page > .top-panel {
-        width: 400px;
-    }    
+.stages {
+  overflow-x: auto;  
 }
 
 @media only screen and (min-width: 800px) {
