@@ -4,8 +4,8 @@
   "theme_color": "#00BCD4 ",
   "background_color": "#fafafa",
   "display": "standalone",
-  "scope": "/2D2P-Solver-JS/",
-  "start_url": "/",
+  "scope": "https://tobiasbriones.github.io/2D2P-Solver-JS/",
+  "start_url": "https://tobiasbriones.github.io/2D2P-Solver-JS/",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
