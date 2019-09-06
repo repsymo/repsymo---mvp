@@ -9,9 +9,12 @@ footer {
 footer > p {
     font-weight: bolder;
     font-size: 14px;
-    font-style: italic;
     text-align: left;
     color: #e0e0e0;
+}
+
+footer > p.copyright {    
+    font-style: italic;
 }
 
 footer > div {
