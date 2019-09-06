@@ -17,8 +17,8 @@ import { TimeUnitDependentLabel, InputItem, CheckboxInputItem } from '../input/i
 export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarListener {
   
   public static readonly MODEL_TYPE: string = 'workforce';
-  private readonly solver: WMSolver;
-  private readonly model: WorkforceModel;
+  readonly solver: WMSolver;
+  readonly model: WorkforceModel;
   readonly pageDocumentation: Definition[];
   readonly inputPaneItems: InputItem[];
   readonly inputTableHeader: string[];

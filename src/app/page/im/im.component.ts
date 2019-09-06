@@ -16,8 +16,8 @@ import { Definition } from '../page-documentation/page-documentation.component';
 export class ImComponent extends Page implements OnInit, OnDestroy, OptionsBarListener {
   
   public static readonly MODEL_TYPE: string = 'investment';
-  private readonly solver: IMSolver;
-  private readonly model: InvestmentModel;
+  readonly solver: IMSolver;
+  readonly model: InvestmentModel;
   readonly pageDocumentation: Definition[];
   readonly inputPaneItems: InputItem[];
   inputTableHeader: string[];
