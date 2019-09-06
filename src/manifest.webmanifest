@@ -1,7 +1,7 @@
 {
   "name": "2D2P Solver",
   "short_name": "2D2P Solver",
-  "theme_color": "#00BCD4 ",
+  "theme_color": "#00BCD4",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
