@@ -1,5 +1,5 @@
-import { WmComponent } from '../page/wm/wm.component';
-import { ImComponent } from '../page/im/im.component';
+import { WmComponent } from '../ui/page/wm/wm.component';
+import { ImComponent } from '../ui/page/im/im.component';
 
 export interface DDPPSFile {
   appVersion: string,

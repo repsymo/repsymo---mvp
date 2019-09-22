@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { IOActionEvent } from './header/header.component';
+import { IOActionEvent } from './ui/header/header.component';
 import { DDPPS, DDPPSFile } from './model/DDPPSolverFile';
 import { IoService, IOEvent } from './io.service';
-import { WmComponent } from './page/wm/wm.component';
+import { WmComponent } from './ui/page/wm/wm.component';
 import { Router } from '@angular/router';
-import { ImComponent } from './page/im/im.component';
+import { ImComponent } from './ui/page/im/im.component';
 
 @Component({
   selector: 'app-root',

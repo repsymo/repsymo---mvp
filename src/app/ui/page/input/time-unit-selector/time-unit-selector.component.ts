@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { TimeUnit } from '../../../model/TimeUnit';
+import { TimeUnit } from '../../../../model/TimeUnit';
 
 @Component({
   selector: 'app-time-unit-selector',

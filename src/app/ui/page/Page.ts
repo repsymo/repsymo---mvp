@@ -1,8 +1,8 @@
 import { of, Subscription } from 'rxjs';
 import { OnInit, OnDestroy } from '@angular/core';
-import { IoService } from '../io.service';
-import { DDPPSFile } from '../model/DDPPSolverFile';
-import { version } from '../../../package.json';
+import { IoService } from '../../io.service';
+import { DDPPSFile } from '../../model/DDPPSolverFile';
+import { version } from '../../../../package.json';
 import { Example } from './example-statement/example-statement.component';
 
 export abstract class Page implements OnInit, OnDestroy {
