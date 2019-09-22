@@ -8,7 +8,7 @@ import { HeaderComponent } from './ui/header/header.component';
 import { FooterComponent } from './ui/footer/footer.component';
 import { ImComponent } from './ui/page/im/im.component';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from './ui/about/about.component';
+import { AboutComponent } from './ui/page/about/about.component';
 import { FormsModule } from '@angular/forms';
 import { PageDocumentationComponent } from './ui/page/page-documentation/page-documentation.component';
 import { TimeUnitSelectorComponent } from './ui/page/input/time-unit-selector/time-unit-selector.component';
