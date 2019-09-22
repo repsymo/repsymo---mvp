@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './ui/app/app.component';
 import { MrmComponent } from './ui/page/mrm/mrm.component';
 import { WmComponent } from './ui/page/wm/wm.component';
 import { HeaderComponent } from './ui/header/header.component';

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IMSolver, Model as InvestmentModel, IMOption, Stage } from 'src/app/solver/IMModel';
 import { InputItem } from '../input/input-pane/input-pane.component';
 import { Page } from '../Page';
-import { IoService } from 'src/app/io.service';
+import { IoService } from 'src/app/ui/service/io/io.service';
 import { Example } from '../example-statement/example-statement.component';
 import { OptionsBarListener } from '../options-bar/options-bar.component';
 import { Definition } from '../page-documentation/page-documentation.component';

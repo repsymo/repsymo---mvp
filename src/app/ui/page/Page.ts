@@ -1,6 +1,6 @@
 import { of, Subscription } from 'rxjs';
 import { OnInit, OnDestroy } from '@angular/core';
-import { IoService } from '../../io.service';
+import { IoService } from '../service/io/io.service';
 import { DDPPSFile } from '../../model/DDPPSolverFile';
 import { version } from '../../../../package.json';
 import { Example } from './example-statement/example-statement.component';

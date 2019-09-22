@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
-import { DDPPSFile } from './model/DDPPSolverFile';
+import { DDPPSFile } from '../../../model/DDPPSolverFile';
 
 export interface IOEvent {
   ioAction: string,

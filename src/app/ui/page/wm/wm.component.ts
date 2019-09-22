@@ -4,7 +4,7 @@ import { TimeUnit } from '../../../model/TimeUnit';
 import { Definition } from '../page-documentation/page-documentation.component';
 import { Example } from '../example-statement/example-statement.component';
 import { Page } from '../Page';
-import { IoService } from '../../../io.service';
+import { IoService } from '../../service/io/io.service';
 import { OptionsBarListener } from '../options-bar/options-bar.component';
 import { TimeUnitDependentLabel, InputItem, CheckboxInputItem } from '../input/input-pane/input-pane.component';
 
