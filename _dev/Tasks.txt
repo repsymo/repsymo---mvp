@@ -9,3 +9,4 @@ Tasks for v0.2.0
 
 Next:
 - Add tabular + formula tool input to general input pane
+- Define the final models (from their solver to the model package)
