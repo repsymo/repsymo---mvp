@@ -10,7 +10,7 @@ export class FooterComponent implements OnInit {
   readonly copyright: string;
   
   constructor() {
-    this.copyright = '© 2019 Tobias Briones';
+    this.copyright = '© 2019-2020 Tobias Briones';
   }
   
   ngOnInit() {

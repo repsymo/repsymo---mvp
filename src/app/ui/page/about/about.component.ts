@@ -9,11 +9,11 @@ import { version } from '../../../../../package.json';
 export class AboutComponent implements OnInit {
   
   private static readonly STR: object = {
-    appName: '2D2P Solver',
-    appLongName: 'Deterministic Dynamic Programming Problem Solver',
-    aboutMsg: `2D2P Solver implements several deterministic dynamic programming models to solve a
+    appName: '2D2P ORS',
+    appLongName: 'Deterministic Dynamic Programming Problem Operations Research Solver',
+    aboutMsg: `2D2P ORS implements several deterministic dynamic programming models to solve a
               considerable amount of real world problems in operations research.`,
-    contributionMsg: `2D2P Solver is open source software licensed under the GPLv3.0 license. Don't
+    contributionMsg: `2D2P ORS is open source software licensed under the GPLv3.0 license. Don't
                       hesitate to get in touch if you are interested in these models or wish to 
                       extend the application for personal or educational usage.`,
     educationMsg: `This app is also intended to improve the teaching of operations research and
