@@ -16,7 +16,7 @@ export abstract class Page implements OnInit, OnDestroy {
   constructor(ioService: IoService, modelLabel: string) {
     this.ioService = ioService;
     this.modelType = modelLabel;
-    this.problemName = 'DDPPSolver problem';
+    this.problemName = '2DP RepSyMo Solver problem';
     this.ioSubscription = null;
   }
   

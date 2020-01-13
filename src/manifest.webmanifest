@@ -1,6 +1,6 @@
 {
-  "name": "2D2P Solver",
-  "short_name": "2D2P Solver",
+  "name": "2DP RepSyMo Solver",
+  "short_name": "2DP RepSyMo Solver",
   "theme_color": "#00BCD4",
   "background_color": "#fafafa",
   "display": "standalone",
