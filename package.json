@@ -24,6 +24,7 @@
     "ngx-pwa-icons": "^0.1.2",
     "rxjs": "~6.5.3",
     "tslib": "^1.10.0",
+    "url-parse": "^1.4.7",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
