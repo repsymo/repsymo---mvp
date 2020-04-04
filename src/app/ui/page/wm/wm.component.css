@@ -1,0 +1,48 @@
+#solutionPanel > .result > .report {
+    margin-top: 32px;
+}
+
+#solutionPanel > .result > .report > p {
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.scale-y {
+    transform: scaleY(0);
+}
+
+.next-button-container {
+    width: 100%;
+}
+
+.next-button-container > button {
+    width: 25%;
+    margin-bottom: 32px;
+    float: right;
+}
+
+.tabular-input {
+    transition: all 400ms;
+}
+
+.solve-button-container {
+    display: flex;
+    margin-bottom: 32px;
+}
+
+.solve-button-container > button {
+    width: 80%;
+    margin: auto;
+}
+
+@media only screen and (min-width: 800px) {
+    .page > .top-panel {
+        width: 680px;
+    }
+    
+    .tabular-input {
+        width: 60%;
+        margin: 16px auto;
+    }
+}

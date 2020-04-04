@@ -88,5 +88,10 @@
   },
   "rulesDirectory": [
     "codelyzer"
+  ],
+  "indent": [
+    true,
+    "spaces",
+    4
   ]
 }

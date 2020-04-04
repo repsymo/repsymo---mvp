@@ -1,0 +1,60 @@
+<div class="top-panel">
+    <div class="years-pane">
+        <div class="form-group">
+            <label for="yearsInput">Number of decision years</label>
+            <input value="4" type="number" class="form-control" id="yearsInput" placeholder="Enter the number of years">
+        </div>
+    </div>
+    <div class="max-time-pane">
+        <div class="form-group">
+            <label for="timeInput">Maximum machine age in years</label>
+            <input value="6" type="number" class="form-control" id="timeInput"  placeholder="Enter the maximum age">
+        </div>
+    </div>
+    <div class="initial-age-pane">
+        <div class="form-group">
+            <label for="initialAgeInput">Initial machine age in years</label>
+            <input value="3" type="number" class="form-control" id="initialAgeInput"  placeholder="Enter the initial machine age">
+        </div>
+    </div>
+    <div class="machine-price-pane">
+        <div class="form-group">
+            <label for="machinePrice">New machine's price in dollars</label>
+            <input value="100000" type="number" class="form-control" id="machinePrice"  placeholder="Enter the price of a new machine">
+        </div>
+    </div>
+    <div>
+        <button id="nextButton" 
+            class="btn btn-primary"
+            (click)="onNext()">
+            Next
+        </button>
+    </div>
+</div>
+<div id="inputTable"></div>
+<div class="solve-button-pane">
+    <button id="solveButton"
+        class="btn btn-primary invisible"
+        (click)="onSolve()">
+        Solve
+    </button>
+</div>
+<div id="solutionPanel" class="gone">
+    <div class="divider"></div>
+    <div class="solution-title">
+        <p>Solution</p>
+    </div>
+    <div>
+        <p>Problem solutions tree</p>
+        <p>Y-Axis: Machine age in years</p>
+        <p>X-Axis: Decision year</p>
+    </div>
+    <div class="solutions-tree">
+        <div></div>
+    </div>
+    <div class="stages"></div>
+    <div class="result">
+        <p>Result chains</p>
+        <div class="chains-container"></div>
+    </div>
+</div>
