@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { OptionsBarComponent } from './options-bar.component';
 
@@ -6,7 +6,7 @@ describe('OptionsBarComponent', () => {
   let component: OptionsBarComponent;
   let fixture: ComponentFixture<OptionsBarComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ OptionsBarComponent ]
     })

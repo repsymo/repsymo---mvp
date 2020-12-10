@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TimeUnitSelectorComponent } from './time-unit-selector.component';
 
@@ -6,7 +6,7 @@ describe('TimeUnitSelectorComponent', () => {
   let component: TimeUnitSelectorComponent;
   let fixture: ComponentFixture<TimeUnitSelectorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TimeUnitSelectorComponent ]
     })

@@ -1,10 +1,11 @@
 import { of, Subscription } from 'rxjs';
-import { OnInit, OnDestroy } from '@angular/core';
+import { OnInit, OnDestroy, Directive } from '@angular/core';
 import { IoService } from '../service/io/io.service';
 import { DDPPSFile } from '../../model/DDPPSolverFile';
 import { version } from '../../../../package.json';
 import { Example } from './example-statement/example-statement.component';
 
+@Directive()
 export abstract class Page implements OnInit, OnDestroy {
   
   private static readonly APP_VERSION: string = version;

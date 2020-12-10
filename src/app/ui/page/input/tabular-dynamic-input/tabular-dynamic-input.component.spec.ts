@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TabularDynamicInputComponent } from './tabular-dynamic-input.component';
 
@@ -6,7 +6,7 @@ describe('TabularDynamicInputComponent', () => {
   let component: TabularDynamicInputComponent;
   let fixture: ComponentFixture<TabularDynamicInputComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TabularDynamicInputComponent ]
     })

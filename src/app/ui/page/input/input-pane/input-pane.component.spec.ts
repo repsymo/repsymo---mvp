@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { InputPaneComponent } from './input-pane.component';
 
@@ -6,7 +6,7 @@ describe('InputPaneComponent', () => {
   let component: InputPaneComponent;
   let fixture: ComponentFixture<InputPaneComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ InputPaneComponent ]
     })

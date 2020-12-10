@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TabularInputComponent } from './tabular-input.component';
 
@@ -6,7 +6,7 @@ describe('TabularInputComponent', () => {
   let component: TabularInputComponent;
   let fixture: ComponentFixture<TabularInputComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TabularInputComponent ]
     })
