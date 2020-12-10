@@ -1,81 +1,111 @@
-<app-options-bar [examplesNumber]="1"
-                [l]="this">
+<!--
+  ~ Copyright (C) 2019-2020 Tobias Briones. All rights reserved.
+  ~
+  ~ This file is part of 2DP Repsymo Solver.
+  ~
+  ~ 2DP Repsymo Solver is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ 2DP Repsymo Solver is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with 2DP Repsymo Solver.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<app-options-bar
+  [examplesNumber]="1"
+  [l]="this">
 </app-options-bar>
-<app-page-documentation [hidden]="!showDocumentation"
-                        [items]="pageDocumentation">
+<app-page-documentation
+  [hidden]="!showDocumentation"
+  [items]="pageDocumentation">
 </app-page-documentation>
 <app-example-statement [value]="example">
 </app-example-statement>
 <div class="top-panel">
-    <app-input-pane [model]="model"
-                    [items]="inputPaneItems"
-                    [timeunit]="false">
-    </app-input-pane>
-    <div class="next-button-container">
-        <button class="btn btn-primary"
-                [ngClass]="{ 'gone': inputDataStep > 0 }"
-                (click)="onNext()">
-            Next
-        </button>
-    </div>
-</div>
-<app-tabular-dynamic-input class="tabular-input"
-                            [ngClass]="{ 'gone': inputDataStep == 0 }"
-                            [header]="inputTableHeader"
-                            [rows]="model.plans"
-                            [rkey]="'options'">
-</app-tabular-dynamic-input>
-<div class="solve-button-container" 
-    [ngClass]="{ 'gone': inputDataStep == 0 }">
-    <button class="btn btn-primary"
-            (click)="onSolve()">
-        Solve
+  <app-input-pane
+    [model]="model"
+    [items]="inputPaneItems"
+    [timeunit]="false">
+  </app-input-pane>
+  <div class="next-button-container">
+    <button
+      class="btn btn-primary"
+      [ngClass]="{ 'gone': inputDataStep > 0 }"
+      (click)="onNext()">
+      Next
     </button>
+  </div>
+</div>
+<app-tabular-dynamic-input
+  class="tabular-input"
+  [ngClass]="{ 'gone': inputDataStep == 0 }"
+  [header]="inputTableHeader"
+  [rows]="model.plans"
+  [rkey]="'options'">
+</app-tabular-dynamic-input>
+<div
+  class="solve-button-container"
+  [ngClass]="{ 'gone': inputDataStep == 0 }">
+  <button
+    class="btn btn-primary"
+    (click)="onSolve()">
+    Solve
+  </button>
 </div>
 
-<div id="solutionPanel"
-    [ngClass]="{ 'gone': inputDataStep < 2 }">
-    <div class="divider"></div>
-    <div class="stages"
-        *ngFor="let stage of solver.getStages()">
-        <p>STAGE / OPTION {{ stage.id + 1 }}</p>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col"
-                        *ngFor="let headerItem of getStageTableHeader(stage)"
-                        [innerHTML]="headerItem">
-                    </th>
-                </tr>
-            </thead>
-            <tbody *ngFor="let row of stage.rows">
-                <tr>
-                    <th scope="row">{{ row.budget }}</th>
-                    <td *ngFor="let revenue of row.revenue">
-                        {{ revenue }}
-                    </td>
-                    <td>
-                        {{ row.f }}
-                    </td>
-                    <td>
-                        {{ row.option + 1 }}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="result">
-        <p>Result chains</p>
-        <div class="chains-container">
-            <div class="chain">
-                <div class="chains" *ngFor="let item of solver.getPath()">
-                    <app-chain-item [value]="item">
-                    </app-chain-item>
-                </div>
-                <app-chain-item class="end"
-                                [value]="'END'">
-                </app-chain-item>
-            </div>
+<div
+  id="solutionPanel"
+  [ngClass]="{ 'gone': inputDataStep < 2 }">
+  <div class="divider"></div>
+  <div
+    class="stages"
+    *ngFor="let stage of solver.getStages()">
+    <p>STAGE / OPTION {{ stage.id + 1 }}</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th
+            scope="col"
+            *ngFor="let headerItem of getStageTableHeader(stage)"
+            [innerHTML]="headerItem">
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let row of stage.rows">
+        <tr>
+          <th scope="row">{{ row.budget }}</th>
+          <td *ngFor="let revenue of row.revenue">
+            {{ revenue }}
+          </td>
+          <td>
+            {{ row.f }}
+          </td>
+          <td>
+            {{ row.option + 1 }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="result">
+    <p>Result chains</p>
+    <div class="chains-container">
+      <div class="chain">
+        <div class="chains" *ngFor="let item of solver.getPath()">
+          <app-chain-item [value]="item">
+          </app-chain-item>
         </div>
+        <app-chain-item
+          class="end"
+          [value]="'END'">
+        </app-chain-item>
+      </div>
     </div>
+  </div>
 </div>

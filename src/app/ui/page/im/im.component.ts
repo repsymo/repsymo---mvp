@@ -1,5 +1,24 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IMSolver, Model as InvestmentModel, IMOption, Stage } from 'src/app/solver/IMModel';
+/*
+ * Copyright (C) 2019-2020 Tobias Briones. All rights reserved.
+ *
+ * This file is part of 2DP Repsymo Solver.
+ *
+ * 2DP Repsymo Solver is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * 2DP Repsymo Solver is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with 2DP Repsymo Solver.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { IMOption, IMSolver, Model as InvestmentModel, Stage } from 'src/app/solver/IMModel';
 import { InputItem } from '../input/input-pane/input-pane.component';
 import { Page } from '../Page';
 import { IoService } from 'src/app/ui/service/io/io.service';
@@ -14,7 +33,7 @@ import { Definition } from '../page-documentation/page-documentation.component';
   host: { class: 'page' }
 })
 export class ImComponent extends Page implements OnInit, OnDestroy, OptionsBarListener {
-  
+
   public static readonly MODEL_TYPE: string = 'investment';
   readonly solver: IMSolver;
   readonly model: InvestmentModel;
@@ -24,7 +43,7 @@ export class ImComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
   inputDataStep: number;
   showDocumentation: boolean;
   example: Example;
-  
+
   constructor(ioService: IoService) {
     super(ioService, ImComponent.MODEL_TYPE);
     this.solver = new IMSolver();
@@ -36,7 +55,98 @@ export class ImComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
     this.showDocumentation = false;
     this.example = this.newExample();
   }
-  
+
+  onShowExample(n: number) {
+    this.setExample(n);
+    this.onSolve();
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
+  }
+
+  ngOnDestroy() {
+    super.ngOnDestroy();
+  }
+
+  getModel() {
+    return this.model;
+  }
+
+  getExample() {
+    return this.example;
+  }
+
+  loadModel(modelObj: object, fileName: string, statement: string): boolean {
+    const model = modelObj as InvestmentModel;
+
+    if (!IMSolver.validateModel(model)) {
+      return false;
+    }
+    Object.keys(model).forEach(key => this.model[key] = model[key]);
+    this.example = this.newExample(0, statement, fileName);
+    return true;
+  }
+
+  onSolve() {
+    try {
+      this.solver.solve(this.model);
+      this.inputDataStep = 2;
+    }
+    catch (error) {
+      alert(error);
+    }
+  }
+
+  onReset() {
+    this.clearModel();
+    this.inputTableHeader = [];
+    this.inputDataStep = 0;
+    this.showDocumentation = false;
+    this.example = this.newExample();
+  }
+
+  onToggleDocumentation() {
+    this.showDocumentation = !this.showDocumentation;
+  }
+
+  onNext() {
+    this.inputDataStep = 1;
+    this.inputTableHeader = this.createInputTableHeader();
+    this.model.plans = [];
+
+    for (let p = 0; p < this.model.numberOfPlans; p++) {
+      const options: IMOption[] = [];
+
+      for (let o = 0; o < this.model.numberOfOptions; o++) {
+        options.push(
+          {
+            cost: 0,
+            revenue: 0
+          }
+        );
+      }
+      this.model.plans.push(
+        {
+          id: 0,
+          options: options
+        });
+    }
+  }
+
+  getStageTableHeader(stage: Stage): string[] {
+    const header = [
+      `x<sub>${ stage.id + 1 }</sub>`
+    ];
+
+    for (let i = 1; i <= this.model.numberOfPlans; i++) {
+      header.push(`Plan ${ i }`);
+    }
+    header.push('Revenue (maximum)');
+    header.push('Plan');
+    return header;
+  }
+
   private newModel(): InvestmentModel {
     return {
       numberOfPlans: 1,
@@ -55,11 +165,11 @@ export class ImComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
       ]
     };
   }
-  
+
   private clearModel() {
     this.model.numberOfPlans = 1;
     this.model.numberOfOptions = 1,
-    this.model.budget = 0;
+      this.model.budget = 0;
     this.model.plans = [
       {
         id: 0,
@@ -72,7 +182,7 @@ export class ImComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
       }
     ];
   }
-  
+
   private createDocumentation(): Definition[] {
     return [
       {
@@ -98,7 +208,7 @@ export class ImComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
       }
     ];
   }
-  
+
   private createInputPaneItems(): InputItem[] {
     return [
       {
@@ -115,18 +225,18 @@ export class ImComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
       }
     ];
   }
-  
+
   private createInputTableHeader(): string[] {
     const header: string[] = [];
-    
+
     header.push('Plan');
-    for(let i = 1; i <= this.model.numberOfOptions; i++) {
-      header.push(`C${i}`);
-      header.push(`R${i}`);
+    for (let i = 1; i <= this.model.numberOfOptions; i++) {
+      header.push(`C${ i }`);
+      header.push(`R${ i }`);
     }
     return header;
   }
-  
+
   private newExample(number: number = -1, statement: string = '', title: string = ''): Example {
     return {
       number: number,
@@ -134,13 +244,13 @@ export class ImComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
       statement: statement
     };
   }
-  
+
   // Just n = 1 for now
   private setExample(n: number) {
     this.model.numberOfPlans = 4;
     this.model.numberOfOptions = 3,
-    this.model.budget = 5;
-    
+      this.model.budget = 5;
+
     this.onNext();
     this.model.plans = [
       {
@@ -219,95 +329,5 @@ export class ImComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
                       maximize the final revenue of the company given its investment of $5 million.
                       If the money is not spent then it is lost money.`;
     this.example = this.newExample(n, statement);
-  }
-  
-  getModel() {
-    return this.model;
-  }
-  
-  loadModel(modelObj: object, fileName: string, statement: string): boolean {
-    const model = modelObj as InvestmentModel;
-    
-    if(!IMSolver.validateModel(model)) {
-      return false;
-    }
-    Object.keys(model).forEach(key => this.model[key] = model[key]);
-    this.example = this.newExample(0, statement, fileName);
-    return true;
-  }
-  
-  getExample() {
-    return this.example;
-  }
-  
-  onReset() {
-    this.clearModel();
-    this.inputTableHeader = [];
-    this.inputDataStep = 0;
-    this.showDocumentation = false;
-    this.example = this.newExample();
-  }
-  
-  onSolve() {
-    try {
-      this.solver.solve(this.model);
-      this.inputDataStep = 2;
-    } catch(error) {
-      alert(error);
-    }
-  }
-  
-  ngOnInit() {
-    super.ngOnInit();
-  }
-  
-  ngOnDestroy() {
-    super.ngOnDestroy();
-  }
-  
-  onShowExample(n: number) {
-    this.setExample(n);
-    this.onSolve();
-  }
-  
-  onToggleDocumentation() {
-    this.showDocumentation = !this.showDocumentation;
-  }
-  
-  onNext() {
-    this.inputDataStep = 1;
-    this.inputTableHeader = this.createInputTableHeader();
-    this.model.plans = [];
-    
-    for(let p = 0; p < this.model.numberOfPlans; p++) {
-      const options: IMOption[] = [];
-      
-      for(let o = 0; o < this.model.numberOfOptions; o++) {
-        options.push(
-          {
-            cost: 0,
-            revenue: 0
-          }
-        );
-      }
-      this.model.plans.push(
-      {
-        id: 0,
-        options: options
-      });
-    }
-  }
-  
-  getStageTableHeader(stage: Stage): string[] {
-    const header = [
-      `x<sub>${stage.id + 1}</sub>`,
-    ];
-    
-    for(let i = 1; i <= this.model.numberOfPlans; i++) {
-      header.push(`Plan ${i}`)
-    }
-    header.push('Revenue (maximum)');
-    header.push('Plan');
-    return header;
   }
 }

@@ -1,12 +1,37 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { WMSolver, WorkforceModel, WorkforcePerTU, Stage, WMProportionalityOption } from '../../../solver/WMSolver';
+/*
+ * Copyright (C) 2019-2020 Tobias Briones. All rights reserved.
+ *
+ * This file is part of 2DP Repsymo Solver.
+ *
+ * 2DP Repsymo Solver is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * 2DP Repsymo Solver is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with 2DP Repsymo Solver.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Stage,
+  WMProportionalityOption,
+  WMSolver,
+  WorkforceModel,
+  WorkforcePerTU
+} from '../../../solver/WMSolver';
 import { TimeUnit } from '../../../model/TimeUnit';
 import { Definition } from '../page-documentation/page-documentation.component';
 import { Example } from '../example-statement/example-statement.component';
 import { Page } from '../Page';
 import { IoService } from '../../service/io/io.service';
 import { OptionsBarListener } from '../options-bar/options-bar.component';
-import { TimeUnitDependentLabel, InputItem, CheckboxInputItem } from '../input/input-pane/input-pane.component';
+import { InputItem, TimeUnitDependentLabel } from '../input/input-pane/input-pane.component';
 
 @Component({
   selector: 'app-wm',
@@ -15,7 +40,7 @@ import { TimeUnitDependentLabel, InputItem, CheckboxInputItem } from '../input/i
   host: { class: 'page' }
 })
 export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarListener {
-  
+
   public static readonly MODEL_TYPE: string = 'workforce';
   readonly solver: WMSolver;
   readonly model: WorkforceModel;
@@ -26,7 +51,7 @@ export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
   inputDataStep: number;
   example: Example;
   timeUnitLabel: string;
-  
+
   constructor(ioService: IoService) {
     super(ioService, WmComponent.MODEL_TYPE);
     this.solver = new WMSolver();
@@ -39,19 +64,116 @@ export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
     this.example = this.newExample();
     this.timeUnitLabel = '';
   }
-  
+
+  onShowExample(n: number) {
+    this.setExample(n);
+    this.inputDataStep++;
+    this.onSolve();
+  }
+
   ngOnInit() {
     super.ngOnInit();
   }
-  
+
   ngOnDestroy() {
     super.ngOnDestroy();
   }
-  
+
+  getModel() {
+    // If current model is empty don't return it so it is not downloaded
+    if (!WMSolver.validateModel(this.model)) {
+      return null;
+    }
+    return this.model;
+  }
+
+  getExample() {
+    return this.example;
+  }
+
+  loadModel(modelObj: object, fileName: string, statement: string): boolean {
+    const model = modelObj as WorkforceModel;
+
+    if (!WMSolver.validateModel(model)) {
+      return false;
+    }
+    Object.keys(model).forEach(key => this.model[key] = model[key]);
+    this.example = this.newExample(0, statement, fileName);
+    return true;
+  }
+
+  onSolve() {
+    try {
+      this.solver.solve(this.model);
+
+      // The step is 2 at this point
+      this.inputDataStep = (this.inputDataStep < 2) ? 2 : this.inputDataStep;
+    }
+    catch (error) {
+      alert(error);
+    }
+  }
+
+  onReset() {
+    this.inputDataStep = 0;
+    //this._timeUnitId = -1;
+    this.example = this.newExample();
+    this.clearModel();
+  }
+
+  onToggleDocumentation() {
+    this.showDocumentation = !this.showDocumentation;
+  }
+
+  onNext() {
+    // The step is 1 at this point
+    this.inputDataStep = (this.inputDataStep < 1) ? 1 : this.inputDataStep;
+    this.initInputDataArray();
+  }
+
+  onTimeUnitChange(timeUnit: TimeUnit) {
+    this.timeUnitLabel = timeUnit.label;
+  }
+
+  getStageTableHeader(stage: Stage): string[] {
+    return [
+      `x<sub>${ stage.id }</sub>`,
+      'Cost (demand, cost)',
+      'f (minimum cost)',
+      `x<sub>${ stage.id + 1 }</sub>`
+    ];
+  }
+
+  getReportTableHeader(): string[] {
+    return [
+      this.timeUnitLabel,
+      'Minimum demand',
+      'Current demand',
+      'Interpretation',
+      'Cost'
+    ];
+  }
+
+  getReportTableRows(): string[] {
+    const stages = this.solver.getStages().slice().reverse();
+    const rows = [];
+
+    stages.forEach(stage => {
+      rows.push({
+        'timeunit': stage.id + 1,
+        'minimumDemand': stage.minimumDemand,
+        'currentDemand': this.solver.getPath()[stage.id],
+        'interpretation': this.solver.getInterpretation()[stage.id],
+        'cost': this.solver.getCost()[stage.id]
+      });
+    });
+    return rows;
+  }
+
   private newModel(): WorkforceModel {
     const propOptions: WMProportionalityOption = {
       fireEmployeeCostToCurrentStage: false
-    }
+    };
     return {
       amountOfAnalysisTime: 1,
       initialNumberOfEmployees: 0,
@@ -60,11 +182,11 @@ export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
       newEmployeePerTUCost: 0,
       fireEmployeeCost: 0,
       quitEmployeesPerTU: 0,
-      workforcePerTU: [ ], // init
+      workforcePerTU: [] // init
       //proportionalityOptions: propOptions
     };
   }
-  
+
   private clearModel() {
     this.model.amountOfAnalysisTime = 1;
     this.model.initialNumberOfEmployees = 0;
@@ -75,7 +197,7 @@ export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
     this.model.quitEmployeesPerTU = 0;
     this.model.workforcePerTU = [];
   }
-  
+
   private newExample(number: number = -1, statement: string = '', title: string = ''): Example {
     return {
       number: number,
@@ -83,7 +205,7 @@ export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
       statement: statement
     };
   }
-  
+
   private createDocumentation(): Definition[] {
     return [
       {
@@ -124,7 +246,7 @@ export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
       }
     ];
   }
-  
+
   private createInputItems(): InputItem[] {
     const labels: TimeUnitDependentLabel[] = [
       {
@@ -180,7 +302,7 @@ export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
       {
         mkey: 'fireEmployeeCost',
         label: labels[5],
-        twoLinesLabel: true,
+        twoLinesLabel: true
         // checkbox: {
         //   label: {
         //     part1: 'Proportional to the current ',
@@ -197,17 +319,17 @@ export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
       }
     ];
   }
-  
+
   private createInputTableHeader(): string[] {
     return [
       'Time t',
       'Workforce required (employees)'
     ];
   }
-  
+
   private initInputDataArray() {
     const inputData: WorkforcePerTU[] = Array(this.model.amountOfAnalysisTime);
-    
+
     for (let i = 0; i < inputData.length; i++) {
       inputData[i] = {
         timeunit: i + 1,
@@ -219,96 +341,100 @@ export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
 
   private setExample(n: number) {
     let sampleData: WorkforcePerTU[];
-    
-    switch(n) {
+
+    switch (n) {
       case 1:
-          //this._timeUnitId = 1;
-          this.model.amountOfAnalysisTime = 5;
-          this.model.manpowerExcessCost = 300;
-          this.model.newEmployeeFixedCost = 400;
-          this.model.newEmployeePerTUCost = 200;
-          this.model.initialNumberOfEmployees = 0;
-          this.model.fireEmployeeCost = 0;
-          this.model.quitEmployeesPerTU = 0;
-          this.example = this.newExample(1, 
-            `A construction contractor estimates that the workforce required 
+        //this._timeUnitId = 1;
+        this.model.amountOfAnalysisTime = 5;
+        this.model.manpowerExcessCost = 300;
+        this.model.newEmployeeFixedCost = 400;
+        this.model.newEmployeePerTUCost = 200;
+        this.model.initialNumberOfEmployees = 0;
+        this.model.fireEmployeeCost = 0;
+        this.model.quitEmployeesPerTU = 0;
+        this.example = this.newExample(
+          1,
+          `A construction contractor estimates that the workforce required 
             over the next 5 weeks is 5, 7, 8, 4 and 6 workers respectively.
             Excess labor kept on the force will cost $300 per worker per
             week, and new hiring in any week will incur a fixed cost of
             $400 plus $200 per worker per week. Compute a hiring plan that
-            minimizes the cost.`);
-          sampleData = [
-            {
-              timeunit: 1,
-              workforce: 5
-            },
-            {
-              timeunit: 2,
-              workforce: 7
-            },
-            {
-              timeunit: 3,
-              workforce: 8
-            },
-            {
-              timeunit: 4,
-              workforce: 4
-            },
-            {
-              timeunit: 5,
-              workforce: 6
-            }
-          ];
+            minimizes the cost.`
+        );
+        sampleData = [
+          {
+            timeunit: 1,
+            workforce: 5
+          },
+          {
+            timeunit: 2,
+            workforce: 7
+          },
+          {
+            timeunit: 3,
+            workforce: 8
+          },
+          {
+            timeunit: 4,
+            workforce: 4
+          },
+          {
+            timeunit: 5,
+            workforce: 6
+          }
+        ];
         break;
-        
+
       case 2:
-         // this._timeUnitId = 3;
-          this.model.amountOfAnalysisTime = 5;
-          this.model.manpowerExcessCost = 0;
-          this.model.newEmployeeFixedCost = 9000;
-          this.model.newEmployeePerTUCost = 108000;
-          this.model.initialNumberOfEmployees = 30;
-          this.model.fireEmployeeCost = 25000;
-          this.model.quitEmployeesPerTU = 3;
-          this.example = this.newExample(2, 
-            `A company requires 28, 30, 25, 29 and 20 workers for the next
+        // this._timeUnitId = 3;
+        this.model.amountOfAnalysisTime = 5;
+        this.model.manpowerExcessCost = 0;
+        this.model.newEmployeeFixedCost = 9000;
+        this.model.newEmployeePerTUCost = 108000;
+        this.model.initialNumberOfEmployees = 30;
+        this.model.fireEmployeeCost = 25000;
+        this.model.quitEmployeesPerTU = 3;
+        this.example = this.newExample(
+          2,
+          `A company requires 28, 30, 25, 29 and 20 workers for the next
             5 years respectively. Currently there are 30 employees. Each
             worker earns $108,000 a year. When starting each year, a worker
             may be hired or fired. It costs $9,000 to hire a worker and
             $25,000 to fire him, because of insurance and benefits. As the
             job is significantly tiring, each year 3 workers quit the job
             (which don't receive the firing money). Find the optimal solution
-            for hiring employees along the 5 years.`);
-          sampleData = [
-            {
-              timeunit: 1,
-              workforce: 28
-            },
-            {
-              timeunit: 2,
-              workforce: 30
-            },
-            {
-              timeunit: 3,
-              workforce: 25
-            },
-            {
-              timeunit: 4,
-              workforce: 29
-            },
-            {
-              timeunit: 5,
-              workforce: 20
-            }
-          ];
+            for hiring employees along the 5 years.`
+        );
+        sampleData = [
+          {
+            timeunit: 1,
+            workforce: 28
+          },
+          {
+            timeunit: 2,
+            workforce: 30
+          },
+          {
+            timeunit: 3,
+            workforce: 25
+          },
+          {
+            timeunit: 4,
+            workforce: 29
+          },
+          {
+            timeunit: 5,
+            workforce: 20
+          }
+        ];
         break;
-        
-        default:
-          sampleData = [];
-          break;
+
+      default:
+        sampleData = [];
+        break;
     }
     const inputData: WorkforcePerTU[] = Array(this.model.amountOfAnalysisTime);
-    
+
     for (let i = 0; i < inputData.length; i++) {
       inputData[i] = {
         timeunit: i + 1,
@@ -317,101 +443,5 @@ export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
     }
     this.model.workforcePerTU = inputData;
   }
-  
-  getModel() {
-    // If current model is empty don't return it so it is not downloaded
-    if(!WMSolver.validateModel(this.model)) {
-      return null;
-    }
-    return this.model;
-  }
-  
-  getExample() {
-    return this.example;
-  }
-  
-  loadModel(modelObj: object, fileName: string, statement: string): boolean {
-    const model = modelObj as WorkforceModel;
-    
-    if(!WMSolver.validateModel(model)) {
-      return false;
-    }
-    Object.keys(model).forEach(key => this.model[key] = model[key]);
-    this.example = this.newExample(0, statement, fileName);
-    return true;
-  }
-  
-  onSolve() {
-    try {
-      this.solver.solve(this.model);
-      
-      // The step is 2 at this point
-      this.inputDataStep =  (this.inputDataStep < 2) ? 2 : this.inputDataStep;
-    } catch(error) {
-      alert(error);
-    }
-  }
-  
-  onShowExample(n: number) {
-    this.setExample(n);
-    this.inputDataStep++;
-    this.onSolve();
-  }
-  
-  onReset() {
-    this.inputDataStep = 0;
-    //this._timeUnitId = -1;
-    this.example = this.newExample();
-    this.clearModel();
-  }
-  
-  onToggleDocumentation() {
-    this.showDocumentation = !this.showDocumentation;
-  }
-  
-  onNext() {
-    // The step is 1 at this point
-    this.inputDataStep = (this.inputDataStep < 1) ? 1 : this.inputDataStep;
-    this.initInputDataArray();
-  }
-  
-  onTimeUnitChange(timeUnit: TimeUnit) {
-    this.timeUnitLabel = timeUnit.label;
-  }
-  
-  getStageTableHeader(stage: Stage): string[] {
-    return [
-      `x<sub>${stage.id}</sub>`,
-      'Cost (demand, cost)',
-      'f (minimum cost)',
-      `x<sub>${stage.id + 1}</sub>`
-    ];
-  }
-  
-  getReportTableHeader(): string[] {
-    return [
-      this.timeUnitLabel,
-      'Minimum demand',
-      'Current demand',
-      'Interpretation',
-      'Cost'
-    ];
-  }
-  
-  getReportTableRows(): string[] {
-    const stages = this.solver.getStages().slice().reverse();
-    const rows = [];
-    
-    stages.forEach(stage => {
-      rows.push({
-        'timeunit': stage.id + 1,
-        'minimumDemand': stage.minimumDemand,
-        'currentDemand': this.solver.getPath()[stage.id],
-        'interpretation': this.solver.getInterpretation()[stage.id],
-        'cost': this.solver.getCost()[stage.id]
-      });
-    });
-    return rows;
-  }
-  
+
 }
