@@ -7,7 +7,7 @@ import { version } from '../../../../../package.json';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-  
+
   private static readonly STR: object = {
     appName: '2DP RepSyMo Solver',
     appLongName: 'Deterministic Dynamic Programming RepSyMo Solver',
@@ -28,7 +28,7 @@ export class AboutComponent implements OnInit {
   readonly educationMsg: string;
   readonly referencesMsg: string;
   readonly bookTaha: string;
-  
+
   constructor() {
     this.appVersion = version;
     this.appName = AboutComponent.STR['appName'];
@@ -39,7 +39,8 @@ export class AboutComponent implements OnInit {
     this.referencesMsg = AboutComponent.STR['referencesMsg'];
     this.bookTaha = 'OPERATIONS RESEARCH AN INTRODUCTION Hamdy A. Taha';
   }
-  
-  ngOnInit() {}
-  
+
+  ngOnInit() {
+  }
+
 }

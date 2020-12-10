@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-tabular-dynamic-input',
@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./tabular-dynamic-input.component.css']
 })
 export class TabularDynamicInputComponent implements OnInit {
-  
+
   readonly keys: any;
   @Input()
   rkey: string;
@@ -14,11 +14,12 @@ export class TabularDynamicInputComponent implements OnInit {
   header: string[];
   @Input()
   rows: object[];
-  
+
   constructor() {
     this.keys = Object.keys;
   }
-  
-  ngOnInit() {}
-  
+
+  ngOnInit() {
+  }
+
 }

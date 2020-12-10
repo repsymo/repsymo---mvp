@@ -8,9 +8,9 @@ describe('OptionsBarComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ OptionsBarComponent ]
-    })
-    .compileComponents();
+             declarations: [OptionsBarComponent]
+           })
+           .compileComponents();
   }));
 
   beforeEach(() => {

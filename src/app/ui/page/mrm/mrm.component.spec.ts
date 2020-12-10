@@ -8,9 +8,9 @@ describe('MrmComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ MrmComponent ]
-    })
-    .compileComponents();
+             declarations: [MrmComponent]
+           })
+           .compileComponents();
   }));
 
   beforeEach(() => {

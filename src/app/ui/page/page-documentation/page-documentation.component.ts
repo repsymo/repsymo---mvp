@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 export interface Definition {
   'title': string,
@@ -11,15 +11,20 @@ export interface Definition {
   styleUrls: ['./page-documentation.component.css']
 })
 export class PageDocumentationComponent implements OnInit {
-  
-  private readonly animationTimeMS: number;
+
   classes: string[];
   @Input()
   items: Definition[];
+  private readonly animationTimeMS: number;
+
+  constructor() {
+    this.animationTimeMS = 300;
+  }
+
   @Input()
   set hidden(hide: boolean) {
-    if(hide) {
-      this.classes = [ 'hide' ];
+    if (hide) {
+      this.classes = ['hide'];
       setTimeout(() => {
         this.classes.push('gone');
       }, this.animationTimeMS);
@@ -31,12 +36,8 @@ export class PageDocumentationComponent implements OnInit {
       }, this.animationTimeMS);
     }
   }
-  
-  constructor() {
-    this.animationTimeMS = 300;
-  }
 
   ngOnInit() {
   }
-  
+
 }

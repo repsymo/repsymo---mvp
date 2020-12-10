@@ -8,9 +8,9 @@ describe('TabularInputComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TabularInputComponent ]
-    })
-    .compileComponents();
+             declarations: [TabularInputComponent]
+           })
+           .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,210 +1,206 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 * {
-    position: relative;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Noto Sans SC', sans-serif;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Noto Sans SC', sans-serif;
 }
 
 html {
-    height: 100%;
-    min-width: 320px;
+  min-width: 320px;
+  height: 100%;
 }
 
 body {
-    height: 100%;
-    background-color: #fafafa;
+  height: 100%;
+  background-color: #FAFAFA;
 }
 
 .container {
-    min-height: 70%;
-    padding-bottom: 64px;
+  min-height: 70%;
+  padding-bottom: 64px;
 }
 
 .gone {
-    display: none !important;
+  display: none !important;
 }
 
 .unselectable,
 * {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;     
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .divider {
-    width: 100%;
-    height: 1px;
-    background: rgba(0, 0, 0, 0.2);
-    margin: 16px 0px;
+  width: 100%;
+  height: 1px;
+  margin: 16px 0px;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 /* ---------------------------------------- PAGES ---------------------------------------- */
 .page > .top-panel {
-    display: block;
-    margin: auto;
-    margin-bottom: 32px;
+  display: block;
+  margin: auto;
+  margin-bottom: 32px;
 }
 
 .page > .solve-button-pane {
-    display: flex;
-    margin-bottom: 32px;
+  display: flex;
+  margin-bottom: 32px;
 }
 
 .page > .top-panel > div.next-button-container {
-    width: 100%;
+  width: 100%;
 }
 
 .page table {
-  overflow-x: auto;  
+  overflow-x: auto;
 }
 
 #nextButton {
-    width: 25%;
-    margin-bottom: 32px;
+  width: 25%;
+  margin-bottom: 32px;
 }
 
 #solveButton {
-    width: 80%;
-    margin: auto;
+  width: 80%;
+  margin: auto;
 }
 
 #solutionPanel {
-    margin: 64px 0px;
+  margin: 64px 0px;
 }
 
 #solutionPanel > .solution-title > p {
-    font-weight: bold;
-    font-style: italic;
-    font-size: 18px;
-    color: #737373;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: italic;
+  color: #737373;
 }
 
 #solutionPanel > .stages > p {
-    font-weight: bold;
-    font-size: 18px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 #solutionPanel > .stages > table {
-    margin-bottom: 32px;
+  margin-bottom: 32px;
 }
 
 #solutionPanel > .result > p {
-    font-weight: bold;
-    font-size: 18px;
-    text-transform: uppercase;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 #solutionPanel > .result > .chains-container {
-    display: block;
-    width: 100%;
-    overflow: auto;
+  display: block;
+  width: 100%;
+  overflow: auto;
 }
 
 #solutionPanel > .result > .chains-container > .chain {
-    display: block;
-    margin: 16px 0px;
-    align-self: center;
+  display: block;
+  margin: 16px 0px;
+  align-self: center;
 }
 
 #solutionPanel > .result > .chains-container > div.chain span {
-    display: inline-block;
-    width: 64px;
-    height: 64px;
-    margin-right: 32px;
-    border: 2px solid #212121;
-    text-align: center;
-    line-height: 56px;
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  margin-right: 32px;
+  text-align: center;
+  border: 2px solid #212121;
+  line-height: 56px;
 }
 
 #solutionPanel > .result > .chains-container > div.chain span::after {
-    content: '->';
-    position: absolute;
-    right: -24px;
-    top: 0px;
+  content: '->';
+  position: absolute;
+  top: 0px;
+  right: -24px;
 }
 
 #solutionPanel > .result > .chains-container > div.chain span.end::after {
-    content: '';
+  content: '';
 }
 
 #solutionPanel > .result > .chains-container > div.chain > div {
-    display: inline-block;
+  display: inline-block;
 }
 
 #inputTable {
-    transition: all 400ms;
+  transition: all 400ms;
 }
 
 .stages {
-  overflow-x: auto;  
+  overflow-x: auto;
 }
 
 @media only screen and (min-width: 800px) {
-    .page > .top-panel {
-        width: 680px;
-    }
-    
-    #inputTable {
-        width: 60%;
-        margin: 16px auto;
-    }
+  .page > .top-panel {
+    width: 680px;
+  }
+
+  #inputTable {
+    width: 60%;
+    margin: 16px auto;
+  }
 }
-
-
-
-
 
 /** MRM Component styles here I guess because the component is implemented in the JS-like style not in the Angular style **/
 #solutionPanel > .solutions-tree {
-    padding: 32px 0px;
-    
+  padding: 32px 0px;
+
 }
 
 #solutionPanel > .solutions-tree > div {
-    padding: 16px 48px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    border-left: 1px solid #212121;
-    border-bottom: 1px solid #212121;
+  padding: 16px 48px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-bottom: 1px solid #212121;
+  border-left: 1px solid #212121;
 }
 
 #solutionPanel > .solutions-tree > div > div {
-    display: flex;
-    height: 128px;
+  display: flex;
+  height: 128px;
 }
 
 #solutionPanel > .solutions-tree > div > div > div.label {
-    align-self: center;
-    font-weight: bold;
+  align-self: center;
+  font-weight: bold;
 }
 
 #solutionPanel > .solutions-tree > div > div > div.item.label {
-    border: none;
-    font-weight: bold;
+  font-weight: bold;
+  border: none;
 }
 
 #solutionPanel > .solutions-tree > div > div > div.item {
-    width: 64px;
-    height: 64px;
-    bottom: -28px;
-    margin: 0px 64px;
-    line-height: 64px;
-    border-radius: 50%;
-    border: 2px solid #212121;
+  width: 64px;
+  height: 64px;
+  margin: 0px 64px;
+  bottom: -28px;
+  border: 2px solid #212121;
+  border-radius: 50%;
+  line-height: 64px;
 }
 
 #solutionPanel > .solutions-tree > div > div > div.item > div {
-    align-self: center;
-    text-align: center;
+  align-self: center;
+  text-align: center;
 }
 
 #solutionPanel > .solutions-tree > div > div > div.item > span {
-    position: absolute;
-    width: 128px;
-    left: -32px;
-    text-align: center;
+  position: absolute;
+  width: 128px;
+  left: -32px;
+  text-align: center;
 }

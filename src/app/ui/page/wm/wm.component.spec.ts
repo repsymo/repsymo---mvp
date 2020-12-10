@@ -8,9 +8,9 @@ describe('WmComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ WmComponent ]
-    })
-    .compileComponents();
+             declarations: [WmComponent]
+           })
+           .compileComponents();
   }));
 
   beforeEach(() => {

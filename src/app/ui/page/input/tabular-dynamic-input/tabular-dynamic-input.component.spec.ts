@@ -8,9 +8,9 @@ describe('TabularDynamicInputComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TabularDynamicInputComponent ]
-    })
-    .compileComponents();
+             declarations: [TabularDynamicInputComponent]
+           })
+           .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 export interface Example {
   number: number,
@@ -12,20 +12,23 @@ export interface Example {
   styleUrls: ['./example-statement.component.css']
 })
 export class ExampleStatementComponent implements OnInit {
-  
+
   example: Example;
   gone: boolean;
+
+  constructor() {
+  }
+
   @Input()
   set value(example: Example) {
     this.example = example;
-    if(example.title) {
+    if (example.title) {
       example.number = 0;
     }
     this.gone = example.number == -1;
   }
-  
-  constructor() {}
-  
-  ngOnInit() {}
-  
+
+  ngOnInit() {
+  }
+
 }

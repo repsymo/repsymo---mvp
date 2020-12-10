@@ -8,9 +8,9 @@ describe('TimeUnitSelectorComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TimeUnitSelectorComponent ]
-    })
-    .compileComponents();
+             declarations: [TimeUnitSelectorComponent]
+           })
+           .compileComponents();
   }));
 
   beforeEach(() => {

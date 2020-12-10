@@ -8,9 +8,9 @@ describe('ChainsResultComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChainsResultComponent ]
-    })
-    .compileComponents();
+             declarations: [ChainsResultComponent]
+           })
+           .compileComponents();
   }));
 
   beforeEach(() => {

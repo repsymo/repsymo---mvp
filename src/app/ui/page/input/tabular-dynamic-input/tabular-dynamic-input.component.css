@@ -1,8 +1,8 @@
 :host {
-    display: block;
-    overflow-x: auto;
+  display: block;
+  overflow-x: auto;
 }
 
 input {
-    min-width: 120px;
+  min-width: 120px;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-chain-item',
@@ -6,12 +6,14 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./chain-item.component.css']
 })
 export class ChainItemComponent implements OnInit {
-  
+
   @Input()
   value: string;
-  
-  constructor() {}
-  
-  ngOnInit() {}
-  
+
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
+
 }

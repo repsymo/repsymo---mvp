@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-tabular-input',
@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./tabular-input.component.css']
 })
 export class TabularInputComponent implements OnInit {
-  
+
   /*
    * Types of expected inputs:
    *
@@ -28,27 +28,29 @@ export class TabularInputComponent implements OnInit {
   readonly keyValue: string;
   @Input()
   readonly multiColumn: boolean;
-  @Input()
-  set timeUnit(timeUnit: string) {
-    this.header[0] = `${this.header[0]} (${timeUnit.toLowerCase()})`;
-  }
-  
+
   constructor() {
     this.keys = Object.keys;
   }
-  
-  ngOnInit() {}
-  
+
+  @Input()
+  set timeUnit(timeUnit: string) {
+    this.header[0] = `${ this.header[0] } (${ timeUnit.toLowerCase() })`;
+  }
+
+  ngOnInit() {
+  }
+
   isSingleColumn(): boolean {
     return !this.multiColumn;
   }
-  
+
   isSingleColumnWithKey(): boolean {
     return !this.multiColumn && typeof this.keyValue == 'string';
   }
-  
+
   isMultiColumn(): boolean {
     return this.multiColumn;
   }
-  
+
 }

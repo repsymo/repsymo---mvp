@@ -1,15 +1,15 @@
 .next-button-container > button {
-    width: 25%;
-    margin-bottom: 32px;
-    float: right;
+  width: 25%;
+  margin-bottom: 32px;
+  float: right;
 }
 
 .solve-button-container {
-    display: flex;
-    margin: 32px 0px;
+  display: flex;
+  margin: 32px 0px;
 }
 
 .solve-button-container > button {
-    width: 80%;
-    margin: auto;
+  width: 80%;
+  margin: auto;
 }

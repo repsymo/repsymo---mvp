@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-tabular-output',
@@ -6,18 +6,20 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./tabular-output.component.css']
 })
 export class TabularOutputComponent implements OnInit {
-  
+
   @Input()
   readonly header: string[];
   @Input()
   readonly rows: object[];
-  
-  constructor() {}
-  
-  ngOnInit() {}
-  
+
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
+
   keys(object: object): any {
     return Object.keys(object);
   }
-  
+
 }

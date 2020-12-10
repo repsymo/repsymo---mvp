@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TimeUnit } from '../../../../model/TimeUnit';
 
 @Component({
@@ -7,19 +7,12 @@ import { TimeUnit } from '../../../../model/TimeUnit';
   styleUrls: ['./time-unit-selector.component.css']
 })
 export class TimeUnitSelectorComponent implements OnInit {
-  
+
   readonly timeUnits: TimeUnit[];
-  @Input()
-  set value(value: number) {
-    if(value >= 0 && value < this.timeUnits.length) {
-      this.selectedValue = this.timeUnits[value];
-      this.onChange();
-    }
-  }
   @Output()
   readonly valueChanged: EventEmitter<TimeUnit>;
   selectedValue: TimeUnit;
-  
+
   constructor() {
     this.timeUnits = [
       { id: 0, label: 'Days', singular: 'Day' },
@@ -31,12 +24,20 @@ export class TimeUnitSelectorComponent implements OnInit {
     this.selectedValue = this.timeUnits[1];
   }
 
+  @Input()
+  set value(value: number) {
+    if (value >= 0 && value < this.timeUnits.length) {
+      this.selectedValue = this.timeUnits[value];
+      this.onChange();
+    }
+  }
+
   ngOnInit() {
     this.onChange();
   }
-  
+
   onChange() {
     this.valueChanged.emit(this.selectedValue);
   }
-  
+
 }

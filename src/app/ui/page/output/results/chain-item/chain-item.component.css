@@ -1,20 +1,20 @@
 :host {
-    display: inline-block;
-    width: 64px;
-    height: 64px;
-    margin: 8px 32px 8px 0px;
-    border: 2px solid #212121;
-    text-align: center;
-    line-height: 56px;
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  margin: 8px 32px 8px 0px;
+  text-align: center;
+  border: 2px solid #212121;
+  line-height: 56px;
 }
 
 :host::after {
-    content: '->';
-    position: absolute;
-    right: -24px;
-    top: 0px;
+  content: '->';
+  position: absolute;
+  top: 0px;
+  right: -24px;
 }
 
 :host.end::after {
-    content: '';
+  content: '';
 }

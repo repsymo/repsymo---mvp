@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IOActionEvent } from '../header/header.component';
 import { DDPPS, DDPPSFile } from '../../model/DDPPSolverFile';
-import { IoService, IOEvent } from '../service/io/io.service';
+import { IOEvent, IoService } from '../service/io/io.service';
 import { WmComponent } from '../page/wm/wm.component';
 import { Router } from '@angular/router';
 import { ImComponent } from '../page/im/im.component';
@@ -12,21 +12,45 @@ import { ImComponent } from '../page/im/im.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  
+
   private readonly router: Router;
   private readonly ioService: IoService;
-  
+
   constructor(router: Router, ioService: IoService) {
     this.router = router;
     this.ioService = ioService;
   }
-  
+
+  ngOnInit() {
+  }
+
+  onIOAction(e: IOActionEvent) {
+    switch (e.action) {
+      case 'open':
+        // Shallow validation
+        if (!DDPPS.validate(e.data)) {
+          alert('Invalid file');
+          return;
+        }
+        this.openFile(e.data as DDPPSFile, e.name);
+        break;
+
+      case 'save':
+        if (this.router.url == '/mrm') {
+          alert('Saving not available yet for MRM');
+          break;
+        }
+        this.ioService.io.next({ ioAction: 'save' });
+        break;
+    }
+  }
+
   private openFile(file: DDPPSFile, name: string) {
     const event: IOEvent = {
       ioAction: 'open',
       name: name,
       data: file
-    }
+    };
     const url = this.router.url;
     const fromModelTypeToURL = (): string => {
       const routes = [
@@ -41,10 +65,10 @@ export class AppComponent implements OnInit {
       ];
       const index = values.findIndex(v => v == file.modelType);
       return routes[index];
-    }
+    };
     const properURL = fromModelTypeToURL();
-    
-    if(url != properURL) {
+
+    if (url != properURL) {
       this.router.navigateByUrl(properURL).then(() => {
         this.ioService.io.next(event);
       });
@@ -52,28 +76,5 @@ export class AppComponent implements OnInit {
     }
     this.ioService.io.next(event);
   }
-  
-  ngOnInit() {}
-  
-  onIOAction(e: IOActionEvent) {
-    switch(e.action) {
-      case 'open':
-        // Shallow validation
-        if(!DDPPS.validate(e.data)) {
-          alert('Invalid file');
-          return;
-        }
-        this.openFile(e.data as DDPPSFile, e.name);
-        break;
-      
-      case 'save':
-        if(this.router.url == '/mrm') {
-          alert('Saving not available yet for MRM');
-          break;
-        }
-        this.ioService.io.next({ ioAction: 'save' });
-        break;
-    }
-  }
-  
+
 }
