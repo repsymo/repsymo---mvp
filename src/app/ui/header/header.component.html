@@ -22,7 +22,7 @@
 <header>
   <nav>
     <div>
-      <h1>2DP RepSyMo Solver</h1>
+      <h1>2DP Repsymo Solver</h1>
     </div>
     <div
       class="items"
@@ -34,7 +34,7 @@
       </div>
       <div
         id="actionSave"
-        *ngIf="selectedTab != -1">
+        *ngIf="selectedTab !== -1">
         <i class="fas fa-save"></i>
       </div>
       <div id="actionOpen">
@@ -44,7 +44,7 @@
   </nav>
   <div class="tabs">
     <div
-      [className]="selectedTab == 0 ? 'active' : ''"
+      [className]="selectedTab === 0 ? 'active' : ''"
       (click)="onTabSelected(0)"
       routerLink="im">
             <span>
@@ -52,7 +52,7 @@
             </span>
     </div>
     <div
-      [className]="selectedTab == 1 ? 'active' : ''"
+      [className]="selectedTab === 1 ? 'active' : ''"
       (click)="onTabSelected(1)"
       routerLink="mrm">
             <span>
@@ -60,7 +60,7 @@
             </span>
     </div>
     <div
-      [className]="selectedTab == 2 ? 'active' : ''"
+      [className]="selectedTab === 2 ? 'active' : ''"
       (click)="onTabSelected(2)"
       routerLink="wm">
             <span>
