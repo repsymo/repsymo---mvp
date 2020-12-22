@@ -25,9 +25,9 @@ import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 export interface IOActionEvent {
-  action: string,
-  name?: string,
-  data?: object
+  action: string;
+  name?: string;
+  data?: object;
 }
 
 @Component({
@@ -59,8 +59,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
         '/mrm',
         '/wm'
       ];
-      const index = routes.findIndex(v => v == url);
-      this.selectedTab = (index != -1) ? index : this.selectedTab;
+      const index = routes.findIndex(v => v === url);
+      this.selectedTab = (index !== -1) ? index : this.selectedTab;
     });
   }
 
@@ -91,7 +91,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   private setIOAction(action: string) {
-    if (action == 'open') {
+    if (action === 'open') {
       const inputEl = document.createElement('input');
 
       inputEl.setAttribute('type', 'file');
@@ -101,7 +101,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           const getName = (): string => {
             let a: string = e.target.files[0].name;
 
-            if (a.lastIndexOf('.') != -1) {
+            if (a.lastIndexOf('.') !== -1) {
               a = a.substring(0, a.lastIndexOf('.'));
             }
             return a;
