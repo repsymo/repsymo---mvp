@@ -59,15 +59,14 @@ body {
 .divider {
   width: 100%;
   height: 1px;
-  margin: 16px 0px;
+  margin: 16px 0;
   background: rgba(0, 0, 0, 0.2);
 }
 
 /* ---------------------------------------- PAGES ---------------------------------------- */
 .page > .top-panel {
   display: block;
-  margin: auto;
-  margin-bottom: 32px;
+  margin: auto auto 32px;
 }
 
 .page > .solve-button-pane {
@@ -94,7 +93,7 @@ body {
 }
 
 #solutionPanel {
-  margin: 64px 0px;
+  margin: 64px 0;
 }
 
 #solutionPanel > .solution-title > p {
@@ -127,7 +126,7 @@ body {
 
 #solutionPanel > .result > .chains-container > .chain {
   display: block;
-  margin: 16px 0px;
+  margin: 16px 0;
   align-self: center;
 }
 
@@ -144,7 +143,7 @@ body {
 #solutionPanel > .result > .chains-container > div.chain span::after {
   content: '->';
   position: absolute;
-  top: 0px;
+  top: 0;
   right: -24px;
 }
 
@@ -177,7 +176,7 @@ body {
 
 /** MRM Component styles here I guess because the component is implemented in the JS-like style not in the Angular style **/
 #solutionPanel > .solutions-tree {
-  padding: 32px 0px;
+  padding: 32px 0;
 
 }
 
@@ -207,7 +206,7 @@ body {
 #solutionPanel > .solutions-tree > div > div > div.item {
   width: 64px;
   height: 64px;
-  margin: 0px 64px;
+  margin: 0 64px;
   bottom: -28px;
   border: 2px solid #212121;
   border-radius: 50%;
