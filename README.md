@@ -1,6 +1,6 @@
 # 2DP Repsymo Solver
 
-[![License](https://img.shields.io/github/license/TobiasBriones/2dp-repsymo-solver)](https://github.com/TobiasBriones/2dp-repsymo-solver/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/TobiasBriones/2dp-repsymo-solver)](https://github.com/TobiasBriones/2dp-repsymo-solver/blob/main/LICENSE)
 
 **2DP Repsymo Solver: Deterministic Dynamic Programming Repsymo Solver** is an app that implements
 dynamic programming models to provide solutions for many business optimization problems.
@@ -30,4 +30,4 @@ Copyright © 2019-2020 Tobias Briones. All rights reserved.
 ### License
 
 This software is licensed under
-the [GNU General Public License v3.0 or later License](https://github.com/TobiasBriones/2dp-repsymo-solver/blob/master/LICENSE).
+the [GNU General Public License v3.0 or later License](https://github.com/TobiasBriones/2dp-repsymo-solver/blob/main/LICENSE).
