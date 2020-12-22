@@ -1,11 +1,11 @@
 {
-  "name": "2DP RepSyMo Solver",
-  "short_name": "2DP RepSyMo Solver",
+  "name": "2DP Repsymo Solver",
+  "short_name": "2DP Repsymo Solver",
   "theme_color": "#00BCD4",
-  "background_color": "#fafafa",
+  "background_color": "#FAFAFA",
   "display": "standalone",
-  "scope": "/",
-  "start_url": "/",
+  "scope": "./",
+  "start_url": "./",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
