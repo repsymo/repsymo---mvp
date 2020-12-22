@@ -1,9 +1,33 @@
-# 2DP RepSyMo Solver
-[![License](https://img.shields.io/github/license/TobiasBriones/2d2p-ors)](https://github.com/TobiasBriones/2d2p-ors/blob/master/LICENSE)
+# 2DP Repsymo Solver
 
-**2DP RepSyMo Solver - Deterministic Dynamic Programming RepSyMo Solver** is an app that implements dynamic programming models to provide solutions for many business optimization problems.
+[![License](https://img.shields.io/github/license/TobiasBriones/2dp-repsymo-solver)](https://github.com/TobiasBriones/2dp-repsymo-solver/blob/master/LICENSE)
+
+**2DP Repsymo Solver: Deterministic Dynamic Programming Repsymo Solver** is an app that implements
+dynamic programming models to provide solutions for many business optimization problems.
 
 The currently supported models are:
+
 - Workflow
+
 - Machine Replacement
+
 - Investment
+
+## Contact
+
+This software: [App](https://tobiasbriones.github.io/2dp-repsymo-solver), [GitHub Repository](https://github.com/TobiasBriones/2dp-repsymo-solver)
+
+Tobias Briones: [GitHub](https://github.com/TobiasBriones)
+
+## About
+
+**2DP Repsymo Solver**
+
+Operations Research Solver app for Deterministic Dynamic Programming Problems.
+
+Copyright © 2019-2020 Tobias Briones. All rights reserved.
+
+### License
+
+This software is licensed under
+the [GNU General Public License v3.0 or later License](https://github.com/TobiasBriones/2dp-repsymo-solver/blob/master/LICENSE).
