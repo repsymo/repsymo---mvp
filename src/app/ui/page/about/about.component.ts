@@ -1,5 +1,7 @@
 /*
- * Copyright (C) 2019-2020 Tobias Briones. All rights reserved.
+ * Copyright (c) 2019-2020 Tobias Briones. All rights reserved.
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
  *
  * This file is part of 2DP Repsymo Solver.
  *
@@ -28,15 +30,15 @@ import { version } from '../../../../../package.json';
 export class AboutComponent implements OnInit {
 
   private static readonly STR: object = {
-    appName: '2DP RepSyMo Solver',
-    appLongName: 'Deterministic Dynamic Programming RepSyMo Solver',
+    appName: '2DP Repsymo Solver',
+    appLongName: 'Deterministic Dynamic Programming Repsymo Solver',
     aboutMsg: `This app implements several deterministic dynamic programming models to solve a
               considerable amount of real world problems in operations research.`,
-    contributionMsg: `2DP RepSyMo Solver is open source software licensed under the GPLv3.0 license. Don't
-                      hesitate to get in touch if you are interested in these models or wish to 
+    contributionMsg: `2DP Repsymo Solver is open source software licensed under the GPLv3.0 license. Don't
+                      hesitate to get in touch if you are interested in these models or wish to
                       extend the application for personal or educational usage.`,
     educationMsg: `This app is also intended to improve the teaching of operations research and
-                  experimental studies of CAS and usage of PWAs`,
+                  experimental studies of CAS.`,
     referencesMsg: `For a general reference about the models check `
   };
   readonly appVersion: string;
