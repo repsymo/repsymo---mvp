@@ -15,15 +15,15 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { DDPPSFile } from '../app/DDPPSolverFile';
 
 export interface IOEvent {
-  ioAction: string,
-  name?: string,
-  data?: DDPPSFile
+  ioAction: string;
+  name?: string;
+  data?: DDPPSFile;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class IoService {
+export class IOService {
   public readonly io: Subject<IOEvent>;
 
   constructor() {

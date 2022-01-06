@@ -14,19 +14,19 @@ import { Directive, OnDestroy, OnInit } from '@angular/core';
 import { of, Subscription } from 'rxjs';
 import { version } from '../../../../package.json';
 import { DDPPSFile } from '../../DDPPSolverFile';
-import { IoService } from '../../../service/io.service';
+import { IOService } from '../../../service/io.service';
 import { Example } from './example-statement/example-statement.component';
 
 @Directive()
 export abstract class Page implements OnInit,
                                       OnDestroy {
   private static readonly APP_VERSION: string = version;
-  private readonly ioService: IoService;
+  private readonly ioService: IOService;
   private readonly modelType: string;
   private problemName: string;
   private ioSubscription: Subscription;
 
-  constructor(ioService: IoService, modelLabel: string) {
+  constructor(ioService: IOService, modelLabel: string) {
     this.ioService = ioService;
     this.modelType = modelLabel;
     this.problemName = '2DP RepSyMo Solver problem';

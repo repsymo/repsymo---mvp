@@ -19,7 +19,7 @@ import {
   WorkforceModel,
   WorkforcePerTU
 } from '../../../../model/WMSolver';
-import { IoService } from '../../../../service/io.service';
+import { IOService } from '../../../../service/io.service';
 import { Example } from '../example-statement/example-statement.component';
 import {
   InputItem,
@@ -49,7 +49,7 @@ export class WmComponent extends Page implements OnInit,
   example: Example;
   timeUnitLabel: string;
 
-  constructor(ioService: IoService) {
+  constructor(ioService: IOService) {
     super(ioService, WmComponent.MODEL_TYPE);
     this.solver = new WMSolver();
     this.model = this.newModel();

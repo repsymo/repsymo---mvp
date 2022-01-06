@@ -16,7 +16,7 @@ import { DDPPS, DDPPSFile } from './DDPPSolverFile';
 import { IOActionEvent } from './ui/header/header.component';
 import { ImComponent } from './ui/page/im/im.component';
 import { WmComponent } from './ui/page/wm/wm.component';
-import { IOEvent, IoService } from '../service/io.service';
+import { IOEvent, IOService } from '../service/io.service';
 
 @Component({
   selector: 'app-root',
@@ -25,9 +25,9 @@ import { IOEvent, IoService } from '../service/io.service';
 })
 export class AppComponent implements OnInit {
   private readonly router: Router;
-  private readonly ioService: IoService;
+  private readonly ioService: IOService;
 
-  constructor(router: Router, ioService: IoService) {
+  constructor(router: Router, ioService: IOService) {
     this.router = router;
     this.ioService = ioService;
   }

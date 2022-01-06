@@ -17,7 +17,7 @@ import {
   Model as InvestmentModel,
   Stage
 } from 'src/model/IMModel';
-import { IoService } from 'src/service/io.service';
+import { IOService } from 'src/service/io.service';
 import { Example } from '../example-statement/example-statement.component';
 import { InputItem } from '../input/input-pane/input-pane.component';
 import { OptionsBarListener } from '../options-bar/options-bar.component';
@@ -43,7 +43,7 @@ export class ImComponent extends Page implements OnInit,
   showDocumentation: boolean;
   example: Example;
 
-  constructor(ioService: IoService) {
+  constructor(ioService: IOService) {
     super(ioService, ImComponent.MODEL_TYPE);
     this.solver = new IMSolver();
     this.model = this.newModel();
