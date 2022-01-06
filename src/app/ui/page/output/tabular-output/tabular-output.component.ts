@@ -18,20 +18,17 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./tabular-output.component.css']
 })
 export class TabularOutputComponent implements OnInit {
-
   @Input()
   readonly header: string[];
+
   @Input()
   readonly rows: object[];
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   keys(object: object): any {
     return Object.keys(object);
   }
-
 }

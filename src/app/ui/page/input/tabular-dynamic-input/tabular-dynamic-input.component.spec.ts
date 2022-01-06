@@ -12,7 +12,9 @@
 
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { TabularDynamicInputComponent } from './tabular-dynamic-input.component';
+import {
+  TabularDynamicInputComponent
+} from './tabular-dynamic-input.component';
 
 describe('TabularDynamicInputComponent', () => {
   let component: TabularDynamicInputComponent;
@@ -20,9 +22,8 @@ describe('TabularDynamicInputComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-             declarations: [TabularDynamicInputComponent]
-           })
-           .compileComponents();
+      declarations: [TabularDynamicInputComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

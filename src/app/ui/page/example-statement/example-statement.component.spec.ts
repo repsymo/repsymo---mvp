@@ -20,8 +20,8 @@ describe('ExampleStatementComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-             declarations: [ExampleStatementComponent]
-           })
+      declarations: [ExampleStatementComponent]
+    })
            .compileComponents();
   }));
 

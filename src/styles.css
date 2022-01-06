@@ -14,9 +14,9 @@
 
 * {
   position: relative;
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
   font-family: 'Noto Sans SC', sans-serif;
 }
 
@@ -27,7 +27,7 @@ html {
 
 body {
   height: 100%;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 .container {
@@ -126,8 +126,8 @@ body {
   width: 64px;
   height: 64px;
   margin-right: 32px;
-  text-align: center;
   border: 2px solid #212121;
+  text-align: center;
   line-height: 56px;
 }
 
@@ -190,8 +190,8 @@ body {
 }
 
 #solutionPanel > .solutions-tree > div > div > div.item.label {
-  font-weight: bold;
   border: none;
+  font-weight: bold;
 }
 
 #solutionPanel > .solutions-tree > div > div > div.item {

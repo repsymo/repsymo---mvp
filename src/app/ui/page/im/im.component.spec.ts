@@ -20,8 +20,8 @@ describe('ImComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-             declarations: [ImComponent]
-           })
+      declarations: [ImComponent]
+    })
            .compileComponents();
   }));
 

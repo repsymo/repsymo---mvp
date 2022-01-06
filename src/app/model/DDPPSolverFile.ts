@@ -10,8 +10,8 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-import { WmComponent } from '../ui/page/wm/wm.component';
 import { ImComponent } from '../ui/page/im/im.component';
+import { WmComponent } from '../ui/page/wm/wm.component';
 
 export interface DDPPSFile {
   appVersion: string,
@@ -21,7 +21,6 @@ export interface DDPPSFile {
 }
 
 export class DDPPS implements DDPPSFile {
-
   private static readonly MODEL_TYPES: string[] = [
     ImComponent.MODEL_TYPE,
     WmComponent.MODEL_TYPE
@@ -30,9 +29,9 @@ export class DDPPS implements DDPPSFile {
   public static validate(data: object): boolean {
     // Shallow check
     const member = 'appVersion' in data
-      && 'modelType' in data
-      && 'statement' in data
-      && 'problemModel' in data;
+                   && 'modelType' in data
+                   && 'statement' in data
+                   && 'problemModel' in data;
 
     if (!member) {
       return false;

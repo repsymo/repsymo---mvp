@@ -21,7 +21,7 @@
   margin: 0px 16px;
   float: right;
   font-size: 24px;
-  color: #FFCA28;
+  color: #ffca28;
   cursor: pointer;
 
 }
@@ -45,12 +45,12 @@
   height: 64px;
   padding: 16px 24px;
   margin: 0px;
-  cursor: pointer;
   line-height: 28px;
+  cursor: pointer;
 }
 
 .popup > p:hover {
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
 
 .popup-touchout {

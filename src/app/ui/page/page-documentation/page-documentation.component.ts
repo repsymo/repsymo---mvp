@@ -23,11 +23,11 @@ export interface Definition {
   styleUrls: ['./page-documentation.component.css']
 })
 export class PageDocumentationComponent implements OnInit {
-
+  private readonly animationTimeMS: number;
   classes: string[];
+
   @Input()
   items: Definition[];
-  private readonly animationTimeMS: number;
 
   constructor() {
     this.animationTimeMS = 300;
@@ -49,7 +49,5 @@ export class PageDocumentationComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

@@ -11,6 +11,7 @@
  */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { TimeUnit } from '../../../model/TimeUnit';
 import {
   Stage,
   WMProportionalityOption,
@@ -18,13 +19,15 @@ import {
   WorkforceModel,
   WorkforcePerTU
 } from '../../../solver/WMSolver';
-import { TimeUnit } from '../../../model/TimeUnit';
-import { Definition } from '../page-documentation/page-documentation.component';
-import { Example } from '../example-statement/example-statement.component';
-import { Page } from '../Page';
 import { IoService } from '../../service/io/io.service';
+import { Example } from '../example-statement/example-statement.component';
+import {
+  InputItem,
+  TimeUnitDependentLabel
+} from '../input/input-pane/input-pane.component';
 import { OptionsBarListener } from '../options-bar/options-bar.component';
-import { InputItem, TimeUnitDependentLabel } from '../input/input-pane/input-pane.component';
+import { Page } from '../Page';
+import { Definition } from '../page-documentation/page-documentation.component';
 
 @Component({
   selector: 'app-wm',
@@ -32,8 +35,9 @@ import { InputItem, TimeUnitDependentLabel } from '../input/input-pane/input-pan
   styleUrls: ['./wm.component.css'],
   host: { class: 'page' }
 })
-export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarListener {
-
+export class WmComponent extends Page implements OnInit,
+                                                 OnDestroy,
+                                                 OptionsBarListener {
   public static readonly MODEL_TYPE: string = 'workforce';
   readonly solver: WMSolver;
   readonly model: WorkforceModel;
@@ -100,7 +104,9 @@ export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
       this.solver.solve(this.model);
 
       // The step is 2 at this point
-      this.inputDataStep = (this.inputDataStep < 2) ? 2 : this.inputDataStep;
+      this.inputDataStep = (
+                             this.inputDataStep < 2
+                           ) ? 2 : this.inputDataStep;
     }
     catch (error) {
       alert(error);
@@ -120,7 +126,9 @@ export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
 
   onNext() {
     // The step is 1 at this point
-    this.inputDataStep = (this.inputDataStep < 1) ? 1 : this.inputDataStep;
+    this.inputDataStep = (
+                           this.inputDataStep < 1
+                         ) ? 1 : this.inputDataStep;
     this.initInputDataArray();
   }
 
@@ -436,5 +444,4 @@ export class WmComponent extends Page implements OnInit, OnDestroy, OptionsBarLi
     }
     this.model.workforcePerTU = inputData;
   }
-
 }

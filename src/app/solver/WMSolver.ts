@@ -15,7 +15,8 @@
  */
 export interface WorkforcePerTU {
   /**
-   * Position of time unit that requires that workforce. For example: the week #2 needs 15 employees.
+   * Position of time unit that requires that workforce. For example: the week
+   * #2 needs 15 employees.
    */
   timeunit: number;
 
@@ -26,10 +27,11 @@ export interface WorkforcePerTU {
 }
 
 /**
- * Defines flags to set a value as proportional to the other value. For example, the key
- * fireEmployeeCostToCurrentStage means that the model value 'fireEmployeeCost' will be taken as
- * (fireEmployeeCost * 'the current stage (eg. week #1, week #4)') in the computation so older
- * employees receive more money if being fired.
+ * Defines flags to set a value as proportional to the other value. For
+ * example, the key fireEmployeeCostToCurrentStage means that the model value
+ * 'fireEmployeeCost' will be taken as
+ * (fireEmployeeCost * 'the current stage (eg. week #1, week #4)') in the
+ * computation so older employees receive more money if being fired.
  */
 export interface WMProportionalityOption { // Experimental
   fireEmployeeCostToCurrentStage: boolean;
@@ -41,8 +43,8 @@ export interface WMProportionalityOption { // Experimental
  */
 export interface WorkforceModel {
   /**
-   * Amount of time (weeks, years, etc) to count the process. It must be the same as workforcePerTU
-   * length, and it must be greater than 0.
+   * Amount of time (weeks, years, etc) to count the process. It must be the
+   * same as workforcePerTU length, and it must be greater than 0.
    */
   amountOfAnalysisTime: number;
 
@@ -57,46 +59,50 @@ export interface WorkforceModel {
   manpowerExcessCost: number;
 
   /**
-   * Fixed cost for hiring a new employee. It is paid only the first time to hire the employee.
+   * Fixed cost for hiring a new employee. It is paid only the first time to
+   * hire the employee.
    */
   newEmployeeFixedCost: number;
 
   /**
-   * Cost to hire a new employee per time unit. For example: a employee salary is $500 a week.
+   * Cost to hire a new employee per time unit. For example: a employee salary
+   * is $500 a week.
    */
   newEmployeePerTUCost: number;
 
   /**
-   * Cost for firing an employee. This cost is about the benefit an employee gets when he's fired.
+   * Cost for firing an employee. This cost is about the benefit an employee
+   * gets when he's fired.
    */
   fireEmployeeCost: number;
 
   /**
-   * Number of employees that quit the job regularly each time unit, they will not get the
-   * fireEmployeeCost money so the company doesn't have to pay that cost. For example: 2 employees
-   * quit each week.
+   * Number of employees that quit the job regularly each time unit, they will
+   * not get the fireEmployeeCost money so the company doesn't have to pay that
+   * cost. For example: 2 employees quit each week.
    */
   quitEmployeesPerTU: number;
 
   /**
-   * Workforce demand there is per time unit. Depends on the time analysis of the problem.
-   * Each position of the array is the demand required per time unit (eg. position 2: demand
-   * required for week #2).
+   * Workforce demand there is per time unit. Depends on the time analysis of
+   * the problem. Each position of the array is the demand required per time
+   * unit (eg. position 2: demand required for week #2).
    */
   workforcePerTU: WorkforcePerTU[];
 
   /**
-   * Defines flags to set a value as proportional to the other value. For example, the key
-   * fireEmployeeCostToCurrentStage means that the model value 'fireEmployeeCost' will be taken as
-   * (fireEmployeeCost * 'the current stage (eg. week #1, week #4)') in the computation so older
-   * employees receive more money if being fired.
+   * Defines flags to set a value as proportional to the other value. For
+   * example, the key fireEmployeeCostToCurrentStage means that the model value
+   * 'fireEmployeeCost' will be taken as
+   * (fireEmployeeCost * 'the current stage (eg. week #1, week #4)') in the
+   * computation so older employees receive more money if being fired.
    */
   // proportionalityOptions: WMProportionalityOption;
 }
 
 /**
- * Pair (demand, value) that is used to compare all of the cost function values on each row and
- * eventually take out the demand yielding the minimum cost.
+ * Pair (demand, value) that is used to compare all of the cost function values
+ * on each row and eventually take out the demand yielding the minimum cost.
  */
 export interface CostOption {
   /**
@@ -159,7 +165,6 @@ export interface Stage {
  * Solves a workforce model problem.
  */
 export class WMSolver {
-
   public static validateModel(model: WorkforceModel): boolean {
     if (model.amountOfAnalysisTime != model.workforcePerTU.length) {
       return false;
@@ -168,13 +173,13 @@ export class WMSolver {
       return false;
     }
     return model.manpowerExcessCost >= 0
-      && model.newEmployeeFixedCost >= 0
-      && model.newEmployeePerTUCost >= 0
-      && model.initialNumberOfEmployees >= 0
-      && model.fireEmployeeCost >= 0
-      && model.quitEmployeesPerTU >= 0
-      && model.workforcePerTU.length >= 1
-      && model.workforcePerTU.filter(v => v.workforce < 0).length == 0;
+           && model.newEmployeeFixedCost >= 0
+           && model.newEmployeePerTUCost >= 0
+           && model.initialNumberOfEmployees >= 0
+           && model.fireEmployeeCost >= 0
+           && model.quitEmployeesPerTU >= 0
+           && model.workforcePerTU.length >= 1
+           && model.workforcePerTU.filter(v => v.workforce < 0).length == 0;
   }
 
   private model: WorkforceModel;
@@ -217,7 +222,10 @@ export class WMSolver {
     this.reset();
     this.model = problemModel;
     this.stages = [];
-    this.max = Math.max.apply(null, problemModel.workforcePerTU.map(v => v.workforce));
+    this.max = Math.max.apply(
+      null,
+      problemModel.workforcePerTU.map(v => v.workforce)
+    );
     const timeunits = problemModel.workforcePerTU.length;
     const initStages = () => {
       let previousXStart = problemModel.initialNumberOfEmployees;
@@ -296,8 +304,8 @@ export class WMSolver {
     const C3 = this.model.newEmployeeFixedCost;
     const F = this.model.fireEmployeeCost;
     const isHiringNewEmployees = (_x: number, demand: number): boolean => {
-      // New employees are hired for this TU iff the number of employees from the
-      // previous TU is less than those of this TU
+      // New employees are hired for this TU iff the number of employees from
+      // the previous TU is less than those of this TU
       return _x < demand;
     };
     const isFiringExistingEmployees = (_x: number, demand: number): boolean => {
@@ -337,7 +345,8 @@ export class WMSolver {
 
     // Compute each row for that stage
     stage.rows.forEach(row => {
-      // Substract the number of employees who just quited the job, they're not taken into account
+      // Substract the number of employees who just quited the job, they're not
+      // taken into account
       const _x = row.previousX - this.model.quitEmployeesPerTU;
       const options: CostOption[] = [];
 
@@ -377,7 +386,8 @@ export class WMSolver {
         return 0;
       } // Last stage
       const nextStage: Stage = this.stages[i - 1];
-      const lookupRow: StageRow = nextStage.rows.find(row => row.previousX == demand);
+      const lookupRow: StageRow = nextStage.rows.find(row => row.previousX
+                                                             == demand);
       return lookupRow.f;
     };
     // Create this initial row to start iterating next
@@ -401,5 +411,4 @@ export class WMSolver {
     this.cost = cost;
     this.interpretation = interpretation;
   }
-
 }

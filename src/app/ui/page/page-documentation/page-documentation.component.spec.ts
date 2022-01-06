@@ -20,8 +20,8 @@ describe('PageDocumentationComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-             declarations: [PageDocumentationComponent]
-           })
+      declarations: [PageDocumentationComponent]
+    })
            .compileComponents();
   }));
 

@@ -24,11 +24,9 @@ export interface IOEvent {
   providedIn: 'root'
 })
 export class IoService {
-
   public readonly io: Subject<IOEvent>;
 
   constructor() {
     this.io = new BehaviorSubject(null);
   }
-
 }

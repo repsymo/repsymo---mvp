@@ -18,14 +18,10 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./chain-item.component.css']
 })
 export class ChainItemComponent implements OnInit {
-
   @Input()
   value: string;
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

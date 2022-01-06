@@ -15,7 +15,8 @@
     <tr>
       <th
         scope="col"
-        *ngFor="let headerItem of header">
+        *ngFor="let headerItem of header"
+      >
         {{ headerItem }}
       </th>
     </tr>
@@ -29,7 +30,8 @@
             <input
               class="form-control"
               type="number"
-              [(ngModel)]="rows[y][rkey][x][key]">
+              [(ngModel)]="rows[y][rkey][x][key]"
+            >
           </div>
         </td>
       </ng-container>

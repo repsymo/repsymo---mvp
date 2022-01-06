@@ -20,8 +20,8 @@ describe('OptionsBarComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-             declarations: [OptionsBarComponent]
-           })
+      declarations: [OptionsBarComponent]
+    })
            .compileComponents();
   }));
 

@@ -12,25 +12,30 @@
 
 <i
   class="fas fa-question-circle"
-  (click)="onShowDoc()">
+  (click)="onShowDoc()"
+>
 </i>
 <i
   class="fas fa-redo-alt"
-  (click)="onReset()">
+  (click)="onReset()"
+>
 </i>
 <i
   class="text"
-  (click)="onExampleButtonClick()">
+  (click)="onExampleButtonClick()"
+>
   EXAMPLE
 </i>
 
 <div
   class="popup"
   [ngClass]="{ 'gone': !showExamplePopup }"
-  (click)="onExampleClick($event)">
+  (click)="onExampleClick($event)"
+>
   <p
     [attr.data-number]="i + 1"
-    *ngFor="let i of getNArray()">
+    *ngFor="let i of getNArray()"
+  >
     Example {{ i + 1 }}
   </p>
 </div>
@@ -38,5 +43,6 @@
 <div
   class="popup-touchout"
   [ngClass]="{ 'gone': !showExamplePopup }"
-  (click)="onPopupTouchoutClick()">
+  (click)="onPopupTouchoutClick()"
+>
 </div>

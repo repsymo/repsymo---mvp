@@ -20,8 +20,8 @@ describe('ChainItemComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-             declarations: [ChainItemComponent]
-           })
+      declarations: [ChainItemComponent]
+    })
            .compileComponents();
   }));
 

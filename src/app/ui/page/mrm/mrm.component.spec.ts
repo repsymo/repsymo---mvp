@@ -20,8 +20,8 @@ describe('MrmComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-             declarations: [MrmComponent]
-           })
+      declarations: [MrmComponent]
+    })
            .compileComponents();
   }));
 

@@ -15,7 +15,8 @@
     <tr>
       <th
         scope="col"
-        *ngFor="let headerItem of header">
+        *ngFor="let headerItem of header"
+      >
         {{ headerItem }}
       </th>
     </tr>
@@ -33,13 +34,15 @@
               class="form-control"
               type="number"
               [(ngModel)]="rows[y][keyValue]"
-              *ngIf="isSingleColumnWithKey()">
+              *ngIf="isSingleColumnWithKey()"
+            />
 
             <input
               class="form-control"
               type="number"
               [(ngModel)]="rows[y]"
-              *ngIf="!isSingleColumnWithKey()">
+              *ngIf="!isSingleColumnWithKey()"
+            />
           </div>
         </td>
       </ng-template>
@@ -51,7 +54,8 @@
             <input
               class="form-control"
               type="number"
-              [(ngModel)]="rows[y][key]">
+              [(ngModel)]="rows[y][key]"
+            >
           </div>
         </td>
       </ng-template>

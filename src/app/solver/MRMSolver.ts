@@ -1,4 +1,4 @@
- /*
+/*
  * Copyright (c) 2019-2022 Tobias Briones. All rights reserved.
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
@@ -18,7 +18,6 @@ interface TreeNode {
 }
 
 export class MRMSolver {
-
   private decisionYears: number;
   private initialMachineAge: number;
   private maxMachineAge: number;
@@ -37,8 +36,8 @@ export class MRMSolver {
   containsNode = (position: number, compare) => {
     return this.decisionYearArray[position].some(
       e => e.decisionYear == compare.decisionYear
-        && e.machineAge == compare.machineAge);
-  };
+           && e.machineAge == compare.machineAge);
+  }
 
   newTreeNode = (machineAge: number, decisionYear: number): TreeNode => {
     return {
@@ -47,7 +46,7 @@ export class MRMSolver {
       k: null,
       r: null
     };
-  };
+  }
 
   fillPath = (node: TreeNode, decisionYear: number) => {
     // Basic step
@@ -69,23 +68,24 @@ export class MRMSolver {
     }
     this.fillPath(rNode, decisionYear + 1);
     node.r = rNode;
-  };
+  }
 
   createDecisionTree = () => {
     // It starts from position 1
     const initialNode = this.newTreeNode(this.initialMachineAge, 1);
 
     /*console.log(`Solving tree for:
-                initial age ${initialMachineAge},
-                decision years: ${decisionYears},
-                maximum age: ${maxMachineAge}`);*/
+     initial age ${initialMachineAge},
+     decision years: ${decisionYears},
+     maximum age: ${maxMachineAge}`);*/
 
     this.fillPath(initialNode, 1);
 
     // Sort each decision year by age
-    this.decisionYearArray.forEach(element => element.sort((a, b) => (a.machineAge >
-      b.machineAge) ? 1 : -1));
-  };
+    this.decisionYearArray.forEach(
+      element => element.sort((a, b) => (a.machineAge > b.machineAge) ? 1 : -1)
+    );
+  }
 
   solveStage = (stage, nextStage, i) => {
     const values = this.decisionYearArray[i];
@@ -96,7 +96,9 @@ export class MRMSolver {
         return -1;
       }
       if (lastStage) {
-        return this.data[t].income + this.data[t + 1].sellingRevenue - this.data[t].operationCost;
+        return this.data[t].income
+               + this.data[t + 1].sellingRevenue
+               - this.data[t].operationCost;
       }
       const nextMax = getNextStageMaxByAge(t + 1);
       return this.data[t].income - this.data[t].operationCost + nextMax;
@@ -104,17 +106,17 @@ export class MRMSolver {
     const getR = t => {
       if (lastStage) {
         return this.data[0].income +
-          this.data[t].sellingRevenue +
-          this.data[1].sellingRevenue -
-          this.data[0].operationCost -
-          this.newMachinePrice;
+               this.data[t].sellingRevenue +
+               this.data[1].sellingRevenue -
+               this.data[0].operationCost -
+               this.newMachinePrice;
       }
       const nextMax = getNextStageMaxByAge(1);
       return this.data[0].income +
-        this.data[t].sellingRevenue -
-        this.data[0].operationCost -
-        this.newMachinePrice +
-        nextMax;
+             this.data[t].sellingRevenue -
+             this.data[0].operationCost -
+             this.newMachinePrice +
+             nextMax;
     };
     const getDecision = (k, r) => {
       // If k = -1 then the machine is old to replace
@@ -124,9 +126,9 @@ export class MRMSolver {
       return (r < k) ? 'K' : ((k < r) ? 'R' : 'K or R');
     };
     /*console.log('Solving stage ' + i)
-    console.log(values)
-    console.log(data)
-    console.log(nextStage)*/
+     console.log(values)
+     console.log(data)
+     console.log(nextStage)*/
     for (let j = 0; j < values.length; j++) {
       const t = values[j].machineAge;
       const k = getK(t);
@@ -141,7 +143,7 @@ export class MRMSolver {
         decision
       };
     }
-  };
+  }
 
   solve = (years, initialAge, maxAge, machinePrice, _data) => {
     this.decisionYears = years;
@@ -168,13 +170,13 @@ export class MRMSolver {
 
       this.solveStage(stage, nextStage, i);
     }
-  };
+  }
 
   getSolutionsTree = () => {
     return this.decisionYearArray;
-  };
+  }
 
   getStages = () => {
     return this.stages;
-  };
+  }
 }

@@ -11,12 +11,17 @@
  */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IMOption, IMSolver, Model as InvestmentModel, Stage } from 'src/app/solver/IMModel';
-import { InputItem } from '../input/input-pane/input-pane.component';
-import { Page } from '../Page';
+import {
+  IMOption,
+  IMSolver,
+  Model as InvestmentModel,
+  Stage
+} from 'src/app/solver/IMModel';
 import { IoService } from 'src/app/ui/service/io/io.service';
 import { Example } from '../example-statement/example-statement.component';
+import { InputItem } from '../input/input-pane/input-pane.component';
 import { OptionsBarListener } from '../options-bar/options-bar.component';
+import { Page } from '../Page';
 import { Definition } from '../page-documentation/page-documentation.component';
 
 @Component({
@@ -25,8 +30,9 @@ import { Definition } from '../page-documentation/page-documentation.component';
   styleUrls: ['./im.component.css'],
   host: { class: 'page' }
 })
-export class ImComponent extends Page implements OnInit, OnDestroy, OptionsBarListener {
-
+export class ImComponent extends Page implements OnInit,
+                                                 OnDestroy,
+                                                 OptionsBarListener {
   public static readonly MODEL_TYPE: string = 'investment';
   readonly solver: IMSolver;
   readonly model: InvestmentModel;

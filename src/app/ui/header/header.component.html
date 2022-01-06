@@ -17,15 +17,18 @@
     </div>
     <div
       class="items"
-      (click)="onActionClick($event)">
+      (click)="onActionClick($event)"
+    >
       <div
         id="actionAbout"
-        routerLink="about">
+        routerLink="about"
+      >
         <i class="fas fa-info-circle"></i>
       </div>
       <div
         id="actionSave"
-        *ngIf="selectedTab !== -1">
+        *ngIf="selectedTab !== -1"
+      >
         <i class="fas fa-save"></i>
       </div>
       <div id="actionOpen">
@@ -37,26 +40,29 @@
     <div
       [className]="selectedTab === 0 ? 'active' : ''"
       (click)="onTabSelected(0)"
-      routerLink="im">
-            <span>
-                Investment
-            </span>
+      routerLink="im"
+    >
+      <span>
+          Investment
+      </span>
     </div>
     <div
       [className]="selectedTab === 1 ? 'active' : ''"
       (click)="onTabSelected(1)"
-      routerLink="mrm">
-            <span>
-                Machine replacement
-            </span>
+      routerLink="mrm"
+    >
+      <span>
+          Machine replacement
+      </span>
     </div>
     <div
       [className]="selectedTab === 2 ? 'active' : ''"
       (click)="onTabSelected(2)"
-      routerLink="wm">
-            <span>
-                Workforce
-            </span>
+      routerLink="wm"
+    >
+      <span>
+          Workforce
+      </span>
     </div>
   </div>
 </header>

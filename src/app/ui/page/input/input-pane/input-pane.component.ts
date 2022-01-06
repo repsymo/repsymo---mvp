@@ -10,7 +10,14 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
 import { TimeUnit } from 'src/app/model/TimeUnit';
 
 export interface TimeUnitDependentLabel {
@@ -30,8 +37,9 @@ export interface CheckboxInputItem {
   label: TimeUnitDependentLabel,
 
   /**
-   * Key in which the checkbox value is found on the passed model, the bind for the checkbox is then
-   * assigned with the next property 'checkboxChildKey'. For example, the checkbox will be binded to
+   * Key in which the checkbox value is found on the passed model, the bind for
+   * the checkbox is then assigned with the next property 'checkboxChildKey'.
+   * For example, the checkbox will be binded to
    * 'model[checkboxParentKey][checkboxChildKey]'.
    */
   checkboxParentKey: string,
@@ -47,8 +55,8 @@ export interface CheckboxInputItem {
  */
 export interface InputItem {
   /**
-   * Key value to bind the input data to this item, belonging to the passed model. It means that, this
-   * item is binded to 'model[mkey]'.
+   * Key value to bind the input data to this item, belonging to the passed
+   * model. It means that, this item is binded to 'model[mkey]'.
    */
   mkey: string,
 
@@ -68,8 +76,8 @@ export interface InputItem {
   hint?: TimeUnitDependentLabel,
 
   /**
-   * If true, the label of this input will be rendered as two lines label for the grid view,
-   * so it matches the height of the current row if required.
+   * If true, the label of this input will be rendered as two lines label for
+   * the grid view, so it matches the height of the current row if required.
    */
   twoLinesLabel?: boolean;
 }
@@ -80,16 +88,19 @@ export interface InputItem {
   styleUrls: ['./input-pane.component.css']
 })
 export class InputPaneComponent implements OnInit {
-
   @Output()
   readonly timeUnitChange: EventEmitter<TimeUnit>;
+  private readonly cdr: ChangeDetectorRef;
+
   @Input()
   items: InputItem[];
+
   @Input()
   model: object;
+
   @Input()
   timeunit: boolean = true;
-  private readonly cdr: ChangeDetectorRef;
+
   private timeUnit: TimeUnit;
 
   constructor(cdr: ChangeDetectorRef) {
@@ -119,5 +130,4 @@ export class InputPaneComponent implements OnInit {
     const isNormalText = typeof item.text == 'string';
     return (isNormalText) ? item.text : item.part1 + tul + item.part2;
   }
-
 }

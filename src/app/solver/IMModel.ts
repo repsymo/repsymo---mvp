@@ -12,51 +12,51 @@
 
 // Experimental model for now
 export interface IMOption {
-  cost: number,
-  revenue: number
+  cost: number;
+  revenue: number;
 }
 
 export interface IMPlan {
-  id: number,
-  options: IMOption[]
+  id: number;
+  options: IMOption[];
 }
 
 export interface Model {
-  numberOfPlans: number,
-  numberOfOptions: number,
-  budget: number
-  plans: IMPlan[]
+  numberOfPlans: number;
+  numberOfOptions: number;
+  budget: number;
+  plans: IMPlan[];
 }
 
 export interface StageRow {
-  budget: number,
-  revenue: number[],
-  f: number,
-  option: number
+  budget: number;
+  revenue: number[];
+  f: number;
+  option: number;
 }
 
 export interface Stage {
-  id: number,
-  rows: StageRow[]
+  id: number;
+  rows: StageRow[];
 }
 
 export class IMSolver {
-
-  // IMOption is validated when solving to avoid over iterations
-  public static validateModel(model: Model): boolean {
-    return model.numberOfPlans > 0
-      && model.numberOfOptions > 0
-      && model.budget >= 0
-      && model.plans.length == model.numberOfPlans
-      && model.plans.filter(v => v.options.length != model.numberOfOptions).length == 0;
+  constructor() {
+    this.reset();
   }
 
   private model: Model;
   private stages: Stage[];
   private path: number[];
 
-  constructor() {
-    this.reset();
+  // IMOption is validated when solving to avoid over iterations
+  public static validateModel(model: Model): boolean {
+    return model.numberOfPlans > 0
+           && model.numberOfOptions > 0
+           && model.budget >= 0
+           && model.plans.length == model.numberOfPlans
+           && model.plans.filter(v => v.options.length
+                                      != model.numberOfOptions).length == 0;
   }
 
   public getStages(): Stage[] {
@@ -80,8 +80,8 @@ export class IMSolver {
           const revenue: number[] = Array(problemModel.numberOfPlans).fill(-1);
 
           rows.push({
-            budget: budget,
-            revenue: revenue,
+            budget,
+            revenue,
             f: 0,
             option: 0
           });
@@ -98,7 +98,7 @@ export class IMSolver {
         }
         this.stages.push({
           id: i,
-          rows: rows
+          rows
         });
       }
     };
@@ -139,8 +139,8 @@ export class IMSolver {
       let max = -1;
       let bestPlan = -1;
 
-      // Each option is the revenue value gotten if the corresponding plan is possible
-      // for the problem, -1 otherwise
+      // Each option is the revenue value gotten if the corresponding plan is
+      // possible for the problem, -1 otherwise
       options.forEach((_option, i) => {
         const plan = this.model.plans[i].options[investmentOption];
 
@@ -179,5 +179,4 @@ export class IMSolver {
     }
     this.path.reverse();
   }
-
 }

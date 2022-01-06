@@ -16,8 +16,8 @@ header {
   padding: 32px;
   margin-bottom: 32px;
   z-index: 9999;
+  background-color: #00bcd4;
   color: white;
-  background-color: #00BCD4;
 }
 
 header > nav {
@@ -89,8 +89,8 @@ header > .tabs > div {
   text-align: center;
   text-transform: uppercase;
   transition: background-color 200ms;
-  outline: none;
   vertical-align: middle;
+  outline: none;
 }
 
 header > .tabs > div > span {
@@ -105,7 +105,7 @@ header > .tabs > div:hover {
 }
 
 header > .tabs > div.active {
-  border-bottom: 2px solid #FFFFFF;
+  border-bottom: 2px solid #ffffff;
 }
 
 @media only screen and (min-width: 800px) {

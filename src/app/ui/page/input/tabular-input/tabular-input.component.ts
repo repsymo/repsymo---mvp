@@ -18,7 +18,6 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./tabular-input.component.css']
 })
 export class TabularInputComponent implements OnInit {
-
   /*
    * Types of expected inputs:
    *
@@ -32,12 +31,16 @@ export class TabularInputComponent implements OnInit {
    * rows = [ { 'c1': 0, 'c2': 0, 'c3': 0 }, ...,  { 'c1': 0, 'c2': 0, 'c3': 0 } ]
    */
   readonly keys: any;
+
   @Input()
   readonly header: string[];
+
   @Input()
   readonly rows: object[];
+
   @Input()
   readonly keyValue: string;
+
   @Input()
   readonly multiColumn: boolean;
 
@@ -64,5 +67,4 @@ export class TabularInputComponent implements OnInit {
   isMultiColumn(): boolean {
     return this.multiColumn;
   }
-
 }

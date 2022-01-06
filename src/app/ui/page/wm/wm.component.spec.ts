@@ -20,8 +20,8 @@ describe('WmComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-             declarations: [WmComponent]
-           })
+      declarations: [WmComponent]
+    })
            .compileComponents();
   }));
 

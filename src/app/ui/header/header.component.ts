@@ -10,10 +10,16 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 export interface IOActionEvent {
   action: string;
@@ -26,13 +32,13 @@ export interface IOActionEvent {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-
+export class HeaderComponent implements OnInit,
+                                        OnDestroy {
   @Output()
   readonly ioAction: EventEmitter<IOActionEvent>;
+  private readonly router: Router;
   routerSubscription: Subscription;
   selectedTab: number;
-  private readonly router: Router;
 
   constructor(router: Router) {
     this.router = router;
@@ -128,5 +134,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.ioAction.emit(event);
     }
   }
-
 }

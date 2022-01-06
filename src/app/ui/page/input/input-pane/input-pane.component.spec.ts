@@ -20,8 +20,8 @@ describe('InputPaneComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-             declarations: [InputPaneComponent]
-           })
+      declarations: [InputPaneComponent]
+    })
            .compileComponents();
   }));
 

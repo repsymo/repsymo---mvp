@@ -18,11 +18,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chains-result.component.css']
 })
 export class ChainsResultComponent implements OnInit {
+  constructor() {}
 
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

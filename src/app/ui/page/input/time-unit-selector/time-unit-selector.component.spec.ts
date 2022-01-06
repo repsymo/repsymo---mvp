@@ -20,8 +20,8 @@ describe('TimeUnitSelectorComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-             declarations: [TimeUnitSelectorComponent]
-           })
+      declarations: [TimeUnitSelectorComponent]
+    })
            .compileComponents();
   }));
 

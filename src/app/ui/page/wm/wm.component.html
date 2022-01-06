@@ -13,13 +13,15 @@
 <!-- ---------------------------------------- PAGE OPTIONS ---------------------------------------- -->
 <app-options-bar
   [examplesNumber]="2"
-  [l]="this">
+  [l]="this"
+>
 </app-options-bar>
 
 <!-- ---------------------------------------- PAGE DOCUMENTATION ---------------------------------------- -->
 <app-page-documentation
   [hidden]="!showDocumentation"
-  [items]="pageDocumentation">
+  [items]="pageDocumentation"
+>
 </app-page-documentation>
 
 <!-- ---------------------------------------- EXAMPLE STATEMENT ---------------------------------------- -->
@@ -31,13 +33,15 @@
   <app-input-pane
     [model]="model"
     [items]="inputPaneItems"
-    (timeUnitChange)="onTimeUnitChange($event)">
+    (timeUnitChange)="onTimeUnitChange($event)"
+  >
   </app-input-pane>
   <div class="next-button-container">
     <button
       class="btn btn-primary"
       [ngClass]="{ 'gone': inputDataStep > 0 }"
-      (click)="onNext()">
+      (click)="onNext()"
+    >
       Next
     </button>
   </div>
@@ -50,14 +54,17 @@
   [header]="inputTableHeader"
   [timeUnit]="timeUnitLabel"
   [keyValue]="'workforce'"
-  [rows]="model.workforcePerTU">
+  [rows]="model.workforcePerTU"
+>
 </app-tabular-input>
 <div
   class="solve-button-container"
-  [ngClass]="{ 'gone': inputDataStep == 0 }">
+  [ngClass]="{ 'gone': inputDataStep == 0 }"
+>
   <button
     class="btn btn-primary"
-    (click)="onSolve()">
+    (click)="onSolve()"
+  >
     Solve
   </button>
 </div>
@@ -65,18 +72,21 @@
 <!-- ---------------------------------------- SOLUTION PANEL ---------------------------------------- -->
 <div
   id="solutionPanel"
-  [ngClass]="{ 'gone': inputDataStep < 2 }">
+  [ngClass]="{ 'gone': inputDataStep < 2 }"
+>
   <div class="divider"></div>
   <div
     class="stages"
-    *ngFor="let stage of solver.getStages()">
+    *ngFor="let stage of solver.getStages()"
+  >
     <p>STAGE {{ stage.id + 1 }}</p>
     <div>
       Minimum Demand: <strong>{{ stage.minimumDemand }}</strong> employees
     </div>
     <app-tabular-output
       [header]="getStageTableHeader(stage)"
-      [rows]="stage.rows">
+      [rows]="stage.rows"
+    >
     </app-tabular-output>
   </div>
   <div class="result">
@@ -89,7 +99,8 @@
         </div>
         <app-chain-item
           class="end"
-          [value]="'END'">
+          [value]="'END'"
+        >
         </app-chain-item>
       </div>
     </div>
@@ -97,7 +108,8 @@
       <p>Report of results</p>
       <app-tabular-output
         [header]="getReportTableHeader()"
-        [rows]="getReportTableRows()">
+        [rows]="getReportTableRows()"
+      >
       </app-tabular-output>
     </div>
   </div>

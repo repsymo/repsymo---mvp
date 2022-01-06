@@ -12,39 +12,45 @@
 
 <app-time-unit-selector
   *ngIf="timeunit"
-  (valueChanged)="onTimeUnitChange($event)">
+  (valueChanged)="onTimeUnitChange($event)"
+>
 </app-time-unit-selector>
 <div>
   <div *ngFor="let item of items; index as i">
     <div class="form-group">
       <label
         for="inputPaneInput{{ i }}"
-        [ngClass]="{ 'two-lines': item.twoLinesLabel }">
-                <span>
-                    {{ getTUDLText(item.label) }}
-                </span>
+        [ngClass]="{ 'two-lines': item.twoLinesLabel }"
+      >
+        <span>
+            {{ getTUDLText(item.label) }}
+        </span>
       </label>
       <input
         id="inputPaneInput{{ i }}"
         class="form-control"
         type="number"
         placeholder="{{ getTUDLText(item.hint) }}"
-        [(ngModel)]="model[item.mkey]">
+        [(ngModel)]="model[item.mkey]"
+      >
     </div>
     <div
       class="form-check"
-      *ngIf="item.checkbox">
+      *ngIf="item.checkbox"
+    >
       <input
         id="inputPaneCB{{ i }}"
         class="form-check-input"
         type="checkbox"
-        [(ngModel)]="model[item.checkbox.checkboxParentKey][item.checkbox.checkboxChildKey]">
+        [(ngModel)]="model[item.checkbox.checkboxParentKey][item.checkbox.checkboxChildKey]"
+      />
       <label
         class="form-check-label"
-        for="inputPaneCB{{ i }}">
-                <span>
-                    {{ getTUDLText(item.checkbox.label) }}
-                </span>
+        for="inputPaneCB{{ i }}"
+      >
+        <span>
+            {{ getTUDLText(item.checkbox.label) }}
+        </span>
       </label>
     </div>
   </div>

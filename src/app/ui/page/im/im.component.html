@@ -12,11 +12,13 @@
 
 <app-options-bar
   [examplesNumber]="1"
-  [l]="this">
+  [l]="this"
+>
 </app-options-bar>
 <app-page-documentation
   [hidden]="!showDocumentation"
-  [items]="pageDocumentation">
+  [items]="pageDocumentation"
+>
 </app-page-documentation>
 <app-example-statement [value]="example">
 </app-example-statement>
@@ -24,13 +26,15 @@
   <app-input-pane
     [model]="model"
     [items]="inputPaneItems"
-    [timeunit]="false">
+    [timeunit]="false"
+  >
   </app-input-pane>
   <div class="next-button-container">
     <button
       class="btn btn-primary"
       [ngClass]="{ 'gone': inputDataStep > 0 }"
-      (click)="onNext()">
+      (click)="onNext()"
+    >
       Next
     </button>
   </div>
@@ -40,25 +44,30 @@
   [ngClass]="{ 'gone': inputDataStep == 0 }"
   [header]="inputTableHeader"
   [rows]="model.plans"
-  [rkey]="'options'">
+  [rkey]="'options'"
+>
 </app-tabular-dynamic-input>
 <div
   class="solve-button-container"
-  [ngClass]="{ 'gone': inputDataStep == 0 }">
+  [ngClass]="{ 'gone': inputDataStep == 0 }"
+>
   <button
     class="btn btn-primary"
-    (click)="onSolve()">
+    (click)="onSolve()"
+  >
     Solve
   </button>
 </div>
 
 <div
   id="solutionPanel"
-  [ngClass]="{ 'gone': inputDataStep < 2 }">
+  [ngClass]="{ 'gone': inputDataStep < 2 }"
+>
   <div class="divider"></div>
   <div
     class="stages"
-    *ngFor="let stage of solver.getStages()">
+    *ngFor="let stage of solver.getStages()"
+  >
     <p>STAGE / OPTION {{ stage.id + 1 }}</p>
     <table class="table">
       <thead>
@@ -66,7 +75,8 @@
           <th
             scope="col"
             *ngFor="let headerItem of getStageTableHeader(stage)"
-            [innerHTML]="headerItem">
+            [innerHTML]="headerItem"
+          >
           </th>
         </tr>
       </thead>
@@ -96,7 +106,8 @@
         </div>
         <app-chain-item
           class="end"
-          [value]="'END'">
+          [value]="'END'"
+        >
         </app-chain-item>
       </div>
     </div>

@@ -11,12 +11,12 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { IOActionEvent } from '../header/header.component';
-import { DDPPS, DDPPSFile } from '../../model/DDPPSolverFile';
-import { IOEvent, IoService } from '../service/io/io.service';
-import { WmComponent } from '../page/wm/wm.component';
 import { Router } from '@angular/router';
+import { DDPPS, DDPPSFile } from '../../model/DDPPSolverFile';
+import { IOActionEvent } from '../header/header.component';
 import { ImComponent } from '../page/im/im.component';
+import { WmComponent } from '../page/wm/wm.component';
+import { IOEvent, IoService } from '../service/io/io.service';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +24,6 @@ import { ImComponent } from '../page/im/im.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
   private readonly router: Router;
   private readonly ioService: IoService;
 
@@ -88,5 +87,4 @@ export class AppComponent implements OnInit {
     }
     this.ioService.io.next(event);
   }
-
 }

@@ -13,8 +13,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MRMSolver } from '../../../solver/MRMSolver';
 
-// This code comes from the previous project Machine Replacement Model, so this component will stay
-// implemented as JS-like way
+// This code comes from the previous project Machine Replacement Model, so this
+// component will stay implemented as JS-like way
 @Component({
   selector: 'app-mrm',
   templateUrl: './mrm.component.html',
@@ -22,7 +22,6 @@ import { MRMSolver } from '../../../solver/MRMSolver';
   host: { class: 'page' }
 })
 export class MrmComponent implements OnInit {
-
   private solver: MRMSolver;
 
   constructor() {
@@ -66,10 +65,12 @@ export class MrmComponent implements OnInit {
     html += `</tbody>
             </table>`;
     document.getElementById('inputTable').innerHTML = html;
-  };
+  }
 
   getInputValueAt = (x: number, y: number) => {
-    const inputValue = (document.getElementById(`input_${ x },${ y }`) as HTMLInputElement).value;
+    const inputValue = (
+      document.getElementById(`input_${ x },${ y }`) as HTMLInputElement
+    ).value;
     const input = parseInt(inputValue);
 
     if (isNaN(input)) {
@@ -77,29 +78,41 @@ export class MrmComponent implements OnInit {
       return;
     }
     return input;
-  };
+  }
 
   generateDataTable = (data) => {
-    const maxAge = parseInt((document.getElementById('timeInput') as HTMLInputElement).value);
+    const maxAge = parseInt((
+      document.getElementById('timeInput') as HTMLInputElement
+    ).value);
     for (let t = 0; t < data.length; t++) {
       if (t > maxAge) {
         break;
       }
       const row = data[t];
-      (document.getElementById(`input_${ 0 },${ t }`) as HTMLInputElement).value = row.income;
-      (document.getElementById(`input_${ 1 },${ t }`) as HTMLInputElement).value = row.operationCost;
-      (document.getElementById(`input_${ 2 },${ t }`) as HTMLInputElement).value = row.sellingRevenue;
+      (
+        document.getElementById(`input_${ 0 },${ t }`) as HTMLInputElement
+      ).value = row.income;
+      (
+        document.getElementById(`input_${ 1 },${ t }`) as HTMLInputElement
+      ).value = row.operationCost;
+      (
+        document.getElementById(`input_${ 2 },${ t }`) as HTMLInputElement
+      ).value = row.sellingRevenue;
     }
-  };
-
-  ngOnInit() {
-
   }
 
+  ngOnInit() {}
+
   onNext() {
-    const nInput = (document.getElementById('yearsInput') as HTMLInputElement).value;
-    const tInput = (document.getElementById('timeInput') as HTMLInputElement).value;
-    const initialAgeInput = (document.getElementById('initialAgeInput') as HTMLInputElement).value;
+    const nInput = (
+      document.getElementById('yearsInput') as HTMLInputElement
+    ).value;
+    const tInput = (
+      document.getElementById('timeInput') as HTMLInputElement
+    ).value;
+    const initialAgeInput = (
+      document.getElementById('initialAgeInput') as HTMLInputElement
+    ).value;
     const n = parseInt(nInput);
     const t = parseInt(tInput);
     const initialAge = parseInt(initialAgeInput);
@@ -146,10 +159,18 @@ export class MrmComponent implements OnInit {
   }
 
   onSolve = () => {
-    const decisionYearsInput = (document.getElementById('yearsInput') as HTMLInputElement).value;
-    const maxAgeInput = (document.getElementById('timeInput') as HTMLInputElement).value;
-    const initialAgeInput = (document.getElementById('initialAgeInput') as HTMLInputElement).value;
-    const machinePriceInput = (document.getElementById('machinePrice') as HTMLInputElement).value;
+    const decisionYearsInput = (
+      document.getElementById('yearsInput') as HTMLInputElement
+    ).value;
+    const maxAgeInput = (
+      document.getElementById('timeInput') as HTMLInputElement
+    ).value;
+    const initialAgeInput = (
+      document.getElementById('initialAgeInput') as HTMLInputElement
+    ).value;
+    const machinePriceInput = (
+      document.getElementById('machinePrice') as HTMLInputElement
+    ).value;
     const decisionYears = parseInt(decisionYearsInput);
     const maxAge = parseInt(maxAgeInput);
     const initialAge = parseInt(initialAgeInput);
@@ -326,18 +347,19 @@ export class MrmComponent implements OnInit {
       chainsHTML.forEach(chain => html += chain);
       document.querySelector('.chains-container').innerHTML = html;
     };
-    if (isNaN(decisionYears) || isNaN(initialAge) || isNaN(maxAge) || isNaN(machinePrice)) {
+    if (isNaN(decisionYears) || isNaN(initialAge) || isNaN(maxAge) || isNaN(
+      machinePrice)) {
       alert('Values are integer numbers');
       return;
     }
     const data = getData();
 
     /*console.log(`Solving problem
-                decision years: ${decisionYears}
-                initial age: ${initialAge},
-                maximum age: ${maxAge},
-                machine price: ${machinePrice},
-                data: \n${JSON.stringify(data)}`);*/
+     decision years: ${decisionYears}
+     initial age: ${initialAge},
+     maximum age: ${maxAge},
+     machine price: ${machinePrice},
+     data: \n${JSON.stringify(data)}`);*/
     this.solver.solve(decisionYears, initialAge, maxAge, machinePrice, data);
 
     // UI
@@ -345,10 +367,10 @@ export class MrmComponent implements OnInit {
     const stages = this.solver.getStages();
 
     /*console.log(`Solutions tree \n${JSON.stringify(tree)}`);
-    console.log(`Stages \n${JSON.stringify(stages)}`);*/
+     console.log(`Stages \n${JSON.stringify(stages)}`);*/
     generateSolutionsTree(tree);
     generateSolutionsStages(stages);
     generateResult(stages, initialAge);
     document.getElementById('solutionPanel').classList.remove('gone');
-  };
+  }
 }

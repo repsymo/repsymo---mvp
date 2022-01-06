@@ -10,16 +10,16 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-import { of, Subscription } from 'rxjs';
 import { Directive, OnDestroy, OnInit } from '@angular/core';
-import { IoService } from '../service/io/io.service';
-import { DDPPSFile } from '../../model/DDPPSolverFile';
+import { of, Subscription } from 'rxjs';
 import { version } from '../../../../package.json';
+import { DDPPSFile } from '../../model/DDPPSolverFile';
+import { IoService } from '../service/io/io.service';
 import { Example } from './example-statement/example-statement.component';
 
 @Directive()
-export abstract class Page implements OnInit, OnDestroy {
-
+export abstract class Page implements OnInit,
+                                      OnDestroy {
   private static readonly APP_VERSION: string = version;
   private readonly ioService: IoService;
   private readonly modelType: string;
@@ -98,7 +98,8 @@ export abstract class Page implements OnInit, OnDestroy {
 
     if (name != null) {
       const stm = this.getExample().statement;
-      const statement = prompt('Enter a problem statement (optional)', stm) || '';
+      const statement = prompt('Enter a problem statement (optional)', stm)
+                        || '';
       const fileObj: DDPPSFile = {
         appVersion: Page.APP_VERSION,
         modelType: this.modelType,
@@ -120,5 +121,4 @@ export abstract class Page implements OnInit, OnDestroy {
   abstract onSolve(): void;
 
   abstract onReset(): void;
-
 }

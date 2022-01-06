@@ -20,8 +20,8 @@ describe('TabularOutputComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-             declarations: [TabularOutputComponent]
-           })
+      declarations: [TabularOutputComponent]
+    })
            .compileComponents();
   }));
 

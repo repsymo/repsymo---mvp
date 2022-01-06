@@ -19,7 +19,6 @@ import { version } from '../../../../../package.json';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-
   private static readonly STR: object = {
     appName: '2DP Repsymo Solver',
     appLongName: 'Deterministic Dynamic Programming Repsymo Solver',
@@ -52,7 +51,5 @@ export class AboutComponent implements OnInit {
     this.bookTaha = 'OPERATIONS RESEARCH AN INTRODUCTION Hamdy A. Taha';
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
