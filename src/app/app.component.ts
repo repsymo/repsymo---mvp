@@ -12,11 +12,11 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DDPPS, DDPPSFile } from '../../DDPPSolverFile';
-import { IOActionEvent } from '../header/header.component';
-import { ImComponent } from '../page/im/im.component';
-import { WmComponent } from '../page/wm/wm.component';
-import { IOEvent, IoService } from '../service/io/io.service';
+import { DDPPS, DDPPSFile } from './DDPPSolverFile';
+import { IOActionEvent } from './ui/header/header.component';
+import { ImComponent } from './ui/page/im/im.component';
+import { WmComponent } from './ui/page/wm/wm.component';
+import { IOEvent, IoService } from './ui/service/io/io.service';
 
 @Component({
   selector: 'app-root',

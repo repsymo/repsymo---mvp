@@ -17,7 +17,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
-import { AppComponent } from './ui/app/app.component';
+import { AppComponent } from './app.component';
 import { FooterComponent } from './ui/footer/footer.component';
 import { HeaderComponent } from './ui/header/header.component';
 import { AboutComponent } from './ui/page/about/about.component';
