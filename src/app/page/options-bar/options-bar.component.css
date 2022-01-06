@@ -18,7 +18,7 @@
 }
 
 :host > i {
-  margin: 0px 16px;
+  margin: 0 16px;
   float: right;
   font-size: 24px;
   color: #ffca28;
@@ -44,7 +44,7 @@
 .popup > p {
   height: 64px;
   padding: 16px 24px;
-  margin: 0px;
+  margin: 0;
   line-height: 28px;
   cursor: pointer;
 }
@@ -57,7 +57,7 @@
   position: fixed;
   width: 100%;
   height: 100%;
-  top: 0%;
-  left: 0%;
+  top: 0;
+  left: 0;
   background: rgba(255, 255, 255, 0.3);
 }

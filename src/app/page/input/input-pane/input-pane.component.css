@@ -20,7 +20,7 @@
 
 :host > div {
   width: 100%;
-  padding: 8px 0px;
+  padding: 8px 0;
 }
 
 :host > div > div {
