@@ -16,7 +16,7 @@ import {
   IMSolver,
   Model as InvestmentModel,
   Stage
-} from 'src/app/solver/IMModel';
+} from 'src/model/IMModel';
 import { IoService } from 'src/app/ui/service/io/io.service';
 import { Example } from '../example-statement/example-statement.component';
 import { InputItem } from '../input/input-pane/input-pane.component';

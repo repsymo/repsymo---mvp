@@ -18,7 +18,7 @@ import {
   WMSolver,
   WorkforceModel,
   WorkforcePerTU
-} from '../../../solver/WMSolver';
+} from '../../../../model/WMSolver';
 import { IoService } from '../../service/io/io.service';
 import { Example } from '../example-statement/example-statement.component';
 import {
