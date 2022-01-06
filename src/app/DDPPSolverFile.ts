@@ -10,8 +10,8 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-import { ImComponent } from '../ui/page/im/im.component';
-import { WmComponent } from '../ui/page/wm/wm.component';
+import { ImComponent } from './ui/page/im/im.component';
+import { WmComponent } from './ui/page/wm/wm.component';
 
 export interface DDPPSFile {
   appVersion: string,

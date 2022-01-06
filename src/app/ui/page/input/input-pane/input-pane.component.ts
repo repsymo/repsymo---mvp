@@ -18,7 +18,7 @@ import {
   OnInit,
   Output
 } from '@angular/core';
-import { TimeUnit } from 'src/app/model/TimeUnit';
+import { TimeUnit } from 'src/app/TimeUnit';
 
 export interface TimeUnitDependentLabel {
   text?: string,

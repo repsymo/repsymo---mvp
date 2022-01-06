@@ -11,7 +11,7 @@
  */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TimeUnit } from '../../../model/TimeUnit';
+import { TimeUnit } from '../../../TimeUnit';
 import {
   Stage,
   WMProportionalityOption,

@@ -13,7 +13,7 @@
 import { Directive, OnDestroy, OnInit } from '@angular/core';
 import { of, Subscription } from 'rxjs';
 import { version } from '../../../../package.json';
-import { DDPPSFile } from '../../model/DDPPSolverFile';
+import { DDPPSFile } from '../../DDPPSolverFile';
 import { IoService } from '../service/io/io.service';
 import { Example } from './example-statement/example-statement.component';
 

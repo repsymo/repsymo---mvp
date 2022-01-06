@@ -12,7 +12,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DDPPS, DDPPSFile } from '../../model/DDPPSolverFile';
+import { DDPPS, DDPPSFile } from '../../DDPPSolverFile';
 import { IOActionEvent } from '../header/header.component';
 import { ImComponent } from '../page/im/im.component';
 import { WmComponent } from '../page/wm/wm.component';
