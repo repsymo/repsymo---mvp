@@ -17,7 +17,7 @@ import {
   Model as InvestmentModel,
   Stage
 } from 'src/model/IMModel';
-import { IoService } from 'src/app/ui/service/io/io.service';
+import { IoService } from 'src/service/io.service';
 import { Example } from '../example-statement/example-statement.component';
 import { InputItem } from '../input/input-pane/input-pane.component';
 import { OptionsBarListener } from '../options-bar/options-bar.component';

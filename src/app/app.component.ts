@@ -16,7 +16,7 @@ import { DDPPS, DDPPSFile } from './DDPPSolverFile';
 import { IOActionEvent } from './ui/header/header.component';
 import { ImComponent } from './ui/page/im/im.component';
 import { WmComponent } from './ui/page/wm/wm.component';
-import { IOEvent, IoService } from './ui/service/io/io.service';
+import { IOEvent, IoService } from '../service/io.service';
 
 @Component({
   selector: 'app-root',
