@@ -18,42 +18,42 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
-import { FooterComponent } from './ui/footer/footer.component';
-import { HeaderComponent } from './ui/header/header.component';
-import { AboutComponent } from './ui/page/about/about.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+import { AboutComponent } from './page/about/about.component';
 import {
   ExampleStatementComponent
-} from './ui/page/example-statement/example-statement.component';
-import { ImComponent } from './ui/page/im/im.component';
+} from './page/example-statement/example-statement.component';
+import { ImComponent } from './page/im/im.component';
 import {
   InputPaneComponent
-} from './ui/page/input/input-pane/input-pane.component';
+} from './page/input/input-pane/input-pane.component';
 import {
   TabularDynamicInputComponent
-} from './ui/page/input/tabular-dynamic-input/tabular-dynamic-input.component';
+} from './page/input/tabular-dynamic-input/tabular-dynamic-input.component';
 import {
   TabularInputComponent
-} from './ui/page/input/tabular-input/tabular-input.component';
+} from './page/input/tabular-input/tabular-input.component';
 import {
   TimeUnitSelectorComponent
-} from './ui/page/input/time-unit-selector/time-unit-selector.component';
-import { MrmComponent } from './ui/page/mrm/mrm.component';
+} from './page/input/time-unit-selector/time-unit-selector.component';
+import { MrmComponent } from './page/mrm/mrm.component';
 import {
   OptionsBarComponent
-} from './ui/page/options-bar/options-bar.component';
+} from './page/options-bar/options-bar.component';
 import {
   ChainItemComponent
-} from './ui/page/output/results/chain-item/chain-item.component';
+} from './page/output/results/chain-item/chain-item.component';
 import {
   ChainsResultComponent
-} from './ui/page/output/results/chains-result/chains-result.component';
+} from './page/output/results/chains-result/chains-result.component';
 import {
   TabularOutputComponent
-} from './ui/page/output/tabular-output/tabular-output.component';
+} from './page/output/tabular-output/tabular-output.component';
 import {
   PageDocumentationComponent
-} from './ui/page/page-documentation/page-documentation.component';
-import { WmComponent } from './ui/page/wm/wm.component';
+} from './page/page-documentation/page-documentation.component';
+import { WmComponent } from './page/wm/wm.component';
 
 const appRoutes: Routes = [
   {

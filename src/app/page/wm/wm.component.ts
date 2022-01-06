@@ -11,15 +11,15 @@
  */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TimeUnit } from '../../../TimeUnit';
+import { TimeUnit } from '../../TimeUnit';
 import {
   Stage,
   WMProportionalityOption,
   WMSolver,
   WorkforceModel,
   WorkforcePerTU
-} from '../../../../model/WMSolver';
-import { IOService } from '../../../../service/io.service';
+} from '../../../model/WMSolver';
+import { IOService } from '../../../service/io.service';
 import { Example } from '../example-statement/example-statement.component';
 import {
   InputItem,

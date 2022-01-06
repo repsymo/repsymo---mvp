@@ -13,9 +13,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DDPPS, DDPPSFile } from './DDPPSolverFile';
-import { IOActionEvent } from './ui/header/header.component';
-import { ImComponent } from './ui/page/im/im.component';
-import { WmComponent } from './ui/page/wm/wm.component';
+import { IOActionEvent } from './header/header.component';
+import { ImComponent } from './page/im/im.component';
+import { WmComponent } from './page/wm/wm.component';
 import { IOEvent, IOService } from '../service/io.service';
 
 @Component({

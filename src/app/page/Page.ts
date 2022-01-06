@@ -12,9 +12,9 @@
 
 import { Directive, OnDestroy, OnInit } from '@angular/core';
 import { of, Subscription } from 'rxjs';
-import { version } from '../../../../package.json';
-import { DDPPSFile } from '../../DDPPSolverFile';
-import { IOService } from '../../../service/io.service';
+import { version } from '../../../package.json';
+import { DDPPSFile } from '../DDPPSolverFile';
+import { IOService } from '../../service/io.service';
 import { Example } from './example-statement/example-statement.component';
 
 @Directive()

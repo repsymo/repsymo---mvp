@@ -11,7 +11,7 @@
  */
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TimeUnit } from '../../../../TimeUnit';
+import { TimeUnit } from '../../../TimeUnit';
 
 @Component({
   selector: 'app-time-unit-selector',
