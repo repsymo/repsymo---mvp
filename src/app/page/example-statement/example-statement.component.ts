@@ -37,7 +37,7 @@ export class ExampleStatementComponent implements OnInit {
     if (example.title) {
       example.number = 0;
     }
-    this.gone = example.number == -1;
+    this.gone = example.number === -1;
   }
 
   ngOnInit() {

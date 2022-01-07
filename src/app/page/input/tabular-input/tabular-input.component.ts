@@ -61,7 +61,7 @@ export class TabularInputComponent implements OnInit {
   }
 
   isSingleColumnWithKey(): boolean {
-    return !this.multiColumn && typeof this.keyValue == 'string';
+    return !this.multiColumn && typeof this.keyValue === 'string';
   }
 
   isMultiColumn(): boolean {

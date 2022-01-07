@@ -39,7 +39,7 @@ export class DDPPS implements DDPPSFile {
     const ddpps = data as DDPPS;
 
     // Check model type (investment, workforce, etc)
-    if (DDPPS.MODEL_TYPES.findIndex(v => v == ddpps.modelType) == -1) {
+    if (DDPPS.MODEL_TYPES.findIndex(v => v === ddpps.modelType) === -1) {
       return false;
     }
     return true;
