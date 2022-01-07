@@ -11,7 +11,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { version } from '../../../../package.json';
+import { VERSION } from '../../../main';
 
 @Component({
   selector: 'app-about',
@@ -41,7 +41,7 @@ export class AboutComponent implements OnInit {
   readonly bookTaha: string;
 
   constructor() {
-    this.appVersion = version;
+    this.appVersion = VERSION;
     this.appName = AboutComponent.STR['appName'];
     this.appLongName = AboutComponent.STR['appLongName'];
     this.aboutMsg = AboutComponent.STR['aboutMsg'];
