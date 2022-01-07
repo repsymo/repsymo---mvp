@@ -12,7 +12,7 @@
 
 import { Directive, OnDestroy, OnInit } from '@angular/core';
 import { of, Subscription } from 'rxjs';
-import { version } from '../../../package.json';
+import { VERSION } from '../../main';
 import { DDPPSFile } from '../DDPPSolverFile';
 import { IOService } from '../../service/io.service';
 import { Example } from './example-statement/example-statement.component';
@@ -20,7 +20,6 @@ import { Example } from './example-statement/example-statement.component';
 @Directive()
 export abstract class Page implements OnInit,
                                       OnDestroy {
-  private static readonly APP_VERSION: string = version;
   private readonly ioService: IOService;
   private readonly modelType: string;
   private problemName: string;
@@ -101,7 +100,7 @@ export abstract class Page implements OnInit,
       const statement = prompt('Enter a problem statement (optional)', stm)
                         || '';
       const fileObj: DDPPSFile = {
-        appVersion: Page.APP_VERSION,
+        appVersion: VERSION,
         modelType: this.modelType,
         statement: statement,
         problemModel: model
