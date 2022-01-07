@@ -1,31 +1,22 @@
 /*
- * Copyright (c) 2019-2020 Tobias Briones. All rights reserved.
+ * Copyright (c) 2019-2022 Tobias Briones. All rights reserved.
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
  * This file is part of 2DP Repsymo Solver.
  *
- * 2DP Repsymo Solver is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * 2DP Repsymo Solver is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with 2DP Repsymo Solver.  If not, see <https://www.gnu.org/licenses/>.
+ * This source code is licensed under the GNU General Public License v3.0 or
+ * later License found in the LICENSE file in the root directory of this source
+ * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 * {
   position: relative;
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
   font-family: 'Noto Sans SC', sans-serif;
 }
 
@@ -36,7 +27,7 @@ html {
 
 body {
   height: 100%;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 .container {
@@ -135,8 +126,8 @@ body {
   width: 64px;
   height: 64px;
   margin-right: 32px;
-  text-align: center;
   border: 2px solid #212121;
+  text-align: center;
   line-height: 56px;
 }
 
@@ -199,8 +190,8 @@ body {
 }
 
 #solutionPanel > .solutions-tree > div > div > div.item.label {
-  font-weight: bold;
   border: none;
+  font-weight: bold;
 }
 
 #solutionPanel > .solutions-tree > div > div > div.item {

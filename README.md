@@ -1,9 +1,17 @@
 # 2DP Repsymo Solver
 
-[![License](https://img.shields.io/github/license/TobiasBriones/2dp-repsymo-solver)](https://github.com/TobiasBriones/2dp-repsymo-solver/blob/main/LICENSE)
+[![Project](https://raw.githubusercontent.com/repsymo/2dp-repsymo-solver/static/badge.svg)](https://repsymo.com)
+&nbsp;
+[![GitHub Repository](https://img.shields.io/static/v1?label=GITHUB&message=REPOSITORY&labelColor=555&color=0277bd&style=for-the-badge&logo=GITHUB)](https://github.com/repsymo/2dp-repsymo-solver)
 
-**2DP Repsymo Solver: Deterministic Dynamic Programming Repsymo Solver** is an app that implements
-dynamic programming models to provide solutions for many business optimization problems.
+[![GitHub Project License](https://img.shields.io/github/license/repsymo/2dp-repsymo-solver.svg?style=flat-square)](https://github.com/repsymo/2dp-repsymo-solver/blob/main/LICENSE)
+
+Operations Research Solver App for Deterministic Dynamic Programming Problems
+targeted at educational purposes.
+
+**2DP Repsymo Solver: Deterministic Dynamic Programming Repsymo Solver** is an
+app that implements dynamic programming models to provide solutions for many
+business optimization problems.
 
 The currently supported models are:
 
@@ -15,19 +23,18 @@ The currently supported models are:
 
 ## Contact
 
-This software: [App](https://tobiasbriones.github.io/2dp-repsymo-solver), [GitHub Repository](https://github.com/TobiasBriones/2dp-repsymo-solver)
-
-Tobias Briones: [GitHub](https://github.com/TobiasBriones)
+Tobias Briones: [GitHub](https://github.com/tobiasbriones)
 
 ## About
 
 **2DP Repsymo Solver**
 
-Operations Research Solver app for Deterministic Dynamic Programming Problems.
+Operations Research Solver App for Deterministic Dynamic Programming Problems
+targeted at educational purposes.
 
-Copyright © 2019-2020 Tobias Briones. All rights reserved.
+Copyright © 2019-2022 Tobias Briones. All rights reserved.
 
 ### License
 
-This software is licensed under
-the [GNU General Public License v3.0 or later License](https://github.com/TobiasBriones/2dp-repsymo-solver/blob/main/LICENSE).
+This project is licensed under
+the [GNU General Public License v3.0 or later License](LICENSE).

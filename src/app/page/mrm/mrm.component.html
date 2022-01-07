@@ -1,0 +1,100 @@
+<!--
+  ~ Copyright (c) 2019-2022 Tobias Briones. All rights reserved.
+  ~
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+  ~
+  ~ This file is part of 2DP Repsymo Solver.
+  ~
+  ~ This source code is licensed under the GNU General Public License v3.0 or
+  ~ later License found in the LICENSE file in the root directory of this source
+  ~ tree or at https://opensource.org/licenses/GPL-3.0.
+  -->
+
+<div class="top-panel">
+  <div class="years-pane">
+    <div class="form-group">
+      <label for="yearsInput">Number of decision years</label>
+      <input
+        id="yearsInput"
+        class="form-control"
+        value="4"
+        type="number"
+        placeholder="Enter the number of years"
+      />
+    </div>
+  </div>
+  <div class="max-time-pane">
+    <div class="form-group">
+      <label for="timeInput">Maximum machine age in years</label>
+      <input
+        id="timeInput"
+        class="form-control"
+        value="6"
+        type="number"
+        placeholder="Enter the maximum age"
+      />
+    </div>
+  </div>
+  <div class="initial-age-pane">
+    <div class="form-group">
+      <label for="initialAgeInput">Initial machine age in years</label>
+      <input
+        id="initialAgeInput"
+        class="form-control"
+        value="3"
+        type="number"
+        placeholder="Enter the initial machine age"
+      />
+    </div>
+  </div>
+  <div class="machine-price-pane">
+    <div class="form-group">
+      <label for="machinePrice">New machine's price in dollars</label>
+      <input
+        id="machinePrice"
+        class="form-control"
+        value="100000"
+        type="number"
+        placeholder="Enter the price of a new machine"
+      />
+    </div>
+  </div>
+  <div>
+    <button
+      id="nextButton"
+      class="btn btn-primary"
+      (click)="onNext()"
+    >
+      Next
+    </button>
+  </div>
+</div>
+<div id="inputTable"></div>
+<div class="solve-button-pane">
+  <button
+    id="solveButton"
+    class="btn btn-primary invisible"
+    (click)="onSolve()"
+  >
+    Solve
+  </button>
+</div>
+<div id="solutionPanel" class="gone">
+  <div class="divider"></div>
+  <div class="solution-title">
+    <p>Solution</p>
+  </div>
+  <div>
+    <p>Problem solutions tree</p>
+    <p>Y-Axis: Machine age in years</p>
+    <p>X-Axis: Decision year</p>
+  </div>
+  <div class="solutions-tree">
+    <div></div>
+  </div>
+  <div class="stages"></div>
+  <div class="result">
+    <p>Result chains</p>
+    <div class="chains-container"></div>
+  </div>
+</div>

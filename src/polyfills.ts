@@ -1,22 +1,13 @@
 /*
- * Copyright (c) 2019-2020 Tobias Briones. All rights reserved.
+ * Copyright (c) 2019-2022 Tobias Briones. All rights reserved.
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
  * This file is part of 2DP Repsymo Solver.
  *
- * 2DP Repsymo Solver is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * 2DP Repsymo Solver is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with 2DP Repsymo Solver.  If not, see <https://www.gnu.org/licenses/>.
+ * This source code is licensed under the GNU General Public License v3.0 or
+ * later License found in the LICENSE file in the root directory of this source
+ * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
 /**
@@ -24,13 +15,15 @@
  * You can add your own extra polyfills to this file.
  *
  * This file is divided into 2 sections:
- *   1. Browser polyfills. These are applied before loading ZoneJS and are sorted by browsers.
- *   2. Application imports. Files imported after ZoneJS that should be loaded before your main
- *      file.
+ *   1. Browser polyfills. These are applied before loading ZoneJS and are
+ * sorted by browsers.
+ *   2. Application imports. Files imported after ZoneJS that should be loaded
+ * before your main file.
  *
- * The current setup is for so-called "evergreen" browsers; the last versions of browsers that
- * automatically update themselves. This includes Safari >= 10, Chrome >= 55 (including Opera),
- * Edge >= 13 on the desktop, and iOS 10 and Chrome on mobile.
+ * The current setup is for so-called "evergreen" browsers; the last versions
+ * of browsers that automatically update themselves. This includes Safari >=
+ * 10, Chrome >= 55 (including Opera), Edge >= 13 on the desktop, and iOS 10
+ * and Chrome on mobile.
  *
  * Learn more in https://angular.io/guide/browser-support
  */
@@ -44,30 +37,34 @@
 
 /**
  * Web Animations `@angular/platform-browser/animations`
- * Only required if AnimationBuilder is used within the application and using IE/Edge or Safari.
- * Standard animation support in Angular DOES NOT require any polyfills (as of Angular 6.0).
+ * Only required if AnimationBuilder is used within the application and using
+ * IE/Edge or Safari. Standard animation support in Angular DOES NOT require
+ * any polyfills (as of Angular 6.0).
  */
 // import 'web-animations-js';  // Run `npm install --save web-animations-js`.
 
 /**
  * By default, zone.js will patch all possible macroTask and DomEvents
- * user can disable parts of macroTask/DomEvents patch by setting following flags
- * because those flags need to be set before `zone.js` being loaded, and webpack
- * will put import in the top of bundle, so user need to create a separate file
- * in this directory (for example: zone-flags.ts), and put the following flags
- * into that file, and then add the following code before importing zone.js.
- * import './zone-flags.ts';
+ * user can disable parts of macroTask/DomEvents patch by setting following
+ * flags because those flags need to be set before `zone.js` being loaded, and
+ * webpack will put import in the top of bundle, so user need to create a
+ * separate file in this directory (for example: zone-flags.ts), and put the
+ * following flags into that file, and then add the following code before
+ * importing zone.js. import './zone-flags.ts';
  *
  * The flags allowed in zone-flags.ts are listed here.
  *
  * The following flags will work for all browsers.
  *
- * (window as any).__Zone_disable_requestAnimationFrame = true; // disable patch requestAnimationFrame
- * (window as any).__Zone_disable_on_property = true; // disable patch onProperty such as onclick
- * (window as any).__zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames
+ * (window as any).__Zone_disable_requestAnimationFrame = true; // disable
+ * patch requestAnimationFrame
+ * (window as any).__Zone_disable_on_property = true; // disable patch
+ * onProperty such as onclick
+ * (window as any).__zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove'];
+ * // disable patch specified eventNames
  *
- *  in IE/Edge developer tools, the addEventListener will also be wrapped by zone.js
- *  with the following flag, it will bypass `zone.js` patch for IE/Edge
+ *  in IE/Edge developer tools, the addEventListener will also be wrapped by
+ * zone.js with the following flag, it will bypass `zone.js` patch for IE/Edge
  *
  *  (window as any).__Zone_enable_cross_context_check = true;
  *

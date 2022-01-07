@@ -10,6 +10,24 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-export const environment = {
-  production: true
-};
+:host {
+  display: flex;
+  min-height: 60vh;
+}
+
+:host > div {
+  align-self: center;
+}
+
+:host .par > p {
+  color: #737373;
+}
+
+:host .ref {
+  font-size: 14px;
+  font-style: italic;
+}
+
+:host .appVersion > p {
+  text-align: center;
+}

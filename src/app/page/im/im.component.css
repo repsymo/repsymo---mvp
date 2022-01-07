@@ -10,6 +10,18 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-export const environment = {
-  production: true
-};
+.next-button-container > button {
+  width: 25%;
+  margin-bottom: 32px;
+  float: right;
+}
+
+.solve-button-container {
+  display: flex;
+  margin: 32px 0;
+}
+
+.solve-button-container > button {
+  width: 80%;
+  margin: auto;
+}

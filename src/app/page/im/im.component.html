@@ -1,0 +1,115 @@
+<!--
+  ~ Copyright (c) 2019-2022 Tobias Briones. All rights reserved.
+  ~
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+  ~
+  ~ This file is part of 2DP Repsymo Solver.
+  ~
+  ~ This source code is licensed under the GNU General Public License v3.0 or
+  ~ later License found in the LICENSE file in the root directory of this source
+  ~ tree or at https://opensource.org/licenses/GPL-3.0.
+  -->
+
+<app-options-bar
+  [examplesNumber]="1"
+  [l]="this"
+>
+</app-options-bar>
+<app-page-documentation
+  [hidden]="!showDocumentation"
+  [items]="pageDocumentation"
+>
+</app-page-documentation>
+<app-example-statement [value]="example">
+</app-example-statement>
+<div class="top-panel">
+  <app-input-pane
+    [model]="model"
+    [items]="inputPaneItems"
+    [timeunit]="false"
+  >
+  </app-input-pane>
+  <div class="next-button-container">
+    <button
+      class="btn btn-primary"
+      [ngClass]="{ 'gone': inputDataStep > 0 }"
+      (click)="onNext()"
+    >
+      Next
+    </button>
+  </div>
+</div>
+<app-tabular-dynamic-input
+  class="tabular-input"
+  [ngClass]="{ 'gone': inputDataStep == 0 }"
+  [header]="inputTableHeader"
+  [rows]="model.plans"
+  [rkey]="'options'"
+>
+</app-tabular-dynamic-input>
+<div
+  class="solve-button-container"
+  [ngClass]="{ 'gone': inputDataStep == 0 }"
+>
+  <button
+    class="btn btn-primary"
+    (click)="onSolve()"
+  >
+    Solve
+  </button>
+</div>
+
+<div
+  id="solutionPanel"
+  [ngClass]="{ 'gone': inputDataStep < 2 }"
+>
+  <div class="divider"></div>
+  <div
+    class="stages"
+    *ngFor="let stage of solver.getStages()"
+  >
+    <p>STAGE / OPTION {{ stage.id + 1 }}</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th
+            scope="col"
+            *ngFor="let headerItem of getStageTableHeader(stage)"
+            [innerHTML]="headerItem"
+          >
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let row of stage.rows">
+        <tr>
+          <th scope="row">{{ row.budget }}</th>
+          <td *ngFor="let revenue of row.revenue">
+            {{ revenue }}
+          </td>
+          <td>
+            {{ row.f }}
+          </td>
+          <td>
+            {{ row.option + 1 }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="result">
+    <p>Result chains</p>
+    <div class="chains-container">
+      <div class="chain">
+        <div class="chains" *ngFor="let item of solver.getPath()">
+          <app-chain-item [value]="item">
+          </app-chain-item>
+        </div>
+        <app-chain-item
+          class="end"
+          [value]="'END'"
+        >
+        </app-chain-item>
+      </div>
+    </div>
+  </div>
+</div>

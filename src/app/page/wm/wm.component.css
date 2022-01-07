@@ -1,0 +1,60 @@
+/*
+ * Copyright (c) 2019-2022 Tobias Briones. All rights reserved.
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * This file is part of 2DP Repsymo Solver.
+ *
+ * This source code is licensed under the GNU General Public License v3.0 or
+ * later License found in the LICENSE file in the root directory of this source
+ * tree or at https://opensource.org/licenses/GPL-3.0.
+ */
+
+#solutionPanel > .result > .report {
+  margin-top: 32px;
+}
+
+#solutionPanel > .result > .report > p {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.scale-y {
+  transform: scaleY(0);
+}
+
+.next-button-container {
+  width: 100%;
+}
+
+.next-button-container > button {
+  width: 25%;
+  margin-bottom: 32px;
+  float: right;
+}
+
+.tabular-input {
+  transition: all 400ms;
+}
+
+.solve-button-container {
+  display: flex;
+  margin-bottom: 32px;
+}
+
+.solve-button-container > button {
+  width: 80%;
+  margin: auto;
+}
+
+@media only screen and (min-width: 800px) {
+  .page > .top-panel {
+    width: 680px;
+  }
+
+  .tabular-input {
+    width: 60%;
+    margin: 16px auto;
+  }
+}

@@ -10,6 +10,18 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-export const environment = {
-  production: true
-};
+import { Component, Input, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-chain-item',
+  templateUrl: './chain-item.component.html',
+  styleUrls: ['./chain-item.component.css']
+})
+export class ChainItemComponent implements OnInit {
+  @Input()
+  value: string;
+
+  constructor() {}
+
+  ngOnInit() {}
+}

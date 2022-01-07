@@ -10,6 +10,8 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-export const environment = {
-  production: true
-};
+export interface TimeUnit {
+  id: number;
+  label: string;
+  singular: string;
+}
