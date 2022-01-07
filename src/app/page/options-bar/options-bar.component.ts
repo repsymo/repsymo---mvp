@@ -26,19 +26,19 @@ export interface OptionsBarListener {
   styleUrls: ['./options-bar.component.css']
 })
 export class OptionsBarComponent implements OnInit {
-
   @Input()
   readonly examplesNumber: number;
+
   @Input()
   readonly l: OptionsBarListener;
+
   showExamplePopup: boolean;
 
   constructor() {
     this.showExamplePopup = false;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onExampleButtonClick() {
     this.showExamplePopup = !this.showExamplePopup;
@@ -60,7 +60,7 @@ export class OptionsBarComponent implements OnInit {
     this.l.onToggleDocumentation();
   }
 
-  onPopupTouchoutClick() {
+  onPopupTouchOutClick() {
     this.showExamplePopup = false;
   }
 

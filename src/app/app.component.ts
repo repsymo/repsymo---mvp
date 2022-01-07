@@ -32,8 +32,7 @@ export class AppComponent implements OnInit {
     this.ioService = ioService;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onIOAction(e: IOActionEvent) {
     switch (e.action) {

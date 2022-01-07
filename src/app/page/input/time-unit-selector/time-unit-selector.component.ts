@@ -19,10 +19,11 @@ import { TimeUnit } from '../../../TimeUnit';
   styleUrls: ['./time-unit-selector.component.css']
 })
 export class TimeUnitSelectorComponent implements OnInit {
-
   readonly timeUnits: TimeUnit[];
+
   @Output()
   readonly valueChanged: EventEmitter<TimeUnit>;
+
   selectedValue: TimeUnit;
 
   constructor() {
@@ -51,5 +52,4 @@ export class TimeUnitSelectorComponent implements OnInit {
   onChange() {
     this.valueChanged.emit(this.selectedValue);
   }
-
 }

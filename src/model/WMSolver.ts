@@ -163,6 +163,8 @@ export interface Stage {
 
 /**
  * Solves a workforce model problem.
+ *
+ * @author Tobias Briones
  */
 export class WMSolver {
   public static validateModel(model: WorkforceModel): boolean {

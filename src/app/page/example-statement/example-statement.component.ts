@@ -24,12 +24,10 @@ export interface Example {
   styleUrls: ['./example-statement.component.css']
 })
 export class ExampleStatementComponent implements OnInit {
-
   example: Example;
   gone: boolean;
 
-  constructor() {
-  }
+  constructor() {}
 
   @Input()
   set value(example: Example) {
@@ -40,7 +38,5 @@ export class ExampleStatementComponent implements OnInit {
     this.gone = example.number === -1;
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

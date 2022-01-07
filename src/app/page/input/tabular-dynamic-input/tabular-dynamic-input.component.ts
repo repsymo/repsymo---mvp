@@ -18,12 +18,14 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./tabular-dynamic-input.component.css']
 })
 export class TabularDynamicInputComponent implements OnInit {
-
   readonly keys: any;
+
   @Input()
   rkey: string;
+
   @Input()
   header: string[];
+
   @Input()
   rows: object[];
 
@@ -31,7 +33,5 @@ export class TabularDynamicInputComponent implements OnInit {
     this.keys = Object.keys;
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
