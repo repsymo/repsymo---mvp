@@ -23,10 +23,10 @@ export class TabularInputComponent implements OnInit {
    *
    * Single column
    * rows = [ 0, 0, ..., 0 ]
-   * 
+   *
    * Single column with objects
    * rows = [ { keyValue: 0 }, { keyValue: 0 }, ..., { keyValue: 0 } ]
-   * 
+   *
    * Multi-column
    * rows = [ { 'c1': 0, 'c2': 0, 'c3': 0 }, ...,  { 'c1': 0, 'c2': 0, 'c3': 0 } ]
    */
@@ -61,7 +61,7 @@ export class TabularInputComponent implements OnInit {
   }
 
   isSingleColumnWithKey(): boolean {
-    return !this.multiColumn && typeof this.keyValue == 'string';
+    return !this.multiColumn && typeof this.keyValue === 'string';
   }
 
   isMultiColumn(): boolean {

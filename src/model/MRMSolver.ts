@@ -35,8 +35,8 @@ export class MRMSolver {
 
   containsNode = (position: number, compare) => {
     return this.decisionYearArray[position].some(
-      e => e.decisionYear == compare.decisionYear
-           && e.machineAge == compare.machineAge);
+      e => e.decisionYear === compare.decisionYear
+           && e.machineAge === compare.machineAge);
   }
 
   newTreeNode = (machineAge: number, decisionYear: number): TreeNode => {
@@ -90,9 +90,9 @@ export class MRMSolver {
   solveStage = (stage, nextStage, i) => {
     const values = this.decisionYearArray[i];
     const lastStage = nextStage == null;
-    const getNextStageMaxByAge = age => nextStage.find(row => row.t == age).max;
+    const getNextStageMaxByAge = age => nextStage.find(row => row.t === age).max;
     const getK = t => {
-      if (t == this.maxMachineAge) {
+      if (t === this.maxMachineAge) {
         return -1;
       }
       if (lastStage) {
@@ -120,7 +120,7 @@ export class MRMSolver {
     };
     const getDecision = (k, r) => {
       // If k = -1 then the machine is old to replace
-      if (k == -1) {
+      if (k === -1) {
         return 'R';
       }
       return (r < k) ? 'K' : ((k < r) ? 'R' : 'K or R');

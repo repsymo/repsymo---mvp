@@ -32,8 +32,7 @@ export class AppComponent implements OnInit {
     this.ioService = ioService;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onIOAction(e: IOActionEvent) {
     switch (e.action) {
@@ -47,7 +46,7 @@ export class AppComponent implements OnInit {
         break;
 
       case 'save':
-        if (this.router.url == '/mrm') {
+        if (this.router.url === '/mrm') {
           alert('Saving not available yet for MRM');
           break;
         }
@@ -74,12 +73,12 @@ export class AppComponent implements OnInit {
         '',
         WmComponent.MODEL_TYPE
       ];
-      const index = values.findIndex(v => v == file.modelType);
+      const index = values.findIndex(v => v === file.modelType);
       return routes[index];
     };
     const properURL = fromModelTypeToURL();
 
-    if (url != properURL) {
+    if (url !== properURL) {
       this.router.navigateByUrl(properURL).then(() => {
         this.ioService.io.next(event);
       });

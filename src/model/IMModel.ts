@@ -54,9 +54,9 @@ export class IMSolver {
     return model.numberOfPlans > 0
            && model.numberOfOptions > 0
            && model.budget >= 0
-           && model.plans.length == model.numberOfPlans
+           && model.plans.length === model.numberOfPlans
            && model.plans.filter(v => v.options.length
-                                      != model.numberOfOptions).length == 0;
+                                      !== model.numberOfOptions).length === 0;
   }
 
   public getStages(): Stage[] {
@@ -125,7 +125,7 @@ export class IMSolver {
 
   private solveStage(stage: Stage) {
     const getFormerRevenue = (budget: number, plan: IMOption): number => {
-      if (stage.id == 0) {
+      if (stage.id === 0) {
         return 0;
       }
       const remaining = budget - plan.cost;
@@ -144,7 +144,7 @@ export class IMSolver {
       options.forEach((_option, i) => {
         const plan = this.model.plans[i].options[investmentOption];
 
-        if (plan.cost == -1 || plan.cost > budget) {
+        if (plan.cost === -1 || plan.cost > budget) {
           row.revenue[i] = -1;
           return;
         }

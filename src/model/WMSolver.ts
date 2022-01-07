@@ -163,10 +163,12 @@ export interface Stage {
 
 /**
  * Solves a workforce model problem.
+ *
+ * @author Tobias Briones
  */
 export class WMSolver {
   public static validateModel(model: WorkforceModel): boolean {
-    if (model.amountOfAnalysisTime != model.workforcePerTU.length) {
+    if (model.amountOfAnalysisTime !== model.workforcePerTU.length) {
       return false;
     }
     if (model.amountOfAnalysisTime <= 0) {
@@ -179,7 +181,7 @@ export class WMSolver {
            && model.fireEmployeeCost >= 0
            && model.quitEmployeesPerTU >= 0
            && model.workforcePerTU.length >= 1
-           && model.workforcePerTU.filter(v => v.workforce < 0).length == 0;
+           && model.workforcePerTU.filter(v => v.workforce < 0).length === 0;
   }
 
   private model: WorkforceModel;
@@ -317,7 +319,7 @@ export class WMSolver {
         return 0;
       }
       const nextStage: Stage = this.stages[stageId + 1];
-      const lookupRow: StageRow = nextStage.rows.find(row => row.previousX == demand);
+      const lookupRow: StageRow = nextStage.rows.find(row => row.previousX === demand);
       return lookupRow.f;
     };
     const calculateCost = (demand: number, _x: number): number => {
@@ -382,12 +384,11 @@ export class WMSolver {
       return `It doesn't change`;
     };
     const getF_ = (i: number, demand: number): number => {
-      if (i == 0) {
+      if (i === 0) {
         return 0;
       } // Last stage
       const nextStage: Stage = this.stages[i - 1];
-      const lookupRow: StageRow = nextStage.rows.find(row => row.previousX
-                                                             == demand);
+      const lookupRow: StageRow = nextStage.rows.find(row => row.previousX === demand);
       return lookupRow.f;
     };
     // Create this initial row to start iterating next
@@ -401,7 +402,7 @@ export class WMSolver {
     // The array is reversed so start from the first stage
     for (let stageIndex = timeunits - 1; stageIndex >= 0; stageIndex--) {
       const stage = this.stages[stageIndex];
-      row = stage.rows.find(v => v.previousX == row.x);
+      row = stage.rows.find(v => v.previousX === row.x);
 
       path.push(row.x);
       cost.push(row.f - getF_(stageIndex, row.x));
