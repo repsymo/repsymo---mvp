@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "DDPP-Solver-JS": {
+    "2DP-Repsymo-Solver": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/DDPP-Solver-JS",
+            "outputPath": "dist/2dp-repsymo-solver",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -63,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "DDPP-Solver-JS:build"
+            "browserTarget": "2DP-Repsymo-Solver:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "DDPP-Solver-JS:build:production"
+              "browserTarget": "2DP-Repsymo-Solver:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DDPP-Solver-JS:build"
+            "browserTarget": "2DP-Repsymo-Solver:build"
           }
         },
         "test": {
@@ -112,15 +112,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "DDPP-Solver-JS:serve"
+            "devServerTarget": "2DP-Repsymo-Solver:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "DDPP-Solver-JS:serve:production"
+              "devServerTarget": "2DP-Repsymo-Solver:serve:production"
             }
           }
         }
       }
-    }},
-  "defaultProject": "DDPP-Solver-JS"
+    }
+  },
+  "defaultProject": "2DP-Repsymo-Solver"
 }
