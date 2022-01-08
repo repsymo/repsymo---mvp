@@ -2,7 +2,9 @@
   "name": "2DP Repsymo Solver",
   "short_name": "2DP Solver",
   "description": "Operations Research Solver App for Deterministic Dynamic Programming Problems targeted at educational purposes",
-  "start_url": "https://app.repsymo.com",
+  "start_url": "https://app.repsymo.com/",
+  "scope": "https://app.repsymo.com/",
+  "id": "/",
   "display": "standalone",
   "theme_color": "#00bcd4",
   "background_color": "#fafafa",
@@ -46,6 +48,12 @@
       "src": "assets/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "assets/icons/maskable-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
