@@ -10,131 +10,249 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-interface TreeNode {
-  machineAge: number;
-  decisionYear: number;
-  k: TreeNode;
-  r: TreeNode;
+export const INITIAL_DECISION_YEAR = 1;
+
+export enum Decision {
+  KEEP = 'K',
+  REPLACE = 'R',
+  KEEP_OR_REPLACE = 'K or R'
 }
 
-export class MRMSolver {
-  private decisionYears: number;
-  private initialMachineAge: number;
-  private maxMachineAge: number;
-  private newMachinePrice: number;
-  private data = null;
-  private decisionYearArray = null;
-  private stages = null;
+export interface MachineReplacementModel {
+  decisionYears: number;
+  initialAge: number;
+  maxAge: number;
+  price: number;
+  data: MachineAgeRecord[];
+}
+
+export function newMachineReplacementModel(): MachineReplacementModel {
+  return {
+    decisionYears: 0,
+    initialAge: 0,
+    maxAge: 0,
+    price: 0,
+    data: []
+  };
+}
+
+export interface MachineAgeRecord {
+  income: number;
+  operationCost: number;
+  sellingRevenue: number;
+}
+
+export interface TreeNode {
+  machineAge: number;
+  decisionYear: number;
+  k?: TreeNode;
+  r?: TreeNode;
+}
+
+export function newTreeNode(): TreeNode {
+  return {
+    machineAge: 0,
+    decisionYear: 0,
+    k: null,
+    r: null
+  };
+}
+
+export interface SolutionStage {
+  t: number;
+  k: number;
+  r: number;
+  max: number;
+  decision: Decision;
+}
+
+/**
+ * Solves a MachineReplacementModel.
+ *
+ * It yields an array of stages containing the
+ * computations for each decision year from which you can follow the respective
+ * optimum solution, and it should be represented as a table.
+ *
+ * It yields a solutions tree containing the possibilities (Keep or Replace) per
+ * decision year than can be taken from a given year. The root node is the
+ * initial year. It should be represented as a tree plotted on a
+ * machine-age-vs-decision-year plane. The particular model's solution(s) can be
+ * followed along this tree which contains all solutions space for
+ * informational purposes.
+ *
+ * See Taha p.482 for the model's recursive equations.
+ *
+ * Current version came from Example Project: Machine Replacement Model
+ * (https://github.com/tobiasbriones/ep-machine-replacement-model).
+ *
+ * @author Tobias Briones
+ */
+export class MachineReplacementSolver {
+  stages: SolutionStage[][];
+  solutionsTree: any[];
+  private model: MachineReplacementModel;
 
   constructor() {
-    this.decisionYears = -1;
-    this.initialMachineAge = -1;
-    this.maxMachineAge = -1;
-    this.newMachinePrice = -1;
+    this.model = newMachineReplacementModel();
+    this.stages = [];
+    this.solutionsTree = [];
   }
 
-  containsNode = (position: number, compare) => {
-    return this.decisionYearArray[position].some(
-      e => e.decisionYear === compare.decisionYear
-           && e.machineAge === compare.machineAge);
+  solve(model: MachineReplacementModel) {
+    this.init(model);
+
+    this.createDecisionTree();
+    this.solveStages();
   }
 
-  newTreeNode = (machineAge: number, decisionYear: number): TreeNode => {
-    return {
-      machineAge,
-      decisionYear,
-      k: null,
-      r: null
+  private init(model) {
+    this.model = model;
+    this.stages = [];
+    this.solutionsTree = [];
+    const { decisionYears } = model;
+
+    for (let i = 0; i < decisionYears; i++) {
+      this.solutionsTree[i] = [];
+      this.stages[i] = [];
+    }
+  }
+
+  private createDecisionTree() {
+    const initialNode: TreeNode = {
+      machineAge: this.model.initialAge,
+      decisionYear: INITIAL_DECISION_YEAR
     };
+    const sortDecisionYearByAge = solutionsTree => {
+      solutionsTree.forEach(element => element.sort(
+          (a, b) => (
+                      a.machineAge > b.machineAge
+                    ) ? 1 : -1
+        )
+      );
+    };
+
+    this.fillPath(initialNode);
+    sortDecisionYearByAge(this.solutionsTree);
   }
 
-  fillPath = (node: TreeNode, decisionYear: number) => {
-    // Basic step
-    if (decisionYear > this.decisionYears) {
+  private fillPath(node: TreeNode) {
+    const { decisionYear } = node;
+
+    if (decisionYear > this.model.decisionYears) {
       return;
     }
-    const kNode = this.newTreeNode(node.machineAge + 1, decisionYear + 1);
-    const rNode = this.newTreeNode(1, decisionYear + 1);
 
-    // Decision year starts at 1 (substract 1)
-    if (!this.containsNode(decisionYear - 1, node)) {
-      this.decisionYearArray[decisionYear - 1].push(node);
-    }
+    const nextDecisionYear = decisionYear + 1;
+    const kNode: TreeNode = {
+      machineAge: node.machineAge + 1,
+      decisionYear: nextDecisionYear
+    };
+    const rNode: TreeNode = { machineAge: 1, decisionYear: nextDecisionYear };
 
-    // Recursive step
-    if (kNode.machineAge <= this.maxMachineAge) {
-      this.fillPath(kNode, decisionYear + 1);
+    this.addNodeIfNotExists(node, decisionYear);
+    if (kNode.machineAge <= this.model.maxAge) {
+      this.fillPath(kNode);
       node.k = kNode;
     }
-    this.fillPath(rNode, decisionYear + 1);
+    this.fillPath(rNode);
     node.r = rNode;
   }
 
-  createDecisionTree = () => {
-    // It starts from position 1
-    const initialNode = this.newTreeNode(this.initialMachineAge, 1);
+  private addNodeIfNotExists(node: TreeNode, decisionYear: number) {
+    const decisionYearPosition = decisionYear - 1;
 
-    /*console.log(`Solving tree for:
-     initial age ${initialMachineAge},
-     decision years: ${decisionYears},
-     maximum age: ${maxMachineAge}`);*/
+    if (!this.containsNode(node, decisionYearPosition)) {
+      this.solutionsTree[decisionYearPosition].push(node);
+    }
+  }
 
-    this.fillPath(initialNode, 1);
-
-    // Sort each decision year by age
-    this.decisionYearArray.forEach(
-      element => element.sort((a, b) => (a.machineAge > b.machineAge) ? 1 : -1)
+  private containsNode(node: TreeNode, position: number) {
+    return this.solutionsTree[position].some(
+      e => e.decisionYear === node.decisionYear
+           && e.machineAge === node.machineAge
     );
   }
 
-  solveStage = (stage, nextStage, i) => {
-    const values = this.decisionYearArray[i];
-    const lastStage = nextStage == null;
-    const getNextStageMaxByAge = age => nextStage.find(row => row.t === age).max;
+  private solveStages() {
+    const years = this.model.decisionYears;
+
+    for (let i = years - 1; i >= 0; i--) {
+      const stage = this.stages[i];
+      const nextStage = (
+                          i < years - 1
+                        ) ? this.stages[i + 1] : null;
+
+      this.solveStage(stage, nextStage, i);
+    }
+  }
+
+  private solveStage(stage: SolutionStage[], nextStage: SolutionStage[], i: number) {
+    const maxMachineAge = this.model.maxAge;
+    const values = this.solutionsTree[i];
+    const isLastStage = nextStage === null;
+    const canKeepOneMoreYear = t => t < maxMachineAge;
+    const getNextStageMaxByAge = age => nextStage.find(row => row.t
+                                                              === age).max;
+    const getMax = (k, r) => k === false ? r : Math.max(k, r);
     const getK = t => {
-      if (t === this.maxMachineAge) {
-        return -1;
+      const data = this.model.data;
+
+      if (!canKeepOneMoreYear(t)) {
+        return false;
       }
-      if (lastStage) {
-        return this.data[t].income
-               + this.data[t + 1].sellingRevenue
-               - this.data[t].operationCost;
+      if (isLastStage) {
+        return data[t].income +
+               data[t + 1].sellingRevenue -
+               data[t].operationCost;
       }
       const nextMax = getNextStageMaxByAge(t + 1);
-      return this.data[t].income - this.data[t].operationCost + nextMax;
+      return data[t].income - data[t].operationCost + nextMax;
     };
     const getR = t => {
-      if (lastStage) {
-        return this.data[0].income +
-               this.data[t].sellingRevenue +
-               this.data[1].sellingRevenue -
-               this.data[0].operationCost -
-               this.newMachinePrice;
+      const data = this.model.data;
+
+      if (isLastStage) {
+        return data[0].income +
+               data[t].sellingRevenue +
+               data[1].sellingRevenue -
+               data[0].operationCost -
+               this.model.price;
       }
       const nextMax = getNextStageMaxByAge(1);
-      return this.data[0].income +
-             this.data[t].sellingRevenue -
-             this.data[0].operationCost -
-             this.newMachinePrice +
+      return data[0].income +
+             data[t].sellingRevenue -
+             data[0].operationCost -
+             this.model.price +
              nextMax;
     };
-    const getDecision = (k, r) => {
-      // If k = -1 then the machine is old to replace
-      if (k === -1) {
-        return 'R';
+    const getDecision = (k, r, t) => {
+      if (k === false) {
+        return Decision.REPLACE;
       }
-      return (r < k) ? 'K' : ((k < r) ? 'R' : 'K or R');
+      const hasToReplaceMachine = () => r > k;
+      const hasToKeepMachine = () => k > r;
+      const hasToKeepOrReplaceMachine = () => k === r;
+      let decision;
+
+      if (hasToReplaceMachine()) {
+        decision = Decision.REPLACE;
+      }
+      else if (hasToKeepMachine()) {
+        decision = Decision.KEEP;
+      }
+      else if (hasToKeepOrReplaceMachine()) {
+        decision = Decision.KEEP_OR_REPLACE;
+      }
+      return decision;
     };
-    /*console.log('Solving stage ' + i)
-     console.log(values)
-     console.log(data)
-     console.log(nextStage)*/
+
     for (let j = 0; j < values.length; j++) {
-      const t = values[j].machineAge;
-      const k = getK(t);
-      const r = getR(t);
-      const max = Math.max(k, r);
-      const decision = getDecision(k, r);
+      const t = values[j].machineAge as number;
+      const kVal = getK(t) as number;
+      const k = canKeepOneMoreYear(t) ? kVal : -1;
+      const r = getR(t) as number;
+      const max = getMax(k, r) as number;
+      const decision = getDecision(k, r, t) as Decision;
       stage[j] = {
         t,
         k,
@@ -143,40 +261,5 @@ export class MRMSolver {
         decision
       };
     }
-  }
-
-  solve = (years, initialAge, maxAge, machinePrice, _data) => {
-    this.decisionYears = years;
-    this.initialMachineAge = initialAge;
-    this.maxMachineAge = maxAge;
-    this.newMachinePrice = machinePrice;
-    this.data = _data;
-    this.decisionYearArray = [];
-    this.stages = [];
-
-    // Initialize
-    for (let i = 0; i < this.decisionYears; i++) {
-      this.decisionYearArray[i] = [];
-      this.stages[i] = [];
-    }
-
-    // Decision tree
-    this.createDecisionTree();
-
-    // Solve stages
-    for (let i = this.decisionYears - 1; i >= 0; i--) {
-      const stage = this.stages[i];
-      const nextStage = (i < this.decisionYears - 1) ? this.stages[i + 1] : null;
-
-      this.solveStage(stage, nextStage, i);
-    }
-  }
-
-  getSolutionsTree = () => {
-    return this.decisionYearArray;
-  }
-
-  getStages = () => {
-    return this.stages;
   }
 }

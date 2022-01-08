@@ -11,7 +11,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { MRMSolver } from '../../../model/MRMSolver';
+import { MachineReplacementSolver } from '../../../model/MRMSolver';
 
 // This code comes from the previous project Machine Replacement Model, so this
 // component will stay implemented as JS-like way
@@ -22,10 +22,10 @@ import { MRMSolver } from '../../../model/MRMSolver';
   host: { class: 'page' }
 })
 export class MrmComponent implements OnInit {
-  private solver: MRMSolver;
+  private solver: MachineReplacementSolver;
 
   constructor() {
-    this.solver = new MRMSolver();
+    this.solver = new MachineReplacementSolver();
   }
 
   generateInputTable = (n: number, t: number) => {
@@ -360,11 +360,11 @@ export class MrmComponent implements OnInit {
      maximum age: ${maxAge},
      machine price: ${machinePrice},
      data: \n${JSON.stringify(data)}`);*/
-    this.solver.solve(decisionYears, initialAge, maxAge, machinePrice, data);
+    this.solver.solve({ decisionYears, initialAge, maxAge, price: machinePrice, data });
 
     // UI
-    const tree = this.solver.getSolutionsTree();
-    const stages = this.solver.getStages();
+    const tree = this.solver.solutionsTree;
+    const stages = this.solver.stages;
 
     /*console.log(`Solutions tree \n${JSON.stringify(tree)}`);
      console.log(`Stages \n${JSON.stringify(stages)}`);*/
