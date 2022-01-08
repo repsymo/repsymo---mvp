@@ -28,8 +28,9 @@ export class AboutComponent implements OnInit {
                       hesitate to get in touch if you are interested in these models or wish to
                       extend the application for personal or educational usage.`,
     educationMsg: `This app is also intended to improve the teaching of operations research and
-                  experimental studies of CAS.`,
-    referencesMsg: `For a general reference about the models check `
+                  make experimental studies of math solvers, CAS, arbitrarily complex systems. This is in order
+                  to get the system model solver at production level as a long term project.`,
+    referencesMsg: `For a general reference about the 2DP models check `
   };
   readonly appVersion: string;
   readonly appName: string;
