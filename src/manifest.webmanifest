@@ -1,8 +1,7 @@
 {
   "name": "2DP Repsymo Solver",
   "short_name": "2DP Solver",
-  "description": "Operations Research Solver App for Deterministic Dynamic
-  Programming Problems targeted at educational purposes.",
+  "description": "Operations Research Solver App for Deterministic Dynamic Programming Problems targeted at educational purposes",
   "start_url": "https://app.repsymo.com",
   "display": "standalone",
   "theme_color": "#00bcd4",
