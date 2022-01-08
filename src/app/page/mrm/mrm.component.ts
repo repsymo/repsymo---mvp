@@ -11,7 +11,9 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { MachineReplacementSolver } from '../../../model/MRMSolver';
+import {
+  MachineReplacementSolver
+} from '../../../model/machine-replacement/machine-replacement.solver';
 
 // This code comes from the previous project Machine Replacement Model, so this
 // component will stay implemented as JS-like way

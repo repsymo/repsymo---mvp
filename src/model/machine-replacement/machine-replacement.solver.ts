@@ -10,37 +10,12 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-export const INITIAL_DECISION_YEAR = 1;
-
-export enum Decision {
-  KEEP = 'K',
-  REPLACE = 'R',
-  KEEP_OR_REPLACE = 'K or R'
-}
-
-export interface MachineReplacementModel {
-  decisionYears: number;
-  initialAge: number;
-  maxAge: number;
-  price: number;
-  data: MachineAgeRecord[];
-}
-
-export function newMachineReplacementModel(): MachineReplacementModel {
-  return {
-    decisionYears: 0,
-    initialAge: 0,
-    maxAge: 0,
-    price: 0,
-    data: []
-  };
-}
-
-export interface MachineAgeRecord {
-  income: number;
-  operationCost: number;
-  sellingRevenue: number;
-}
+import {
+  Decision,
+  INITIAL_DECISION_YEAR,
+  MachineReplacementModel,
+  newMachineReplacementModel
+} from './machine-replacement.model';
 
 export interface TreeNode {
   machineAge: number;
@@ -124,9 +99,7 @@ export class MachineReplacementSolver {
     };
     const sortDecisionYearByAge = solutionsTree => {
       solutionsTree.forEach(element => element.sort(
-          (a, b) => (
-                      a.machineAge > b.machineAge
-                    ) ? 1 : -1
+          (a, b) => (a.machineAge > b.machineAge) ? 1 : -1
         )
       );
     };
@@ -178,9 +151,7 @@ export class MachineReplacementSolver {
 
     for (let i = years - 1; i >= 0; i--) {
       const stage = this.stages[i];
-      const nextStage = (
-                          i < years - 1
-                        ) ? this.stages[i + 1] : null;
+      const nextStage = (i < years - 1) ? this.stages[i + 1] : null;
 
       this.solveStage(stage, nextStage, i);
     }
