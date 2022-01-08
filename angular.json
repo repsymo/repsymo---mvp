@@ -14,7 +14,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/2dp-repsymo-solver",
-            "index": "src/index.html",
+            "index": "src/index.dev.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
@@ -37,6 +37,10 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "index": {
+                "input": "src/index.html",
+                "output": "index.html"
+              },
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
