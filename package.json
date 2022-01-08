@@ -20,7 +20,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href=https://app.repsymo.com/",
+    "build": "ng build --configuration production --base-href=https://app.repsymo.com/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
