@@ -10,110 +10,26 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-/**
- * Workforce required per unit of time.
- */
-export interface WorkforcePerTU {
-  /**
-   * Position of time unit that requires that workforce. For example: the week
-   * #2 needs 15 employees.
-   */
-  timeunit: number;
-
-  /**
-   * Workforce demand on that time unit.
-   */
-  workforce: number;
-}
+import { CostOption, Workforce } from './workforce';
 
 /**
- * Defines flags to set a value as proportional to the other value. For
- * example, the key fireEmployeeCostToCurrentStage means that the model value
- * 'fireEmployeeCost' will be taken as
- * (fireEmployeeCost * 'the current stage (eg. week #1, week #4)') in the
- * computation so older employees receive more money if being fired.
+ * Stage of the problem solution.
  */
-export interface WMProportionalityOption { // Experimental
-  fireEmployeeCostToCurrentStage: boolean;
-}
-
-// TU = Time Unit(s)
-/**
- * Workforce problem model.
- */
-export interface WorkforceModel {
+export interface Stage {
   /**
-   * Amount of time (weeks, years, etc) to count the process. It must be the
-   * same as workforcePerTU length, and it must be greater than 0.
+   * Represents the time unit of this stage (eg. stage 1: week #1).
    */
-  amountOfAnalysisTime: number;
+  id: number;
 
   /**
-   * Initial number of employees working before applying the analysis.
+   * Minimum workforce required on that stage.
    */
-  initialNumberOfEmployees: number;
+  minimumDemand: number;
 
   /**
-   * Cost to pay to each employee hired for their manpower.
+   * Rows that provide the solution information for that stage.
    */
-  manpowerExcessCost: number;
-
-  /**
-   * Fixed cost for hiring a new employee. It is paid only the first time to
-   * hire the employee.
-   */
-  newEmployeeFixedCost: number;
-
-  /**
-   * Cost to hire a new employee per time unit. For example: a employee salary
-   * is $500 a week.
-   */
-  newEmployeePerTUCost: number;
-
-  /**
-   * Cost for firing an employee. This cost is about the benefit an employee
-   * gets when he's fired.
-   */
-  fireEmployeeCost: number;
-
-  /**
-   * Number of employees that quit the job regularly each time unit, they will
-   * not get the fireEmployeeCost money so the company doesn't have to pay that
-   * cost. For example: 2 employees quit each week.
-   */
-  quitEmployeesPerTU: number;
-
-  /**
-   * Workforce demand there is per time unit. Depends on the time analysis of
-   * the problem. Each position of the array is the demand required per time
-   * unit (eg. position 2: demand required for week #2).
-   */
-  workforcePerTU: WorkforcePerTU[];
-
-  /**
-   * Defines flags to set a value as proportional to the other value. For
-   * example, the key fireEmployeeCostToCurrentStage means that the model value
-   * 'fireEmployeeCost' will be taken as
-   * (fireEmployeeCost * 'the current stage (eg. week #1, week #4)') in the
-   * computation so older employees receive more money if being fired.
-   */
-  // proportionalityOptions: WMProportionalityOption;
-}
-
-/**
- * Pair (demand, value) that is used to compare all of the cost function values
- * on each row and eventually take out the demand yielding the minimum cost.
- */
-export interface CostOption {
-  /**
-   * Workforce assumed.
-   */
-  demand: number;
-
-  /**
-   * Cost evaluated on that demand.
-   */
-  value: number;
+  rows: StageRow[];
 }
 
 /**
@@ -142,32 +58,12 @@ export interface StageRow {
 }
 
 /**
- * Stage of the problem solution.
- */
-export interface Stage {
-  /**
-   * Represents the time unit of this stage (eg. stage 1: week #1).
-   */
-  id: number;
-
-  /**
-   * Minimum workforce required on that stage.
-   */
-  minimumDemand: number;
-
-  /**
-   * Rows that provide the solution information for that stage.
-   */
-  rows: StageRow[];
-}
-
-/**
  * Solves a workforce model problem.
  *
  * @author Tobias Briones
  */
-export class WMSolver {
-  public static validateModel(model: WorkforceModel): boolean {
+export class WorkforceSolver {
+  public static validateModel(model: Workforce): boolean {
     if (model.amountOfAnalysisTime !== model.workforcePerTU.length) {
       return false;
     }
@@ -184,7 +80,7 @@ export class WMSolver {
            && model.workforcePerTU.filter(v => v.workforce < 0).length === 0;
   }
 
-  private model: WorkforceModel;
+  private model: Workforce;
   private stages: Stage[];
   private max: number;
   private path: number[];
@@ -197,7 +93,7 @@ export class WMSolver {
     this.reset();
   }
 
-  getModel(): WorkforceModel {
+  getModel(): Workforce {
     return this.model;
   }
 
@@ -217,8 +113,8 @@ export class WMSolver {
     return this.interpretation;
   }
 
-  solve(problemModel: WorkforceModel) {
-    if (!WMSolver.validateModel(problemModel)) {
+  solve(problemModel: Workforce) {
+    if (!WorkforceSolver.validateModel(problemModel)) {
       throw new RangeError('Invalid problem model parameters');
     }
     this.reset();

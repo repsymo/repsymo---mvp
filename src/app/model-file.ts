@@ -13,18 +13,30 @@
 import { ImComponent } from './page/im/im.component';
 import { WmComponent } from './page/wm/wm.component';
 
-export interface DDPPSFile {
-  appVersion: string,
-  modelType: string,
-  statement: string,
-  problemModel: object
+export interface ModelFile {
+  appVersion: string;
+  modelType: string;
+  statement: string;
+  problemModel: object;
 }
 
-export class DDPPS implements DDPPSFile {
+export class DefaultModelFile implements ModelFile {
+  constructor(appVersion: string, modelType: string, statement: string, problemModel: object) {
+    this.appVersion = appVersion;
+    this.modelType = modelType;
+    this.statement = statement;
+    this.problemModel = problemModel;
+  }
+
   private static readonly MODEL_TYPES: string[] = [
     ImComponent.MODEL_TYPE,
     WmComponent.MODEL_TYPE
   ];
+
+  public readonly appVersion: string;
+  public readonly modelType: string;
+  public readonly statement: string;
+  public readonly problemModel: object;
 
   public static validate(data: object): boolean {
     // Shallow check
@@ -36,24 +48,12 @@ export class DDPPS implements DDPPSFile {
     if (!member) {
       return false;
     }
-    const ddpps = data as DDPPS;
+    const ddpps = data as DefaultModelFile;
 
     // Check model type (investment, workforce, etc)
-    if (DDPPS.MODEL_TYPES.findIndex(v => v === ddpps.modelType) === -1) {
+    if (DefaultModelFile.MODEL_TYPES.findIndex(v => v === ddpps.modelType) === -1) {
       return false;
     }
     return true;
-  }
-
-  public readonly appVersion: string;
-  public readonly modelType: string;
-  public readonly statement: string;
-  public readonly problemModel: object;
-
-  constructor(appVersion: string, modelType: string, statement: string, problemModel: object) {
-    this.appVersion = appVersion;
-    this.modelType = modelType;
-    this.statement = statement;
-    this.problemModel = problemModel;
   }
 }

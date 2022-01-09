@@ -11,23 +11,24 @@
  */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TimeUnit } from '../../TimeUnit';
+import {
+  WMProportionalityOption,
+  Workforce, WorkforcePerTU
+} from '../../../model/workforce/workforce';
 import {
   Stage,
-  WMProportionalityOption,
-  WMSolver,
-  WorkforceModel,
-  WorkforcePerTU
-} from '../../../model/WMSolver';
+  WorkforceSolver
+} from '../../../model/workforce/workforce.solver';
+import { TimeUnit } from '../../time-unit';
 import { IOService } from '../../../service/io.service';
-import { Example } from '../example-statement/example-statement.component';
+import { Example } from '../../components/example-statement/example-statement.component';
 import {
   InputItem,
   TimeUnitDependentLabel
-} from '../input/input-pane/input-pane.component';
-import { OptionsBarListener } from '../options-bar/options-bar.component';
-import { Page } from '../Page';
-import { Definition } from '../page-documentation/page-documentation.component';
+} from '../../components/input/input-pane/input-pane.component';
+import { OptionsBarListener } from '../../components/options-bar/options-bar.component';
+import { Page } from '../page';
+import { Definition } from '../../components/page-documentation/page-documentation.component';
 
 @Component({
   selector: 'app-wm',
@@ -39,8 +40,8 @@ export class WmComponent extends Page implements OnInit,
                                                  OnDestroy,
                                                  OptionsBarListener {
   public static readonly MODEL_TYPE: string = 'workforce';
-  readonly solver: WMSolver;
-  readonly model: WorkforceModel;
+  readonly solver: WorkforceSolver;
+  readonly model: Workforce;
   readonly pageDocumentation: Definition[];
   readonly inputPaneItems: InputItem[];
   readonly inputTableHeader: string[];
@@ -51,7 +52,7 @@ export class WmComponent extends Page implements OnInit,
 
   constructor(ioService: IOService) {
     super(ioService, WmComponent.MODEL_TYPE);
-    this.solver = new WMSolver();
+    this.solver = new WorkforceSolver();
     this.model = this.newModel();
     this.pageDocumentation = this.createDocumentation();
     this.inputPaneItems = this.createInputItems();
@@ -78,7 +79,7 @@ export class WmComponent extends Page implements OnInit,
 
   getModel() {
     // If current model is empty don't return it so it is not downloaded
-    if (!WMSolver.validateModel(this.model)) {
+    if (!WorkforceSolver.validateModel(this.model)) {
       return null;
     }
     return this.model;
@@ -89,9 +90,9 @@ export class WmComponent extends Page implements OnInit,
   }
 
   loadModel(modelObj: object, fileName: string, statement: string): boolean {
-    const model = modelObj as WorkforceModel;
+    const model = modelObj as Workforce;
 
-    if (!WMSolver.validateModel(model)) {
+    if (!WorkforceSolver.validateModel(model)) {
       return false;
     }
     Object.keys(model).forEach(key => this.model[key] = model[key]);
@@ -171,7 +172,7 @@ export class WmComponent extends Page implements OnInit,
     return rows;
   }
 
-  private newModel(): WorkforceModel {
+  private newModel(): Workforce {
     const propOptions: WMProportionalityOption = {
       fireEmployeeCostToCurrentStage: false
     };

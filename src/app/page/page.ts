@@ -13,9 +13,9 @@
 import { Directive, OnDestroy, OnInit } from '@angular/core';
 import { of, Subscription } from 'rxjs';
 import { VERSION } from '../../main';
-import { DDPPSFile } from '../DDPPSolverFile';
+import { ModelFile } from '../model-file';
 import { IOService } from '../../service/io.service';
-import { Example } from './example-statement/example-statement.component';
+import { Example } from '../components/example-statement/example-statement.component';
 
 @Directive()
 export abstract class Page implements OnInit,
@@ -60,7 +60,7 @@ export abstract class Page implements OnInit,
     this.ioSubscription.unsubscribe();
   }
 
-  private open(data: DDPPSFile, name: string) {
+  private open(data: ModelFile, name: string) {
     if (data.modelType != this.modelType) {
       return;
     }
@@ -99,7 +99,7 @@ export abstract class Page implements OnInit,
       const stm = this.getExample().statement;
       const statement = prompt('Enter a problem statement (optional)', stm)
                         || '';
-      const fileObj: DDPPSFile = {
+      const fileObj: ModelFile = {
         appVersion: VERSION,
         modelType: this.modelType,
         statement: statement,

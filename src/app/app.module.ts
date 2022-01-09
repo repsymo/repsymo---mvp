@@ -23,36 +23,36 @@ import { HeaderComponent } from './header/header.component';
 import { AboutComponent } from './page/about/about.component';
 import {
   ExampleStatementComponent
-} from './page/example-statement/example-statement.component';
+} from './components/example-statement/example-statement.component';
 import { ImComponent } from './page/im/im.component';
 import {
   InputPaneComponent
-} from './page/input/input-pane/input-pane.component';
+} from './components/input/input-pane/input-pane.component';
 import {
   TabularDynamicInputComponent
-} from './page/input/tabular-dynamic-input/tabular-dynamic-input.component';
+} from './components/input/tabular-dynamic-input/tabular-dynamic-input.component';
 import {
   TabularInputComponent
-} from './page/input/tabular-input/tabular-input.component';
+} from './components/input/tabular-input/tabular-input.component';
 import {
   TimeUnitSelectorComponent
-} from './page/input/time-unit-selector/time-unit-selector.component';
+} from './components/input/time-unit-selector/time-unit-selector.component';
 import { MrmComponent } from './page/mrm/mrm.component';
 import {
   OptionsBarComponent
-} from './page/options-bar/options-bar.component';
+} from './components/options-bar/options-bar.component';
 import {
   ChainItemComponent
-} from './page/output/results/chain-item/chain-item.component';
+} from './components/output/results/chain-item/chain-item.component';
 import {
   ChainsResultComponent
-} from './page/output/results/chains-result/chains-result.component';
+} from './components/output/results/chains-result/chains-result.component';
 import {
   TabularOutputComponent
-} from './page/output/tabular-output/tabular-output.component';
+} from './components/output/tabular-output/tabular-output.component';
 import {
   PageDocumentationComponent
-} from './page/page-documentation/page-documentation.component';
+} from './components/page-documentation/page-documentation.component';
 import { WmComponent } from './page/wm/wm.component';
 
 const appRoutes: Routes = [

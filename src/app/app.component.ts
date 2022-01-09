@@ -12,7 +12,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DDPPS, DDPPSFile } from './DDPPSolverFile';
+import { DefaultModelFile, ModelFile } from './model-file';
 import { IOActionEvent } from './header/header.component';
 import { ImComponent } from './page/im/im.component';
 import { WmComponent } from './page/wm/wm.component';
@@ -38,11 +38,11 @@ export class AppComponent implements OnInit {
     switch (e.action) {
       case 'open':
         // Shallow validation
-        if (!DDPPS.validate(e.data)) {
+        if (!DefaultModelFile.validate(e.data)) {
           alert('Invalid file');
           return;
         }
-        this.openFile(e.data as DDPPSFile, e.name);
+        this.openFile(e.data as ModelFile, e.name);
         break;
 
       case 'save':
@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  private openFile(file: DDPPSFile, name: string) {
+  private openFile(file: ModelFile, name: string) {
     const event: IOEvent = {
       ioAction: 'open',
       name: name,

@@ -11,18 +11,17 @@
  */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  IMOption,
-  IMSolver,
-  Model as InvestmentModel,
-  Stage
-} from 'src/model/IMModel';
 import { IOService } from 'src/service/io.service';
-import { Example } from '../example-statement/example-statement.component';
-import { InputItem } from '../input/input-pane/input-pane.component';
-import { OptionsBarListener } from '../options-bar/options-bar.component';
-import { Page } from '../Page';
-import { Definition } from '../page-documentation/page-documentation.component';
+import { Option, Investment } from '../../../model/investment/investment';
+import {
+  InvestmentSolver,
+  Stage
+} from '../../../model/investment/investment.solver';
+import { Example } from '../../components/example-statement/example-statement.component';
+import { InputItem } from '../../components/input/input-pane/input-pane.component';
+import { OptionsBarListener } from '../../components/options-bar/options-bar.component';
+import { Page } from '../page';
+import { Definition } from '../../components/page-documentation/page-documentation.component';
 
 @Component({
   selector: 'app-im',
@@ -34,8 +33,8 @@ export class ImComponent extends Page implements OnInit,
                                                  OnDestroy,
                                                  OptionsBarListener {
   public static readonly MODEL_TYPE: string = 'investment';
-  readonly solver: IMSolver;
-  readonly model: InvestmentModel;
+  readonly solver: InvestmentSolver;
+  readonly model: Investment;
   readonly pageDocumentation: Definition[];
   readonly inputPaneItems: InputItem[];
   inputTableHeader: string[];
@@ -45,7 +44,7 @@ export class ImComponent extends Page implements OnInit,
 
   constructor(ioService: IOService) {
     super(ioService, ImComponent.MODEL_TYPE);
-    this.solver = new IMSolver();
+    this.solver = new InvestmentSolver();
     this.model = this.newModel();
     this.pageDocumentation = this.createDocumentation();
     this.inputPaneItems = this.createInputPaneItems();
@@ -77,9 +76,9 @@ export class ImComponent extends Page implements OnInit,
   }
 
   loadModel(modelObj: object, fileName: string, statement: string): boolean {
-    const model = modelObj as InvestmentModel;
+    const model = modelObj as Investment;
 
-    if (!IMSolver.validateModel(model)) {
+    if (!InvestmentSolver.validateModel(model)) {
       return false;
     }
     Object.keys(model).forEach(key => this.model[key] = model[key]);
@@ -115,7 +114,7 @@ export class ImComponent extends Page implements OnInit,
     this.model.plans = [];
 
     for (let p = 0; p < this.model.numberOfPlans; p++) {
-      const options: IMOption[] = [];
+      const options: Option[] = [];
 
       for (let o = 0; o < this.model.numberOfOptions; o++) {
         options.push(
@@ -146,7 +145,7 @@ export class ImComponent extends Page implements OnInit,
     return header;
   }
 
-  private newModel(): InvestmentModel {
+  private newModel(): Investment {
     return {
       numberOfPlans: 1,
       numberOfOptions: 1,
