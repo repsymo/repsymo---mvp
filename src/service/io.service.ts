@@ -12,12 +12,12 @@
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { DDPPSFile } from '../app/model-file';
+import { ModelFile } from '../app/model-file';
 
 export interface IOEvent {
   ioAction: string;
   name?: string;
-  data?: DDPPSFile;
+  data?: ModelFile;
 }
 
 @Injectable({
