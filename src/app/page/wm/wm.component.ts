@@ -19,7 +19,7 @@ import {
   Stage,
   WorkforceSolver
 } from '../../../model/workforce/workforce.solver';
-import { TimeUnit } from '../../TimeUnit';
+import { TimeUnit } from '../../time-unit';
 import { IOService } from '../../../service/io.service';
 import { Example } from '../../components/example-statement/example-statement.component';
 import {
