@@ -13,9 +13,9 @@
 import {
   Decision,
   INITIAL_DECISION_YEAR,
-  MachineReplacementModel,
+  MachineReplacement,
   newMachineReplacementModel
-} from './machine-replacement.model';
+} from './machine-replacement';
 
 export interface TreeNode {
   machineAge: number;
@@ -42,7 +42,7 @@ export interface SolutionStage {
 }
 
 /**
- * Solves a MachineReplacementModel.
+ * Solves a MachineReplacement model.
  *
  * It yields an array of stages containing the
  * computations for each decision year from which you can follow the respective
@@ -65,7 +65,7 @@ export interface SolutionStage {
 export class MachineReplacementSolver {
   stages: SolutionStage[][];
   solutionsTree: any[];
-  private model: MachineReplacementModel;
+  private model: MachineReplacement;
 
   constructor() {
     this.model = newMachineReplacementModel();
@@ -73,7 +73,7 @@ export class MachineReplacementSolver {
     this.solutionsTree = [];
   }
 
-  solve(model: MachineReplacementModel) {
+  solve(model: MachineReplacement) {
     this.init(model);
 
     this.createDecisionTree();

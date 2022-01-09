@@ -18,7 +18,7 @@ export enum Decision {
   KEEP_OR_REPLACE = 'K or R'
 }
 
-export interface MachineReplacementModel {
+export interface MachineReplacement {
   decisionYears: number;
   initialAge: number;
   maxAge: number;
@@ -26,7 +26,7 @@ export interface MachineReplacementModel {
   data: MachineAgeRecord[];
 }
 
-export function newMachineReplacementModel(): MachineReplacementModel {
+export function newMachineReplacementModel(): MachineReplacement {
   return {
     decisionYears: 0,
     initialAge: 0,
