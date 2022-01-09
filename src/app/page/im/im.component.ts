@@ -20,7 +20,7 @@ import {
 import { Example } from '../../components/example-statement/example-statement.component';
 import { InputItem } from '../../components/input/input-pane/input-pane.component';
 import { OptionsBarListener } from '../../components/options-bar/options-bar.component';
-import { Page } from '../Page';
+import { Page } from '../page';
 import { Definition } from '../../components/page-documentation/page-documentation.component';
 
 @Component({
