@@ -17,11 +17,11 @@ import {
   InvestmentSolver,
   Stage
 } from '../../../model/investment/investment.solver';
-import { Example } from '../example-statement/example-statement.component';
-import { InputItem } from '../input/input-pane/input-pane.component';
-import { OptionsBarListener } from '../options-bar/options-bar.component';
+import { Example } from '../../components/example-statement/example-statement.component';
+import { InputItem } from '../../components/input/input-pane/input-pane.component';
+import { OptionsBarListener } from '../../components/options-bar/options-bar.component';
 import { Page } from '../Page';
-import { Definition } from '../page-documentation/page-documentation.component';
+import { Definition } from '../../components/page-documentation/page-documentation.component';
 
 @Component({
   selector: 'app-im',

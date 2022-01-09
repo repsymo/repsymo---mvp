@@ -21,14 +21,14 @@ import {
 } from '../../../model/workforce/workforce.solver';
 import { TimeUnit } from '../../TimeUnit';
 import { IOService } from '../../../service/io.service';
-import { Example } from '../example-statement/example-statement.component';
+import { Example } from '../../components/example-statement/example-statement.component';
 import {
   InputItem,
   TimeUnitDependentLabel
-} from '../input/input-pane/input-pane.component';
-import { OptionsBarListener } from '../options-bar/options-bar.component';
+} from '../../components/input/input-pane/input-pane.component';
+import { OptionsBarListener } from '../../components/options-bar/options-bar.component';
 import { Page } from '../Page';
-import { Definition } from '../page-documentation/page-documentation.component';
+import { Definition } from '../../components/page-documentation/page-documentation.component';
 
 @Component({
   selector: 'app-wm',

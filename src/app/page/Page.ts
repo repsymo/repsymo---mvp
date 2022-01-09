@@ -15,7 +15,7 @@ import { of, Subscription } from 'rxjs';
 import { VERSION } from '../../main';
 import { DDPPSFile } from '../DDPPSolverFile';
 import { IOService } from '../../service/io.service';
-import { Example } from './example-statement/example-statement.component';
+import { Example } from '../components/example-statement/example-statement.component';
 
 @Directive()
 export abstract class Page implements OnInit,
