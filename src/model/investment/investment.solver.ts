@@ -10,22 +10,11 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-// Experimental model for now
-export interface IMOption {
-  cost: number;
-  revenue: number;
-}
+import { Option, Investment } from './investment';
 
-export interface IMPlan {
+export interface Stage {
   id: number;
-  options: IMOption[];
-}
-
-export interface Model {
-  numberOfPlans: number;
-  numberOfOptions: number;
-  budget: number;
-  plans: IMPlan[];
+  rows: StageRow[];
 }
 
 export interface StageRow {
@@ -35,22 +24,17 @@ export interface StageRow {
   option: number;
 }
 
-export interface Stage {
-  id: number;
-  rows: StageRow[];
-}
-
-export class IMSolver {
+export class InvestmentSolver {
   constructor() {
     this.reset();
   }
 
-  private model: Model;
+  private model: Investment;
   private stages: Stage[];
   private path: number[];
 
   // IMOption is validated when solving to avoid over iterations
-  public static validateModel(model: Model): boolean {
+  public static validateModel(model: Investment): boolean {
     return model.numberOfPlans > 0
            && model.numberOfOptions > 0
            && model.budget >= 0
@@ -67,8 +51,8 @@ export class IMSolver {
     return this.path;
   }
 
-  public solve(problemModel: Model) {
-    if (!IMSolver.validateModel(problemModel)) {
+  public solve(problemModel: Investment) {
+    if (!InvestmentSolver.validateModel(problemModel)) {
       throw new Error('Invalid investment model');
     }
     const initStages = () => {
@@ -88,7 +72,9 @@ export class IMSolver {
         };
 
         // Fill the stage rows
-        if ((i + 1) < problemModel.numberOfOptions) {
+        if ((
+              i + 1
+            ) < problemModel.numberOfOptions) {
           for (let budget = 0; budget <= problemModel.budget; budget++) {
             addRow(budget);
           }
@@ -119,12 +105,12 @@ export class IMSolver {
     this.path = [];
   }
 
-  private isAvailableOption(option: IMOption): boolean {
+  private isAvailableOption(option: Option): boolean {
     return option.cost >= 0 && option.revenue >= 0;
   }
 
   private solveStage(stage: Stage) {
-    const getFormerRevenue = (budget: number, plan: IMOption): number => {
+    const getFormerRevenue = (budget: number, plan: Option): number => {
       if (stage.id === 0) {
         return 0;
       }
@@ -167,7 +153,8 @@ export class IMSolver {
     let lastOption = -1;
 
     lastOption = this.stages[lastStageIndex].rows[0].option;
-    moneyLeft = moneyLeft - this.model.plans[lastOption].options[lastStageIndex].cost;
+    moneyLeft = moneyLeft
+                - this.model.plans[lastOption].options[lastStageIndex].cost;
 
     this.path.push(lastOption + 1);
     for (let i = this.stages.length - 2; i >= 0; i--) {
