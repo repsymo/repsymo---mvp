@@ -10,7 +10,7 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-import { InvalidModelException } from '../invalid-model.exception';
+import { InvalidModelException } from '../exception';
 
 export class MachineReplacementException extends InvalidModelException {
   constructor(msg: string) {
