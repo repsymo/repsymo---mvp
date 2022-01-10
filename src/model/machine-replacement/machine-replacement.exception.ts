@@ -12,8 +12,6 @@
 
 import { InvalidModelException } from '../exception';
 
-export class MachineReplacementException extends InvalidModelException {
-  constructor(msg: string) {
-    super('Machine Replacement', msg);
-  }
+export function newInvalidModelException(msg: string) {
+  return new InvalidModelException('Machine Replacement', msg);
 }
