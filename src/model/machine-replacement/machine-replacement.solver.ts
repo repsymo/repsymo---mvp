@@ -13,8 +13,7 @@
 import {
   Decision,
   INITIAL_DECISION_YEAR,
-  MachineReplacement,
-  newMachineReplacementModel
+  MachineReplacement, requireValidModel
 } from './machine-replacement';
 
 export interface TreeNode {
@@ -68,12 +67,13 @@ export class MachineReplacementSolver {
   private model: MachineReplacement;
 
   constructor() {
-    this.model = newMachineReplacementModel();
+    this.model = new MachineReplacement();
     this.stages = [];
     this.solutionsTree = [];
   }
 
   solve(model: MachineReplacement) {
+    requireValidModel(model);
     this.init(model);
 
     this.createDecisionTree();
@@ -99,7 +99,9 @@ export class MachineReplacementSolver {
     };
     const sortDecisionYearByAge = solutionsTree => {
       solutionsTree.forEach(element => element.sort(
-          (a, b) => (a.machineAge > b.machineAge) ? 1 : -1
+          (a, b) => (
+                      a.machineAge > b.machineAge
+                    ) ? 1 : -1
         )
       );
     };
@@ -151,7 +153,9 @@ export class MachineReplacementSolver {
 
     for (let i = years - 1; i >= 0; i--) {
       const stage = this.stages[i];
-      const nextStage = (i < years - 1) ? this.stages[i + 1] : null;
+      const nextStage = (
+                          i < years - 1
+                        ) ? this.stages[i + 1] : null;
 
       this.solveStage(stage, nextStage, i);
     }
