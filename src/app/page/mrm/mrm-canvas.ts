@@ -34,3 +34,7 @@ abstract class MrmCanvas {
 
   abstract draw(ctx: CanvasRenderingContext2D);
 }
+
+function getHypotenuse(triangleX: number, triangleY: number) {
+  return Math.sqrt(Math.pow(triangleX, 2) + Math.pow(triangleY, 2));
+}
