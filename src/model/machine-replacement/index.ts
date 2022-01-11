@@ -10,8 +10,6 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-export class InvalidModelException extends Error {
-  constructor(modelType: string, msg: string) {
-    super(`Invalid ${ modelType } model: ${ msg }`);
-  }
-}
+export * from './machine-replacement';
+export * from './machine-replacement.solver';
+export * from './machine-replacement.exception';
