@@ -12,6 +12,6 @@
 
 export class InvalidModelException extends Error {
   constructor(modelType: string, msg: string) {
-    super(`Invalid model ${ modelType }: ${ msg }`);
+    super(`Invalid ${ modelType } model: ${ msg }`);
   }
 }
