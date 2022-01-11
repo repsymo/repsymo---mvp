@@ -10,6 +10,8 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
+import { TreeNode } from '../../../model/machine-replacement';
+
 export const parentElId = 'solutionsTreeParent';
 
 export abstract class MrmCanvas {
@@ -29,10 +31,6 @@ export abstract class MrmCanvas {
     return this.canvasEl.height;
   }
 
-  abstract update();
-
-  abstract draw(ctx: CanvasRenderingContext2D);
-
   init(canvasEl: HTMLCanvasElement) {
     this.canvasEl = canvasEl;
     this.ctx = this.canvasEl.getContext('2d');
@@ -40,11 +38,20 @@ export abstract class MrmCanvas {
     this.update();
   }
 
+  render() {
+    this.update();
+    this.draw(this.ctx);
+  }
+
   private updateCanvasSize() {
     const parentEl = document.getElementById(parentElId);
     this.canvasEl.width = parentEl.offsetWidth - this.padding;
     this.canvasEl.height = parentEl.offsetHeight - this.padding;
   }
+
+  protected abstract update();
+
+  protected abstract draw(ctx: CanvasRenderingContext2D);
 }
 
 function getHypotenuse(triangleX: number, triangleY: number) {
