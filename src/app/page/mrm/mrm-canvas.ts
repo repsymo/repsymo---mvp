@@ -10,3 +10,27 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
+abstract class MrmCanvas {
+  private canvasEl: HTMLCanvasElement;
+  private ctx: CanvasRenderingContext2D;
+
+  protected constructor() {}
+
+  get width() {
+    return this.canvasEl.width;
+  }
+
+  get height() {
+    return this.canvasEl.height;
+  }
+
+  init(canvasEl: HTMLCanvasElement) {
+    this.canvasEl = canvasEl;
+    this.ctx = this.canvasEl.getContext('2d');
+    this.update();
+  }
+
+  abstract update();
+
+  abstract draw(ctx: CanvasRenderingContext2D);
+}
