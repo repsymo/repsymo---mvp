@@ -21,11 +21,11 @@ export enum Decision {
 }
 
 export class MachineReplacement {
-  readonly decisionYears: number;
-  readonly initialAge: number;
-  readonly maxAge: number;
-  readonly price: number;
-  readonly data: MachineAgeRecord[];
+  decisionYears: number;
+  initialAge: number;
+  maxAge: number;
+  price: number;
+  data: MachineAgeRecord[];
 
   constructor(
     decisionYears = 0,
@@ -49,7 +49,7 @@ export interface MachineAgeRecord {
   sellingRevenue: number;
 }
 
-function requireValidModel(model) {
+export function requireValidModel(model) {
   const { decisionYears, initialAge, maxAge, price } = model;
   const requireNonNegative = (value, name) => {
     if (value < 0) {

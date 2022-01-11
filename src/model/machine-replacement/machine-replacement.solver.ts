@@ -13,7 +13,7 @@
 import {
   Decision,
   INITIAL_DECISION_YEAR,
-  MachineReplacement
+  MachineReplacement, requireValidModel
 } from './machine-replacement';
 
 export interface TreeNode {
@@ -73,6 +73,7 @@ export class MachineReplacementSolver {
   }
 
   solve(model: MachineReplacement) {
+    requireValidModel(model);
     this.init(model);
 
     this.createDecisionTree();
