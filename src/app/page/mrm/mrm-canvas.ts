@@ -10,11 +10,16 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-abstract class MrmCanvas {
+export const parentElId = 'solutionsTreeParent';
+
+export abstract class MrmCanvas {
+  public padding: number;
   private canvasEl: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
 
-  protected constructor() {}
+  protected constructor() {
+    this.padding = 0;
+  }
 
   get width() {
     return this.canvasEl.width;
@@ -24,15 +29,22 @@ abstract class MrmCanvas {
     return this.canvasEl.height;
   }
 
-  init(canvasEl: HTMLCanvasElement) {
-    this.canvasEl = canvasEl;
-    this.ctx = this.canvasEl.getContext('2d');
-    this.update();
-  }
-
   abstract update();
 
   abstract draw(ctx: CanvasRenderingContext2D);
+
+  init(canvasEl: HTMLCanvasElement) {
+    this.canvasEl = canvasEl;
+    this.ctx = this.canvasEl.getContext('2d');
+    this.updateCanvasSize();
+    this.update();
+  }
+
+  private updateCanvasSize() {
+    const parentEl = document.getElementById(parentElId);
+    this.canvasEl.width = parentEl.offsetWidth - this.padding;
+    this.canvasEl.height = parentEl.offsetHeight - this.padding;
+  }
 }
 
 function getHypotenuse(triangleX: number, triangleY: number) {
