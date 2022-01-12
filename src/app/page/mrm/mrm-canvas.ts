@@ -147,11 +147,23 @@ export class SolutionsTreeCanvas extends MrmCanvas {
   }
 
   private drawNodeCircle(ctx: CanvasRenderingContext2D, node: TreeNode) {
-    // TODO
+    const { x, y } = this.getNodeCP(node);
+    ctx.beginPath();
+    ctx.arc(x, y, this.radiusPx, 0, 2 * Math.PI);
+    ctx.fillStyle = 'white';
+    ctx.fill();
+    ctx.stroke();
   }
 
   private drawNodeContent(ctx: CanvasRenderingContext2D, node: TreeNode) {
-    // TODO
+    ctx.font = '24px Poppins';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'black';
+    const txt = String(node.machineAge);
+    const txtMetrics = ctx.measureText(txt);
+    const txtHeight = txtMetrics.actualBoundingBoxAscent + txtMetrics.actualBoundingBoxDescent;
+    const { x, y } = this.getNodeCP(node);
+    ctx.fillText(txt, x, y + txtHeight / 2);
   }
 
   private getNodeCP(node: TreeNode) {
