@@ -143,7 +143,81 @@ export class SolutionsTreeCanvas extends MrmCanvas {
   }
 
   private drawNodeLines(ctx: CanvasRenderingContext2D, node: TreeNode) {
-    // TODO
+    const padding = TreeAxesCanvas.AXIS_LABEL_SIZE_PX;
+    const { x, y } = this.getNodeCP(node);
+    const isNodeNext = () => node.machineAge === 1;
+    const isNodeBelow = (next: TreeNode) => node.machineAge < next.machineAge;
+
+    const drawLineTo = (next: TreeNode) => {
+      const nextX = (next.decisionYear * this.axesCanvas.cellSize) + padding;
+      const nextY = this.height - (next.machineAge * this.axesCanvas.cellSize) - padding;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(nextX, nextY);
+      ctx.stroke();
+    };
+
+    /**
+     * Computes the rectangle triangle given by this node's (x, y) and the next
+     * node's (nextX, nextY) points.
+     */
+    const triangle = (next: TreeNode) => {
+      const nextCP = this.getNodeCP(next);
+      const nextX = nextCP.x;
+      const nextY = nextCP.y;
+      const triangleX = nextX - x;
+      const triangleY = Math.abs(nextY - y);
+      const hypotenuse = getHypotenuse(triangleX, triangleY);
+      return { triangleX, triangleY, hypotenuse };
+    };
+
+    const drawUpRightLabel = (next: TreeNode, label: string) => {
+      const { triangleX, triangleY, hypotenuse } = triangle(next);
+      const labelX = x + (triangleX * this.radiusPx / hypotenuse);
+      const labelY = y - (triangleY * this.radiusPx / hypotenuse) - 8;
+      ctx.fillText(label, labelX, labelY);
+    };
+
+    const drawDownRightLabel = (next: TreeNode, label: string) => {
+      const { triangleX, triangleY, hypotenuse } = triangle(next);
+      const labelX = x + (triangleX * this.radiusPx / hypotenuse) - 4;
+      const labelY = y + (triangleY * this.radiusPx / hypotenuse) + 16;
+      ctx.fillText(label, labelX, labelY);
+    };
+
+    const drawRightLabel = (next: TreeNode, label: string) => {
+      const { triangleX, triangleY, hypotenuse } = triangle(next);
+      const labelX = x + (triangleX * this.radiusPx / hypotenuse) + 4;
+      const labelY = y + (triangleY * this.radiusPx / hypotenuse) + 16;
+      ctx.fillText(label, labelX, labelY);
+    };
+
+    const drawLabelTo = (next: TreeNode, label: string) => {
+      ctx.font = '12px Poppins';
+      ctx.textAlign = 'center';
+      ctx.fillStyle = 'black';
+
+      if (isNodeBelow(next)) {
+        drawUpRightLabel(next, label);
+      }
+      else if (isNodeNext()) {
+        drawRightLabel(next, label);
+      }
+      else {
+        drawDownRightLabel(next, label);
+      }
+    };
+
+    if (node.k) {
+      drawLineTo(node.k);
+      drawLabelTo(node.k, 'K');
+      this.drawNode(ctx, node.k); // Recursive call
+    }
+    if (node.r) {
+      drawLineTo(node.r);
+      drawLabelTo(node.r, 'R');
+      this.drawNode(ctx, node.r); // Recursive call
+    }
   }
 
   private drawNodeCircle(ctx: CanvasRenderingContext2D, node: TreeNode) {
