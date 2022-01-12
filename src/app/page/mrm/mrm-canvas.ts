@@ -10,8 +10,6 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-import { TreeNode } from '../../../model/machine-replacement';
-
 export const parentElId = 'solutionsTreeParent';
 
 export abstract class MrmCanvas {
@@ -52,6 +50,59 @@ export abstract class MrmCanvas {
   protected abstract update();
 
   protected abstract draw(ctx: CanvasRenderingContext2D);
+}
+
+export class TreeAxesCanvas extends MrmCanvas {
+  public static readonly AXIS_LABEL_SIZE_PX = 24;
+  public maxAbscissa: number;
+  public maxOrdinate: number;
+  private cellSizePx: number;
+
+  constructor() {
+    super();
+    this.padding = TreeAxesCanvas.AXIS_LABEL_SIZE_PX;
+    this.maxAbscissa = 5;
+    this.maxOrdinate = 8;
+  }
+
+  get cellSize() {
+    return this.cellSizePx;
+  }
+
+  protected update() {
+    this.cellSizePx = this.width / 6;
+  }
+
+  protected draw(ctx) {
+    ctx.font = '12px Poppins';
+    ctx.fillStyle = 'black';
+
+    ctx.moveTo(this.padding, 0);
+    ctx.lineTo(this.padding, this.height - this.padding);
+    ctx.lineTo(this.width, this.height - this.padding);
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    this.drawXLabels(ctx);
+    this.drawYLabels(ctx);
+  }
+
+  private drawXLabels(ctx) {
+    ctx.textAlign = 'center';
+
+    for (let i = 0; i <= this.maxAbscissa; i++) {
+      const x = (i * this.cellSizePx) + this.padding;
+      ctx.fillText(String(i), x, this.height);
+    }
+  }
+
+  private drawYLabels(ctx) {
+    ctx.textAlign = 'start';
+
+    for (let i = 1; i <= this.maxOrdinate; i++) {
+      const y = this.height - (i * this.cellSizePx) - this.padding;
+      ctx.fillText(String(i), 0, y);
+    }
+  }
 }
 
 function getHypotenuse(triangleX: number, triangleY: number) {
