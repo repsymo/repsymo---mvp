@@ -133,16 +133,25 @@ export class SolutionsTreeCanvas extends MrmCanvas {
   }
 
   protected draw(ctx) {
-    this.drawNode(ctx, this.rootNode);
+    const memoization = new Set<string>();
+
+    this.drawNode(ctx, this.rootNode, memoization);
   }
 
-  private drawNode(ctx: CanvasRenderingContext2D, node: TreeNode) {
-    this.drawNodeLines(ctx, node);
+  private drawNode(ctx: CanvasRenderingContext2D, node: TreeNode, memoization: Set<string>) {
+    const point2d = { x: node.decisionYear, y: node.machineAge };
+    const point2dStr = JSON.stringify(point2d);
+    const hasNeverBeenDrawn = !memoization.has(point2dStr);
+
+    if (hasNeverBeenDrawn) {
+      this.drawNodeLines(ctx, node, memoization);
+    }
     this.drawNodeCircle(ctx, node);
     this.drawNodeContent(ctx, node);
+    memoization.add(point2dStr);
   }
 
-  private drawNodeLines(ctx: CanvasRenderingContext2D, node: TreeNode) {
+  private drawNodeLines(ctx: CanvasRenderingContext2D, node: TreeNode, memoization: Set<string>) {
     const padding = TreeAxesCanvas.AXIS_LABEL_SIZE_PX;
     const { x, y } = this.getNodeCP(node);
     const isNodeNext = () => node.machineAge === 1;
@@ -211,12 +220,12 @@ export class SolutionsTreeCanvas extends MrmCanvas {
     if (node.k) {
       drawLineTo(node.k);
       drawLabelTo(node.k, 'K');
-      this.drawNode(ctx, node.k); // Recursive call
+      this.drawNode(ctx, node.k, memoization); // Recursive call
     }
     if (node.r) {
       drawLineTo(node.r);
       drawLabelTo(node.r, 'R');
-      this.drawNode(ctx, node.r); // Recursive call
+      this.drawNode(ctx, node.r, memoization); // Recursive call
     }
   }
 
@@ -250,4 +259,9 @@ export class SolutionsTreeCanvas extends MrmCanvas {
 
 function getHypotenuse(triangleX: number, triangleY: number) {
   return Math.sqrt(Math.pow(triangleX, 2) + Math.pow(triangleY, 2));
+}
+
+interface Point2D {
+  x: number;
+  y: number;
 }
