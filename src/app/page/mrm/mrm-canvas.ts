@@ -154,7 +154,7 @@ export class SolutionsTreeCanvas extends MrmCanvas {
   private drawNodeLines(ctx: CanvasRenderingContext2D, node: TreeNode, memoization: Set<string>) {
     const padding = TreeAxesCanvas.AXIS_LABEL_SIZE_PX;
     const { x, y } = this.getNodeCP(node);
-    const isNodeNext = () => node.machineAge === 1;
+    const isNodeNext = (next: TreeNode) => node.machineAge === 1 && next.machineAge === 1;
     const isNodeBelow = (next: TreeNode) => node.machineAge < next.machineAge;
 
     const drawLineTo = (next: TreeNode) => {
@@ -209,7 +209,7 @@ export class SolutionsTreeCanvas extends MrmCanvas {
       if (isNodeBelow(next)) {
         drawUpRightLabel(next, label);
       }
-      else if (isNodeNext()) {
+      else if (isNodeNext(next)) {
         drawRightLabel(next, label);
       }
       else {
