@@ -260,8 +260,3 @@ export class SolutionsTreeCanvas extends MrmCanvas {
 function getHypotenuse(triangleX: number, triangleY: number) {
   return Math.sqrt(Math.pow(triangleX, 2) + Math.pow(triangleY, 2));
 }
-
-interface Point2D {
-  x: number;
-  y: number;
-}
