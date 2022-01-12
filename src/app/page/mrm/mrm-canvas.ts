@@ -10,6 +10,8 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
+import { newTreeNode, TreeNode } from '../../../model/machine-replacement';
+
 export const parentElId = 'solutionsTreeParent';
 
 export abstract class MrmCanvas {
@@ -102,6 +104,61 @@ export class TreeAxesCanvas extends MrmCanvas {
       const y = this.height - (i * this.cellSizePx) - this.padding;
       ctx.fillText(String(i), 0, y);
     }
+  }
+}
+
+export class SolutionsTreeCanvas extends MrmCanvas {
+  private readonly axesCanvas: TreeAxesCanvas;
+  public rootNode: TreeNode;
+  private radiusPx: number;
+
+  constructor() {
+    super();
+    this.axesCanvas = new TreeAxesCanvas();
+    this.rootNode = newTreeNode();
+  }
+
+  init(canvasEl) {
+    super.init(canvasEl);
+    this.axesCanvas.init(canvasEl);
+  }
+
+  render() {
+    super.render();
+    this.axesCanvas.render();
+  }
+
+  protected update() {
+    this.radiusPx = this.axesCanvas.cellSize / 4;
+  }
+
+  protected draw(ctx) {
+    this.drawNode(ctx, this.rootNode);
+  }
+
+  private drawNode(ctx: CanvasRenderingContext2D, node: TreeNode) {
+    this.drawNodeLines(ctx, node);
+    this.drawNodeCircle(ctx, node);
+    this.drawNodeContent(ctx, node);
+  }
+
+  private drawNodeLines(ctx: CanvasRenderingContext2D, node: TreeNode) {
+    // TODO
+  }
+
+  private drawNodeCircle(ctx: CanvasRenderingContext2D, node: TreeNode) {
+    // TODO
+  }
+
+  private drawNodeContent(ctx: CanvasRenderingContext2D, node: TreeNode) {
+    // TODO
+  }
+
+  private getNodeCP(node: TreeNode) {
+    return {
+      x: (node.decisionYear * this.axesCanvas.cellSize) + TreeAxesCanvas.AXIS_LABEL_SIZE_PX,
+      y: this.height - (node.machineAge * this.axesCanvas.cellSize) - TreeAxesCanvas.AXIS_LABEL_SIZE_PX
+    };
   }
 }
 
