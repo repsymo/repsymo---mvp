@@ -44,8 +44,12 @@ export class TabularInputComponent implements OnInit {
   @Input()
   readonly multiColumn: boolean;
 
+  @Input()
+  readonly startIndex: number;
+
   constructor() {
     this.keys = Object.keys;
+    this.startIndex = 1;
   }
 
   @Input()
