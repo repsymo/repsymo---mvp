@@ -21,10 +21,10 @@ import {
 import { TimeUnit } from 'src/app/time-unit';
 
 export interface TimeUnitDependentLabel {
-  text?: string,
-  part1?: string,
-  part2?: string,
-  singular?: boolean
+  text?: string;
+  part1?: string;
+  part2?: string;
+  singular?: boolean;
 }
 
 /**
@@ -34,20 +34,20 @@ export interface CheckboxInputItem {
   /**
    * Label to show on this input.
    */
-  label: TimeUnitDependentLabel,
+  label: TimeUnitDependentLabel;
 
   /**
    * Key in which the checkbox value is found on the passed model, the bind for
    * the checkbox is then assigned with the next property 'checkboxChildKey'.
-   * For example, the checkbox will be binded to
+   * For example, the checkbox will be bound to
    * 'model[checkboxParentKey][checkboxChildKey]'.
    */
-  checkboxParentKey: string,
+  checkboxParentKey: string;
 
   /**
    * See InputItem.checkboxParentKey.
    */
-  checkboxChildKey: string
+  checkboxChildKey: string;
 }
 
 /**
@@ -58,22 +58,22 @@ export interface InputItem {
    * Key value to bind the input data to this item, belonging to the passed
    * model. It means that, this item is binded to 'model[mkey]'.
    */
-  mkey: string,
+  mkey: string;
 
   /**
    * Label to show on this input.
    */
-  label: TimeUnitDependentLabel,
+  label: TimeUnitDependentLabel;
 
   /**
    * Checkbox to add to this input.
    */
-  checkbox?: CheckboxInputItem,
+  checkbox?: CheckboxInputItem;
 
   /**
    * Hint for the input element.
    */
-  hint?: TimeUnitDependentLabel,
+  hint?: TimeUnitDependentLabel;
 
   /**
    * If true, the label of this input will be rendered as two lines label for
@@ -99,7 +99,7 @@ export class InputPaneComponent implements OnInit {
   model: object;
 
   @Input()
-  timeunit: boolean = true;
+  timeunit = true;
 
   private timeUnit: TimeUnit;
 
@@ -127,7 +127,7 @@ export class InputPaneComponent implements OnInit {
     }
     const tu = this.timeUnit;
     const tul = (item.singular) ? tu.singular.toLowerCase() : tu.label.toLowerCase();
-    const isNormalText = typeof item.text == 'string';
+    const isNormalText = typeof item.text === 'string';
     return (isNormalText) ? item.text : item.part1 + tul + item.part2;
   }
 }
