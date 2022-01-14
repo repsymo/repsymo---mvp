@@ -47,18 +47,26 @@ export class TabularInputComponent implements OnInit {
   @Input()
   readonly startIndex: number;
 
+  private timeUnitLabel: string;
+
   constructor() {
     this.keys = Object.keys;
     this.startIndex = 1;
+    this.timeUnitLabel = '';
   }
 
   @Input()
-  set timeUnit(timeUnit: string) {
-    this.header[0] = `${ this.header[0] } (${ timeUnit.toLowerCase() })`;
+  set timeUnit(value: string) {
+    let headingValue = this.header[0];
+
+    if (this.timeUnitLabel && headingValue.includes(this.timeUnitLabel)) {
+      headingValue = headingValue.substring(0, headingValue.length - this.timeUnitLabel.length - 3);
+    }
+    this.timeUnitLabel = value.toLowerCase();
+    this.header[0] = `${ headingValue } (${ this.timeUnitLabel })`;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   isSingleColumn(): boolean {
     return !this.multiColumn;
