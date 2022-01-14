@@ -213,8 +213,8 @@ export class TreeAxesCanvas extends MrmCanvas {
   constructor() {
     super();
     this.padding = TreeAxesCanvas.AXIS_LABEL_SIZE_PX;
-    this.maxAbscissa = 5;
-    this.maxOrdinate = 8;
+    this.maxAbscissa = 8;
+    this.maxOrdinate = 10;
   }
 
   get cellSize() {
@@ -222,7 +222,7 @@ export class TreeAxesCanvas extends MrmCanvas {
   }
 
   protected update() {
-    this.cellSizePx = this.width / 6;
+    this.cellSizePx = this.width / (this.maxAbscissa + 1);
   }
 
   protected draw(ctx) {
