@@ -23,7 +23,7 @@
   </thead>
   <tbody *ngFor="let row of rows; index as y;">
     <tr>
-      <th scope="row">{{ y + 1 }}</th>
+      <th scope="row">{{ y + startIndex }}</th>
       <div *ngIf="isSingleColumn(); then singleColumnBlock else multiColumnBlock"></div>
 
       <!-- Render for single column -->

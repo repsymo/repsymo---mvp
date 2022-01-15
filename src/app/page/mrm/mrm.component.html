@@ -10,58 +10,21 @@
   ~ tree or at https://opensource.org/licenses/GPL-3.0.
   -->
 
+<app-options-bar
+  [examplesNumber]="1"
+  [l]="this"
+>
+</app-options-bar>
+
 <div class="top-panel">
-  <div class="years-pane">
-    <div class="form-group">
-      <label for="yearsInput">Number of decision years</label>
-      <input
-        id="yearsInput"
-        class="form-control"
-        value="4"
-        type="number"
-        placeholder="Enter the number of years"
-      />
-    </div>
-  </div>
-  <div class="max-time-pane">
-    <div class="form-group">
-      <label for="timeInput">Maximum machine age in years</label>
-      <input
-        id="timeInput"
-        class="form-control"
-        value="6"
-        type="number"
-        placeholder="Enter the maximum age"
-      />
-    </div>
-  </div>
-  <div class="initial-age-pane">
-    <div class="form-group">
-      <label for="initialAgeInput">Initial machine age in years</label>
-      <input
-        id="initialAgeInput"
-        class="form-control"
-        value="3"
-        type="number"
-        placeholder="Enter the initial machine age"
-      />
-    </div>
-  </div>
-  <div class="machine-price-pane">
-    <div class="form-group">
-      <label for="machinePrice">New machine's price in dollars</label>
-      <input
-        id="machinePrice"
-        class="form-control"
-        value="100000"
-        type="number"
-        placeholder="Enter the price of a new machine"
-      />
-    </div>
-  </div>
-  <div>
+  <app-input-pane
+    [model]="model"
+    [items]="inputPaneItems"
+    (timeUnitChange)="onTimeUnitChange($event)"
+  >
+  </app-input-pane>
+  <div class="next-button-container">
     <button
-      id="nextButton"
       class="btn btn-primary"
       (click)="onNext()"
     >
@@ -69,30 +32,59 @@
     </button>
   </div>
 </div>
-<div id="inputTable"></div>
-<div class="solve-button-pane">
+
+<app-tabular-input
+  class="tabular-input"
+  [ngClass]="{ 'gone': inputDataStep === 0 }"
+  [header]="inputTableHeader"
+  [timeUnit]="timeUnitLabel"
+  [rows]="model.data"
+  [multiColumn]="true"
+  [startIndex]="0"
+>
+</app-tabular-input>
+
+<div
+  class="solve-button-container"
+  [ngClass]="{ 'gone': inputDataStep === 0 }"
+>
   <button
-    id="solveButton"
-    class="btn btn-primary invisible"
+    class="btn btn-primary"
     (click)="onSolve()"
   >
     Solve
   </button>
 </div>
-<div id="solutionPanel" class="gone">
-  <div class="divider"></div>
-  <div class="solution-title">
-    <p>Solution</p>
-  </div>
+
+<div
+  id="solutionPanel"
+  [ngClass]="{ 'gone': inputDataStep < 2 }"
+>
   <div>
     <p>Problem solutions tree</p>
-    <p>Y-Axis: Machine age in years</p>
-    <p>X-Axis: Decision year</p>
+    <p>Y-Axis: Machine age in {{ timeUnitLabel }}</p>
+    <p>X-Axis: Decision {{ timeUnitLabel }}</p>
   </div>
-  <div class="solutions-tree">
-    <div></div>
+  <div style="overflow-x: auto;">
+    <div id="solutionsTreeParent">
+      <canvas id="solutionsTree">
+      </canvas>
+    </div>
   </div>
-  <div class="stages"></div>
+
+  <div class="divider"></div>
+
+  <div
+    class="stages"
+    *ngFor="let stage of solver.stages; index as y"
+  >
+    <p>STAGE {{ y + 1 }}</p>
+    <app-tabular-output
+      [header]="getStageTableHeader()"
+      [rows]="stage"
+    >
+    </app-tabular-output>
+  </div>
   <div class="result">
     <p>Result chains</p>
     <div class="chains-container"></div>

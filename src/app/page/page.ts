@@ -22,13 +22,13 @@ export abstract class Page implements OnInit,
                                       OnDestroy {
   private readonly ioService: IOService;
   private readonly modelType: string;
-  private problemName: string;
+  private readonly problemName: string;
   private ioSubscription: Subscription;
 
-  constructor(ioService: IOService, modelLabel: string) {
+  protected constructor(ioService: IOService, modelLabel: string) {
     this.ioService = ioService;
     this.modelType = modelLabel;
-    this.problemName = '2DP RepSyMo Solver problem';
+    this.problemName = '2DP Repsymo Solver problem';
     this.ioSubscription = null;
   }
 
@@ -36,7 +36,7 @@ export abstract class Page implements OnInit,
     let f = false; // fixes the bug of asking to save when changing from tab
 
     this.ioSubscription = this.ioService.io.subscribe(e => {
-      if (e == null) {
+      if (e === null) {
         return;
       }
 
@@ -57,11 +57,13 @@ export abstract class Page implements OnInit,
   }
 
   ngOnDestroy() {
-    this.ioSubscription.unsubscribe();
+    if (this.ioSubscription) {
+      this.ioSubscription.unsubscribe();
+    }
   }
 
   private open(data: ModelFile, name: string) {
-    if (data.modelType != this.modelType) {
+    if (data.modelType !== this.modelType) {
       return;
     }
     if (this.loadModel(data.problemModel, name, data.statement)) {
@@ -73,7 +75,7 @@ export abstract class Page implements OnInit,
   }
 
   private save() {
-    const downlaod = (json: string, name: string) => {
+    const download = (json: string, name: string) => {
       const p = { userDate1: 1, userData2: 2 };
 
       of(p).subscribe(() => {
@@ -89,13 +91,13 @@ export abstract class Page implements OnInit,
     const model = this.getModel();
 
     // The model may be empty and had returned null, don't download then
-    if (model == null) {
+    if (model === null) {
       alert('Model is empty!');
       return;
     }
     const name = prompt('Save problem as', this.problemName);
 
-    if (name != null) {
+    if (name !== null) {
       const stm = this.getExample().statement;
       const statement = prompt('Enter a problem statement (optional)', stm)
                         || '';
@@ -107,7 +109,7 @@ export abstract class Page implements OnInit,
       };
       const fileJSON = JSON.stringify(fileObj);
 
-      downlaod(fileJSON, `${ name }.ddpps`);
+      download(fileJSON, `${ name }.ddpps`);
     }
   }
 
