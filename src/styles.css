@@ -165,53 +165,40 @@ body {
   }
 }
 
-/** MRM Component styles here I guess because the component is implemented in the JS-like style not in the Angular style **/
-#solutionPanel > .solutions-tree {
-  padding: 32px 0;
 
+.chains-container {
+  display: block;
+  width: 100%;
+  overflow: auto;
 }
 
-#solutionPanel > .solutions-tree > div {
-  padding: 16px 48px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  border-bottom: 1px solid #212121;
-  border-left: 1px solid #212121;
-}
-
-#solutionPanel > .solutions-tree > div > div {
-  display: flex;
-  height: 128px;
-}
-
-#solutionPanel > .solutions-tree > div > div > div.label {
+.chain {
+  display: block;
+  margin: 16px 0;
   align-self: center;
-  font-weight: bold;
 }
 
-#solutionPanel > .solutions-tree > div > div > div.item.label {
-  border: none;
-  font-weight: bold;
-}
-
-#solutionPanel > .solutions-tree > div > div > div.item {
+div.chain > span {
+  display: inline-block;
   width: 64px;
   height: 64px;
-  margin: 0 64px;
-  bottom: -28px;
+  margin-right: 32px;
   border: 2px solid #212121;
-  border-radius: 50%;
-  line-height: 64px;
-}
-
-#solutionPanel > .solutions-tree > div > div > div.item > div {
-  align-self: center;
   text-align: center;
+  line-height: 56px;
 }
 
-#solutionPanel > .solutions-tree > div > div > div.item > span {
+div.chain > span::after {
+  content: '->';
   position: absolute;
-  width: 128px;
-  left: -32px;
-  text-align: center;
+  top: 0;
+  right: -24px;
+}
+
+div.chain > span.end::after {
+  content: '';
+}
+
+div.chain > div {
+  display: inline-block;
 }

@@ -13,7 +13,8 @@
 import {
   Decision,
   INITIAL_DECISION_YEAR,
-  MachineReplacement, requireValidModel
+  MachineReplacement,
+  requireValidModel
 } from './machine-replacement';
 
 export interface TreeNode {
@@ -78,6 +79,19 @@ export class MachineReplacementSolver {
 
     this.createDecisionTree();
     this.solveStages();
+  }
+
+  /**
+   * Use this function to get the actual tree for now. Notice this is twice
+   * work.
+   */
+  getSolutionsTree(): TreeNode {
+    const rootNode: TreeNode = {
+      decisionYear: 1,
+      machineAge: this.model.initialAge
+    };
+    this.setTreeNodeChildren(rootNode);
+    return rootNode;
   }
 
   private init(model) {
@@ -235,6 +249,24 @@ export class MachineReplacementSolver {
         max,
         decision
       };
+    }
+  }
+
+  private setTreeNodeChildren(node: TreeNode) {
+    const nextDecisionYear = node.decisionYear + 1;
+    const kNode: TreeNode = {
+      decisionYear: nextDecisionYear,
+      machineAge: node.machineAge + 1
+    };
+    const rNode: TreeNode = {
+      decisionYear: nextDecisionYear,
+      machineAge: 1
+    };
+    node.k = kNode;
+    node.r = rNode;
+    if (nextDecisionYear <= this.model.decisionYears) {
+      this.setTreeNodeChildren(kNode);
+      this.setTreeNodeChildren(rNode);
     }
   }
 }
