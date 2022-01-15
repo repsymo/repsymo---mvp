@@ -107,6 +107,7 @@ export class SolutionsTreeCanvas extends MrmCanvas {
     const drawLineTo = (next: TreeNode) => {
       const nextX = (next.decisionYear * this.axesCanvas.cellSize) + padding;
       const nextY = this.height - (next.machineAge * this.axesCanvas.cellSize) - padding;
+      ctx.strokeStyle = this.getLineColor(node, next);
       ctx.beginPath();
       ctx.moveTo(x, y);
       ctx.lineTo(nextX, nextY);
@@ -181,6 +182,7 @@ export class SolutionsTreeCanvas extends MrmCanvas {
     ctx.beginPath();
     ctx.arc(x, y, this.radiusPx, 0, 2 * Math.PI);
     ctx.fillStyle = 'white';
+    ctx.strokeStyle = 'black';
     ctx.fill();
     ctx.stroke();
   }
@@ -201,6 +203,10 @@ export class SolutionsTreeCanvas extends MrmCanvas {
       x: (node.decisionYear * this.axesCanvas.cellSize) + TreeAxesCanvas.AXIS_LABEL_SIZE_PX,
       y: this.height - (node.machineAge * this.axesCanvas.cellSize) - TreeAxesCanvas.AXIS_LABEL_SIZE_PX
     };
+  }
+
+  private getLineColor(node: TreeNode, next: TreeNode) {
+    return 'black';
   }
 }
 
@@ -228,6 +234,7 @@ export class TreeAxesCanvas extends MrmCanvas {
   protected draw(ctx) {
     ctx.font = '12px Poppins';
     ctx.fillStyle = 'black';
+    ctx.strokeStyle = 'black';
 
     ctx.moveTo(this.padding, 0);
     ctx.lineTo(this.padding, this.height - this.padding);
