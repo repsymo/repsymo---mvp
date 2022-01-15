@@ -10,7 +10,12 @@
  * tree or at https://opensource.org/licenses/GPL-3.0.
  */
 
-import { newTreeNode, TreeNode } from '../../../model/machine-replacement';
+import {
+  Decision,
+  newTreeNode,
+  SolutionStageRow,
+  TreeNode
+} from '../../../model/machine-replacement';
 
 export const parentElId = 'solutionsTreeParent';
 
@@ -56,12 +61,14 @@ export abstract class MrmCanvas {
 
 export class SolutionsTreeCanvas extends MrmCanvas {
   private readonly axesCanvas: TreeAxesCanvas;
+  public readonly solutionMark: NodeSolutionMark;
   public rootNode: TreeNode;
   private radiusPx: number;
 
   constructor() {
     super();
     this.axesCanvas = new TreeAxesCanvas();
+    this.solutionMark = new NodeSolutionMark();
     this.rootNode = newTreeNode();
   }
 
@@ -185,6 +192,13 @@ export class SolutionsTreeCanvas extends MrmCanvas {
     ctx.strokeStyle = 'black';
     ctx.fill();
     ctx.stroke();
+    this.solutionMark.fillNodeSolutionMarkIfAny(
+      ctx,
+      node,
+      x,
+      y,
+      this.radiusPx
+    );
   }
 
   private drawNodeContent(ctx: CanvasRenderingContext2D, node: TreeNode) {
@@ -206,7 +220,7 @@ export class SolutionsTreeCanvas extends MrmCanvas {
   }
 
   private getLineColor(node: TreeNode, next: TreeNode) {
-    return 'black';
+    return this.solutionMark.areConnected(node, next) ? '#0288d1' : 'black';
   }
 }
 
@@ -260,6 +274,121 @@ export class TreeAxesCanvas extends MrmCanvas {
     for (let i = 1; i <= this.maxOrdinate; i++) {
       const y = this.height - (i * this.cellSizePx) - this.padding;
       ctx.fillText(String(i), 0, y);
+    }
+  }
+}
+
+// By designing a domain model all the actions are easy trivial to execute
+// By using primitive obsession and so, many complicated algorithms with
+// side effects have to be done
+// This is a great implementation for the current stage of the project though
+class NodeSolutionMark {
+  private readonly solutions: Set<string>;
+  private readonly connectedNodes: Set<string>;
+  private stages: SolutionStageRow[][];
+  private currentStage: number;
+
+  constructor() {
+    this.solutions = new Set();
+    this.connectedNodes = new Set();
+    this.currentStage = 1;
+  }
+
+  init(stages: SolutionStageRow[][]) {
+    this.stages = stages;
+
+    this.solutions.clear();
+    this.connectedNodes.clear();
+    this.markStageSolutionNode(0, stages[0][0].t);
+  }
+
+  fillNodeSolutionMarkIfAny(
+    ctx: CanvasRenderingContext2D,
+    node: TreeNode,
+    x: number,
+    y: number,
+    radiusPx: number
+  ) {
+    const point2dStr = JSON.stringify({
+      x: node.decisionYear,
+      y: node.machineAge
+    });
+
+    if (!this.solutions.has(point2dStr)) {
+      return;
+    }
+    ctx.beginPath();
+    ctx.arc(x, y, radiusPx, 0, 2 * Math.PI);
+    ctx.fillStyle = '#b3e5fc';
+    ctx.fill();
+    ctx.stroke();
+  }
+
+  areConnected(node: TreeNode, nextNode: TreeNode) {
+    const ser = (n: TreeNode) => JSON.stringify({
+      x: n.decisionYear,
+      y: n.machineAge
+    });
+    return this.connectedNodes.has(ser(node) + ser(nextNode));
+  }
+
+  private markStageSolutionNode(x: number, t: number) {
+    const nextX = x + 1;
+    const row = this.stages[x].find(r => r.t === t);
+    const { decision } = row;
+
+    const getNextIndexes = () => {
+      if (decision === Decision.KEEP) {
+        return [t + 1];
+      }
+      else if (decision === Decision.REPLACE) {
+        return [1];
+      }
+      return [t + 1, 1];
+    };
+
+    const isLastStage = (decisionYear: number) => decisionYear === this.stages.length;
+    const nextMachineAge = getNextIndexes();
+
+    const markConnected = (rowX: number, machineAge: number) => {
+      const point2dStr = JSON.stringify({ x: rowX + 1, y: machineAge });
+      const nextPoint2dStr = JSON.stringify({
+        x: rowX + 2,
+        y: nextMachineAge[0]
+      });
+      this.connectedNodes.add(point2dStr + nextPoint2dStr);
+
+      if (nextMachineAge.length === 2) {
+        const otherPoint2dStr = JSON.stringify({
+          x: rowX + 2,
+          y: nextMachineAge[1]
+        });
+        this.connectedNodes.add(point2dStr + otherPoint2dStr);
+      }
+    };
+
+    const mark = (rowX: number, machineAge: number) => {
+      const point2dStr = JSON.stringify({ x: rowX + 1, y: machineAge });
+      this.solutions.add(point2dStr);
+      markConnected(rowX, machineAge);
+    };
+
+    const markNext = () => {
+      mark(nextX, nextMachineAge[0]);
+      if (nextMachineAge.length === 2) {
+        mark(nextX, nextMachineAge[1]);
+      }
+    };
+
+    mark(x, t);
+    if (isLastStage(nextX)) {
+      markNext();
+      return;
+    }
+
+    this.markStageSolutionNode(nextX, nextMachineAge[0]);
+    if (nextMachineAge.length === 2) {
+      this.markStageSolutionNode(nextX, nextMachineAge[1]);
     }
   }
 }
