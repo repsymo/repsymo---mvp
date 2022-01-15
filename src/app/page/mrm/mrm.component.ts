@@ -206,6 +206,7 @@ export class MrmComponent extends Page implements OnInit,
 
     canvas.rootNode = this.solver.getSolutionsTree();
     canvas.init(canvasEl);
+    canvas.solutionMark.init(this.solver.stages);
 
     canvas.render();
   }

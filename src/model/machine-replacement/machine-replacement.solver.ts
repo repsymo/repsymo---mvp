@@ -33,7 +33,7 @@ export function newTreeNode(): TreeNode {
   };
 }
 
-export interface SolutionStage {
+export interface SolutionStageRow {
   t: number;
   k: number;
   r: number;
@@ -63,7 +63,7 @@ export interface SolutionStage {
  * @author Tobias Briones
  */
 export class MachineReplacementSolver {
-  stages: SolutionStage[][];
+  stages: SolutionStageRow[][];
   solutionsTree: any[];
   private model: MachineReplacement;
 
@@ -175,7 +175,7 @@ export class MachineReplacementSolver {
     }
   }
 
-  private solveStage(stage: SolutionStage[], nextStage: SolutionStage[], i: number) {
+  private solveStage(stage: SolutionStageRow[], nextStage: SolutionStageRow[], i: number) {
     const maxMachineAge = this.model.maxAge;
     const values = this.solutionsTree[i];
     const isLastStage = nextStage === null;
