@@ -134,13 +134,21 @@ export interface Hurwicz {
 export function hurwicz(model: HurwiczUncertainty) {
   const { payoff, weight } = model;
   const weights: number[] = [];
+  const calculateWeight = (a, min, max) => {
+    if (model.isGain) {
+      return weight * payoff[a].states[max] + (
+        1 - weight
+      ) * payoff[a].states[min];
+    }
+    return weight * payoff[a].states[min] + (
+      1 - weight
+    ) * payoff[a].states[max];
+  };
 
   for (let a = 0; a < payoff.length; a++) {
     const max = maxIndex(payoff[a].states);
     const min = minIndex(payoff[a].states);
-    const w = weight * payoff[a].states[max] + (
-      1 - weight
-    ) * payoff[a].states[min];
+    const w = calculateWeight(a, min, max);
     weights.push(w);
   }
   const max = maxIndex(weights);
