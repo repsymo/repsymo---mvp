@@ -54,6 +54,7 @@ import {
   PageDocumentationComponent
 } from './components/page-documentation/page-documentation.component';
 import { WmComponent } from './page/wm/wm.component';
+import { UncertaintyComponent } from './page/uncertainty/uncertainty.component';
 
 const appRoutes: Routes = [
   {
@@ -76,6 +77,10 @@ const appRoutes: Routes = [
   {
     path: 'about',
     component: AboutComponent
+  },
+  {
+    path: 'uncertainty',
+    component: UncertaintyComponent
   }
 ];
 
@@ -97,7 +102,8 @@ const appRoutes: Routes = [
     ChainsResultComponent,
     InputPaneComponent,
     ChainItemComponent,
-    TabularDynamicInputComponent
+    TabularDynamicInputComponent,
+    UncertaintyComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
