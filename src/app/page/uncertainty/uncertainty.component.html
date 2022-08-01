@@ -61,7 +61,7 @@
 
 <!-- ===================================================================== -->
 
-<div class="my-4" [ngClass]="{ 'gone': inputDataStep === 0}">
+<div class="my-4" [ngClass]="{ 'gone': inputDataStep === 0 }">
   <p><strong>Payoff Matrix</strong></p>
 
   <table class="table tabular-input">
@@ -75,13 +75,13 @@
     <tbody *ngFor="let action of model.payoff; index as i;">
       <tr>
         <th scope="row">{{ i + 1 }}</th>
-        <ng-container *ngFor="let state of action.states; index as s">
+        <ng-container *ngFor="let state of action.states; index as j">
           <td>
             <div class="form-group">
               <input
                 class="form-control"
                 type="number"
-                [(ngModel)]="model.payoff[i].states[s]"
+                [(ngModel)]="model.payoff[i].states[j]"
               >
             </div>
           </td>
@@ -366,7 +366,7 @@
     <div>
       <p><strong>Action: </strong>{{ laplace.action + 1 }}</p>
       <p><strong>Laplace: </strong>{{ laplace.laplace }} of expected value</p>
-      <p><strong>Approach: </strong>1/{{ model.m }} uniform distribution
+      <p><strong>Approach: </strong>1/{{ model.n }} uniform distribution
                                     expectation</p>
     </div>
 

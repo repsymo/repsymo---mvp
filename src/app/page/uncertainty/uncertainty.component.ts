@@ -161,10 +161,10 @@ export class UncertaintyComponent extends Page implements OnInit,
     this.inputTableHeader = this.createInputTableHeader();
     this.model.payoff = [];
 
-    for (let i = 0; i < this.model.n; i++) {
+    for (let i = 0; i < this.model.m; i++) {
       const states: number[] = [];
 
-      for (let j = 0; j < this.model.m; j++) {
+      for (let j = 0; j < this.model.n; j++) {
         states.push(0);
       }
       this.model.payoff.push({ id: i + 1, states });
@@ -185,11 +185,11 @@ export class UncertaintyComponent extends Page implements OnInit,
   private createInputPaneItems(): InputItem[] {
     return [
       {
-        mkey: 'n',
+        mkey: 'm',
         label: { text: 'Number of actions' }
       },
       {
-        mkey: 'm',
+        mkey: 'n',
         label: { text: 'Number of natural states' }
       }
     ];
@@ -199,7 +199,7 @@ export class UncertaintyComponent extends Page implements OnInit,
     const header: string[] = [];
 
     header.push('Action');
-    for (let j = 1; j <= this.model.m; j++) {
+    for (let j = 1; j <= this.model.n; j++) {
       header.push(`State ${ j }`);
     }
     return header;
@@ -217,8 +217,8 @@ export class UncertaintyComponent extends Page implements OnInit,
 
   private newModel(): Uncertainty {
     return {
-      n: 0,
       m: 0,
+      n: 0,
       payoff: []
     };
   }
@@ -301,8 +301,8 @@ function getExamples(): ExampleModel[] {
       professor’s unpredictable mood. (Taha, 15-38).
       `,
       model: {
-        n: 3,
         m: 3,
+        n: 3,
         payoff: [
           { id: 1, states: [85, 60, 40] },
           { id: 2, states: [92, 85, 81] },
