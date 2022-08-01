@@ -49,15 +49,31 @@
 
       <!-- Render for multi column -->
       <ng-template #multiColumnBlock>
-        <td *ngFor="let key of keys(row)">
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="number"
-              [(ngModel)]="rows[y][key]"
-            >
-          </div>
-        </td>
+        <ng-container *ngIf="columnsVecKey===null">
+          <td *ngFor="let key of keys(row)">
+            <div class="form-group">
+              <input
+                class="form-control"
+                type="number"
+                [(ngModel)]="rows[y][key]"
+              >
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Render for multi column without column labels (plain column
+        vector)-->
+        <ng-container *ngIf="columnsVecKey!==null">
+          <td *ngFor="let value of rows[y][columnsVecKey]; index as x; trackBy:trackByIdx">
+            <div class="form-group">
+              <input
+                class="form-control"
+                type="number"
+                [(ngModel)]="rows[y][columnsVecKey][x]"
+              /> <!-- e.g. payoff[0].states[x] -->
+            </div>
+          </td>
+        </ng-container>
       </ng-template>
     </tr>
   </tbody>

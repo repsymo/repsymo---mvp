@@ -29,6 +29,9 @@ export class TabularInputComponent implements OnInit {
    *
    * Multi-column
    * rows = [ { 'c1': 0, 'c2': 0, 'c3': 0 }, ...,  { 'c1': 0, 'c2': 0, 'c3': 0 } ]
+   *
+   * Multi-colum with vector as columns (not-labeled columns)
+   * rows = [{id:1,states:[1,2,3]}]
    */
   readonly keys: any;
 
@@ -43,6 +46,9 @@ export class TabularInputComponent implements OnInit {
 
   @Input()
   readonly multiColumn: boolean;
+
+  @Input()
+  readonly columnsVecKey: string = null;
 
   @Input()
   readonly startIndex: number;
@@ -78,5 +84,9 @@ export class TabularInputComponent implements OnInit {
 
   isMultiColumn(): boolean {
     return this.multiColumn;
+  }
+
+  trackByIdx(index: number, obj: any): any {
+    return index;
   }
 }
