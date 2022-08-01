@@ -184,17 +184,18 @@ export function laplace(model: Uncertainty) {
 
 export interface Savage {
   model: Uncertainty;
-  regret: number[];
+  regret: Action[];
+  maxima: number[];
   action: number;
   savage: number;
 }
 
-export function savage(model: Uncertainty) {
+export function savage(model: Uncertainty): Savage {
   const { payoff, isGain } = model;
-  const maxColumn = idx => maxIndex(payoff.map(row => row[idx]));
-  const minColumn = idx => minIndex(payoff.map(row => row[idx]));
-  const gainValue = (i, j) => payoff[maxColumn(j)][j] - payoff[i][j];
-  const lossValue = (i, j) => payoff[i][j] - payoff[minColumn(j)][j];
+  const maxColumn = idx => maxIndex(payoff.map(row => row.states[idx]));
+  const minColumn = idx => minIndex(payoff.map(row => row.states[idx]));
+  const gainValue = (i, j) => payoff[maxColumn(j)].states[j] - payoff[i].states[j];
+  const lossValue = (i, j) => payoff[i].states[j] - payoff[minColumn(j)].states[j];
   const regretMatrix = () => {
     const matrix: Action[] = [];
 
@@ -212,8 +213,9 @@ export function savage(model: Uncertainty) {
   return {
     model,
     regret,
+    maxima: mm.maxima,
     action: mm.action,
-    savage: payoff[mm.action]
+    savage: mm.minimax
   };
 }
 
