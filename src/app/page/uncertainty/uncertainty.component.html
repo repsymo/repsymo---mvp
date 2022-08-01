@@ -34,7 +34,7 @@
       id="flexSwitchCheckChecked"
       checked
       [(ngModel)]="model.isGain"
-      (change)="onSolve()"
+      (change)="onGainPayoffChange()"
     /> <label
     class="form-check-label"
     for="flexSwitchCheckChecked"
@@ -52,7 +52,6 @@
   <div class="next-button-container">
     <button
       class="btn btn-primary"
-      [ngClass]="{ 'gone': inputDataStep > 0 }"
       (click)="onNext()"
     >
       Next
@@ -60,37 +59,16 @@
   </div>
 </div>
 
-<!-- ===================================================================== -->
-
-<div class="my-4" [ngClass]="{ 'gone': inputDataStep === 0}">
-  <p><strong>Payoff Matrix</strong></p>
-
-  <table class="table tabular-input">
-    <thead>
-      <tr>
-        <th scope="col" *ngFor="let headerItem of inputTableHeader">
-          {{ headerItem }}
-        </th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let action of model.payoff; index as i;">
-      <tr>
-        <th scope="row">{{ i + 1 }}</th>
-        <ng-container *ngFor="let state of action.states; index as s">
-          <td>
-            <div class="form-group">
-              <input
-                class="form-control"
-                type="number"
-                [(ngModel)]="model.payoff[i].states[s]"
-              >
-            </div>
-          </td>
-        </ng-container>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<app-tabular-input
+  class="tabular-input"
+  [ngClass]="{ 'gone': inputDataStep === 0 }"
+  [header]="inputTableHeader"
+  [rows]="model.payoff"
+  [multiColumn]="true"
+  [columnsVecKey]="'states'"
+  [startIndex]="1"
+>
+</app-tabular-input>
 
 <!-- ===================================================================== -->
 
@@ -99,7 +77,7 @@
   [ngClass]="{ 'gone': inputDataStep === 0 }"
 >
   <button
-    class="btn btn-primary"
+    class="btn btn-primary w-100"
     (click)="onSolve()"
   >
     Solve
@@ -109,6 +87,7 @@
 <div
   id="solutionPanel"
   [ngClass]="{ 'gone': inputDataStep < 2 }"
+  *ngIf="inputDataStep >= 2"
 >
   <div class="divider"></div>
 
@@ -232,17 +211,18 @@
     <div>
       <p><strong>Action: </strong>{{ minimin.action + 1 }}</p>
       <p><strong>Minimin: </strong>{{ minimin.minimin }}</p>
-      <p *ngIf="model.isGain"><strong>Approach: </strong>
-        The worst of the worst, pessimist 👎👎, liberal</p>
-      <p *ngIf="!model.isGain"><strong>Approach: </strong>
-        The best of the best, optimist 👍👍, liberal</p>
+      <p *ngIf="model.isGain"><strong>Approach: </strong> The worst of the
+                                                          worst, pessimist 👎👎,
+                                                          liberal</p>
+      <p *ngIf="!model.isGain"><strong>Approach: </strong> The best of the best,
+                                                           optimist 👍👍,
+                                                           liberal</p>
     </div>
 
     <div class="divider"></div>
   </div>
 
   <!-- ===================================================================== -->
-
 
   <!-- ===================================================================== -->
   <!--MAXIMAX-->
@@ -279,10 +259,12 @@
     <div>
       <p><strong>Action: </strong>{{ maximax.action + 1 }}</p>
       <p><strong>Maximax: </strong>{{ maximax.maximax }}</p>
-      <p *ngIf="model.isGain"><strong>Approach: </strong>The best of the best, optimist 👍👍,
-                                    liberal</p>
-      <p *ngIf="!model.isGain"><strong>Approach: </strong>
-        The worst of the worst, pessimist 👎👎, liberal</p>
+      <p *ngIf="model.isGain"><strong>Approach: </strong>The best of the best,
+                                                         optimist 👍👍, liberal
+      </p>
+      <p *ngIf="!model.isGain"><strong>Approach: </strong> The worst of the
+                                                           worst, pessimist
+                                                           👎👎, liberal</p>
     </div>
 
     <div class="divider"></div>
@@ -324,14 +306,13 @@
     <div>
       <p><strong>Action: </strong>{{ hurwicz.action + 1 }}</p>
       <p><strong>Hurwicz: </strong>{{ hurwicz.hurwicz }} of weight</p>
-      <p><strong>Approach: </strong>{{ alpha*100 }}% optimistic</p>
+      <p><strong>Approach: </strong>{{ alpha * 100 }}% optimistic</p>
     </div>
 
     <div class="divider"></div>
   </div>
 
   <!-- ===================================================================== -->
-
 
   <!--LAPLACE-->
   <div class="my-4">
@@ -367,7 +348,7 @@
     <div>
       <p><strong>Action: </strong>{{ laplace.action + 1 }}</p>
       <p><strong>Laplace: </strong>{{ laplace.laplace }} of expected value</p>
-      <p><strong>Approach: </strong>1/{{ model.m }} uniform distribution
+      <p><strong>Approach: </strong>1/{{ model.n }} uniform distribution
                                     expectation</p>
     </div>
 
@@ -375,7 +356,6 @@
   </div>
 
   <!-- ===================================================================== -->
-
 
   <!--SAVAGE-->
   <div class="my-4">
@@ -403,7 +383,8 @@
           </ng-container>
           <td>
             <strong
-              *ngIf="i === savage.action">{{savage.maxima[i]}}</strong>
+              *ngIf="i === savage.action"
+            >{{savage.maxima[i]}}</strong>
             <div *ngIf="i !== savage.action">{{savage.maxima[i]}}</div>
           </td>
         </tr>
@@ -418,6 +399,5 @@
   </div>
 
   <!-- ===================================================================== -->
-
 
 </div>
