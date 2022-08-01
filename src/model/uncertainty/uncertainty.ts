@@ -14,8 +14,8 @@
 
 export interface Uncertainty {
   payoff: Action[];
-  n?: number;
-  m?: number;
+  m?: number; // # of Actions
+  n?: number; // # of States
   isGain?: boolean;
 }
 
@@ -198,9 +198,9 @@ export function savage(model: Uncertainty) {
   const regretMatrix = () => {
     const matrix: Action[] = [];
 
-    for (let i = 0; i < model.n; i++) {
+    for (let i = 0; i < model.m; i++) {
       matrix.push({ id: i + 1, states: [] });
-      for (let j = 0; j < model.m; j++) {
+      for (let j = 0; j < model.n; j++) {
         const value = isGain ? gainValue(i, j) : lossValue(i, j);
         matrix[i].states.push(value);
       }
