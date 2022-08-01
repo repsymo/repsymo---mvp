@@ -93,6 +93,12 @@ export class UncertaintyComponent extends Page implements OnInit,
     return false;
   }
 
+  onGainPayoffChange() {
+    if (this.inputDataStep > 1) {
+      this.onSolve();
+    }
+  }
+
   onSolve() {
     try {
       this.solveMinimax();
