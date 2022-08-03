@@ -178,7 +178,7 @@
 
   <!-- ===================================================================== -->
   <!--MINIMIN-->
-  <div>
+  <div *ngIf="!model.isGain">
     <p><strong>MINIMIN</strong></p>
 
     <table class="table">
@@ -211,12 +211,8 @@
     <div>
       <p><strong>Action: </strong>{{ minimin.action + 1 }}</p>
       <p><strong>Minimin: </strong>{{ minimin.minimin }}</p>
-      <p *ngIf="model.isGain"><strong>Approach: </strong> The worst of the
-                                                          worst, pessimist 👎👎,
-                                                          liberal</p>
-      <p *ngIf="!model.isGain"><strong>Approach: </strong> The best of the best,
-                                                           optimist 👍👍,
-                                                           liberal</p>
+      <p><strong>Approach: </strong>The best of the best, optimist 👍👍,
+                                    liberal, minimizes the minimum risk</p>
     </div>
 
     <div class="divider"></div>
@@ -226,7 +222,7 @@
 
   <!-- ===================================================================== -->
   <!--MAXIMAX-->
-  <div class="my-4">
+  <div *ngIf="model.isGain" class="my-4">
     <p><strong>MAXIMAX</strong></p>
 
     <table class="table">
@@ -259,12 +255,8 @@
     <div>
       <p><strong>Action: </strong>{{ maximax.action + 1 }}</p>
       <p><strong>Maximax: </strong>{{ maximax.maximax }}</p>
-      <p *ngIf="model.isGain"><strong>Approach: </strong>The best of the best,
-                                                         optimist 👍👍, liberal
-      </p>
-      <p *ngIf="!model.isGain"><strong>Approach: </strong> The worst of the
-                                                           worst, pessimist
-                                                           👎👎, liberal</p>
+      <p><strong>Approach: </strong>The best of the best, optimist 👍👍,
+                                    liberal, maximizes the maximum gain</p>
     </div>
 
     <div class="divider"></div>
