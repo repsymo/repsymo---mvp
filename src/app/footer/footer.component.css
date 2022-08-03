@@ -17,7 +17,7 @@ footer {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-footer > p {
+footer p {
   font-size: 14px;
   font-weight: bolder;
   text-align: left;
@@ -26,13 +26,6 @@ footer > p {
 
 footer > p.copyright {
   font-style: italic;
-}
-
-footer > div {
-  position: absolute;
-  top: 50%;
-  right: 32px;
-  transform: translateY(-50%);
 }
 
 footer i {
@@ -51,7 +44,26 @@ footer a:hover {
 }
 
 @media only screen and (min-width: 800px) {
+  footer {
+    padding: 64px;
+  }
+
+  footer > div {
+    position: absolute;
+    top: 50%;
+    right: 32px;
+    transform: translateY(-50%);
+  }
+
+  footer > div {
+    position: absolute;
+  }
+
   footer > p {
     text-align: center;
+  }
+
+  .follow-label {
+    width: 220px;
   }
 }
