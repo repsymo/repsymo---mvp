@@ -111,7 +111,7 @@ export function minimin(model: Uncertainty): Minimin {
     const min = minIndex(payoff[a].states);
     minima.push(payoff[a].states[min]);
   }
-  const min = maxIndex(minima);
+  const min = minIndex(minima);
   return {
     model,
     minima,
