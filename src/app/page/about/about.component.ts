@@ -20,7 +20,7 @@ import { VERSION } from '../../../main';
 })
 export class AboutComponent implements OnInit {
   private static readonly STR: object = {
-    appName: '2DP Repsymo Solver',
+    appName: '2DP Repsymo™ Solver',
     appLongName: 'Deterministic Dynamic Programming Repsymo Solver',
     aboutMsg: `This app implements several deterministic dynamic programming models to solve a
               considerable amount of real world problems in operations research.`,
