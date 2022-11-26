@@ -106,7 +106,7 @@ const appRoutes: Routes = [
     UncertaintyComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(appRoutes, {}),
     BrowserModule,
     FormsModule,
     ServiceWorkerModule.register(
