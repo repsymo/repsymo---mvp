@@ -127,5 +127,7 @@
       }
     }
   },
-  "defaultProject": "2DP-Repsymo-Solver"
+  "cli": {
+    "analytics": false
+  }
 }
