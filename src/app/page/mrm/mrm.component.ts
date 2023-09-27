@@ -38,6 +38,7 @@ export class MrmComponent extends Page implements OnInit,
   model: MachineReplacement;
   inputDataStep: number;
   timeUnitLabel: string;
+  ss: string[];
 
   constructor(ioService: IOService) {
     super(ioService, MrmComponent.MODEL_TYPE);
@@ -201,6 +202,7 @@ export class MrmComponent extends Page implements OnInit,
     canvas.solutionMark.init(this.solver.stages);
 
     canvas.render();
+    this.ss = canvas.ss.ss;
   }
 
   private updateResultChains() {

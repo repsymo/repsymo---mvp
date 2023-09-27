@@ -8,6 +8,7 @@ import {
   SolutionStageRow,
   TreeNode
 } from '../../../model/machine-replacement';
+import {Screenshots} from '../../../sim/sim';
 
 export const parentElId = 'solutionsTreeParent';
 
@@ -57,6 +58,8 @@ export class SolutionsTreeCanvas extends MrmCanvas {
   public rootNode: TreeNode;
   private radiusPx: number;
 
+  ss: Screenshots;
+
   constructor() {
     super();
     this.axesCanvas = new TreeAxesCanvas();
@@ -67,6 +70,8 @@ export class SolutionsTreeCanvas extends MrmCanvas {
   init(canvasEl) {
     super.init(canvasEl);
     this.axesCanvas.init(canvasEl);
+
+    this.ss = new Screenshots(canvasEl);
   }
 
   render() {
@@ -82,6 +87,8 @@ export class SolutionsTreeCanvas extends MrmCanvas {
     const memoization = new Set<string>();
 
     this.drawNode(ctx, this.rootNode, memoization);
+    this.ss.saveLast();
+    this.ss.download();
   }
 
   private drawNode(ctx: CanvasRenderingContext2D, node: TreeNode, memoization: Set<string>) {
@@ -90,11 +97,16 @@ export class SolutionsTreeCanvas extends MrmCanvas {
     const hasNeverBeenDrawn = !memoization.has(point2dStr);
 
     if (hasNeverBeenDrawn) {
+      this.ss.save(`first drawing of node (${node.decisionYear},${node.machineAge})...`);
       this.drawNodeLines(ctx, node, memoization);
+    }
+    else {
+      this.ss.save(`partial drawing of node (${node.decisionYear},${node.machineAge})...`);
     }
     this.drawNodeCircle(ctx, node);
     this.drawNodeContent(ctx, node);
     memoization.add(point2dStr);
+    this.ss.save(`...(${node.decisionYear},${node.machineAge}) node done`);
   }
 
   private drawNodeLines(ctx: CanvasRenderingContext2D, node: TreeNode, memoization: Set<string>) {
@@ -106,11 +118,13 @@ export class SolutionsTreeCanvas extends MrmCanvas {
     const drawLineTo = (next: TreeNode) => {
       const nextX = (next.decisionYear * this.axesCanvas.cellSize) + padding;
       const nextY = this.height - (next.machineAge * this.axesCanvas.cellSize) - padding;
+      const color = this.getLineColor(node, next);
       ctx.strokeStyle = this.getLineColor(node, next);
       ctx.beginPath();
       ctx.moveTo(x, y);
       ctx.lineTo(nextX, nextY);
       ctx.stroke();
+      return color;
     };
 
     /**
@@ -130,26 +144,26 @@ export class SolutionsTreeCanvas extends MrmCanvas {
     const drawUpRightLabel = (next: TreeNode, label: string) => {
       const { triangleX, triangleY, hypotenuse } = triangle(next);
       const labelX = x + (triangleX * this.radiusPx / hypotenuse);
-      const labelY = y - (triangleY * this.radiusPx / hypotenuse) - 8;
+      const labelY = y - (triangleY * this.radiusPx / hypotenuse) - 16;
       ctx.fillText(label, labelX, labelY);
     };
 
     const drawDownRightLabel = (next: TreeNode, label: string) => {
       const { triangleX, triangleY, hypotenuse } = triangle(next);
-      const labelX = x + (triangleX * this.radiusPx / hypotenuse) - 4;
-      const labelY = y + (triangleY * this.radiusPx / hypotenuse) + 16;
+      const labelX = x + (triangleX * this.radiusPx / hypotenuse) - 8;
+      const labelY = y + (triangleY * this.radiusPx / hypotenuse) + 32;
       ctx.fillText(label, labelX, labelY);
     };
 
     const drawRightLabel = (next: TreeNode, label: string) => {
       const { triangleX, triangleY, hypotenuse } = triangle(next);
-      const labelX = x + (triangleX * this.radiusPx / hypotenuse) + 4;
-      const labelY = y + (triangleY * this.radiusPx / hypotenuse) + 16;
+      const labelX = x + (triangleX * this.radiusPx / hypotenuse) + 8;
+      const labelY = y + (triangleY * this.radiusPx / hypotenuse) + 32;
       ctx.fillText(label, labelX, labelY);
     };
 
     const drawLabelTo = (next: TreeNode, label: string) => {
-      ctx.font = '12px Poppins';
+      ctx.font = '24px Poppins';
       ctx.textAlign = 'center';
       ctx.fillStyle = 'black';
 
@@ -164,16 +178,23 @@ export class SolutionsTreeCanvas extends MrmCanvas {
       }
     };
 
+
     if (node.k) {
-      drawLineTo(node.k);
+      const color = drawLineTo(node.k) === 'black' ? '' : ' (solution)';
+      this.ss.save('line K'+color);
       drawLabelTo(node.k, 'K');
+      this.ss.save('label K');
+
       this.drawNode(ctx, node.k, memoization); // Recursive call
     }
     if (node.r) {
-      drawLineTo(node.r);
+      const color = drawLineTo(node.r) === 'black' ? '' : ' (solution)';
+      this.ss.save('line R'+color);
       drawLabelTo(node.r, 'R');
+      this.ss.save('label R');
       this.drawNode(ctx, node.r, memoization); // Recursive call
     }
+    this.ss.save('...node lines done');
   }
 
   private drawNodeCircle(ctx: CanvasRenderingContext2D, node: TreeNode) {
@@ -184,17 +205,25 @@ export class SolutionsTreeCanvas extends MrmCanvas {
     ctx.strokeStyle = 'black';
     ctx.fill();
     ctx.stroke();
-    this.solutionMark.fillNodeSolutionMarkIfAny(
+    const sol=this.solutionMark.fillNodeSolutionMarkIfAny(
       ctx,
       node,
       x,
       y,
       this.radiusPx
     );
+
+    if (sol) {
+      this.ss.save('node circle (solution)');
+
+    }
+    else {
+      this.ss.save('node circle');
+    }
   }
 
   private drawNodeContent(ctx: CanvasRenderingContext2D, node: TreeNode) {
-    ctx.font = '24px Poppins';
+    ctx.font = '48px Poppins';
     ctx.textAlign = 'center';
     ctx.fillStyle = 'black';
     const txt = String(node.machineAge);
@@ -202,6 +231,7 @@ export class SolutionsTreeCanvas extends MrmCanvas {
     const txtHeight = txtMetrics.actualBoundingBoxAscent + txtMetrics.actualBoundingBoxDescent;
     const { x, y } = this.getNodeCP(node);
     ctx.fillText(txt, x, y + txtHeight / 2);
+    this.ss.save(`node content: ${txt}`);
   }
 
   private getNodeCP(node: TreeNode) {
@@ -225,8 +255,8 @@ export class TreeAxesCanvas extends MrmCanvas {
   constructor() {
     super();
     this.padding = TreeAxesCanvas.AXIS_LABEL_SIZE_PX;
-    this.maxAbscissa = 8;
-    this.maxOrdinate = 10;
+    this.maxAbscissa = 6;
+    this.maxOrdinate = 7;
   }
 
   get cellSize() {
@@ -307,13 +337,14 @@ class NodeSolutionMark {
     });
 
     if (!this.solutions.has(point2dStr)) {
-      return;
+      return false;
     }
     ctx.beginPath();
     ctx.arc(x, y, radiusPx, 0, 2 * Math.PI);
     ctx.fillStyle = '#b3e5fc';
     ctx.fill();
     ctx.stroke();
+    return true;
   }
 
   areConnected(node: TreeNode, nextNode: TreeNode) {

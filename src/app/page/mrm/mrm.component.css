@@ -3,8 +3,8 @@
 /* This file is part of https://github.com/repsymo/2dp-repsymo-solver */
 
 #solutionsTreeParent {
-  width: 800px;
-  height: 960px;
+  width: 1200px;
+  height: 1400px;
   overflow-x: auto;
 }
 
@@ -12,4 +12,8 @@
   #solutionsTreeParent {
     margin: auto;
   }
+}
+
+.aaa{
+  width: 22%;
 }
