@@ -9,9 +9,9 @@
 </app-options-bar>
 
 <div id="ss">
-  <div *ngFor="let s of ss; index as i"  style="display: inline-block;
+  <div *ngFor="let s of shots; index as i" style="display: inline-block;
     border:1px solid rgba(0,0,0,0.3); margin:16px;" class="aaa">
-    <img [src]="s" alt="" style="display: block;width: 100%;">
+    <img [src]="s.screenshot" alt="" style="display: block;width: 100%;">
     <!--<div>{{ i }}</div>-->
   </div>
 </div>

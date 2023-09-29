@@ -23,6 +23,7 @@ import {
 import { TimeUnit } from '../../time-unit';
 import { Page } from '../page';
 import { SolutionsTreeCanvas } from './mrm-canvas';
+import {Shot} from '../../../sim/sim';
 
 @Component({
   selector: 'app-mrm',
@@ -38,7 +39,7 @@ export class MrmComponent extends Page implements OnInit,
   model: MachineReplacement;
   inputDataStep: number;
   timeUnitLabel: string;
-  ss: string[];
+  shots: Shot[];
 
   constructor(ioService: IOService) {
     super(ioService, MrmComponent.MODEL_TYPE);
@@ -202,7 +203,7 @@ export class MrmComponent extends Page implements OnInit,
     canvas.solutionMark.init(this.solver.stages);
 
     canvas.render();
-    this.ss = canvas.ss.ss;
+    this.shots = canvas.screenshots.shots;
   }
 
   private updateResultChains() {
