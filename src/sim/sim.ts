@@ -36,6 +36,7 @@ export class Screenshots {
                 {
                     title: 'Solution Tree Recursive Drawing',
                     home: 'mathsoftware.engineer',
+                    subHome: 'Repsymo',
                     abstract
                 }
             )
@@ -43,14 +44,19 @@ export class Screenshots {
     }
 
     saveLast() {
-        this.shots.push(getShot(
+        const last = getShot(
             this.canvas,
             {
                 title: 'MRM Solution Tree',
                 subHome: 'Repsymo',
                 home: 'math.software'
             }
-        ));
+        );
+
+        this.shots.push(last);
+        this.shots.push(last);
+        this.shots.push(last);
+        this.shots.push(last);
     }
 
     download() {
