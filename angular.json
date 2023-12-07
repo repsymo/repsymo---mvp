@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "2DP-Repsymo-Solver:build"
+            "buildTarget": "2DP-Repsymo-Solver:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "2DP-Repsymo-Solver:build:production"
+              "buildTarget": "2DP-Repsymo-Solver:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "2DP-Repsymo-Solver:build"
+            "buildTarget": "2DP-Repsymo-Solver:build"
           }
         },
         "test": {

@@ -10,7 +10,8 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
-import 'zone.js/dist/zone-testing';
+import 'zone.js';
+import 'zone.js/testing';
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
