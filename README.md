@@ -4,12 +4,12 @@
 
 # 2DP Repsymo Solver
 
-[![Project](https://raw.githubusercontent.com/repsymo/2dp-repsymo-solver/static/badge.svg)](https://repsymo.com)
+[![Project](https://raw.githubusercontent.com/repsymo/repsymo---mvp/static/badge.svg)](https://rsm.math.software)
 &nbsp;
-[![GitHub Repository](https://img.shields.io/static/v1?label=GITHUB&message=REPOSITORY&labelColor=555&color=0277bd&style=for-the-badge&logo=GITHUB)](https://github.com/repsymo/2dp-repsymo-solver)
+[![GitHub Repository](https://img.shields.io/static/v1?label=GITHUB&message=REPOSITORY&labelColor=555&color=0277bd&style=for-the-badge&logo=GITHUB)](https://github.com/repsymo/repsymo---mvp)
 
-[![GitHub Project License](https://img.shields.io/github/license/repsymo/2dp-repsymo-solver.svg?style=flat-square)](https://github.com/repsymo/2dp-repsymo-solver/blob/main/LICENSE)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d7e97a65-7a32-48ac-9fbf-e840c28235d8/deploy-status)](https://app.netlify.com/sites/2dp-repsymo/deploys)
+[![GitHub Project License](https://img.shields.io/github/license/repsymo/repsymo---mvp.svg?style=flat-square)](https://github.com/repsymo/repsymo---mvp/blob/main/LICENSE)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d7e97a65-7a32-48ac-9fbf-e840c28235d8/deploy-status)](https://app.netlify.com/sites/repsymo/deploys)
 
 Operations Research Solver App for Deterministic Dynamic Programming Problems
 targeted at educational purposes.
