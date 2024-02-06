@@ -4,12 +4,12 @@
 
 import { Directive, OnDestroy, OnInit } from "@angular/core";
 import { of, Subscription } from "rxjs";
-import { VERSION } from "../../main";
 import { ModelFile } from "../model-file";
 import { IOService } from "../../service/io.service";
 import {
     Example,
 } from "../components/example-statement/example-statement.component";
+import { APP_SEMVER, APP_VERSION } from "../../info";
 
 @Directive()
 export abstract class Page implements OnInit,
@@ -116,7 +116,7 @@ export abstract class Page implements OnInit,
                 )
                 || "";
             const fileObj: ModelFile = {
-                appVersion: VERSION,
+                appVersion: APP_SEMVER,
                 modelType: this.modelType,
                 statement: statement,
                 problemModel: model,
