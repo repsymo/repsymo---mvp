@@ -4,6 +4,22 @@
 
 @import 'font.css';
 
+:root {
+    --content-background-color: #ffffff;
+    --title-text-color: #212121;
+    --content-text-color: #424242;
+    --secondary-text-color: #616161;
+    --third-text-color: #757575;
+    --accent-color: #607d8b;
+    --hover-background-color: #f5f5f5;
+    --accent-blue-text-color: #1565c0;
+}
+
+:root {
+    --content-padding: 5%;
+    --nav-height: 4rem;
+}
+
 * {
     position: relative;
     box-sizing: border-box;
@@ -18,8 +34,10 @@ html {
 }
 
 body {
+    font-size: 16px;
     height: 100%;
-    background-color: #fafafa;
+    background-color: var(--content-background-color);
+    color: var(--content-text-color);
 }
 
 .container {
