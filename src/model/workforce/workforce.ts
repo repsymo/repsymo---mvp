@@ -1,6 +1,6 @@
 // Copyright (c) 2019-2022 Tobias Briones. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-or-later
-// This file is part of https://github.com/repsymo/2dp-repsymo-solver
+// This file is part of https://github.com/repsymo/repsymo---mvp
 
 /**
  * Workforce problem model.
