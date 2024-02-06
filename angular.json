@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "2DP-Repsymo-Solver": {
+    "repsymo": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/2dp-repsymo-solver",
+            "outputPath": "dist",
             "index": "src/index.dev.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "2DP-Repsymo-Solver:build"
+            "buildTarget": "repsymo:build"
           },
           "configurations": {
             "production": {
-              "buildTarget": "2DP-Repsymo-Solver:build:production"
+              "buildTarget": "repsymo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "2DP-Repsymo-Solver:build"
+            "buildTarget": "repsymo:build"
           }
         },
         "test": {
