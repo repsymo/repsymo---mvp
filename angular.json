@@ -116,11 +116,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "2DP-Repsymo-Solver:serve"
+            "devServerTarget": "repsymo:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "2DP-Repsymo-Solver:serve:production"
+              "devServerTarget": "repsymo:serve:production"
             }
           }
         }
