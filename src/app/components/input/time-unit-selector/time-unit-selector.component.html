@@ -3,23 +3,23 @@
 <!-- This file is part of https://github.com/repsymo/repsymo---mvp -->
 
 <div class="form-group">
-  <label
-    class="input-group-text"
-    for="timeUnitSelect"
-  >
-    Select a unit of time
-  </label>
-  <select
-    id="timeUnitSelect"
-    class="form-select"
-    [(ngModel)]="selectedValue"
-    (change)="onChange()"
-  >
-    <option
-      *ngFor="let unit of timeUnits"
-      [ngValue]="unit"
+    <label
+      class="input-group-text"
+      for="timeUnitSelect"
     >
-      {{ unit.label }}
-    </option>
-  </select>
+        Select a unit of time
+    </label>
+    <select
+      (change)="onChange()"
+      [(ngModel)]="selectedValue"
+      class="form-select"
+      id="timeUnitSelect"
+    >
+        <option
+          *ngFor="let unit of timeUnits"
+          [ngValue]="unit"
+        >
+            {{ unit.label }}
+        </option>
+    </select>
 </div>

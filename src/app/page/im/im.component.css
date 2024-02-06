@@ -3,17 +3,17 @@
 /* This file is part of https://github.com/repsymo/repsymo---mvp */
 
 .next-button-container > button {
-  width: 25%;
-  margin-bottom: 32px;
-  float: right;
+    width: 25%;
+    margin-bottom: 32px;
+    float: right;
 }
 
 .solve-button-container {
-  display: flex;
-  margin: 32px 0;
+    display: flex;
+    margin: 32px 0;
 }
 
 .solve-button-container > button {
-  width: 80%;
-  margin: auto;
+    width: 80%;
+    margin: auto;
 }

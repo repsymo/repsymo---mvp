@@ -3,7 +3,7 @@
 // This file is part of https://github.com/repsymo/repsymo---mvp
 
 export interface TimeUnit {
-  id: number;
-  label: string;
-  singular: string;
+    id: number;
+    label: string;
+    singular: string;
 }

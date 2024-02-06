@@ -3,8 +3,8 @@
 /* This file is part of https://github.com/repsymo/repsymo---mvp */
 
 @font-face {
-  font-family: 'Poppins';
-  src: url('assets/fonts/poppins/Poppins-Regular.woff2') format('woff2'),
-       url('assets/fonts/poppins/Poppins-Regular.ttf') format('truetype');
-  font-display: swap;
+    font-family: 'Poppins';
+    src: url('assets/fonts/poppins/Poppins-Regular.woff2') format('woff2'),
+    url('assets/fonts/poppins/Poppins-Regular.ttf') format('truetype');
+    font-display: swap;
 }

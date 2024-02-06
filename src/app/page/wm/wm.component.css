@@ -3,50 +3,50 @@
 /* This file is part of https://github.com/repsymo/repsymo---mvp */
 
 #solutionPanel > .result > .report {
-  margin-top: 32px;
+    margin-top: 32px;
 }
 
 #solutionPanel > .result > .report > p {
-  font-size: 18px;
-  font-weight: bold;
-  text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .scale-y {
-  transform: scaleY(0);
+    transform: scaleY(0);
 }
 
 .next-button-container {
-  width: 100%;
+    width: 100%;
 }
 
 .next-button-container > button {
-  width: 25%;
-  margin-bottom: 32px;
-  float: right;
+    width: 25%;
+    margin-bottom: 32px;
+    float: right;
 }
 
 .tabular-input {
-  transition: all 400ms;
+    transition: all 400ms;
 }
 
 .solve-button-container {
-  display: flex;
-  margin-bottom: 32px;
+    display: flex;
+    margin-bottom: 32px;
 }
 
 .solve-button-container > button {
-  width: 80%;
-  margin: auto;
+    width: 80%;
+    margin: auto;
 }
 
 @media only screen and (min-width: 800px) {
-  .page > .top-panel {
-    width: 680px;
-  }
+    .page > .top-panel {
+        width: 680px;
+    }
 
-  .tabular-input {
-    width: 60%;
-    margin: 16px auto;
-  }
+    .tabular-input {
+        width: 60%;
+        margin: 16px auto;
+    }
 }

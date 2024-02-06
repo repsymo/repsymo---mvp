@@ -2,28 +2,28 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // This file is part of https://github.com/repsymo/repsymo---mvp
 
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { PageDocumentationComponent } from './page-documentation.component';
+import { PageDocumentationComponent } from "./page-documentation.component";
 
-describe('PageDocumentationComponent', () => {
-  let component: PageDocumentationComponent;
-  let fixture: ComponentFixture<PageDocumentationComponent>;
+describe("PageDocumentationComponent", () => {
+    let component: PageDocumentationComponent;
+    let fixture: ComponentFixture<PageDocumentationComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [PageDocumentationComponent]
-    })
-           .compileComponents();
-  }));
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ PageDocumentationComponent ],
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PageDocumentationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(PageDocumentationComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it("should create", () => {
+        expect(component).toBeTruthy();
+    });
 });

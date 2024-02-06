@@ -3,13 +3,13 @@
 /* This file is part of https://github.com/repsymo/repsymo---mvp */
 
 #solutionsTreeParent {
-  width: 800px;
-  height: 960px;
-  overflow-x: auto;
+    width: 800px;
+    height: 960px;
+    overflow-x: auto;
 }
 
 @media (min-width: 800px) {
-  #solutionsTreeParent {
-    margin: auto;
-  }
+    #solutionsTreeParent {
+        margin: auto;
+    }
 }

@@ -46,5 +46,5 @@ the [GNU General Public License v3.0 or later License](LICENSE).
 
 ---
 
-This project contains assets from third parties, see [NOTICE](NOTICE.md) for 
+This project contains assets from third parties, see [NOTICE](NOTICE.md) for
 more details.

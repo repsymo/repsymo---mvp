@@ -3,22 +3,22 @@
 /* This file is part of https://github.com/repsymo/repsymo---mvp */
 
 :host {
-  display: inline-block;
-  width: 64px;
-  height: 64px;
-  margin: 8px 32px 8px 0;
-  border: 2px solid #212121;
-  text-align: center;
-  line-height: 56px;
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    margin: 8px 32px 8px 0;
+    line-height: 56px;
+    text-align: center;
+    border: 2px solid #212121;
 }
 
 :host::after {
-  content: '->';
-  position: absolute;
-  top: 0;
-  right: -24px;
+    content: '->';
+    position: absolute;
+    top: 0;
+    right: -24px;
 }
 
 :host.end::after {
-  content: '';
+    content: '';
 }

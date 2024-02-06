@@ -9,76 +9,76 @@
 </app-options-bar>
 
 <div class="top-panel">
-  <app-input-pane
-    [model]="model"
-    [items]="inputPaneItems"
-    (timeUnitChange)="onTimeUnitChange($event)"
-  >
-  </app-input-pane>
-  <div class="next-button-container">
-    <button
-      class="btn btn-primary"
-      (click)="onNext()"
+    <app-input-pane
+      (timeUnitChange)="onTimeUnitChange($event)"
+      [items]="inputPaneItems"
+      [model]="model"
     >
-      Next
-    </button>
-  </div>
+    </app-input-pane>
+    <div class="next-button-container">
+        <button
+          (click)="onNext()"
+          class="btn btn-primary"
+        >
+            Next
+        </button>
+    </div>
 </div>
 
 <app-tabular-input
-  class="tabular-input"
-  [ngClass]="{ 'gone': inputDataStep === 0 }"
   [header]="inputTableHeader"
-  [timeUnit]="timeUnitLabel"
-  [rows]="model.data"
   [multiColumn]="true"
+  [ngClass]="{ 'gone': inputDataStep === 0 }"
+  [rows]="model.data"
   [startIndex]="0"
+  [timeUnit]="timeUnitLabel"
+  class="tabular-input"
 >
 </app-tabular-input>
 
 <div
-  class="solve-button-container"
   [ngClass]="{ 'gone': inputDataStep === 0 }"
+  class="solve-button-container"
 >
-  <button
-    class="btn btn-primary"
-    (click)="onSolve()"
-  >
-    Solve
-  </button>
+    <button
+      (click)="onSolve()"
+      class="btn btn-primary"
+    >
+        Solve
+    </button>
 </div>
 
 <div
-  id="solutionPanel"
   [ngClass]="{ 'gone': inputDataStep < 2 }"
+  id="solutionPanel"
 >
-  <div>
-    <p>Problem solutions tree</p>
-    <p>Y-Axis: Machine age in {{ timeUnitLabel }}</p>
-    <p>X-Axis: Decision {{ timeUnitLabel }}</p>
-  </div>
-  <div style="overflow-x: auto;">
-    <div id="solutionsTreeParent">
-      <canvas id="solutionsTree">
-      </canvas>
+    <div>
+        <p>Problem solutions tree</p>
+        <p>Y-Axis: Machine age in {{ timeUnitLabel }}</p>
+        <p>X-Axis: Decision {{ timeUnitLabel }}</p>
     </div>
-  </div>
+    <div style="overflow-x: auto;">
+        <div id="solutionsTreeParent">
+            <canvas id="solutionsTree">
+            </canvas>
+        </div>
+    </div>
 
-  <div class="divider"></div>
+    <div class="divider"></div>
 
-  <div
-    class="stages"
-    *ngFor="let stage of solver.stages; index as y"
-  >
-    <p>STAGE {{ y + 1 }}</p>
-    <app-tabular-output
-      [header]="getStageTableHeader()"
-      [rows]="stage"
+    <div
+      *ngFor="let stage of solver.stages; index as y"
+      class="stages"
     >
-    </app-tabular-output>
-  </div>
-  <div class="result">
-    <p>Result chains</p>
-    <div class="chains-container"></div>
-  </div>
+        <p>STAGE {{ y + 1 }}</p>
+        <app-tabular-output
+          [header]="getStageTableHeader()"
+          [rows]="stage"
+        >
+        </app-tabular-output>
+    </div>
+    <div class="result">
+        <p>Result chains</p>
+        <div class="chains-container"></div>
+    </div>
 </div>

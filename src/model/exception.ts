@@ -3,7 +3,7 @@
 // This file is part of https://github.com/repsymo/repsymo---mvp
 
 export class InvalidModelException extends Error {
-  constructor(modelType: string, msg: string) {
-    super(`Invalid ${ modelType } model: ${ msg }`);
-  }
+    constructor(modelType: string, msg: string) {
+        super(`Invalid ${ modelType } model: ${ msg }`);
+    }
 }

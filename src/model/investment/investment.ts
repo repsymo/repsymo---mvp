@@ -4,18 +4,18 @@
 
 // Experimental model for now
 export interface Investment {
-  numberOfPlans: number;
-  numberOfOptions: number;
-  budget: number;
-  plans: Plan[];
+    numberOfPlans: number;
+    numberOfOptions: number;
+    budget: number;
+    plans: Plan[];
 }
 
 export interface Option {
-  cost: number;
-  revenue: number;
+    cost: number;
+    revenue: number;
 }
 
 export interface Plan {
-  id: number;
-  options: Option[];
+    id: number;
+    options: Option[];
 }

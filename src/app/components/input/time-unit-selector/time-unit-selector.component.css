@@ -3,17 +3,17 @@
 /* This file is part of https://github.com/repsymo/repsymo---mvp */
 
 :host {
-  display: block;
+    display: block;
 }
 
 :host > div > label,
 :host > div > select {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media only screen and (min-width: 800px) {
-  :host > div > label,
-  :host > div > select {
-    font-size: 16px;
-  }
+    :host > div > label,
+    :host > div > select {
+        font-size: 16px;
+    }
 }

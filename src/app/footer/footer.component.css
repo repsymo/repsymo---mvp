@@ -3,59 +3,59 @@
 /* This file is part of https://github.com/repsymo/repsymo---mvp */
 
 footer {
-  width: 100%;
-  padding: 32px 64px;
-  background-color: #004d40;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+    width: 100%;
+    padding: 32px 64px;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: #004d40;
 }
 
 footer p {
-  font-size: 14px;
-  font-weight: bolder;
-  text-align: left;
-  color: #e0e0e0;
+    font-size: 14px;
+    font-weight: bolder;
+    color: #e0e0e0;
+    text-align: left;
 }
 
 footer > p.copyright {
-  font-style: italic;
+    font-style: italic;
 }
 
 footer i {
-  margin-right: 8px;
-  font-size: 24px;
-  color: white;
+    margin-right: 8px;
+    font-size: 24px;
+    color: white;
 }
 
 footer a {
-  font-size: 18px;
-  color: rgb(79, 185, 255);
+    font-size: 18px;
+    color: rgb(79, 185, 255);
 }
 
 footer a:hover {
-  color: rgb(146, 211, 255);
+    color: rgb(146, 211, 255);
 }
 
 @media only screen and (min-width: 800px) {
-  footer {
-    padding: 64px;
-  }
+    footer {
+        padding: 64px;
+    }
 
-  footer > div {
-    position: absolute;
-    top: 50%;
-    right: 32px;
-    transform: translateY(-50%);
-  }
+    footer > div {
+        position: absolute;
+        top: 50%;
+        right: 32px;
+        transform: translateY(-50%);
+    }
 
-  footer > div {
-    position: absolute;
-  }
+    footer > div {
+        position: absolute;
+    }
 
-  footer > p {
-    text-align: center;
-  }
+    footer > p {
+        text-align: center;
+    }
 
-  .follow-label {
-    width: 220px;
-  }
+    .follow-label {
+        width: 220px;
+    }
 }

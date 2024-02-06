@@ -3,122 +3,122 @@
 /* This file is part of https://github.com/repsymo/repsymo---mvp */
 
 header {
-  width: 100%;
-  height: 160px;
-  padding: 32px;
-  margin-bottom: 32px;
-  z-index: 9999;
-  background-color: #00bcd4;
-  color: white;
+    width: 100%;
+    height: 160px;
+    padding: 32px;
+    margin-bottom: 32px;
+    z-index: 9999;
+    color: white;
+    background-color: #00bcd4;
 }
 
 header > nav {
-  display: flex;
-  height: 72px;
+    display: flex;
+    height: 72px;
 }
 
 header > nav > div {
-  width: 100%;
-  align-self: center;
+    width: 100%;
+    align-self: center;
 }
 
 header > nav > div > h1 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 600;
-  text-align: center;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
 }
 
 header > div {
-  padding: 16px 32px;
+    padding: 16px 32px;
 }
 
 header > div > p {
-  font-size: 14px;
-  text-align: center;
+    font-size: 14px;
+    text-align: center;
 }
 
 .items {
-  position: absolute;
-  top: -32px;
-  right: -32px;
+    position: absolute;
+    top: -32px;
+    right: -32px;
 }
 
 .items > div {
-  width: 56px;
-  height: 56px;
-  float: right;
-  transition: background-color 200ms;
-  cursor: pointer;
+    width: 56px;
+    height: 56px;
+    float: right;
+    cursor: pointer;
+    transition: background-color 200ms;
 }
 
 .items > div > i {
-  position: absolute;
-  display: block;
-  top: 50%;
-  left: 50%;
-  z-index: -1;
-  transform: translate(-50%, -50%);
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    transform: translate(-50%, -50%);
 }
 
 header > .tabs {
-  position: absolute;
-  width: 100%;
-  height: 56px;
-  padding: 0;
-  bottom: 0;
-  left: 0;
-  cursor: pointer;
+    position: absolute;
+    width: 100%;
+    height: 56px;
+    padding: 0;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
 }
 
 header > .tabs > div {
-  display: inline-flex;
-  width: 33.3%;
-  height: 100%;
-  padding: 8px;
-  font-size: 12px;
-  font-weight: bold;
-  text-align: center;
-  text-transform: uppercase;
-  transition: background-color 200ms;
-  vertical-align: middle;
-  outline: none;
+    display: inline-flex;
+    width: 33.3%;
+    height: 100%;
+    padding: 8px;
+    vertical-align: middle;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background-color 200ms;
+    outline: none;
 }
 
 header > .tabs > div > span {
-  display: block;
-  margin: auto;
-  align-self: center;
+    display: block;
+    margin: auto;
+    align-self: center;
 }
 
 .items > div:hover,
 header > .tabs > div:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 header > .tabs > div.active {
-  border-bottom: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
 }
 
 @media only screen and (min-width: 800px) {
-  header {
-    height: 200px;
-  }
+    header {
+        height: 200px;
+    }
 
-  header > div > p {
-    font-size: 16px;
-  }
+    header > div > p {
+        font-size: 16px;
+    }
 
-  header > nav > div > h1 {
-    font-size: 36px;
-  }
+    header > nav > div > h1 {
+        font-size: 36px;
+    }
 
-  header > .tabs {
-    height: auto;
-  }
+    header > .tabs {
+        height: auto;
+    }
 
-  header > .tabs > div {
-    padding: 16px;
-    font-size: 16px;
-  }
+    header > .tabs > div {
+        padding: 16px;
+        font-size: 16px;
+    }
 }

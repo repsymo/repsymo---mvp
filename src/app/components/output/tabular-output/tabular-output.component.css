@@ -3,6 +3,6 @@
 /* This file is part of https://github.com/repsymo/repsymo---mvp */
 
 :host {
-  display: block;
-  overflow-x: auto;
+    display: block;
+    overflow-x: auto;
 }

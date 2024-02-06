@@ -3,23 +3,23 @@
 /* This file is part of https://github.com/repsymo/repsymo---mvp */
 
 :host {
-  display: flex;
-  min-height: 60vh;
+    display: flex;
+    min-height: 60vh;
 }
 
 :host > div {
-  align-self: center;
+    align-self: center;
 }
 
 :host .par > p {
-  color: #737373;
+    color: #737373;
 }
 
 :host .ref {
-  font-size: 14px;
-  font-style: italic;
+    font-size: 14px;
+    font-style: italic;
 }
 
 :host .appVersion > p {
-  text-align: center;
+    text-align: center;
 }

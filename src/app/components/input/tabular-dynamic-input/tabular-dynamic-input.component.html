@@ -3,30 +3,30 @@
 <!-- This file is part of https://github.com/repsymo/repsymo---mvp -->
 
 <table class="table">
-  <thead>
-    <tr>
-      <th
-        scope="col"
-        *ngFor="let headerItem of header"
-      >
-        {{ headerItem }}
-      </th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let row of rows; index as y;">
-    <tr>
-      <th scope="row">{{ y + 1 }}</th>
-      <ng-container *ngFor="let obj of row[rkey]; index as x">
-        <td *ngFor="let key of keys(obj)">
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="number"
-              [(ngModel)]="rows[y][rkey][x][key]"
+    <thead>
+        <tr>
+            <th
+              *ngFor="let headerItem of header"
+              scope="col"
             >
-          </div>
-        </td>
-      </ng-container>
-    </tr>
-  </tbody>
+                {{ headerItem }}
+            </th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let row of rows; index as y;">
+        <tr>
+            <th scope="row">{{ y + 1 }}</th>
+            <ng-container *ngFor="let obj of row[rkey]; index as x">
+                <td *ngFor="let key of keys(obj)">
+                    <div class="form-group">
+                        <input
+                          [(ngModel)]="rows[y][rkey][x][key]"
+                          class="form-control"
+                          type="number"
+                        >
+                    </div>
+                </td>
+            </ng-container>
+        </tr>
+    </tbody>
 </table>

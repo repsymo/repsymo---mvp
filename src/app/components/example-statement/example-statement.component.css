@@ -3,15 +3,15 @@
 /* This file is part of https://github.com/repsymo/repsymo---mvp */
 
 div {
-  margin-bottom: 16px;
+    margin-bottom: 16px;
 }
 
 div > div {
-  color: #737373;
+    color: #737373;
 }
 
 div > p {
-  font-size: 16px;
-  font-weight: bold;
-  text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
 }

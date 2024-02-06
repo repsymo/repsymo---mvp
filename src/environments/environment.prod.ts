@@ -3,5 +3,5 @@
 // This file is part of https://github.com/repsymo/repsymo---mvp
 
 export const environment = {
-  production: true
+    production: true,
 };
