@@ -28,5 +28,12 @@
 }
 
 .abstract {
-    margin-bottom: 24px;
+    margin-bottom: 2.5rem;
+}
+
+@media (min-width: 960px) {
+    :host {
+        width: 60%;
+        margin: auto;
+    }
 }
