@@ -1,52 +1,74 @@
 <!-- Copyright (c) 2019-2022 Tobias Briones. All rights reserved. -->
 <!-- SPDX-License-Identifier: GPL-3.0-or-later -->
-<!-- This file is part of https://github.com/repsymo/2dp-repsymo-solver -->
+<!-- This file is part of https://github.com/repsymo/repsymo---mvp -->
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta
-      name="description"
-      content="Operations Research Solver App for Deterministic Dynamic Programming Problems targeted at educational purposes"
-    />
-    <meta
-      name="keywords"
-      content="operations-research, dynamic-programming, mathematical-programming, system-modeling, optimization-algorithms, recursion, business"
-    />
-    <meta
-      name="author"
-      content="Tobias Briones"
-    />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <head>
+        <meta charset="utf-8">
+        <meta
+          content="Operations Research Solver App for Deterministic Dynamic Programming Problems targeted at educational purposes"
+          name="description"
+        />
+        <meta
+          content="operations-research, dynamic-programming, mathematical-programming, system-modeling, optimization-algorithms, recursion, business"
+          name="keywords"
+        />
+        <meta
+          content="Tobias Briones"
+          name="author"
+        />
+        <meta
+          content="width=device-width, initial-scale=1.0"
+          name="viewport"
+        />
 
-    <meta name="theme-color" content="#0097a7" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta content="#0097a7" name="theme-color" />
+        <meta content="yes" name="apple-mobile-web-app-capable" />
 
-    <title>2DP Repsymo Solver</title>
-    <link
-      rel="manifest"
-      href="manifest.webmanifest"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      href="icon.png"
-    />
-    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <base href="https://rsm.math.software" />
+        <title>Repsymo</title>
+        <link
+          href="manifest.webmanifest"
+          rel="manifest"
+        />
+        <link
+          href="icon.png"
+          rel="icon"
+          type="image/png"
+        />
+        <link href="assets/icons/icon-192x192.png" rel="apple-touch-icon">
+        <link
+          crossorigin="anonymous"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          rel="stylesheet"
+        >
+        <base href="https://rsm.math.software" />
 
-    <script src="https://kit.fontawesome.com/dc1b09a32b.js"></script>
-  </head>
+        <script src="https://kit.fontawesome.com/dc1b09a32b.js"></script>
 
-  <body>
-    <app-root></app-root>
-    <noscript>
-      Please enable JavaScript to continue using this application.
-    </noscript>
-  </body>
+        <!-- Google tag (gtag.js) -->
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-W94V4RNPSD"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
+            gtag("js", new Date());
+
+            gtag("config", "G-W94V4RNPSD");
+        </script>
+    </head>
+
+    <body>
+        <app-root></app-root>
+        <noscript>
+            Please enable JavaScript to continue using this application.
+        </noscript>
+    </body>
 </html>

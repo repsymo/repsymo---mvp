@@ -1,55 +1,55 @@
 /* Copyright (c) 2019-2022 Tobias Briones. All rights reserved. */
 /* SPDX-License-Identifier: GPL-3.0-or-later */
-/* This file is part of https://github.com/repsymo/2dp-repsymo-solver */
+/* This file is part of https://github.com/repsymo/repsymo---mvp */
 
 :host {
-  display: block;
-  height: 24px;
-  margin-bottom: 16px;
-  z-index: 99999;
+    display: block;
+    height: 24px;
+    margin-bottom: 16px;
+    z-index: 99999;
 }
 
 :host > i {
-  margin: 0 16px;
-  float: right;
-  font-size: 24px;
-  color: #ffca28;
-  cursor: pointer;
+    margin: 0 16px;
+    float: right;
+    cursor: pointer;
+    font-size: 24px;
+    color: #ffca28;
 
 }
 
 :host > i.text {
-  font-size: 16px;
-  font-weight: bold;
-  font-style: normal;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
 }
 
 .popup {
-  display: inline-block;
-  width: 240px;
-  left: calc(100% - 240px);
-  z-index: 9999;
-  background: white;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    width: 240px;
+    left: calc(100% - 240px);
+    z-index: 9999;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: white;
 }
 
 .popup > p {
-  height: 64px;
-  padding: 16px 24px;
-  margin: 0;
-  line-height: 28px;
-  cursor: pointer;
+    height: 64px;
+    padding: 16px 24px;
+    margin: 0;
+    line-height: 28px;
+    cursor: pointer;
 }
 
 .popup > p:hover {
-  background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
 
 .popup-touchout {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: rgba(255, 255, 255, 0.3);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.3);
 }

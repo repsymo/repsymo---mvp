@@ -1,29 +1,29 @@
 // Copyright (c) 2019-2022 Tobias Briones. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-or-later
-// This file is part of https://github.com/repsymo/2dp-repsymo-solver
+// This file is part of https://github.com/repsymo/repsymo---mvp
 
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { OptionsBarComponent } from './options-bar.component';
+import { OptionsBarComponent } from "./options-bar.component";
 
-describe('OptionsBarComponent', () => {
-  let component: OptionsBarComponent;
-  let fixture: ComponentFixture<OptionsBarComponent>;
+describe("OptionsBarComponent", () => {
+    let component: OptionsBarComponent;
+    let fixture: ComponentFixture<OptionsBarComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [OptionsBarComponent]
-    })
-           .compileComponents();
-  }));
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ OptionsBarComponent ],
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(OptionsBarComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(OptionsBarComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it("should create", () => {
+        expect(component).toBeTruthy();
+    });
 });

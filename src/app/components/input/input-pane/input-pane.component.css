@@ -1,52 +1,52 @@
 /* Copyright (c) 2019-2022 Tobias Briones. All rights reserved. */
 /* SPDX-License-Identifier: GPL-3.0-or-later */
-/* This file is part of https://github.com/repsymo/2dp-repsymo-solver */
+/* This file is part of https://github.com/repsymo/repsymo---mvp */
 
 :host {
-  display: block;
+    display: block;
 }
 
 :host > app-time-unit-selector {
-  width: 100%;
+    width: 100%;
 }
 
 :host > div {
-  width: 100%;
-  padding: 8px 0;
+    width: 100%;
+    padding: 8px 0;
 }
 
 :host > div > div {
-  width: 100%;
-  margin-bottom: 16px;
-  vertical-align: top;
+    width: 100%;
+    margin-bottom: 16px;
+    vertical-align: top;
 }
 
 :host > div > div > div label {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 :host > div > div > div.form-check label {
-  font-weight: bold;
-  color: #f57f17;
+    font-weight: bold;
+    color: #f57f17;
 }
 
 @media only screen and (min-width: 800px) {
-  :host > div {
-    padding: 8px 32px;
-  }
+    :host > div {
+        padding: 8px 32px;
+    }
 
-  :host > div > div {
-    display: inline-block;
-    width: 42%;
-    margin: 8px 4%;
-  }
+    :host > div > div {
+        display: inline-block;
+        width: 42%;
+        margin: 8px 4%;
+    }
 
-  :host > div > div > div label {
-    font-size: 16px;
-  }
+    :host > div > div > div label {
+        font-size: 16px;
+    }
 
-  :host > div > div > div.form-group label.two-lines {
-    height: 48px;
-    line-height: 70px;
-  }
+    :host > div > div > div.form-group label.two-lines {
+        height: 48px;
+        line-height: 70px;
+    }
 }

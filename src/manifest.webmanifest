@@ -1,6 +1,6 @@
 {
-  "name": "2DP Repsymo Solver",
-  "short_name": "2DP Solver",
+  "name": "Repsymo",
+  "short_name": "RSM",
   "description": "Operations Research Solver App for Deterministic Dynamic Programming Problems targeted at educational purposes",
   "start_url": "https://rsm.math.software",
   "scope": "https://rsm.math.software",

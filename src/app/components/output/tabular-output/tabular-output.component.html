@@ -1,28 +1,28 @@
 <!-- Copyright (c) 2019-2022 Tobias Briones. All rights reserved. -->
 <!-- SPDX-License-Identifier: GPL-3.0-or-later -->
-<!-- This file is part of https://github.com/repsymo/2dp-repsymo-solver -->
+<!-- This file is part of https://github.com/repsymo/repsymo---mvp -->
 
 <table class="table">
-  <thead>
-    <tr>
-      <th
-        scope="col"
-        *ngFor="let headerItem of header"
-        [innerHTML]="headerItem"
-      >
-      </th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let row of rows">
-    <tr>
-      <ng-container *ngFor="let key of keys(row); index as i">
-        <th *ngIf="i == 0">
-          {{ row[key] }}
-        </th>
-        <td *ngIf="i > 0">
-          {{ row[key] }}
-        </td>
-      </ng-container>
-    </tr>
-  </tbody>
+    <thead>
+        <tr>
+            <th
+              *ngFor="let headerItem of header"
+              [innerHTML]="headerItem"
+              scope="col"
+            >
+            </th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let row of rows">
+        <tr>
+            <ng-container *ngFor="let key of keys(row); index as i">
+                <th *ngIf="i == 0">
+                    {{ row[key] }}
+                </th>
+                <td *ngIf="i > 0">
+                    {{ row[key] }}
+                </td>
+            </ng-container>
+        </tr>
+    </tbody>
 </table>

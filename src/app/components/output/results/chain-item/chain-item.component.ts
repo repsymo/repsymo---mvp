@@ -1,19 +1,19 @@
 // Copyright (c) 2019-2022 Tobias Briones. All rights reserved.
 // SPDX-License-Identifier: GPL-3.0-or-later
-// This file is part of https://github.com/repsymo/2dp-repsymo-solver
+// This file is part of https://github.com/repsymo/repsymo---mvp
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-chain-item',
-  templateUrl: './chain-item.component.html',
-  styleUrls: ['./chain-item.component.css']
+    selector: "app-chain-item",
+    templateUrl: "./chain-item.component.html",
+    styleUrls: [ "./chain-item.component.css" ],
 })
 export class ChainItemComponent implements OnInit {
-  @Input()
-  value: string;
+    @Input()
+    value: string;
 
-  constructor() {}
+    constructor() {}
 
-  ngOnInit() {}
+    ngOnInit() {}
 }

@@ -1,6 +1,6 @@
 <!-- Copyright (c) 2022 Tobias Briones. All rights reserved. -->
 <!-- SPDX-License-Identifier: GPL-3.0-or-later -->
-<!-- This file is part of https://github.com/repsymo/2dp-repsymo-solver -->
+<!-- This file is part of https://github.com/repsymo/repsymo---mvp -->
 
 <app-options-bar
   [examplesNumber]="1"
@@ -11,377 +11,507 @@
 <app-example-statement [value]="example">
 </app-example-statement>
 <div class="top-panel">
-  <app-input-pane
-    [model]="model"
-    [items]="inputPaneItems"
-    [timeunit]="false"
-  >
-  </app-input-pane>
-
-  <div class="form-check form-switch my-4">
-    <input
-      class="form-check-input"
-      type="checkbox"
-      role="switch"
-      id="flexSwitchCheckChecked"
-      checked
-      [(ngModel)]="model.isGain"
-      (change)="onGainPayoffChange()"
-    /> <label
-    class="form-check-label"
-    for="flexSwitchCheckChecked"
-  > Gain Payoff</label>
-  </div>
-
-  <div class="w-50">
-    <label for="customRange1" class="form-label"> Hurwicz Optimism Coefficient
-                                                  ({{ alpha }}) </label> <input
-    type="range" class="form-range" id="customRange1" min="0" max="1"
-    step="0.1" [(ngModel)]="alpha" (change)="solveHurwicz()"
-  >
-  </div>
-
-  <div class="next-button-container">
-    <button
-      class="btn btn-primary"
-      (click)="onNext()"
+    <app-input-pane
+      [items]="inputPaneItems"
+      [model]="model"
+      [timeunit]="false"
     >
-      Next
-    </button>
-  </div>
+    </app-input-pane>
+
+    <div class="form-check form-switch my-4">
+        <input
+          (change)="onGainPayoffChange()"
+          [(ngModel)]="model.isGain"
+          checked
+          class="form-check-input"
+          id="flexSwitchCheckChecked"
+          role="switch"
+          type="checkbox"
+        />
+        <label
+          class="form-check-label"
+          for="flexSwitchCheckChecked"
+        > Gain Payoff
+        </label>
+    </div>
+
+    <div class="w-50">
+        <label class="form-label" for="customRange1"> Hurwicz Optimism
+            Coefficient
+            ({{ alpha }})
+        </label>
+        <input
+          (change)="solveHurwicz()"
+          [(ngModel)]="alpha"
+          class="form-range"
+          id="customRange1"
+          max="1"
+          min="0"
+          step="0.1"
+          type="range"
+        >
+    </div>
+
+    <div class="next-button-container">
+        <button
+          (click)="onNext()"
+          class="btn btn-primary"
+        >
+            Next
+        </button>
+    </div>
 </div>
 
 <app-tabular-input
-  class="tabular-input"
-  [ngClass]="{ 'gone': inputDataStep === 0 }"
-  [header]="inputTableHeader"
-  [rows]="model.payoff"
-  [multiColumn]="true"
   [columnsVecKey]="'states'"
+  [header]="inputTableHeader"
+  [multiColumn]="true"
+  [ngClass]="{ 'gone': inputDataStep === 0 }"
+  [rows]="model.payoff"
   [startIndex]="1"
+  class="tabular-input"
 >
 </app-tabular-input>
 
 <!-- ===================================================================== -->
 
 <div
-  class="solve-button-container"
   [ngClass]="{ 'gone': inputDataStep === 0 }"
+  class="solve-button-container"
 >
-  <button
-    class="btn btn-primary w-100"
-    (click)="onSolve()"
-  >
-    Solve
-  </button>
+    <button
+      (click)="onSolve()"
+      class="btn btn-primary w-100"
+    >
+        Solve
+    </button>
 </div>
 
 <div
-  id="solutionPanel"
-  [ngClass]="{ 'gone': inputDataStep < 2 }"
   *ngIf="inputDataStep >= 2"
+  [ngClass]="{ 'gone': inputDataStep < 2 }"
+  id="solutionPanel"
 >
-  <div class="divider"></div>
-
-  <!-- ===================================================================== -->
-  <!--MINIMAX-->
-  <div class="my-4" *ngIf="!model.isGain">
-
-    <p><strong>MINIMAX</strong></p>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th
-            scope="col"
-            *ngFor="let headerItem of extendedTableHeader('Maximum (per row)')"
-          >
-            {{ headerItem }}
-          </th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let action of model.payoff; index as i;">
-        <tr>
-          <th scope="row">{{ i + 1 }}</th>
-          <ng-container *ngFor="let state of action.states; index as s">
-            <td>
-              {{ model.payoff[i].states[s]}}
-            </td>
-          </ng-container>
-          <td>
-            <strong *ngIf="i === minimax.action">{{minimax.maxima[i]}}</strong>
-            <div *ngIf="i !== minimax.action">{{minimax.maxima[i]}}</div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div>
-      <p><strong>Action: </strong>{{ minimax.action + 1 }}</p>
-      <p><strong>Minimax: </strong>{{ minimax.minimax }}</p>
-      <p><strong>Approach: </strong>The best of the worst, pessimist 👍,
-                                    conservative, minimizes the maximum loss</p>
-    </div>
     <div class="divider"></div>
 
-  </div>
+    <!-- ===================================================================== -->
+    <!--MINIMAX-->
+    <div *ngIf="!model.isGain" class="my-4">
 
-  <!-- ===================================================================== -->
-  <!--MAXIMIN-->
-  <div *ngIf="model.isGain">
-    <p><strong>MAXIMIN</strong></p>
+        <p>
+            <strong>MINIMAX</strong>
+        </p>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th
-            scope="col"
-            *ngFor="let headerItem of extendedTableHeader('Minimum (per row)')"
-          >
-            {{ headerItem }}
-          </th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let action of model.payoff; index as i;">
-        <tr>
-          <th scope="row">{{ i + 1 }}</th>
-          <ng-container *ngFor="let state of action.states; index as s">
-            <td>
-              {{ model.payoff[i].states[s]}}
-            </td>
-          </ng-container>
-          <td>
-            <strong *ngIf="i === maximin.action">{{maximin.minima[i]}}</strong>
-            <div *ngIf="i !== maximin.action">{{maximin.minima[i]}}</div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th
+                      *ngFor="let headerItem of extendedTableHeader('Maximum (per row)')"
+                      scope="col"
+                    >
+                        {{ headerItem }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let action of model.payoff; index as i;">
+                <tr>
+                    <th scope="row">{{ i + 1 }}</th>
+                    <ng-container *ngFor="let state of action.states; index as s">
+                        <td>
+                            {{ model.payoff[i].states[s] }}
+                        </td>
+                    </ng-container>
+                    <td>
+                        <strong *ngIf="i === minimax.action">{{
+                                minimax.maxima[i]
+                            }}
+                        </strong>
+                        <div *ngIf="i !== minimax.action">{{
+                                minimax.maxima[i]
+                            }}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <div>
-      <p><strong>Action: </strong>{{ maximin.action + 1 }}</p>
-      <p><strong>Maximin: </strong>{{ maximin.maximin }}</p>
-      <p><strong>Approach: </strong>The best of the worse, pessimist 👍,
-                                    conservative, maximizes the minimum gain</p>
+        <div>
+            <p>
+                <strong>Action:</strong>
+                {{ minimax.action + 1 }}
+            </p>
+            <p>
+                <strong>Minimax:</strong>
+                {{ minimax.minimax }}
+            </p>
+            <p>
+                <strong>Approach:</strong>
+                The best of the worst, pessimist 👍,
+                conservative, minimizes the maximum loss
+            </p>
+        </div>
+        <div class="divider"></div>
+
     </div>
 
-    <div class="divider"></div>
-  </div>
+    <!-- ===================================================================== -->
+    <!--MAXIMIN-->
+    <div *ngIf="model.isGain">
+        <p>
+            <strong>MAXIMIN</strong>
+        </p>
 
-  <!-- ===================================================================== -->
-  <!--MINIMIN-->
-  <div *ngIf="!model.isGain">
-    <p><strong>MINIMIN</strong></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th
+                      *ngFor="let headerItem of extendedTableHeader('Minimum (per row)')"
+                      scope="col"
+                    >
+                        {{ headerItem }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let action of model.payoff; index as i;">
+                <tr>
+                    <th scope="row">{{ i + 1 }}</th>
+                    <ng-container *ngFor="let state of action.states; index as s">
+                        <td>
+                            {{ model.payoff[i].states[s] }}
+                        </td>
+                    </ng-container>
+                    <td>
+                        <strong *ngIf="i === maximin.action">{{
+                                maximin.minima[i]
+                            }}
+                        </strong>
+                        <div *ngIf="i !== maximin.action">{{
+                                maximin.minima[i]
+                            }}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th
-            scope="col"
-            *ngFor="let headerItem of extendedTableHeader('Minimum (per row)')"
-          >
-            {{ headerItem }}
-          </th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let action of model.payoff; index as i;">
-        <tr>
-          <th scope="row">{{ i + 1 }}</th>
-          <ng-container *ngFor="let state of action.states; index as s">
-            <td>
-              {{ model.payoff[i].states[s]}}
-            </td>
-          </ng-container>
-          <td>
-            <strong *ngIf="i === minimin.action">{{minimin.minima[i]}}</strong>
-            <div *ngIf="i !== minimin.action">{{minimin.minima[i]}}</div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <div>
+            <p>
+                <strong>Action:</strong>
+                {{ maximin.action + 1 }}
+            </p>
+            <p>
+                <strong>Maximin:</strong>
+                {{ maximin.maximin }}
+            </p>
+            <p>
+                <strong>Approach:</strong>
+                The best of the worse, pessimist 👍,
+                conservative, maximizes the minimum gain
+            </p>
+        </div>
 
-    <div>
-      <p><strong>Action: </strong>{{ minimin.action + 1 }}</p>
-      <p><strong>Minimin: </strong>{{ minimin.minimin }}</p>
-      <p><strong>Approach: </strong>The best of the best, optimist 👍👍,
-                                    liberal, minimizes the minimum risk</p>
+        <div class="divider"></div>
     </div>
 
-    <div class="divider"></div>
-  </div>
+    <!-- ===================================================================== -->
+    <!--MINIMIN-->
+    <div *ngIf="!model.isGain">
+        <p>
+            <strong>MINIMIN</strong>
+        </p>
 
-  <!-- ===================================================================== -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th
+                      *ngFor="let headerItem of extendedTableHeader('Minimum (per row)')"
+                      scope="col"
+                    >
+                        {{ headerItem }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let action of model.payoff; index as i;">
+                <tr>
+                    <th scope="row">{{ i + 1 }}</th>
+                    <ng-container *ngFor="let state of action.states; index as s">
+                        <td>
+                            {{ model.payoff[i].states[s] }}
+                        </td>
+                    </ng-container>
+                    <td>
+                        <strong *ngIf="i === minimin.action">{{
+                                minimin.minima[i]
+                            }}
+                        </strong>
+                        <div *ngIf="i !== minimin.action">{{
+                                minimin.minima[i]
+                            }}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-  <!-- ===================================================================== -->
-  <!--MAXIMAX-->
-  <div *ngIf="model.isGain" class="my-4">
-    <p><strong>MAXIMAX</strong></p>
+        <div>
+            <p>
+                <strong>Action:</strong>
+                {{ minimin.action + 1 }}
+            </p>
+            <p>
+                <strong>Minimin:</strong>
+                {{ minimin.minimin }}
+            </p>
+            <p>
+                <strong>Approach:</strong>
+                The best of the best, optimist 👍👍,
+                liberal, minimizes the minimum risk
+            </p>
+        </div>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th
-            scope="col"
-            *ngFor="let headerItem of extendedTableHeader('Maximum (per row)')"
-          >
-            {{ headerItem }}
-          </th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let action of model.payoff; index as i;">
-        <tr>
-          <th scope="row">{{ i + 1 }}</th>
-          <ng-container *ngFor="let state of action.states; index as s">
-            <td>
-              {{ model.payoff[i].states[s]}}
-            </td>
-          </ng-container>
-          <td>
-            <strong *ngIf="i === maximax.action">{{maximax.maxima[i]}}</strong>
-            <div *ngIf="i !== maximax.action">{{maximax.maxima[i]}}</div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div>
-      <p><strong>Action: </strong>{{ maximax.action + 1 }}</p>
-      <p><strong>Maximax: </strong>{{ maximax.maximax }}</p>
-      <p><strong>Approach: </strong>The best of the best, optimist 👍👍,
-                                    liberal, maximizes the maximum gain</p>
+        <div class="divider"></div>
     </div>
 
-    <div class="divider"></div>
-  </div>
+    <!-- ===================================================================== -->
 
-  <!-- ===================================================================== -->
+    <!-- ===================================================================== -->
+    <!--MAXIMAX-->
+    <div *ngIf="model.isGain" class="my-4">
+        <p>
+            <strong>MAXIMAX</strong>
+        </p>
 
-  <!--HURWICZ-->
-  <div class="my-4">
-    <p><strong>HURWICZ</strong></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th
+                      *ngFor="let headerItem of extendedTableHeader('Maximum (per row)')"
+                      scope="col"
+                    >
+                        {{ headerItem }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let action of model.payoff; index as i;">
+                <tr>
+                    <th scope="row">{{ i + 1 }}</th>
+                    <ng-container *ngFor="let state of action.states; index as s">
+                        <td>
+                            {{ model.payoff[i].states[s] }}
+                        </td>
+                    </ng-container>
+                    <td>
+                        <strong *ngIf="i === maximax.action">{{
+                                maximax.maxima[i]
+                            }}
+                        </strong>
+                        <div *ngIf="i !== maximax.action">{{
+                                maximax.maxima[i]
+                            }}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th
-            scope="col"
-            *ngFor="let headerItem of extendedTableHeader('Weight')"
-          >
-            {{ headerItem }}
-          </th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let action of model.payoff; index as i;">
-        <tr>
-          <th scope="row">{{ i + 1 }}</th>
-          <ng-container *ngFor="let state of action.states; index as s">
-            <td>
-              {{ model.payoff[i].states[s]}}
-            </td>
-          </ng-container>
-          <td>
-            <strong *ngIf="i === hurwicz.action">{{hurwicz.weights[i]}}</strong>
-            <div *ngIf="i !== hurwicz.action">{{hurwicz.weights[i]}}</div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <div>
+            <p>
+                <strong>Action:</strong>
+                {{ maximax.action + 1 }}
+            </p>
+            <p>
+                <strong>Maximax:</strong>
+                {{ maximax.maximax }}
+            </p>
+            <p>
+                <strong>Approach:</strong>
+                The best of the best, optimist 👍👍,
+                liberal, maximizes the maximum gain
+            </p>
+        </div>
 
-    <div>
-      <p><strong>Action: </strong>{{ hurwicz.action + 1 }}</p>
-      <p><strong>Hurwicz: </strong>{{ hurwicz.hurwicz }} of weight</p>
-      <p><strong>Approach: </strong>{{ alpha * 100 }}% optimistic</p>
+        <div class="divider"></div>
     </div>
 
-    <div class="divider"></div>
-  </div>
+    <!-- ===================================================================== -->
 
-  <!-- ===================================================================== -->
+    <!--HURWICZ-->
+    <div class="my-4">
+        <p>
+            <strong>HURWICZ</strong>
+        </p>
 
-  <!--LAPLACE-->
-  <div class="my-4">
-    <p><strong>LAPLACE</strong></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th
+                      *ngFor="let headerItem of extendedTableHeader('Weight')"
+                      scope="col"
+                    >
+                        {{ headerItem }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let action of model.payoff; index as i;">
+                <tr>
+                    <th scope="row">{{ i + 1 }}</th>
+                    <ng-container *ngFor="let state of action.states; index as s">
+                        <td>
+                            {{ model.payoff[i].states[s] }}
+                        </td>
+                    </ng-container>
+                    <td>
+                        <strong *ngIf="i === hurwicz.action">{{
+                                hurwicz.weights[i]
+                            }}
+                        </strong>
+                        <div *ngIf="i !== hurwicz.action">{{
+                                hurwicz.weights[i]
+                            }}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th
-            scope="col"
-            *ngFor="let headerItem of extendedTableHeader('Expectation')"
-          >
-            {{ headerItem }}
-          </th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let action of model.payoff; index as i;">
-        <tr>
-          <th scope="row">{{ i + 1 }}</th>
-          <ng-container *ngFor="let state of action.states; index as s">
-            <td>
-              {{ model.payoff[i].states[s]}}
-            </td>
-          </ng-container>
-          <td>
-            <strong *ngIf="i === laplace.action">{{laplace.expectations[i]}}</strong>
-            <div *ngIf="i !== laplace.action">{{laplace.expectations[i]}}</div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <div>
+            <p>
+                <strong>Action:</strong>
+                {{ hurwicz.action + 1 }}
+            </p>
+            <p>
+                <strong>Hurwicz:</strong>
+                {{ hurwicz.hurwicz }} of weight
+            </p>
+            <p>
+                <strong>Approach:</strong>
+                {{ alpha * 100 }}% optimistic
+            </p>
+        </div>
 
-    <div>
-      <p><strong>Action: </strong>{{ laplace.action + 1 }}</p>
-      <p><strong>Laplace: </strong>{{ laplace.laplace }} of expected value</p>
-      <p><strong>Approach: </strong>1/{{ model.n }} uniform distribution
-                                    expectation</p>
+        <div class="divider"></div>
     </div>
 
-    <div class="divider"></div>
-  </div>
+    <!-- ===================================================================== -->
 
-  <!-- ===================================================================== -->
+    <!--LAPLACE-->
+    <div class="my-4">
+        <p>
+            <strong>LAPLACE</strong>
+        </p>
 
-  <!--SAVAGE-->
-  <div class="my-4">
-    <p><strong>SAVAGE</strong></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th
+                      *ngFor="let headerItem of extendedTableHeader('Expectation')"
+                      scope="col"
+                    >
+                        {{ headerItem }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let action of model.payoff; index as i;">
+                <tr>
+                    <th scope="row">{{ i + 1 }}</th>
+                    <ng-container *ngFor="let state of action.states; index as s">
+                        <td>
+                            {{ model.payoff[i].states[s] }}
+                        </td>
+                    </ng-container>
+                    <td>
+                        <strong *ngIf="i === laplace.action">{{
+                                laplace.expectations[i]
+                            }}
+                        </strong>
+                        <div *ngIf="i !== laplace.action">{{
+                                laplace.expectations[i]
+                            }}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <p><strong>Regret Matrix</strong></p>
-    <table class="table">
-      <thead>
-        <tr>
-          <th
-            scope="col"
-            *ngFor="let headerItem of extendedTableHeader('Maximum')"
-          >
-            {{ headerItem }}
-          </th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let action of model.payoff; index as i;">
-        <tr>
-          <th scope="row">{{ i + 1 }}</th>
-          <ng-container *ngFor="let state of action.states; index as s">
-            <td>
-              {{ savage.regret[i].states[s]}}
-            </td>
-          </ng-container>
-          <td>
-            <strong
-              *ngIf="i === savage.action"
-            >{{savage.maxima[i]}}</strong>
-            <div *ngIf="i !== savage.action">{{savage.maxima[i]}}</div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <div>
+            <p>
+                <strong>Action:</strong>
+                {{ laplace.action + 1 }}
+            </p>
+            <p>
+                <strong>Laplace:</strong>
+                {{ laplace.laplace }} of expected value
+            </p>
+            <p>
+                <strong>Approach:</strong>
+                1/{{ model.n }} uniform distribution
+                expectation
+            </p>
+        </div>
 
-    <div>
-      <p><strong>Action: </strong>{{ savage.action + 1 }}</p>
-      <p><strong>Savage: </strong>{{ savage.savage }} units of regret</p>
-      <p><strong>Approach: </strong>Minimax to Regret Matrix</p>
+        <div class="divider"></div>
     </div>
-  </div>
 
-  <!-- ===================================================================== -->
+    <!-- ===================================================================== -->
+
+    <!--SAVAGE-->
+    <div class="my-4">
+        <p>
+            <strong>SAVAGE</strong>
+        </p>
+
+        <p>
+            <strong>Regret Matrix</strong>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th
+                      *ngFor="let headerItem of extendedTableHeader('Maximum')"
+                      scope="col"
+                    >
+                        {{ headerItem }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let action of model.payoff; index as i;">
+                <tr>
+                    <th scope="row">{{ i + 1 }}</th>
+                    <ng-container *ngFor="let state of action.states; index as s">
+                        <td>
+                            {{ savage.regret[i].states[s] }}
+                        </td>
+                    </ng-container>
+                    <td>
+                        <strong
+                          *ngIf="i === savage.action"
+                        >{{ savage.maxima[i] }}
+                        </strong>
+                        <div *ngIf="i !== savage.action">{{
+                                savage.maxima[i]
+                            }}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div>
+            <p>
+                <strong>Action:</strong>
+                {{ savage.action + 1 }}
+            </p>
+            <p>
+                <strong>Savage:</strong>
+                {{ savage.savage }} units of regret
+            </p>
+            <p>
+                <strong>Approach:</strong>
+                Minimax to Regret Matrix
+            </p>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
 
 </div>

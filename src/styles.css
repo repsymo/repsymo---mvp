@@ -1,196 +1,195 @@
 /* Copyright (c) 2019-2022 Tobias Briones. All rights reserved. */
 /* SPDX-License-Identifier: GPL-3.0-or-later */
-/* This file is part of https://github.com/repsymo/2dp-repsymo-solver */
+/* This file is part of https://github.com/repsymo/repsymo---mvp */
 
 @import 'font.css';
 
 * {
-  position: relative;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
+    position: relative;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 html {
-  min-width: 320px;
-  height: 100%;
+    min-width: 320px;
+    height: 100%;
 }
 
 body {
-  height: 100%;
-  background-color: #fafafa;
+    height: 100%;
+    background-color: #fafafa;
 }
 
 .container {
-  min-height: 70%;
-  padding-bottom: 64px;
+    min-height: 70%;
+    padding-bottom: 64px;
 }
 
 .gone {
-  display: none !important;
+    display: none !important;
 }
 
 .unselectable,
 * {
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .divider {
-  width: 100%;
-  height: 1px;
-  margin: 16px 0;
-  background: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 1px;
+    margin: 16px 0;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 /* ---------------------------------------- PAGES ---------------------------------------- */
 .page > .top-panel {
-  display: block;
-  margin: auto auto 32px;
+    display: block;
+    margin: auto auto 32px;
 }
 
 .page > .solve-button-pane {
-  display: flex;
-  margin-bottom: 32px;
+    display: flex;
+    margin-bottom: 32px;
 }
 
 .page > .top-panel > div.next-button-container {
-  width: 100%;
+    width: 100%;
 }
 
 .page table {
-  overflow-x: auto;
+    overflow-x: auto;
 }
 
 #nextButton {
-  width: 25%;
-  margin-bottom: 32px;
+    width: 25%;
+    margin-bottom: 32px;
 }
 
 #solveButton {
-  width: 80%;
-  margin: auto;
+    width: 80%;
+    margin: auto;
 }
 
 #solutionPanel {
-  margin: 64px 0;
+    margin: 64px 0;
 }
 
 #solutionPanel > .solution-title > p {
-  font-size: 18px;
-  font-weight: bold;
-  font-style: italic;
-  color: #737373;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+    color: #737373;
 }
 
 #solutionPanel > .stages > p {
-  font-size: 18px;
-  font-weight: bold;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 #solutionPanel > .stages > table {
-  margin-bottom: 32px;
+    margin-bottom: 32px;
 }
 
 #solutionPanel > .result > p {
-  font-size: 18px;
-  font-weight: bold;
-  text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 #solutionPanel > .result > .chains-container {
-  display: block;
-  width: 100%;
-  overflow: auto;
+    display: block;
+    width: 100%;
+    overflow: auto;
 }
 
 #solutionPanel > .result > .chains-container > .chain {
-  display: block;
-  margin: 16px 0;
-  align-self: center;
+    display: block;
+    margin: 16px 0;
+    align-self: center;
 }
 
 #solutionPanel > .result > .chains-container > div.chain span {
-  display: inline-block;
-  width: 64px;
-  height: 64px;
-  margin-right: 32px;
-  border: 2px solid #212121;
-  text-align: center;
-  line-height: 56px;
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    margin-right: 32px;
+    line-height: 56px;
+    text-align: center;
+    border: 2px solid #212121;
 }
 
 #solutionPanel > .result > .chains-container > div.chain span::after {
-  content: '->';
-  position: absolute;
-  top: 0;
-  right: -24px;
+    content: '->';
+    position: absolute;
+    top: 0;
+    right: -24px;
 }
 
 #solutionPanel > .result > .chains-container > div.chain span.end::after {
-  content: '';
+    content: '';
 }
 
 #solutionPanel > .result > .chains-container > div.chain > div {
-  display: inline-block;
+    display: inline-block;
 }
 
 #inputTable {
-  transition: all 400ms;
+    transition: all 400ms;
 }
 
 .stages {
-  overflow-x: auto;
+    overflow-x: auto;
 }
 
 @media only screen and (min-width: 800px) {
-  .page > .top-panel {
-    width: 680px;
-  }
+    .page > .top-panel {
+        width: 680px;
+    }
 
-  #inputTable {
-    width: 60%;
-    margin: 16px auto;
-  }
+    #inputTable {
+        width: 60%;
+        margin: 16px auto;
+    }
 }
 
-
 .chains-container {
-  display: block;
-  width: 100%;
-  overflow: auto;
+    display: block;
+    width: 100%;
+    overflow: auto;
 }
 
 .chain {
-  display: block;
-  margin: 16px 0;
-  align-self: center;
+    display: block;
+    margin: 16px 0;
+    align-self: center;
 }
 
 div.chain > span {
-  display: inline-block;
-  width: 64px;
-  height: 64px;
-  margin-right: 32px;
-  border: 2px solid #212121;
-  text-align: center;
-  line-height: 56px;
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    margin-right: 32px;
+    line-height: 56px;
+    text-align: center;
+    border: 2px solid #212121;
 }
 
 div.chain > span::after {
-  content: '->';
-  position: absolute;
-  top: 0;
-  right: -24px;
+    content: '->';
+    position: absolute;
+    top: 0;
+    right: -24px;
 }
 
 div.chain > span.end::after {
-  content: '';
+    content: '';
 }
 
 div.chain > div {
-  display: inline-block;
+    display: inline-block;
 }

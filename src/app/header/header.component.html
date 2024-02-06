@@ -1,60 +1,60 @@
 <!-- Copyright (c) 2019-2022 Tobias Briones. All rights reserved. -->
 <!-- SPDX-License-Identifier: GPL-3.0-or-later -->
-<!-- This file is part of https://github.com/repsymo/2dp-repsymo-solver -->
+<!-- This file is part of https://github.com/repsymo/repsymo---mvp -->
 
 <header>
-  <nav>
-    <div>
-      <h1>2DP Repsymo Solver</h1>
-    </div>
-    <div
-      class="items"
-      (click)="onActionClick($event)"
-    >
-      <div
-        id="actionAbout"
-        routerLink="about"
-      >
-        <i class="fas fa-info-circle"></i>
-      </div>
-      <div
-        id="actionSave"
-        *ngIf="selectedTab !== -1"
-      >
-        <i class="fas fa-save"></i>
-      </div>
-      <div id="actionOpen">
-        <i class="fas fa-upload"></i>
-      </div>
-    </div>
-  </nav>
-  <div class="tabs">
-    <div
-      [className]="selectedTab === 0 ? 'active' : ''"
-      (click)="onTabSelected(0)"
-      routerLink="im"
-    >
+    <nav>
+        <div>
+            <h1>2DP Repsymo Solver</h1>
+        </div>
+        <div
+          (click)="onActionClick($event)"
+          class="items"
+        >
+            <div
+              id="actionAbout"
+              routerLink="about"
+            >
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <div
+              *ngIf="selectedTab !== -1"
+              id="actionSave"
+            >
+                <i class="fas fa-save"></i>
+            </div>
+            <div id="actionOpen">
+                <i class="fas fa-upload"></i>
+            </div>
+        </div>
+    </nav>
+    <div class="tabs">
+        <div
+          (click)="onTabSelected(0)"
+          [className]="selectedTab === 0 ? 'active' : ''"
+          routerLink="im"
+        >
       <span>
           Investment
       </span>
-    </div>
-    <div
-      [className]="selectedTab === 1 ? 'active' : ''"
-      (click)="onTabSelected(1)"
-      routerLink="mrm"
-    >
+        </div>
+        <div
+          (click)="onTabSelected(1)"
+          [className]="selectedTab === 1 ? 'active' : ''"
+          routerLink="mrm"
+        >
       <span>
           Machine replacement
       </span>
-    </div>
-    <div
-      [className]="selectedTab === 2 ? 'active' : ''"
-      (click)="onTabSelected(2)"
-      routerLink="wm"
-    >
+        </div>
+        <div
+          (click)="onTabSelected(2)"
+          [className]="selectedTab === 2 ? 'active' : ''"
+          routerLink="wm"
+        >
       <span>
           Workforce
       </span>
+        </div>
     </div>
-  </div>
 </header>
