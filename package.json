@@ -1,12 +1,12 @@
 {
-  "name": "2dp-repsymo-solver",
+  "name": "repsymo",
   "description": "Operations Research Solver App for Deterministic Dynamic Programming Problems targeted at educational purposes.",
   "license": "GPL-3.0-or-later",
   "version": "0.1.0",
   "author": "Tobias Briones <tobiasbriones.dev@gmail.com>",
-  "homepage": "https://github.com/repsymo/2dp-repsymo-solver#readme",
+  "homepage": "https://github.com/repsymo/repsymo---mvp#readme",
   "bugs": {
-    "url": "https://github.com/repsymo/2dp-repsymo-solver/issues"
+    "url": "https://github.com/repsymo/repsymo---mvp/issues"
   },
   "keywords": [
     "operations-research",
