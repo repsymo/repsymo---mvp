@@ -8,8 +8,6 @@ import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { AppModule } from "./app/app.module";
 import { environment } from "./environments/environment";
 
-export const VERSION = "0.1.0";
-
 if (environment.production) {
     enableProdMode();
 }

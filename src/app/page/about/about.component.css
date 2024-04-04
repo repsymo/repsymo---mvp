@@ -11,15 +11,29 @@
     align-self: center;
 }
 
-:host .par > p {
-    color: #737373;
-}
-
 :host .ref {
     font-size: 14px;
     font-style: italic;
 }
 
 :host .appVersion > p {
+    margin-top: 24px;
     text-align: center;
+}
+
+.title {
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+}
+
+.abstract {
+    margin-bottom: 2.5rem;
+}
+
+@media (min-width: 960px) {
+    :host {
+        width: 60%;
+        margin: auto;
+    }
 }

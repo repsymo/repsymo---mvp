@@ -4,42 +4,70 @@
 
 <div>
     <div>
-        <p>
-            <strong>{{ appName }}</strong>
-            - {{ appLongName }} -
+        <p class="title">
+            {{ appName }}: {{ appLongName }}
         </p>
     </div>
+
     <div class="par">
+        <p class="abstract">
+            Repsymo is applied mathematical software aiming to solve
+            domain-specific models with granular representation standards.
+        </p>
+
         <p>
-            {{ aboutMsg }}
+            The current version is implementing several deterministic dynamic
+            programming models to solve many real-world problems in operations
+            research.
+        </p>
+        <p>
+            Even though the app is still in its initial
+            MVP (Minimum Viable Project) versions, some representations, like
+            the solutions tree, are already <b>state-of-the-art</b>.
         </p>
     </div>
+
     <div class="par">
         <p>
-            {{ contributionMsg }}
+            Repsymo MVP is <b>open-source software</b> licensed under the
+            GPLv3.0 license. Don't hesitate to contact me if you are interested
+            in these models or wish to extend the application for personal or
+            educational usage.
         </p>
     </div>
+
     <div class="par">
         <p>
-            {{ educationMsg }}
+            The early MVP versions of the app were also intended to improve the
+            teaching of operations research and make experimental studies of
+            math solvers, CAS, and arbitrarily complex systems.
+            This was to get the solver at a production level as a long-term
+            project.
         </p>
     </div>
+
     <div class="par">
         <p>
-            {{ referencesMsg }}
+            For a general reference about the 2DP models, check
             <span class="ref">
         "{{ bookTaha }}"
       </span>
         </p>
     </div>
+
     <div class="appVersion">
         <p>
-            {{ appName }} v{{ appVersion }}
+            {{ appVersionLabel }}
         </p>
     </div>
+
     <div>
         Created by
-        <a href="https://github.com/tobiasbriones">Tobias Briones</a>
-        .
+        <a href="https://github.com/tobiasbriones">Tobias Briones</a>.
+
+        <div>
+            Math Software Engineer and Founder of
+            <a href="https://math.software">Math.Software</a>.
+        </div>
     </div>
 </div>
